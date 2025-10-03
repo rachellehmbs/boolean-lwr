@@ -1,6 +1,4 @@
 from sage.all import *
-#from my_sage_utils import *
-
 
 ##############
 # ANF of LWR #
