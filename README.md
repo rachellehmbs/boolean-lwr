@@ -1,1 +1,1 @@
-Test to understand why the anonymous4science link does not work. 
+This repository provides the code associated with the paper Rounding is not Noise: Boolean Modeling and Dedicated Analysis of LWR.
