@@ -1,0 +1,355 @@
+% !TEX root = ../slides_jc2.tex
+\section[A unified PoV on the known APN functions]{A unified point-of-view on the known APN functions}
+
+\input{slides/section_title}
+
+
+\subsection{One of the first non-power functions}
+
+\begin{frame}
+\frametitle{\subsecname}
+\vspace{-.6cm}
+% \begin{mybox}{Power function}{}{\small\purple{[Gold68, Nyberg94]}}
+% $$F \from \FF_{2^{12}} \to \FF_{2^{12}} \quad x \mapsto x^{3}$$
+% % $\blue{\lambda} \in \FFfield^{*}$. $F(\blue{\lambda} x) = \blue{\lambda}^{3} F(x)$ $\leadsto$ $\cyan{A} \comp F \comp \cyan{B} = F$ \hfill $\cyan{B}(x) = \blue{\lambda} x$, $\cyan{A}(x) = \blue{\lambda}^{-3} x$
+% \end{mybox}
+% \pause
+\begin{mybox}{An APN binomial}{}{\small \purple{[BudCarLea08]}}
+$$ G \from \orange{\FF_{2^{12}}} \to \orange{\FF_{2^{12}}} \quad x \mapsto x^3 + \orange{\alpha} x^{528}$$
+
+$G(x) = x^{3}(1 + x^{525}) = x^{3}P(x^{15})$, where $P = 1+ X^{35}$ \hfill($525 = 35\times 15$)
+%$\hspace*{5.5cm}F(x) =  x^3 + \alpha x^{528} = x^{3}P(x^{15}) \hfill P = 1 + x^{35}$
+
+
+% \onslide<3->{
+% \vspace{.3cm}
+% $\blue{\lambda} \in \blue{\FF_{2^{4}}^{*}}$ (i.e. $\blue{\lambda}^{15} = 1$).  \hspace*{1.5cm} $F(\blue{\lambda})  =\blue{\lambda}^{3}P(\blue{\lambda}^{15}) = \blue{\lambda}^{3}P(1)$
+% }
+
+
+% \onslide<4->{
+% \vspace{.3cm}
+% \bulletpoint $F$ behaves as $x \mapsto x^{\red{3}}$ on each coset $\gamma\blue{\FF_{2^{4}}}$
+% }
+
+% \onslide<5->{
+% \vspace{.1cm}
+% \bulletpoint Multivariate point of view\hfill
+% $\widetilde{F} \from (\blue{\FF_{2^{4}}})^{3} \to (\blue{\FF_{2^{4}}})^{3}\  (v_{1}, v_{2}, v_{3}) \mapsto \left(\widetilde{F_{1}}(v), \widetilde{F_{2}}(v), \widetilde{F_{3}}(v)\right)$
+% }
+
+
+
+% \onslide<6->{
+% \vspace{.1cm}
+% \hfill All coordinates $\widetilde{F}_{i}$ are \emph{homogeneous} of the \emph{same} \red{order 3}
+% }
+
+\end{mybox}\pause
+
+\vspace{.2cm}
+$\purple{\FF_{2^{4}}^{*}} \subset \orange{\FF_{2^{12}}^{*}}$. %$\quad\FF_{2^{12}}^{*} = \bigsqcup\limits_{\gamma \in \Gamma} \gamma\purple{\FF_{2^{4}}^{*}}$ for some system of representatives $\Gamma$.
+\pause
+
+$$\forall \ \purple{\phi} \in \purple{\FF_{2^{4}}^{*}}, \quad G(\purple{\phi}) = \purple{\phi}^{3}P(\purple{\phi}^{15}) = \purple{\phi}^{3}P(1).$$\pause
+\vspace{.2cm}
+
+\begin{proposition}
+    For any $\gamma \in  \orange{\FF_{2^{12}}^{*}}$, the restriction of $G|_{\gamma\purple{\FF_{2^{4}}^{*}}}$ is (up to a constant) the power mapping $x \mapsto x^{3}$.
+\end{proposition}
+
+
+% \onslide<7->{
+% \begin{mybox}{One of the first bivariate functions}{}{\purple{\small[ZhoPot13]}}
+% $\hspace*{5.5cm}F \from \FF_{64}^{2} \to \FF_{64}^{2}, (x, y) \mapsto (xy, x^{3} + ay^{3})$
+
+
+% % \vspace{.2cm}
+% % $F_{0}$ homogeneous of order 2, $F_{1}$ homogeneous of order 3
+
+% % \vspace{.2cm}
+% % $\leadsto \cyan{A} \comp F \comp \cyan{B} = F$ with $\quad \cyan{B}(x, y) = (\blue{\lambda} x, \blue{\lambda} y), \cyan{A}(x, y) = (\blue{\lambda}^{-2} x, \blue{\lambda}^{-3} y)$
+% \end{mybox}
+% }
+
+\end{frame}
+\begin{frame}\frametitle{The multiplicative point of view}
+
+\begin{mybox}{An APN binomial}{}{\small \purple{[BudCarLea08]}}
+\begin{itemize}
+    \item[\bulletpoint] $G \from \orange{\FF_{2^{12}}} \to \orange{\FF_{2^{12}}} \quad x \mapsto x^3 + \orange{\alpha} x^{528}$
+    \item[\bulletpoint] $G|_{\purple{\FF_{2^{4}}}} : \purple{\phi} \mapsto c \purple{\phi}^{3}$
+\end{itemize}
+\end{mybox}\pause
+
+\begin{mybox}{Multivariate point-of-view}{}{}
+$G$ is linearly equivalent to $\widetilde{G} \from (\purple{\FF_{2^{4}}})^{3} \to (\purple{\FF_{2^{4}}})^{3}\  (x_{1}, x_{2}, x_{3}) \mapsto \left(\widetilde{G_{1}}(x), \widetilde{G_{2}}(x), \widetilde{G_{3}}(x)\right)$.
+
+$$\widetilde{G}_{1}(x) = {\color{ptpurple!50}?}x_{1}^2x_{2} + {\color{ptpurple!50}?}x_{1}x_{2}^{2} + {\color{ptpurple!50}?}x_{2}^{3}+ {\color{ptpurple!50}?}x_{1}^2x_{3} + {\color{ptpurple!50}?}x_{2}^2x_{3} + {\color{ptpurple!50}?}x_{1}x_{3}^2 + {\color{ptpurple!50}?}x_{2}x_{3}^2 + {\color{ptpurple!50}?}x_{3}^3. $$
+
+All coordinates of $\widetilde{G}$ are homogeneous of the same degree $3$.
+\end{mybox}\pause
+
+\begin{mybox}{An APN bivariate functions}{}{\purple{\small[ZhoPot13]}}
+$$H \from \green{\FF_{64}^{2}} \to \green{\FF_{64}^{2}}, (x, y) \mapsto (xy, x^{3} + \green{a}y^{3})$$
+
+\begin{itemize}
+    \item[\bulletpoint{}] $H_{1}$ homogeneous of order 2.
+    \item[\bulletpoint{}] $H_{2}$ homogeneous of order 3.
+\end{itemize}
+\end{mybox}
+
+
+\end{frame}
+
+
+\subsection{Linear self-equivalence}
+\begin{frame}
+\frametitle{\subsecname}
+\vspace{-.7cm}
+\begin{mybox}{Power mapping}{}{}
+$$F(x) = x^{e}$$
+Let $ \blue{\lambda} \in \FFfield^{*}$. Then for all $x$, $F(\blue{\lambda} x) = \blue{\lambda}^{e}x^{e} = \blue{\lambda}^{e}F(x)$.
+
+Thus
+ $\orange{A} \comp F \comp \orange{B} = F\ $ \hfill with $\orange{B}(x)\vcentcolon= \blue{\lambda} x$, $\ \orange{A}(x) \vcentcolon= \blue{\lambda}^{-e} x$. 
+\end{mybox}
+\pause
+
+\vspace{-.1cm}
+\begin{mybox}{Cyclotomic mapping w.r.t a subfield}{}{\purple{\small[Wang07]}}
+$$ G(x) = x^{e}P\left(x^{2^{k} - 1}\right), n = \ell k$$
+Let $ \purple{\phi} \in \purple{\FF_{2^{k}}}$. Then for all $x $, $G(\purple{\phi} x) = \purple{\phi}^{e}x^{e}P\left(x^{2^{k}-1}\right) = \purple{\phi}^{e}G(x)$.
+
+Thus
+ $\orange{A} \comp G \comp \orange{B} = G\ $ \hfill with  $ \orange{B}(x)\vcentcolon= \purple{\phi} x$, $\ \orange{A}(x) \vcentcolon= \purple{\phi}^{-e} x$. 
+
+
+% $\cyan{A} \comp F \comp \cyan{B} = F$ with $\quad \cyan{B}(x) = \blue{\lambda} x$, $\quad\cyan{A}(x) = \blue{\lambda}^{-e} x$ for any $\lambda \in \blue{\FF_{2^{k}}^{*}}$
+
+% \vspace{.2cm}
+% $\widetilde{\cyan{A}} \comp \widetilde{F} \comp \widetilde{\cyan{B}} = \widetilde{F}$ with $\quad\widetilde{\cyan{B}}(v) = (\blue{\lambda} v_{1}, \dotsc , \blue{\lambda} v_{\ell}),$ $\quad \widetilde{\cyan{A}}(v) = (\blue{\lambda}^{-e} v_{1}, \dotsc , \blue{\lambda}^{-e} v_{\ell})$
+\end{mybox}
+\pause
+
+\vspace{-.1cm}
+\begin{mybox}{$\ell$-projective mapping}{}{\purple{\small[\blue{B}CP24,Göloğlu22]}}
+
+$$ H \from \FFinter \to \FFinter \ (x_{1}, \dotsc, x_{\ell}
+) \mapsto (H_{1}(x), \dotsc, H_{\ell}(x)),$$
+$ \forall \ i$, $H_{i}$ is homogeneous of order $\cyan{e_{i}}$. 
+
+Thus $\orange{A} \comp H \comp \orange{B} = H$ \hfill with $\quad\orange{B}(x) = (\purple{\phi} x_{1}, \dotsc , \purple{\phi} x_{\ell}),$
+
+\hfill $\orange{A}(x) = (\purple{\phi}^{-\cyan{e_{1}}} x_{1}, \dotsc , \purple{\phi}^{-\cyan{e_{\ell}}} x_{\ell})$
+\end{mybox}
+\end{frame}
+
+\subsection{Our main result (1/2)}
+\begin{frame}
+\frametitle{\subsecname}
+
+\begin{center}
+\vspace{-.5cm}
+Among the 22 known infinite APN families, 19 consist entirely of 
+\emph{cyclotomic} or \emph{$\ell$-projective} mappings, \emph{up to linear equivalence}.
+\input{tabular/tab_apn_1}
+\end{center}
+% \input{tabular/tab_apn_2}
+\end{frame}
+
+\subsection{Our main result (2/2)}
+\begin{frame}
+\frametitle{\subsecname}
+
+\begin{center}
+\vspace{-.5cm}
+Among the 22 known infinite APN families, 19 consist entirely of 
+
+\emph{cyclotomic} or \emph{$\ell$-projective} mappings, \emph{up to linear equivalence}.
+\scalebox{.75}{
+\input{tabular/tab_apn_2}
+}
+\end{center}
+\end{frame}
+
+\begin{comment}
+
+\subsection{Sketch of proof}
+\begin{frame}
+\frametitle{\subsecname}
+\vspace{-.7cm}
+% \begin{recap}[Conjugacy, again]
+% The conjugate of a composition is the composition of the conjugates.
+% $$ F = F_{3} \comp F_{2} \comp F_{1} \quad \iff \quad F^{\changevar} = F_{3}^{\changevar} \comp F_{2}^{\changevar} \comp F_{1}^{\changevar}$$
+% \end{recap}
+
+\onslide<1->{
+\begin{mybox}{Linear self-equivalence \& conjugacy}{}{}
+Let $F$ be linearly self-equivalent: $\quad F = \orange{A} \comp F \comp \orange{B}$.
+
+Let $G$ be linearly equivalent to $F$: $\quad G = \cyan{P} \comp F \comp \cyan{Q}$.
+
+\vspace{.4cm}
+Then $G$ is linearly self-equivalent:
+\vspace{-.2cm}
+ $$ G = (\cyan{P} \comp \orange{A} \comp \cyan{P})^{-1} \comp G \comp (\cyan{Q}^{-1}\comp \orange{B} \comp \cyan{Q}) $$
+
+\onslide<2->{
+Furthermore, $\orange{A}$ and  $\cyan{P} \comp \orange{A} \comp \cyan{P}^{-1}$ are \emph{similar} and thus share the same \emph{elementary divisors}. }
+\end{mybox}}
+
+\onslide<3->{
+$$G = \cyan{P} \comp F \comp \cyan{Q} = \cyan{P} \comp \orange{A} \comp F \comp \orange{B} \comp \cyan{Q}  = \cyan{P} \comp \orange{A} \comp \cyan{P}^{-1} \comp G \comp \cyan{Q}^{-1}\comp \orange{B} \comp \cyan{Q} $$}
+
+\onslide<4>{
+\begin{theorem}[Alternative formulation]
+Most of the known infinite APN families are made of \emph{linearly self-equivalent mappings} with \emph{very specific} mappings $\orange{A}, \orange{B}$. This can be detected independently of the representation.
+\end{theorem}
+}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Example: Cyclotomic mappings}
+\begin{recap}
+$$ F(x) = x^{e}P\left(x^{2^{k} - 1}\right), n = \ell k$$
+
+
+Univariate: $\orange{A} \comp F \comp \orange{B} = F$ with $\quad \orange{B}(x) = \blue{\lambda} x$, $\quad\orange{A}(x) = \blue{\lambda}^{-e} x$ for any $\lambda \in \blue{\FF_{2^{k}}^{*}}$
+
+\vspace{.2cm}
+Multivariate: $\widetilde{\orange{A}} \comp \widetilde{F} \comp \widetilde{\orange{B}} = \widetilde{F}$ with $\quad\widetilde{\orange{B}}(v) = (\blue{\lambda} v_{1}, \dotsc , \blue{\lambda} v_{\ell}),$ $\quad \widetilde{\orange{A}}(v) = (\blue{\lambda}^{-e} v_{1}, \dotsc , \blue{\lambda}^{-e} v_{\ell})$
+\end{recap}\pause
+
+\begin{proposition}[Up to linear equivalence]
+    $F \from \FFspace \to \FFspace$. $F$ is linearly equivalent to a cyclotomic mapping w.r.t a subfield $\FF_{2^{k}}$ iff:
+
+    \vspace{.2cm}
+     $\exists \ \orange{A},\orange{B}$ such that $\orange{A} \comp F \comp \orange{B} = F$ and:
+
+    \begin{itemize}
+        \item[\bulletpoint] $\min(\orange{A}), \min(\orange{B})$ are \emph{irreducible} polynomials
+        \item[\bulletpoint] $\ord(\orange{B}) = 2^{k} - 1$ and $\ord(\orange{A}) \mid \ord(\orange{B})$
+    \end{itemize}
+\end{proposition}
+
+
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Linear self-equivalence and APN functions}
+
+\begin{mybox}{Sum up}{}{}
+\begin{itemize}
+    \item[\bulletpoint] \emph{Pen-and-paper} functions:  linearly self-equivalent with \emph{very specific} $\orange{A},\orange{B}$
+    \item[\bulletpoint] From \emph{computer searches}: most are linearly self-equivalent with \emph{less structured} $\orange{A},\orange{B}$.
+\end{itemize}
+\end{mybox}\pause
+
+\begin{mybox}{The only solution to the big APN problem}{}{}
+A single bijective APN mapping is known when $n$ is even. It is \emph{CCZ-equivalent} to the ``Kim mapping'':
+$$ \kappa \from \FF_{2^{6}} \to \FF_{2^{6}}, X \mapsto X^{3} + X^{10} + uX^{24},$$
+for some specific $u \in \FF_{2^{6}}$.
+
+\pause
+\vspace{.3cm}
+$\kappa(X) = X^{3}(1 + X^{7} + uX^{21}) = X^{3}P(X^{2^{3}-1})$ \hfill \emph{cyclotomic w.r.t $\FF_{2^{3}}$}.
+\end{mybox}
+
+
+\end{frame}
+\end{comment}
+
+\begin{comment}
+\begin{frame}[t]\frametitle{A (re)open problem}
+
+
+\begin{mybox}{Question}{}{}
+For an APN function $F$, does there always exist a \emph{CCZ-equivalent} function $G$ which is linear self-equivalent ($\orange{A} \comp G \comp \orange{B} = G$) ?
+\end{mybox}\pause
+
+\begin{mybox}{Element of answers}{}{}
+\begin{itemize}
+    \item[\bulletpoint] A \emph{data base} of the known functions (sporadic / infinite families) for small $n$.
+    \item[\bulletpoint] Some of the properties of $\orange{A},\orange{B}$ are still preserved by \emph{affine and CCZ equivalences}.
+\end{itemize}
+
+\end{mybox}
+
+\end{frame}
+
+
+
+\begin{frame}\frametitle{More self-equivalent APN functions ?}
+
+% \begin{mybox}{Linear self-equivalences of APN functions}{}{}
+% \begin{itemize}
+%     \item[\bulletpoint] (almost) All pen-and-paper functions are  linearly self-equivalent with \emph{very specific} $\orange{A},\orange{B}$
+%     \item[\bulletpoint] A lot (all ?) functions from \emph{computer searches} are linearly self-equivalent with \emph{less structured} $\orange{A},\orange{B}$.
+% \end{itemize}
+% \end{mybox}
+
+\begin{mybox}{Previous works}{}{}
+Linearly self-equivalence to \emph{speed up searches} \hfill \purple{\small [BeiBriLea21,BeiLea22]}.
+\end{mybox}\pause
+
+\begin{mybox}{Toward new APN functions ?}{}{}
+\begin{itemize}
+    \item[\bulletpoint] \emph{Non-quadratic }linearly self-equivalent functions for $n =6$ ?
+    \item[\bulletpoint] Cyclotomic mappings $F(x) = x^{e}P\left(x^{2^{k} - 1}\right)$ with \emph{non-quadratic} $e$ ?
+    \item[\bulletpoint] $\ell$-projective mappings with \emph{$\ell > 4$} ?
+\end{itemize}
+
+\end{mybox}
+
+\end{frame}
+% \onslide<3->{
+% \begin{mybox}{Sketch theorem}{}{}
+% $F$ $\lin$ to a cyclotomic mapping iff \quad $\exists \ \cyan{A}, \cyan{B}$, such that $F = \cyan{A} \comp F \comp \cyan{B}$ with:
+
+% \vspace{.1cm}
+% $\cyan{B}$ (resp. $\cyan{A}$) with elementary divisors of $M_{\blue{\lambda}} : x \mapsto \blue{\lambda} x$ (resp. $M_{\blue{\lambda^{e}}}$ )
+% % \begin{itemize}
+% % 	\item[-] 
+% % 	\item[-] $\cyan{A}$ with elementary divisors of $M_{\blue{\lambda^{e}}}: x \mapsto \blue{\lambda^{e}} x$ for some $e$.
+% % \end{itemize}
+
+% \onslide<4>{
+% \vspace{.1cm}
+% \hfill$\leadsto$ related to \emph{minimal polynomials} of $\cyan{A}, \cyan{B}$.
+% }
+% \end{mybox}
+% }
+\end{comment}
+
+
+\subsection{Take away}
+\begin{frame}
+\frametitle{\subsecname}
+
+\begin{theorem}[]
+Among the 22 known infinite APN families, 19 consist entirely of 
+
+\emph{cyclotomic} or \emph{$\ell$-projective} mappings, \emph{up to linear equivalence}.
+\end{theorem}
+
+\begin{mybox}{Sum up}{}{}
+\begin{itemize}
+\item[-] Characterization of \emph{very specific} self-equivalences
+\item[-] Unify most of the approaches
+\item[-] Partial answer to the \emph{detection} of such structures up to equivalence
+\end{itemize}
+\end{mybox}
+
+\pause
+\begin{mybox}{Open questions}{}{}
+\begin{itemize}
+\item[-] Link between self-equivalence and APN-ness\hfill\purple{\small [BeiBriLea21, Conjecture 1]}
+% \item[-] Characterization up to CCZ equivalence?
+\item[-] Cyclotomic mappings outside the known classes? (from \emph{non-quadratic} APN monomial)
+\item[-] Projective mappings outside the known classes? (with \emph{more} coordinates)
+
+\end{itemize}
+\end{mybox}
+
+\end{frame}

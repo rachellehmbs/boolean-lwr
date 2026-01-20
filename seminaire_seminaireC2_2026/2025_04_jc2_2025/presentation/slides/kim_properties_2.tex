@@ -1,0 +1,172 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=kim-properties-2]
+\frametitle{Properties of the Kim mapping (2/2)}
+
+\onslide<+->{
+\recapbox{ \emph{Subspace prop}: $\forall \ \clambda, \quad\quad\quad \  \cF(\clambda\cFF) = \cF(\clambda)\cFF$ \hfill $\kim(\clambda) = \clambda^3 + \clambda^{10} + u\clambda^{24}$.
+
+\hspace*{15pt} \emph{Cyclotomic}: $\exists \ d, \forall \ \clambda , \forall \ \cphi, \quad \cF(\cphi\clambda) = \cF(\clambda)\cphi^d$
+}
+}
+
+\onslide<+->{
+\vspace{-10pt}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\centering
+\adjustbox{scale=0.4}{
+\begin{tikzpicture}[scale=2,cap=round,>=latex]
+
+% draw the unit circle
+\draw[thick,gray,opacity=.5] (0cm,0cm) circle(1cm);
+
+%upper lines
+\foreach \x in {0,1,...,8} {
+	% lines from center to point
+	\draw[gray, dashed] (0cm,0cm) -- ({\x*40}:2.9cm);
+}
+
+\draw[clightblue, dashed, line width=3pt] (0cm,0cm) -- (0:2.9cm);
+\draw[cgreen, dashed, line width=3pt] (0cm,0cm) -- (40:2.9cm);
+\draw[cgreen, dashed, line width=3pt] (0cm,0cm) -- (120:2.9cm);
+
+
+\foreach \x in {0,1,...,8} {
+		% dots at each point
+	\filldraw[corange] ({\x*40}:1cm) circle(1.7pt);
+	\filldraw[black] ({\x*40}:1.7cm) circle(1.2pt);
+	\filldraw[black] ({\x*40}:2.5cm) circle(1.1pt);
+}
+
+% draw each angle in radians
+\foreach \x/\xtext in {
+	32/\alpha,
+	320/\alpha^{8},
+	360/}
+{
+	\draw (\x:0.77cm) node[opacity=0, text opacity=1, color=corange] {\Large $\xtext$};
+}
+
+
+\foreach \x/\xtext in {
+	40/\alpha,
+	320/\alpha^{8},
+	360/\color{clightblue}}
+{
+	\draw (\x:3.2cm) node[opacity=0, text opacity=1,] {\Large $\xtext \cFF$};
+}
+
+\filldraw[cred] (0:0cm) circle(1.7pt);
+%\draw (1.2cm:1.2cm) node[color=color4, opacity=0, text opacity=1] {$S$};
+\draw (0.1cm:0.15cm) node[color=cred, opacity=0, text opacity=1] {\Large $0$};
+\end{tikzpicture}
+}
+
+\end{column}
+
+
+
+% ============= SECOND FIGURE===============
+\begin{column}{0.5\textwidth}
+\centering
+\adjustbox{scale=0.43}{
+\begin{tikzpicture}[scale=2,cap=round,>=latex]
+
+% draw the unit circle
+\draw[thick,gray,opacity=.5] (0cm,0cm) circle(1cm);
+
+%upper lines
+\foreach \x in {0,1,...,8} {
+	% lines from center to point
+	\draw[gray, dashed] (0cm,0cm) -- ({\x*40}:2.9cm);
+}
+
+\draw[clightblue, dashed, line width=3pt] (0cm,0cm) -- (200:2.9cm);
+\draw[cgreen, dashed, line width=3pt] (0cm,0cm) -- (160:2.9cm);
+
+
+\foreach \x in {0,1,...,8} {
+		% dots at each point
+	\filldraw[corange] ({\x*40}:1cm) circle(1.7pt);
+	\filldraw[black] ({\x*40}:1.7cm) circle(1.2pt);
+	\filldraw[black] ({\x*40}:2.5cm) circle(1.1pt);
+}
+
+% draw each angle in radians
+\foreach \x/\xtext in {
+	32/\alpha,
+	320/\alpha^{8},
+	360/}
+{
+	\draw (\x:0.77cm) node[opacity=0, text opacity=1, color=corange] {\Large $\xtext$};
+}
+
+
+\foreach \x/\xtext in {
+	40/\alpha,
+	205/\cF(1),
+	320/\alpha^{8},
+	360/}
+{
+	\draw (\x:3.2cm) node[opacity=0, text opacity=1,] {\Large $\xtext \cFF$};
+}
+
+\filldraw[cred] (0:0cm) circle(1.7pt);
+%\draw (1.2cm:1.2cm) node[color=color4, opacity=0, text opacity=1] {$S$};
+\draw (0.1cm:0.15cm) node[color=cred, opacity=0, text opacity=1] {\Large $0$};
+
+\end{tikzpicture}
+}
+\end{column}
+
+\end{columns}
+}
+
+\onslide<4->{
+\centering
+\begin{tikzpicture}[scale=1.3,cap=round,>=latex]
+
+\node at (-.5cm,0.3cm) {\lightblue{$\cFF$}};
+\node at (6cm,0.3cm) {{$\cF(1)\cFF$}};
+
+\draw[clightblue, dashed, line width=2pt] (0cm,0cm) -- +(4cm, 0cm);
+
+\draw[clightblue, dashed, line width=2pt] (6.5cm,0cm) -- +(4cm, 0cm);
+
+\draw[cred, fill=cred] (0.25cm,0cm) circle [radius=1.3pt] node[below] {\scriptsize $0$};
+\draw[corange, fill=corange] (0.75cm,0cm) circle [radius=1.3pt] node[below] {\scriptsize $1$};
+
+
+\draw[cred, fill=cred] (6.75cm,0cm) circle [radius=1.3pt] node[below=.1cm] {\color{black} \scriptsize $\cF(0) = 0$};
+\draw[corange, fill=corange] (7.25cm,0cm) circle [radius=1.3pt] node[below=.5cm] {\color{black} \scriptsize $\cF(1)$};
+
+\foreach \x in {2,...,7} {
+	\filldraw[black] (0.25cm + \x*0.5cm,0cm) circle(1.3pt);
+	\filldraw[black] (6.75cm + \x*0.5cm,0cm) circle(1.3pt);
+
+}
+
+\draw[cblue, fill=cblue] (1.25cm,0cm) circle [radius=1.3pt] node[below] {\scriptsize $\blue{\phi}$};
+\draw[cblue, fill=cblue] (9.75cm,0cm) circle [radius=1.3pt] node[below=.1cm] {\color{black}\scriptsize $\cF(\blue{\phi}) = \blue{\phi}^3\cF(1)$};
+
+\end{tikzpicture}
+}
+
+
+\begin{textblock*}{2.6cm}(6.5cm,4cm)
+\onslide<3->{
+\begin{mybox}[cred]{Not bijective}
+\end{mybox}
+}
+\end{textblock*}
+
+
+\begin{textblock*}{1.9cm}(6.7cm,8cm)
+\onslide<5>{
+\begin{mybox}[cred]{Bijective, monomial}
+\end{mybox}
+}
+\end{textblock*}
+
+\end{frame}

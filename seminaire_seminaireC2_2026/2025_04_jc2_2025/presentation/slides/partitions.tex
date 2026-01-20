@@ -1,0 +1,57 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=partitions]
+\frametitle{Cosets of a subfield}
+\centering
+\vspace{-10pt}
+\begin{mybox}[cgreen]{Partition into cosets}
+\begin{itemize}
+	\item[-] $\cFF \subset \cLL$ finite fields of characteristic 2.
+	\item[-] $\cFF^*$ multiplicative subgroup of $\cLL^*$ $\implies$ $\cLL^* = \bigsqcup\limits_{\cgamma \in \cGamma} \ \cgamma\cFF^*$
+\end{itemize}
+\end{mybox}
+\begin{mybox}[cred]{}
+Any $\clambda \in \cLL^* $ can be uniquely written as $\clambda = \cgamma\cphi$ with $\cgamma \in \cGamma, \cphi \in \cFF^*$.
+\end{mybox}
+\vspace{-5pt}
+\centering
+		\adjustbox{scale=0.55}{
+			\begin{tikzpicture}[scale=1.8,cap=round,>=latex]
+				
+				% draw the unit circle
+				\draw[thick,gray] (0cm,0cm) circle(1cm);
+				
+				%upper lines
+				\foreach \x in {0,1,...,16} {
+					% lines from center to point
+					\draw[gray, dashed] (0cm,0cm) -- ({\x*21.17}:2.5cm);
+					% dots at each point
+					\filldraw[corange] ({\x*21.17}:1cm) circle(1.2pt);
+					\filldraw[black] ({\x*21.17}:2cm) circle(1.1pt);
+				}
+				
+				
+				%lower lines
+				\foreach \x in {17, 18,..., 33} {
+					% lines from center to point
+					\draw[gray, dashed] (0cm,0cm) -- ({\x*21.17}:1cm);
+				}
+				
+				% draw each angle in radians
+				\foreach \x/\xtext in {
+					21.17/\alpha,
+					63.51/\alpha^3,
+					338.72/\alpha^{16},
+					360/1}
+				{
+					\draw (\x:2.7cm) node[] {\Large $\xtext \cFF$};
+					\draw (\x:0.77cm) node[corange] {\Large $\xtext$};
+				}
+				
+				\filldraw[cred] (0:0cm) circle(1.2pt);
+				\draw (0.1cm:0.15cm) node[color=cred] {$0$};
+				\draw (1.2cm:1.2cm) node[color=corange] {$\cGamma$};
+				
+			\end{tikzpicture}
+		}
+\end{frame}

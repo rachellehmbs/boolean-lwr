@@ -1,0 +1,32 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=cosets_to_cosets]
+\frametitle{Decomposition of $\pi$}
+\centering
+\vspace{-10pt}
+\recapbox{$\brown{\FF_2^8} \simeq \cLL = \brown{\FF_{256}}, \quad \cFF = \lightblue{\FF_{16}}$ \hfill $\clambda \in \cLL, \cgamma \in \cGamma, \cphi \in \cFF$\vspace{5pt}
+
+$16$ \darkgreen{additive} cosets $\cx + \cFF, \cx \in \cO$, $\quad$ $17$ \orange{multiplicative} cosets $\cgamma\cFF^*, \cgamma \in \cGamma$
+}
+\onslide<2->{
+\begin{mybox}[cred]{Multiplicative cosets to additive cosets}
+\begin{itemize}
+	\item<2->[-] For any $\cgamma\cFF^* \neq \cFF^*$, $\quad \cpi(\cgamma\cFF^*) = \cx_\cgamma + \cFF^*$.
+	\item<3->[-] $\cpi(\cFF) = \set{\cx_\cgamma } = \cO$
+	\item<4->[-] $\cgamma\cFF^*  \leadsto \cx_\cgamma + \cFF^*$ always 
+	the same.%: no dependecy in $\cgamma$ for $\blueF$.
+\end{itemize}
+\end{mybox}
+}
+\onslide<5->{
+\begin{mybox}[cblue]{Decomposition of $\cpi$ \hfill [Perrin19]}
+With well-chosen $\brown{\FF_2^8} \simeq \cLL$, $\ \cGamma, \ \cO$, $\quad \cpi$ can be expressed as:
+\begin{align*}
+	\cpi|_{\cLL \setminus \cFF} \ \from \cLL \setminus \cFF \quad &\to\quad \cLL\\ 
+	\cgamma\cphi \quad &\mapsto \quad \orangeG(\cgamma) + \blueF(\cphi)
+\end{align*}
+where $\orangeG \from \cGamma\setminus\cFF \xrightarrow{\sim} \cO, \quad \blueF \from \cFF \xrightarrow{\sim} \cFF\ \ $ with $\blueF(0) = 0$ and $\cpi(\cFF) = \cO$.
+\end{mybox}
+}
+
+\end{frame}

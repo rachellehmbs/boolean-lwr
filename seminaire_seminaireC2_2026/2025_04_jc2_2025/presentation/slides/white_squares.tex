@@ -1,0 +1,53 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=white_squares]
+\frametitle{Squares of zeros}
+\vspace{-15pt}
+
+\recapbox{\emph{Cyclotomic}: $\exists \ d, \forall \ \clambda, \forall \ \cphi, \quad \cF(\cphi\clambda) = \cphi^d \cF(\clambda)$ \hfill $\cLL = \brown{\FF_{2^{2t}}}$, $\cFF = \lightblue{\FF_{2^{t}}}$\vspace{10pt}
+
+\hspace*{15pt} $\cFh_\beta(\alpha) \vcentcolon= \sum\limits_{\clambda \in \cLL} (-1)^{\trlftwo(\alpha\clambda + \beta F(\clambda))}$\hfill $Z_F \vcentcolon= \set{(\alpha, \beta) , \cFh_\beta(\alpha) = 0} \cup \set{(0, 0)}$ 
+}
+
+\vspace{-10pt}
+\pause
+
+
+\begin{mybox}[cred]{Walsh zeroes}
+$\cF$ CCZ-equiv. to a bijection iff $\quad \exists, U, V\subset Z_F$ subspaces of dim. $n$, $U\cap V = \set{0}$.
+
+\hfill For $\kim$, $U = u_1\cFF \times u_2\cFF$, $V = v_1\cFF \times v_2\cFF$.
+\end{mybox}
+
+\vspace{-5pt}
+\pause
+
+\begin{columns}[T]
+\begin{column}{.3\textwidth}
+\begin{overpic}[scale=.08]{figures/kim_lat}
+          \begin{tikzpicture}[scale=6.5]
+            \draw[transparent] (0, 0) rectangle (1, 1) ;
+
+              \draw[ForestGreen, line width=.7mm] (0.14, 0.55) circle (1.5pt);
+              \draw[ForestGreen, line width=.7mm] (0.65, 0.3) circle (1.5pt);
+              \draw[yellow, line width=.8mm] (0.09, 0.75) rectangle (.19, .79);
+              \draw[yellow, line width=.8mm] (0.6, 0.75) rectangle (.7, .79);
+
+          \end{tikzpicture}
+        \end{overpic}
+\end{column}
+
+\begin{column}{.6\textwidth}
+\begin{mybox}[cblue]{Characterization of $\alpha\FF^* \times \beta \FF^* \subset Z_F$}
+For cyclotomic mappings of order $d$ over $\cFF$, $[\cLL : \cFF] = 2$
+\begin{itemize}
+  \item[-] $\cF(\cLL) = c\cFF \quad \implies \quad \forall \ \alpha,\  \alpha \cFF^* \times c\cFF^* \subset Z_F$
+  \item[-] Otherwise$^{\blue{*}}$, can only happened if $\cFh_\beta(0) = 0$. 
+\end{itemize}
+\vspace{10pt}
+$^{\blue{*}}$ Full characterization in the abstract
+\end{mybox}
+\end{column}
+\end{columns}
+
+\end{frame}

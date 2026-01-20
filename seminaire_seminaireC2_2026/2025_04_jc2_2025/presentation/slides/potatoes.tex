@@ -1,0 +1,49 @@
+% !TEX root = ../slides.tex
+
+\section{Cyclotomic mappings and APNness}
+\begin{frame}[label=potatoes]
+\frametitle{Subspace property and Cyclotomy}
+\vspace{-10pt}
+
+\recapbox{\emph{Subspace prop}: $\forall \ \clambda, \quad \quad \quad \quad \quad \quad \  \cF(\clambda\cFF) = \cF(\clambda)\cFF$
+
+\hspace*{15pt} \emph{Cyclotomic}: $\exists \ d, \forall \ \clambda, \forall \ \cphi, \quad \quad \quad \ \  \cF(\cphi\clambda) = \cphi^d \cF(\clambda)$
+
+\hspace*{15pt} \emph{Gen. cyclotomic}: $\forall \ \clambda, \exists \ \orange{d_\lambda}, \forall \ \cphi, \quad \cF(\cphi\clambda) = \cphi^{\orange{d_\lambda}} \cF(\clambda)$
+}
+
+		\begin{tikzpicture}
+		%	\scriptsize		
+			\coordinate (nw) at (0, 5);
+			\coordinate (sw) at (0, 0);
+			\coordinate (ne) at (6, 5);
+			\coordinate (se) at (6, 0);
+			
+			\draw[very thick,corange,rounded corners=50pt] (nw) rectangle (se);
+
+			\draw[name path= A, rounded corners=40pt] ($(nw)+(0.2, -0.2)$) rectangle ($(se)+(-2, .2)$) ;
+			\draw[name path=B, rounded corners=30pt] ($(nw)+(2, -.6)$) rectangle ($(se)+(-.2, .6)$) ;
+			%\tikzfillbetween[of=A and B]{white};
+
+
+ 			\draw[very thick,cgreen,rounded corners=30pt] ($(nw)+(2, -.6)$) rectangle ($(se)+(-.2, .6)$) ;
+
+			\draw[very thick,cblue,rounded corners=40pt] ($(nw)+(0.2, -0.2)$) rectangle ($(se)+(-2, .2)$) ;
+			\draw[very thick,cred,rounded corners=30pt] ($(nw)+(2.5, -.8)$) rectangle ($(se)+(-.8, .8)$) ;
+			\draw[very thick,clightblue,rounded corners=15pt] ($(nw)+(3, -1.5)$) rectangle ($(se)+(-1.3, 1.5)$) ;
+
+			\draw (3.2,1.3) node[] {{\tiny X} $\kim$};
+
+			
+			\draw[very thick,cblue] ($ (nw) + (.5, -.7) $) --++(-.6,0.7) node[right,above=.2]{Subspace prop.\@: {\color{black} $\cF(\clambda\cFF) = \cF(\clambda)\cFF$}};
+			\draw[very thick,corange] ($ (ne) + (-.35, -.7) $) --++(.6,0.7) node[right,above=.2]{\color{black} $\cF(\clambda\cFF) \subset \cF(\clambda)\cFF$};
+			\draw[very thick,cgreen] ($ (ne) + (-.25, -1.4) $) --++(.6,0.7) node[right=1]{Generalized cyclotomic mapping};
+			\draw[very thick,cred] ($ (ne) + (-.83, -3.4) $) --++(1,0.5) node[right=1]{Cyclotomic mapping};
+			\draw[very thick,clightblue] ($ (ne) + (-1.3, -2.6) $) --++(1.5,0.7) node[right=1]{Power mapping};
+		
+			%\draw[pattern=north east lines] (6.5, 0) rectangle node[right=2] {asd} +(.8, .5);
+			
+			
+			\end{tikzpicture}
+
+\end{frame}

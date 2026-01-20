@@ -1,0 +1,17 @@
+% !TEX root = ../slides.tex
+\renewcommand\arraystretch{.9} 
+\begin{tabular}{c|c|}
+% \toprule
+\rctt\textbf{Multivariate} &  \textbf{Observations}\\
+% \midrule
+$(x,y) \mapsto \left(\begin{array}{c} x^{2^s + 1} + ay ^{(2^s+1)2^i}\\ xy\end{array}\right)$ & $\lin$ biprojective\\
+\rct$(x,y) \mapsto \left(\begin{array}{c}x^{2^{2s} + 2^{3s}} + ax^{2^{2s}}y^{2^s} + by^{2^s+1}\\ xy\end{array}\right)$ & $\lin$ biprojective\\
+$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + x^{2^{s + k/2}}y^{2^{k/2}} + axy^{2^s} + by^{2^s+1}\\ xy\end{array}\right)$ & $\lin$ 4-projective\\
+\rct$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + xy^{2^{s}} + y^{2^s + 1}\\ x^{2^{2s}+1} + x^{2^{2s}}y + y^{2^{2s} + 1}\end{array}\right)$ & biprojective\\
+$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + xy^{2^{s}} + y^{2^s + 1}\\ x^{2^{3s}}y + xy^{2^{3s}}\end{array}\right)$ & biprojective\\
+\rct$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + by^{2^s + 1}\\ x^{2^{s + k/2}}y + \frac{a}{b}xy^{2^{s + k/2}}\end{array}\right)$ &biprojective\\
+$(x,y) \mapsto \left(\begin{array}{c}x^{2^s + 1} + xy^{2^s} + ay^{2^s +1}\\ x^{2^{2s} + 1} + ax^{2^{2s}}y + (1 + a)^{2^s}xy^{2^{2s}} + ay^{2^{2s} + 1}\end{array}\right)$ & biprojective\\
+\rct$(x,y,z) \mapsto \left(\begin{array}{c}x^{2^s+1} + x^{2^s}z + yz^{2^s}\\x^{2^s}z + y^{2^s+1}\\xy^{2^s} + y^{2^s}z + z^{2^s+1}\end{array}\right)$ & $\begin{array}{c}\text{3-projective}\\ \lin \text{cyclotomic}\end{array}$\\
+$(x,y,z) \mapsto \left(\begin{array}{c}x^{2^s+1} + xy^{2^s} + yz^{2^s}\\xy^{2^s} + z^{2^s+1}\\x^{2^s}z + y^{2^s+1} + y^{2^s}z\end{array}\right)$ & $\begin{array}{c}\text{3-projective}\\ \lin \text{cyclotomic}\end{array}$\\
+% \bottomrule
+\end{tabular}

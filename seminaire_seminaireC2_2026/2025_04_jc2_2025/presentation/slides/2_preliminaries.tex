@@ -1,0 +1,150 @@
+% !TEX root = ../slides.tex
+\section{Differential cryptanalysis}
+
+\input{slides/section_title}
+
+\subsection{Differential distinguisher}
+\begin{frame}[fragile]
+\frametitle{\subsecname}
+\vspace{-.4cm}
+\begin{recap}
+$\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$.\hfill $[\ E \xleftarrow{\$} \mathcal{E} \ ]$  or $[ \ F \xleftarrow{\$} \mathrm{Bij}(\FF_2^{n}) \ ]$ ?
+\end{recap}
+
+\begin{center}
+The difference $\dout$ between two ciphertexts \emph{should be uniformly distributed},
+
+even when the difference $\din$ between plaintexts is chosen.
+\end{center}
+
+%\only<1>{
+\begin{center}
+\begin{tikzcd}
+						x  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[opacity=0]{r}[name=uparrow,opacity=0]{\gray{F^{(0)}}} & \white{x^{(1)}} \arrow[leftrightarrow,opacity=0]{d}{\seconddiff} \arrow[dashed,opacity=0]{r}{} &  \white{x^{(R-1)}} \arrow[opacity=0]{r}[opacity=0]{\gray{F^{(r-1)}}} \arrow[leftrightarrow,opacity=0]{d}{}{\beforelastdiff} &  \black{E}_{\red{k}}(x) \arrow[leftrightarrow]{d}{\dout}[]{}
+						\\
+						y \arrow[opacity=0]{r}{}[swap,name=bottomarrow,opacity=0]{\gray{F^{(0)}}} & \white{y^{(1)}}  \arrow[dashed,opacity=0]{r}{}[swap]{} &  \white{y^{(R-1)}} \arrow[swap,opacity=0]{r}{}[opacity=0]{\gray{F^{(r-1)}}} &   \black{E}_{\red{k}}(y)
+						%\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+			
+\end{tikzcd}
+\end{center}
+
+\pause
+\begin{mybox}{For a random bijection \purple{$F$}}{}{}
+$\purple{F}(x + \din) + \purple{F}(x) = \dout$ has 1 solution $x$ on average.
+\end{mybox}
+
+
+\pause
+\begin{mybox}{Differential distinguisher\hfill {\small\purple{[BihSha91]}}}{}{}
+$\din \neq 0, \dout$ s.t for many $\red{k}$, $\quad E_{\red{k}}(x + \din) + E_{\red{k}}(x) = \dout$ has many solutions $x$.
+\end{mybox}
+
+\end{frame}
+
+\subsection{Differential cryptanalysis}
+\begin{frame}[fragile]
+\frametitle{\subsecname}
+\begin{center}
+\begin{tikzcd}
+			x^{(0)}  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[]{r}[name=uparrow]{F_{\red{k^{(0)}}}} & x^{(1)} \arrow[leftrightarrow]{d}{\seconddiff} \arrow[dashed]{r}{} &  x^{(R-1)} \arrow[]{r}{F_{\red{k^{(R-1)}}}} \arrow[leftrightarrow]{d}{}{\difference{R-1}} &  \black{E}_{\red{k}}(x^{(0)}) \arrow[leftrightarrow]{d}{\dout}[]{}
+						\\
+						y^{(0)} \arrow[]{r}{}[swap,name=bottomarrow]{F_{\red{k^{(0)}}}} & y^{(1)}  \arrow[dashed]{r}{}[swap]{} &  y^{(R-1)} \arrow[swap]{r}{}{F_{\red{k^{(R-1)}}}} &   \black{E}_{\red{k}}(y^{(0)})
+						%\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+\end{tikzcd}
+\end{center}
+
+$F_{\red{k^{(i)}}} = \purple{F} \comp T_{\red{k^{(i)}}}$ for $i \geq 0$.
+
+\pause
+\begin{mybox}{On average over all key sequences}{}{\small\purple{[LaiMasMur91]}}
+$\edp[\inputdiff][\outputdiff]{\blockcipher} \geq \edptrail{\purple{F}}{\purple{F}} = \prod_{i = 0}^{R-1} \diffproba[\difference{i}][\difference{i+1}]{\purple{F}}$
+\end{mybox}
+% \pause
+% \begin{mybox}{Almost perfect non-linear (APN) functions \hfill {\small\purple{[NybKnu92]}}}{}{}
+% $\forall (\din, \dout)$, $\din \neq 0$, $\quad \purple{F}(x + \din) + \purple{F}(x) = \dout$ at most $2$ solutions $x$.
+% \end{mybox}
+\end{frame}
+
+\subsection{Resisting differential cryptanalysis}
+\begin{frame}
+\frametitle{\subsecname}
+\begin{columns}[c]
+\begin{column}{0.3\textwidth}
+\scalebox{.8}{\toggletrue{SPNtwoS}\input{figures/spn}}
+\end{column}
+
+\begin{column}{0.7\textwidth}
+\vspace{.1cm}
+% \begin{itemize}
+% 	\item[\bulletpoint] $\diffproba[\din][\dout]{\scalemath{.9}{\cyan{\sboxlayer}}} = \prod_{i = 0}^{s-1} \diffproba[\smalldin{i}][\smalldout{i}]{\cyan{S}}$
+% 	\onslide<3->{
+% 	\item[\bulletpoint] Trivial equation: $\diffproba[0][0]{\cyan{S}} = 1$}
+% 	\onslide<4->{\item[\bulletpoint] Linear function: $\forall \ \din, \ \ \diffproba[\din][\orange{L}(\din)]{\orange{L}} = 1$}
+
+
+% \end{itemize}
+\begin{mybox}{As a designer\hfill{\small\purple{[DaeRij00]}}}{}{}
+\begin{itemize}
+	\item[\bulletpoint] Low \emph{differential uniformity}: \hfill {\small\purple{[Nyberg94]}}
+	$$\delta(\cyan{S}) =  \underset{\din \neq 0, \dout}{\max} \card{\set{x, \cyan{S}(x + \din) + \cyan{S}(x) = \dout}}$$
+	\item[\bulletpoint] Minimum number of active Sboxes determined by $\orange{L}$
+\end{itemize}
+\end{mybox}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Advanced Encryption Standard (AES)}
+\begin{frame}
+\frametitle{\subsecname}
+
+\only<1->{\scalebox{0.7}{\toggletrue{stateempty}\input{figures/midori_aes_like.tex}}}\hspace{.3cm}\only<2->{\scalebox{0.7}{\toggletrue{midorisbox}\input{figures/midori_aes_like.tex}}}\hspace{.3cm}
+\only<3->{\scalebox{0.7}{\toggletrue{AESshiftrowsin}\input{figures/midori_aes_like.tex}}}\only<3->{\raisebox{.9cm}{$\ \to \ $}\scalebox{0.7}{\toggletrue{AESshiftrowsout}\input{figures/midori_aes_like.tex}}}\hspace{.3cm}
+\only<4->{\scalebox{0.7}{\toggletrue{midorilinear}\input{figures/midori_aes_like.tex}}}\hspace{.3cm}
+\only<5->{\scalebox{0.7}{\toggletrue{AESconstant}\input{figures/midori_aes_like.tex}}}
+
+\vspace{.1cm}
+\only<1>{\hspace{3.2cm}$\color{oicyan!0}{\sboxlayer}$}
+\only<2->{\hspace{3.2cm}$\cyan{\sboxlayer}$}\only<3->{\hspace{3.4cm}$\purple{\SR}$}\only<4->{\hspace{3.2cm}$\orange{\MC}$}\only<5->{\hspace{2cm}$\black{T}_{\red{k}}$}
+
+\begin{mybox}{AES\hfill{\small\purple{[DaeRij00]}}}{}{}
+\begin{itemize}
+	\only<1->{\item[\bulletpoint] $4 \times 4$ matrix of bytes = 128-bit state}
+	\only<5->{\item[\bulletpoint] $\black{F}_{\red{k^{(i)}}} = \black{T_{\red{k^{(i)}}}} \comp \orange{\MC} \comp \purple{\SR} \comp \cyan{\sboxlayer}$.}
+	\only<5->{\item[\bulletpoint] Repeat 10 times.}
+	% \only<5->{\item[\bulletpoint] No known APN bijection for $n = 8$: $\implies$ here $\delta(\cyan{S}) = 4$.}
+	\only<6->{\item[\bulletpoint] $\delta(\cyan{S}) = 4$.}
+	\only<6->{\item[\bulletpoint] Structured linear layer $\orange{\MC} \comp \purple{\SR}$: $\implies$ $\edptrail[\inputdiff][\seconddiff][\difference{3}]{F^{(0)}}{F^{(3)}}\leq 2^{-150}$.}
+\end{itemize}
+\end{mybox}
+
+
+
+\end{frame}
+
+
+\subsection{Midori}
+\begin{frame}
+\frametitle{\subsecname}
+
+\scalebox{0.7}{\toggletrue{stateempty}\input{figures/midori_aes_like.tex}}\hspace{.3cm}\scalebox{0.7}{\toggletrue{midorisbox}\input{figures/midori_aes_like.tex}}\hspace{.3cm}
+\scalebox{0.7}{\toggletrue{midorishuffle}\input{figures/midori_aes_like.tex}}\hspace{.3cm}
+\scalebox{0.7}{\toggletrue{midorilinear}\input{figures/midori_aes_like.tex}}\hspace{.3cm}
+\scalebox{0.7}{\toggletrue{AESconstant}\input{figures/midori_aes_like.tex}}
+
+\vspace{.1cm}
+\hspace{3.2cm}$\cyan{\sboxlayer}$\hspace{2cm}$\purple{\SC}$\hspace{2cm}$\orange{\MC}$\hspace{2cm}$\black{T}_{\red{k}}$
+
+\pause
+\begin{mybox}{Midori\hfill{\small\purple{[BBISHAR15]}}}{}{}
+\begin{itemize}
+\item[\bulletpoint] $4 \times 4$ matrix of \emph{nibbles} = 64-bit state
+\item[\bulletpoint] $\black{F}_{\red{k^{(i)}}} = \black{T}_{\red{k^{(i)}}} \comp \orange{\MC} \comp \purple{\SC} \comp \cyan{\sboxlayer}$.
+\item[\bulletpoint] Repeat 16 times.
+\item[\bulletpoint] $\delta(\cyan{S}) = 4$.
+\item[\bulletpoint] $\edptrail[\inputdiff][\seconddiff][\difference{7}]{F^{(0)}}{F^{(6)}}\leq 2^{-70}$.
+\end{itemize}
+\end{mybox}
+\end{frame}
+

@@ -1,0 +1,106 @@
+%
+% LaTeX fonts, Inria 2024
+% Requires XeTeX, LuaTex
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fontes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ProvidesPackage{inriafontes}
+\RequirePackage{iftex}
+
+\newif\ifOTFok
+\OTFokfalse
+
+\ifLuaTeX
+\OTFoktrue
+\fi
+
+\ifXeTeX
+\OTFoktrue
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\switchtosans}{}
+\newcommand{\switchtoserif}{}
+
+\ifOTFok
+\RequirePackage{fontspec}
+% \RequirePackage{xltxtra}
+\newfontfamily{\InriaSans}{InriaSans}[
+    NFSSFamily=InriaSans,
+    Extension = .otf,
+    Ligatures = TeX,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+%   FontFace={xl}{n}{*-ExtraLight},
+%   FontFace={xl}{it}{*-ExtraLightItalic},
+    FontFace={l}{n}{*-Light},
+    FontFace={l}{it}{*-LightItalic},
+%   FontFace={mb}{n}{*-Medium},
+%   FontFace={mb}{it}{*-MediumItalic},
+    FontFace={k}{n}{*-Extrabold},
+    FontFace={k}{it}{*-ExtraboldItalic},
+]
+
+\newfontfamily{\InriaSerif}{InriaSerif}[
+    NFSSFamily=InriaSerif,
+    Extension = .otf,
+    Ligatures = TeX,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+%   FontFace={xl}{n}{*-ExtraLight},
+%   FontFace={xl}{it}{*-ExtraLightItalic},
+    FontFace={l}{n}{*-Light},
+    FontFace={l}{it}{*-LightItalic},
+%   FontFace={mb}{n}{*-Medium},
+%   FontFace={mb}{it}{*-MediumItalic},
+    FontFace={k}{n}{*-Extrabold},
+    FontFace={k}{it}{*-ExtraboldItalic},
+]
+    
+\renewcommand{\switchtosans}{\InriaSans}
+\renewcommand{\switchtoserif}{\InriaSerif}
+
+\else
+
+\PackageWarning{inriafontes}{%
+  =================================================\MessageBreak
+  == La compilation n'utilise pas le moteur XeLaTeX\MessageBreak
+  == ni LuaLaTeX.\MessageBreak
+  == les fontes Inria OTF ne seront pas utilisées\MessageBreak
+  =================================================\MessageBreak
+}
+\RequirePackage{helvet}
+\newcommand{\hvfam}{\fontencoding{T1}\fontfamily{phv}\fontseries{m}\fontshape{n}}
+\newcommand{\hvsel}{\hvfam\selectfont}
+\newcommand{\hvten}{\hvfam\fontsize{10}{12pt}\selectfont}
+\newcommand{\hvtwfv}{\hvfam\fontsize{25}{30pt}\selectfont}
+
+\renewcommand{\switchtosans}{\renewcommand{\familydefault}{phv}}
+\renewcommand{\switchtoserif}{}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareOption{InriaSans}{%
+  \renewcommand{\familydefault}{InriaSans}%
+}
+\DeclareOption{InriaSerif}{%
+  \renewcommand{\familydefault}{InriaSerif}%
+}
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,26 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=subspace_prop]
+\frametitle{The subspace property}
+\vspace{-10pt}
+\begin{mybox}[cblue]{A ``special'' property \hfill[BDMW10]}
+\begin{quote}
+``$\kim$ maps the subspace $\clambda\lightblue{\FF_{8}}$ to the subspace $\kim(\clambda)\lightblue{\FF_{8}}$ for all $\clambda \in \brown{\FF_{64}}$'' 
+\end{quote}
+\end{mybox}
+\pause
+\begin{mybox}[cgreen]{Subspace property}
+	$\cFF \subset \cLL$ two finite fields. $\cF \from \cLL \to \cLL$ satisfies the subspace property if:
+	$$ \forall \ \clambda \in \cLL, \quad \cF(\clambda \cFF) = \cF(\clambda) \cFF. $$
+\end{mybox}
+\pause
+\begin{mybox}[cred]{Mapping cosets onto cosets}
+	$\cFF \subset \cLL$ two finite fields. $\cF \from \cLL \to \cLL$ satisfies the subspace property iff:
+	$$\forall \clambda \in \cLL,  \ \exists \ \cGl \from \cFF \to \cFF \text{ bijective s.t:} \quad  \forall \cphi \in \cFF, \quad  \cF(\clambda \cphi) = \cF(\clambda)\cGl(\cphi). $$
+	\hfill \red{If $\cF(\clambda) \neq 0$, $\cGl$ unique}
+\end{mybox}
+% \pause
+%\begin{mybox}[cred]{\centering \Large \bfseries How general is it compared to $\kim$ ?}
+%\end{mybox}
+
+\end{frame}

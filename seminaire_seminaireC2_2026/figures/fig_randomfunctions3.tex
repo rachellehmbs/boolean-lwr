@@ -1,0 +1,77 @@
+\begin{figure}
+  \centering
+  % \colorlet{colorA}{red!0!green!50!white}
+  % \colorlet{colorB}{red!33!green!50!white}
+  % \colorlet{colorC}{red!67!green!50!white}
+  % \colorlet{colorD}{red!100!green!50!white}
+  
+  \colorlet{colorA}{red!50!white}
+  \colorlet{colorB}{colorA>wheel,1,4}
+  \colorlet{colorC}{colorA>wheel,2,4}
+  \colorlet{colorD}{colorA>wheel,3,4}
+  
+  \begin{tikzpicture}[xscale=.5,yscale=.5,
+    level distance=1.2cm, sibling distance=0.9cm,
+    edge from parent/.style={draw,<-}]
+    
+
+    \foreach \i in {0,1,...,5} {
+      \node[point,color=vert3] (x\i) at ($(\i*360/6:1cm)$) {};
+}
+          
+    \foreach \i\j in {0/1,1/2,2/3,3/4,4/5,5/0} {
+      \draw[->] (x\i) to (x\j);
+    }
+   \node[ipoint] at (x1) {} child[grow=north east,shift={(0,-.2)}]
+    { node[point]  {}
+      child { node[point] {} }
+      child { node[point] {} }
+    };
+    %%%%
+    \node[ipoint] at (x2) {} 
+    %%
+    child[grow=north,shift={(0,-.15)}]
+    { 
+    node[point,color=vert3] (tx3) {} 
+    %
+      child[grow=north] { node[point,color=vert3] (tx1) {} child { node[point,color=vert3] (tx0) {} child { node[point] {} } child { node[point,color=vert3] {} } } }
+      child[grow= north east] { node[point] {} child[grow=north] { node[point] {} } child[grow=north east] { node[point] {} child[grow = north] { node[point] {} child { node[point] {} } child { node[point] {} child { node[point] {} } }} } }
+    }
+    %%
+    child[grow=north east,shift={(0,-.15)}]
+    { 
+    node[point]  {} child[grow=north east] { node[point] {} }
+    }
+    ;
+    %
+    \node[ipoint] at (x3) {} child[grow=north west]
+    { node[point] {}
+      child[grow=north] { node[point] {} child { node[point] {} } child { node[point] {} } }
+    };
+    \node[ipoint] at (x4) {} child[grow=south,shift={(0,-0.15)}]
+    { node[point] {}
+    };
+    %
+    \node[ipoint] at (x5) {} child[grow=south east,shift={(0,-0.15)}]
+    { node[point] {}
+      child { node[point] {} } child { node[point] {} }
+    };
+
+    
+
+       \node[color=vert3] at ([xshift=-2.5mm, yshift = 0.3mm] tx0.west) {\footnotesize $x_0$};
+    \draw[latex-latex,NavyBlue,thick,densely dashed]  ([xshift=-1.5mm,yshift=-1.8mm] tx0.west) -- ([xshift=-1.5mm] tx1.west) node[left,yshift=-2mm] {$t$}-- ([xshift=-1.5mm] x2.west) ; 
+    
+        \draw[latex-latex,rouge3,thick, densely dashed]  (x2.south) --  (x3.east) -- (x4.north east) -- (x5.north west) -- (x0.west) -- (x1.south west) -- (x2.south east); 
+        
+        \node[color=rouge3] at (0,0) {$\ell$};
+    
+    \node at (0,-3.5) {};
+
+
+  \end{tikzpicture}
+
+
+
+\end{figure}
+

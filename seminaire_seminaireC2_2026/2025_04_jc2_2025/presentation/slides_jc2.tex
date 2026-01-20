@@ -1,0 +1,75 @@
+\input{beamer_preamble}
+\usetikzlibrary{patterns, crypto.symbols, arrows} 
+\input{macros}
+%\usepackage{bm}
+\newcommand{\cFFspace}{\cyan{\FFspace}}
+\newcommand{\cFFfield}{\orange{\FFfield}}
+\newcommand{\cFFinter}{\purple{\FFinter}}
+
+\usepackage{inriafontes}
+
+%% Le changement de police peut être réalisé
+%% au chargement du paquet
+%% \usepackage{InriaSans]{inriafontes}
+%% ou en cours d'utilisation
+
+%\usepackage{sfmath}
+
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+% \setmathfont[FakeBold=1]{Latin Modern Math}
+\mathversion{bold}
+%\usepackage{fourier}
+
+\renewcommand{\familydefault}{InriaSans}
+%\newfontfamily\myfont{InriaSerif}
+
+% \title{Practical cube-attack against nonce-misused ASCON}
+% \author{Jules Baudrin, Anne Canteaut, and Léo Perrin (Inria, Paris, France)}
+% \date{May 2024}
+
+\begin{document}
+
+\author{Jules Baudrin}
+\institute{UCLouvain}
+\date{11/02/2025}
+
+\begin{frame}[plain]
+\vfill
+\begin{center}
+\color{ptblue} \huge Linear self-equivalence : a unifying point-of-view on the known families of APN functions
+\end{center}
+
+\begin{center}
+\vspace{.6cm}
+\color{oiblack} {\Large Jules Baudrin}\\ \vspace{.2cm} based on a joint work with
+Anne Canteaut \& Léo Perrin
+\vfill
+\includegraphics[scale=.3]{figures/logo_uclouvain}
+\vfill
+{Journées Codage \& Cryptographie,  April 3rd, 2025}
+\end{center}
+
+\begin{textblock*}{7cm}(9.5cm,9.5cm) % {block width} (coords)
+ Contact: \href{mailto:jules.baudrin@uclouvain.be}{jules.baudrin@uclouvain.be}
+\end{textblock*}
+
+\end{frame}
+
+
+% \input{slides/0_test_slides}
+
+
+
+\input{slides/1_symmetric_cryptography}
+\input{slides/2_boolean_functions}
+\input{slides/4_self_linear_equivalence_APN}
+
+
+
+\appendix
+
+\input{slides/6_backup_uvsq}
+% \input{slides/6_backup}	
+
+\end{document}

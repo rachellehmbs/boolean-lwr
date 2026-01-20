@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Introduction: motivation and setting}{2}{0}{1}
+\beamer@sectionintoc {2}{A symmetric point of view}{15}{0}{2}
+\beamer@sectionintoc {3}{Theoretical analysis of the ANF}{34}{0}{3}
+\beamer@sectionintoc {4}{Effective computation of the ANF}{44}{0}{4}

@@ -1,0 +1,90 @@
+%\newtoggle{diffinput}
+%\newtoggle{rotinput}
+%\newtoggle{diffoutput}
+%\newtoggle{rotoutput}
+%\newtoggle{diffboxinput}
+%\newtoggle{diffboxoutput}
+%\newtoggle{rotdiffinput}
+%\newtoggle{rotdiffoutput}
+%\newtoggle{affineinput}
+%\newtoggle{affineoutput}
+%\newtoggle{x}
+%\newtoggle{y}
+%\newtoggle{colorvars}
+
+%\toggletrue{x}
+%\toggletrue{y}
+%\toggletrue{diffinput}
+%\toggletrue{diffoutput}
+%\toggletrue{diffboxinput}
+%\toggletrue{diffboxoutput}
+%\toggletrue{rotdiffinput}
+%\toggletrue{rotdiffoutput}
+%\toggletrue{affineinput}
+%\toggletrue{affineoutput}
+%\toggletrue{rotinput}
+%\toggletrue{rotoutput}
+
+\begin{tikzpicture}[thick, scale=1]
+
+	\draw[] (0.5, 1)  -- (0.5, 2) node[above] {\iftoggle{colorvars}{\red{$k$}}{$k$}}
+	(-3.5, 0.5) node[left] {\iftoggle{x}{\iftoggle{colorvars}{\green{$x$}}{$x$}}{\color{white}$x$}} -- (0, 0.5)
+	(1, 0.5) -- (4.5, 0.5) node[right] {\iftoggle{y}{\iftoggle{colorvars}{\orange{$y$}}{$y$}}{\color{white}$y$}};
+	\draw[fill=white, drop shadow, draw=cblue] (0,0) rectangle (1,1) node[midway] {\blue{$E$}};
+	\draw[draw=cblue, fill=cblue] (0.3, 1) -- (0.5, 0.8) -- (0.7, 1);
+	
+	\iftoggle{diffinput}{
+	\draw (-1, 0.75) -- (-1, 1.25) node[above] {\orange{$\bm{\alpha}$}};
+	\draw[draw=corange] (-1,0.5) circle (0.25cm);
+	\draw[draw=corange] (-1, 0.5) -- +(0, 0.25)
+		 			(-1, 0.5) -- +(0, -0.25)
+	 				(-1, 0.5) -- +(-.25, 0)
+		 			(-1, 0.5) -- +(.25, 0);
+}{}
+	
+	\iftoggle{diffoutput}{
+	\draw (2, 0.75) -- (2, 1.25) node[above] {\orange{$\bm{\beta}$}};
+	\draw[draw=corange] (2,0.5) circle (0.25cm);
+	\draw[draw=corange] (2, 0.5) -- +(0, 0.25)
+	(2, 0.5) -- +(0, -0.25)
+	(2, 0.5) -- +(-.25, 0)
+	(2, 0.5) -- +(.25, 0);
+}{}
+	
+	\iftoggle{rotinput}{
+	\draw[fill=white, drop shadow, draw=cgreen] (-1.5,0) rectangle (-.5,1) node[midway] {\green{$\rho_i$}};
+}{}
+	
+	\iftoggle{rotoutput}{
+	\draw[fill=white, drop shadow, draw=cgreen] (1.5,0) rectangle (2.5,1) node[midway] {\green{$\rho_j$}};
+}{}
+
+	\iftoggle{diffboxinput}{
+	\draw[fill=white, drop shadow, draw=corange] (-1.5,0) rectangle (-.5,1) node[midway] {\orange{$T_\alpha$}};
+}{}
+
+\iftoggle{diffboxoutput}{
+	\draw[fill=white, drop shadow, draw=corange] (1.5,0) rectangle (2.5,1) node[midway] {\orange{$T_\beta$}};
+}{}
+
+	\iftoggle{rotdiffinput}{
+	\draw[fill=white, drop shadow, draw=corange] (-1.5,0) rectangle (-.5,1) node[midway] {\orange{$T_\alpha$}};
+	\draw[fill=white, drop shadow, draw=cgreen] (-3,0) rectangle (-2,1) node[midway] {\green{$\rho_i$}};
+	}{}
+	
+	\iftoggle{rotdiffoutput}{
+	\draw[fill=white, drop shadow, draw=corange] (3,0) rectangle (4,1) node[midway] {\orange{$T_\beta$}};
+	\draw[fill=white, drop shadow, draw=cgreen] (1.5,0) rectangle (2.5,1) node[midway] {\green{$\rho_j$}};
+	}{}
+	
+	\iftoggle{affineinput}{
+	\draw[fill=white, drop shadow, draw=cred] (-1.5,0) rectangle (-.5,1) node[midway] {\red{$T_{c_A}$}};
+	\draw[fill=white, drop shadow, draw=cred] (-3,0) rectangle (-2,1) node[midway] {\red{$L_A$}};
+	}{}
+	
+	\iftoggle{affineoutput}{
+	\draw[fill=white, drop shadow, draw=cred] (3,0) rectangle (4,1) node[midway] {\red{$T_{c_B}$}};
+	\draw[fill=white, drop shadow, draw=cred] (1.5,0) rectangle (2.5,1) node[midway] {\red{$L_B$}};
+	}{}
+	
+\end{tikzpicture}

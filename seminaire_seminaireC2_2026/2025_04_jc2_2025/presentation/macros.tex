@@ -1,0 +1,491 @@
+% !TEX root = ./slides_jc2.tex
+
+\newcommand{\bulletpoint}{\raisebox{.08cm}{\tiny $\bullet$~}}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\newcommand{\leadstobig}{\scalemath{1.5}{\leadsto}}
+\newcommand{\recapsymbol}{\green{\faHistory}}
+%========= Maths sets=========
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\ind}{\mathbf{1}}
+
+%multisets
+\newcommand*{\ldblbrace}{\{\mskip-5mu\{} 
+\newcommand*{\rdblbrace}{\}\mskip-5mu\}}
+
+% Equivalence
+\newcommand{\equivcolor}[1]{\orange{#1}}
+\renewcommand{\AA}{\equivcolor{A}}
+\newcommand{\BB}{\equivcolor{B}}
+\newcommand{\EE}{\equivcolor{E}}
+\newcommand{\DD}{\equivcolor{D}}
+\newcommand{\Caff}{\equivcolor{C}}
+\newcommand{\calAA}{\equivcolor{\mathcal{A}}}
+\newcommand{\calLL}{\equivcolor{\mathcal{L}}}
+\newcommand{\calBB}{\equivcolor{\mathcal{B}}}
+\newcommand{\cstterm}{\equivcolor{c}}
+
+\newcommand{\ccz}{\sim_{\mathrm{CCZ}}}
+\newcommand{\ea}{\sim_{\mathrm{EA}}}
+\newcommand{\lin}{\sim_{\mathrm{lin}}}
+\newcommand{\similar}{\sim_{\mathrm{sim}}}
+\newcommand{\aff}{\sim_{\mathrm{aff}}}
+\newcommand{\graph}{\mathcal{G}}
+
+
+% AES round functions
+\newcommand{\SB}{\mathsf{SB}}
+\newcommand{\SR}{\mathsf{SR}}
+\newcommand{\MC}{\mathsf{MC}}
+\newcommand{\SC}{\mathsf{SC}}
+
+\newcommand{\ShiftRows}{\textsf{ShiftRows}}
+\newcommand{\MixColumns}{\textsf{MixColumns}}
+\newcommand{\ShuffleCells}{\textsf{ShuffleCells}}
+
+\newcommand{\whitekey}{\mathrm{WK}}
+
+\newcommand{\succset}{\mathrm{Succ}}
+\newcommand{\precset}{\mathrm{Prec}}
+
+% ASCON
+\newcommand{\IV}{\mathrm{IV}}
+\newcommand{\nonce}{N}
+\newcommand{\aeadtag}{T}
+\newcommand{\setascon}[1]{Z_{#1}}
+\newcommand{\classa}{\blue{\mathcal{C}(a_{0}+1, e_{0})}}
+\newcommand{\classb}{\orange{\mathcal{C}(a_{0}, e_{0})}}
+\newcommand{\cubea}{\blue{v}}
+\newcommand{\cubeb}{\orange{w}}
+\newcommand{\cubeas}[1]{\blue{v \lll #1}}
+\newcommand{\cubebs}[1]{\orange{w \lll #1}}
+\newcommand{\mcubea}{\blue{x^{v}}}
+\newcommand{\mcubeb}{\orange{x^{w}}}
+\newcommand{\mcubeas}[1]{\blue{x^{v \lll #1}}}
+\newcommand{\mcubebs}[1]{\orange{x^{w \lll #1}}}
+\newcommand{\classai}[1]{\blue{\mathcal{C}(a_{#1}+1, e_{#1})}}
+\newcommand{\classbi}[1]{\orange{\mathcal{C}(a_{#1}, e_{#1})}}
+\newcommand{\rin}{r_{\mathrm{in}}}
+\newcommand{\rout}{r_{\mathrm{out}}}
+
+
+%============ Maths/info======
+\newcommand{\re}{\mathrm{Re}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\rank}{\mathrm{rk}}
+\newcommand{\xor}{\oplus}
+\newcommand{\from}{\colon}
+\newcommand{\set}[1]{\left\{#1\right\}} % { }
+\newcommand{\spanset}[1]{\left\langle#1\right\rangle} % < >
+\newcommand{\intset}[1]{\left\llbracket #1 \right\rrbracket} % [[  ]]
+\newcommand{\multiset}[1]{\ldblbrace #1 \rdblbrace}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert} % absolute value | |
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert} % cardinal | |
+\newcommand{\comp}{\circ}
+\newcommand{\modadd}[1]{\boxplus_{#1}} % modular addition
+%\newcommand{\aes}{\mathrm{AES}}
+\newcommand{\walsh}{W}
+\newcommand\extendedwalsh{\mathcal{W}}
+\newcommand{\scaledwalsh}{\widetilde{W}}
+\newcommand{\keysize}{\red{\kappa}}
+\newcommand{\algdeg}{\deg_{\text{a}}}
+\newcommand{\univdeg}{\deg_{\text{u}}}
+\newcommand{\hamming}{\mathrm{wt}}
+\newcommand{\blockcipher}{\mathcal{E}}
+\newcommand{\bij}{\xrightarrow{\sim}}
+\newcommand{\keyspace}{\FF_2^{\keysize}}
+\newcommand{\randomdraw}{\xleftarrow{\scriptscriptstyle\$}}
+\newcommand{\drawfrom}{\overset{\$}{\leftarrow}}
+\newcommand{\transitionmat}[1]{\mathbf{T}^{#1}}
+\newcommand{\quasidiff}[1]{\mathbf{D}^{#1}}
+\newcommand{\correlationmat}[1]{\mathbf{C}^{#1}}
+
+\newcommand{\bijset}{\mathrm{Bij}(\FFspace)}
+\newcommand{\deriv}[1]{D_{#1}}
+\newcommand{\proba}[1]{\PP\left[#1\right]}
+
+% phi, epsilon
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\id}{\mathrm{Id}}
+\newcommand{\idn}{\mathrm{I_{n}}}
+
+% Linear masks
+\newcommand{\mask}[1]{\blue{#1}}
+\newcommand{\maa}{\mask{\alpha}}
+\newcommand{\aazero}{\mask{\alpha_{0}}}
+\newcommand{\aaone}{\mask{\alpha^{(1)}}}
+\newcommand{\aabeforelast}{\mask{\alpha^{(R-1)}}}
+\newcommand{\aalast}{\mask{\alpha_{n-1}}}
+\newcommand{\aain}{\mask{\alpha^{(0)}}}
+%\renewcommand{\aat}{\mask{\alpha^{(r)}}} % renew because of blkarray
+\newcommand{\aanext}{\mask{\alpha^{(r+1)}}}
+\newcommand{\aaout}{\mask{\alpha^{(R)}}}
+
+\newcommand{\bb}{\mask{\beta}}
+\newcommand{\bbzero}{\mask{\beta_{0}}}
+\newcommand{\bblast}{\mask{\beta_{n-1}}}
+
+\newcommand{\ai}{\mask{\alpha_{i}}}
+\newcommand{\bi}{\mask{\beta_{i}}}
+
+\newcommand{\linearity}{\mathcal{L}}
+\newcommand{\LAT}{\mathrm{LAT}}
+
+
+% Trace functions
+\NewDocumentCommand{\tr}{o o}{
+	\IfNoValueTF {#1}
+	{\mathrm{Tr}}
+	{\mathrm{Tr}_{{#1}/{#2}}}
+}
+\newcommand{\trlf}{\tr[\LL][\FF]}
+\newcommand{\trlfk}{\tr[\LL][\F_{2^k}]}
+\newcommand{\trlftwo}{\tr[\LL][\FF_{2}]}
+\newcommand{\trfftwo}{\tr[\FF][\FF_{2}]}
+\newcommand{\trntwo}{\tr[\FF_{2^n}][\FF_{2}]}
+\newcommand{\trnk}{\tr[\FF_{2^n}][\FF_{2^{k}}]}
+
+\usepackage{upgreek}
+\newcommand{\canon}[1]{\upxi^{(#1)}} 
+
+
+% DIFFERENCES
+\newcommand{\bnabla}{\blue{\nabla}}
+\newcommand{\plaindiff}{\cyan{\Delta}}
+\newcommand{\difference}[1]{\blue{\Delta^{(#1)}}}
+\newcommand{\inputdiff}{\difference{0}}
+\newcommand{\seconddiff}{\difference{1}}
+\newcommand{\ithdiff}{\difference{i}}
+\newcommand{\tdiff}{\difference{r}}
+\newcommand{\rdiff}{\difference{r}}
+\newcommand{\nextdiff}{\difference{r+1}}
+\newcommand{\beforelastdiff}{\difference{r-1}} 
+\newcommand{\outputdiff}{\difference{r}}      
+\newcommand{\rplusonediff}{\difference{r+1}}   
+\newcommand{\sthdiff}{\difference{s}}
+\newcommand{\din}{\cyan{\Delta^{\mathrm{in}}}}
+\newcommand{\dout}{\cyan{\Delta^{\mathrm{out}}}}
+\newcommand{\smalldin}[1]{\blue{\Delta^{\mathrm{in}}_{#1}}}
+\newcommand{\smalldout}[1]{\blue{\Delta^{\mathrm{out}}_{#1}}}
+
+\newcommand{\ddiff}{\difference{d}}
+\newcommand{\dminusonediff}{\difference{d-1}}
+
+% ROUND FUNCTIONS
+\newcommand{\roundF}[1]{F^{(#1)}}
+\newcommand{\Ft}{\roundF{t}}
+\newcommand{\Fr}{\roundF{r}}
+\newcommand{\Fnext}{\roundF{t+1}}
+\newcommand{\Fprev}{\roundF{t-1}}
+\newcommand{\Fin}{\roundF{0}}
+\newcommand{\Fout}{\roundF{r-1}}
+\newcommand{\Fbeforelast}{\roundF{r-2}}
+
+
+
+% Round values  ! warning F and x/y not the same out value !
+\newcommand{\roundx}[1]{x^{(#1)}}
+\newcommand{\xt}{\roundx{t}}
+\newcommand{\xr}{\roundx{r}}
+\newcommand{\xnext}{\roundx{t+1}}
+\newcommand{\xprev}{\roundx{t-1}}
+\newcommand{\xin}{\roundx{0}}
+\newcommand{\xout}{\roundx{r}}
+\newcommand{\xbeforelast}{\roundx{r-1}}
+
+\newcommand{\roundy}[1]{y^{(#1)}}
+\newcommand{\yt}{\roundy{t}}
+\newcommand{\yr}{\roundy{r}}
+\newcommand{\ynext}{\roundy{t+1}}
+\newcommand{\yprev}{\roundy{t-1}}
+\newcommand{\yin}{\roundy{0}}
+\newcommand{\yout}{\roundy{r}}
+\newcommand{\ybeforelast}{\roundy{r-1}}
+
+\newcommand{\roundz}[1]{z^{(#1)}}
+
+\newcommand{\roundk}[1]{k^{(#1)}}
+\newcommand{\kt}{\roundk{t}}
+\newcommand{\knext}{\roundk{t+1}}
+\newcommand{\kprev}{\roundk{t-1}}
+\newcommand{\kin}{\roundk{0}}
+\newcommand{\kout}{\roundk{r}}
+\newcommand{\kbeforelast}{\roundk{r-1}}
+
+% Matrices
+\newcommand{\matrixspace}[2]{\mathbf{M}_{#1}(#2)}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\GL}[2]{\mathbf{GL}_{#1}(#2)}
+
+\newcommand{\functionproduct}[2]{#1 \times #2}
+
+\newcommand{\add}[1]{T_{#1}}
+
+\newcommand{\roundblockcipher}{\mathcal{F}}
+
+\newcommand{\changevar}{\orange{G}}
+\newcommand{\changevarlayer}{\orange{\mathcal{G}}}
+
+\newcommand{\li}{N}
+\newcommand{\pcomA}{\cyan{A}}
+\newcommand{\pcomB}{\cyan{B}}
+\newcommand{\alayer}{\cyan{\mathcal{A}}}
+\newcommand{\blayer}{\blue{\mathcal{B}}}
+\newcommand{\alayerpart}{\blue{\widetilde{\mathcal{A}}}}
+\newcommand{\blayerpart}{\blue{\widetilde{\mathcal{B}}}}
+\newcommand{\comA}[1]{\blue{A^{(#1)}}}
+\newcommand{\comB}[1]{\blue{B^{(#1)}}}
+\newcommand{\comAlayer}[1]{\blue{\mathcal{A}^{(#1)}}}
+\newcommand{\comBlayer}[1]{\blue{\mathcal{B}^{(#1)}}}
+
+\newcommand{\invf}{\blue{f}}
+\newcommand{\invg}{\blue{g}}
+\newcommand{\invh}[1]{\blue{h_{#1}}}
+\newcommand{\invrho}{\blue{\rho}}
+\newcommand{\invtau}{\blue{\tau}}
+
+\NewDocumentCommand{\diff}{O{} O{\inputdiff} O{\difference{R}}}{#2 \xrightarrow{#1} #3}
+\NewDocumentCommand{\trail}{O{} O{} O{\inputdiff} O{\seconddiff} O{\difference{R}}}{#3 \xrightarrow{#1} #4 \xrightarrow{} \cdots \xrightarrow{#2} #5}
+
+\NewDocumentCommand{\diffproba}{O{\inputdiff} O{\difference{R}} m}{\PP\left[#1 \xrightarrow{#3} #2\right]}
+\NewDocumentCommand{\diffprobatrail}{O{\inputdiff} O{\seconddiff} O{\difference{R}} m m}{\PP\left[#1 \xrightarrow{#4} #2 \xrightarrow{} \cdots \xrightarrow{#5} #3\right]}
+
+\NewDocumentCommand{\edp}{O{\inputdiff} O{\difference{R}} m}{\mathbb{E}\left[#1 \xrightarrow{#3} #2\right]}
+\NewDocumentCommand{\edptrail}{O{\inputdiff} O{\seconddiff} O{\difference{R}} m m}{\mathbb{E}\left[#1 \xrightarrow{#4} #2 \xrightarrow{} \cdots \xrightarrow{#5} #3\right]}
+
+\newcommand{\solutionset}{Z}
+\newcommand{\diffset}{\solutionset^{\mathrm{diff}}}
+\newcommand{\commuteset}{\solutionset^{\mathrm{comm}}}
+%\newcommand{\opset}{\solutionset^{\op\text{-diff}}}
+\newcommand{\linset}{\solutionset^{\mathrm{lin}}}
+\newcommand{\linnbsols}{z^{\mathrm{lin}}}
+
+
+
+\newcommand{\keyschedule}{\mathrm{KS}}
+
+\newcommand{\sboxsize}{m}
+\newcommand{\sboxspace}{\FF_2^m}
+\newcommand{\sboxlayer}{\mathcal{S}}
+\newcommand{\llayer}{\mathcal{L}}
+\newcommand{\nbs}{s} % Number of sboxes
+
+%============ Ciphers ======
+\newcommand{\cipher}[1]{\textsf{#1}} %sf, sc
+
+\newcommand{\AES}{\cipher{AES}}
+\newcommand{\AESNI}{\cipher{AES-NI}}
+\newcommand{\Ascon}{\cipher{Ascon}}
+\newcommand{\Asconpq}{\cipher{Ascon-80pq}}
+\newcommand{\DES}{\cipher{DES}}
+\newcommand{\mdfour}{\cipher{MD}4}
+\newcommand{\keccak}{\cipher{Keccak}}
+\newcommand{\keccakf}{\cipher{Keccak}-$f$}
+\newcommand{\mimc}{\cipher{MiMC}}
+\newcommand{\scream}{\cipher{Scream}}
+\newcommand{\midori}{\cipher{Midori}}
+\newcommand{\prince}{\cipher{Prince}}
+\newcommand{\mantis}{\cipher{Mantis}}
+\newcommand{\Square}{\cipher{Square}}
+\newcommand{\Misty}{\cipher{Misty1}}
+\newcommand{\SHAthree}{\cipher{SHA}3}
+\newcommand{\midoribis}[2]{\cipher{Vert}$^{#2}_{#1}$}
+\newcommand{\midoriter}[2]{\cipher{Grün}\textsubscript{#1}\textsuperscript{#2}}
+\newcommand{\iscream}{\cipher{iSCREAM}}
+\newcommand{\norx}{\cipher{NORX v2.0}}
+\newcommand{\simpira}{\cipher{Simpira v1}}
+\newcommand{\haraka}{\cipher{Haraka v1}}
+\newcommand{\Robin}{\cipher{Robin}}
+\newcommand{\iSCREAM}{\cipher{iSCREAM}}
+\newcommand{\Zorro}{\cipher{Zorro}}
+\newcommand{\boomslang}{\cipher{Boomslang}}
+\newcommand{\qarma}{\cipher{QARMA}}
+\newcommand{\kuznyechik}{\cipher{Kuznyechik}}
+
+\newcommand{\op}{\diamond}
+\newcommand{\opset}{Z^{\op\text{-diff}}}
+\newcommand{\trans}{\mathcal{T}}
+\newcommand{\linspace}[1]{\mathrm{LS}\left(#1\right)}
+\newcommand{\wkset}[2]{W(#1, #2)}
+
+
+\newcommand{\kim}{\kappa}
+\newcommand{\FFfield}{\FF_{2^n}}
+\newcommand{\subfield}{\FF_{2^{k}}}
+\newcommand{\FFspace}{\FF_{2}^{n}}
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\fix}{\mathrm{Fix}}
+
+\newcommand{\mathtitle}{\texorpdfstring}
+
+
+%=========== MACROS LeMac========
+% operation LeMac textsf
+\newcommand{\LIN}	{\ensuremath{\mathsf{LIN}}\xspace}
+\newcommand{\AK}{\ensuremath{\mathsf{AK}}\xspace}
+\newcommand{\AC}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\AT}{\ensuremath{\mathsf{AT}}\xspace}
+\newcommand{\ATK}  {\ensuremath{\mathsf{ATK}}\xspace}
+\newcommand{\KS}{\ensuremath{\mathsf{KS}}\xspace}
+\newcommand{\AddRoundKey} {\ensuremath{\mathsf{AddRoundKey}}\xspace}
+\newcommand{\SubCells}  {\ensuremath{\mathsf{SubCells}}\xspace}
+\newcommand{\AddConstants}{\ensuremath{\mathsf{AddConstants}}\xspace}
+\newcommand{\AddRoundTweak}  {\ensuremath{\mathsf{AddRoundTweak}}\xspace}
+\newcommand{\AddRoundTweakey} {\ensuremath{\mathsf{AddRoundTweakey}}\xspace}
+\newcommand\SubBytes{\ensuremath{\mathsf{SubBytes}}\xspace}
+
+\newcommand\LFSR{\ensuremath{\mathsf{LFSR}}}
+\newcommand{\transitionspace}{\matrixspace{(\ours+\ourr)\times (\ourm+\ourr)}{\FF_2}}
+\newcommand{\aes}   {{\textsf{AES}}\xspace}
+\newcommand{\siv}   {\textsf{SIV}\xspace}
+\newcommand{\ghash}   {\textsf{GHASH}\xspace}
+\newcommand{\gcm}   {\textsf{GCM}\xspace}
+\newcommand{\lemac}  {\textsf{LeMac}\xspace}
+\newcommand{\lepetit} {\textsf{PetitMac}\xspace}
+\newcommand{\laconstruction}{\textrm{LaConstruction}}
+\newcommand{\panama}   {\textsf{Panama}\xspace}
+\newcommand{\radiogatun}   {\textsf{RadioGat\`un}\xspace}
+\newcommand{\lux}   {\textsf{Lux}\xspace}
+\newcommand{\tiaoxin}   {\textsf{Tiaoxin}\xspace}
+\newcommand{\aegis}   {\textsf{AEGIS}\xspace}
+\newcommand{\deoxys}   {\textsf{Deoxys}\xspace}
+\newcommand{\deoxysbc}   {\textsf{Deoxys-BC}\xspace}
+\newcommand{\aerion}   {\textsf{Aerion}\xspace}
+\newcommand{\rocca}   {\textsf{Rocca}\xspace}
+\newcommand{\roccas}   {\textsf{Rocca-S}\xspace}
+\newcommand\ours{\green{s}}
+\newcommand\ourS{\green{S}}
+\newcommand\ourX{\green{X}}
+\newcommand\ourY{\green{Y}}
+\newcommand\ourZ{\green{Z}}
+\newcommand\ourm{\blue{m}}
+\newcommand\ourr{\orange{r}}
+\newcommand\ourR{\orange{R}}
+\newcommand\oura[1]{\red{a_{#1}}}
+\newcommand\ourL{\red{L}}
+\newcommand\ourT{\red{T}}
+\newcommand\ourV{\green{V}}
+\newcommand\ourW{\green{W}}
+\newcommand\ourM{\blue{M}}
+\newcommand\ourw{\red{w}}
+\newcommand{\ourseqV}{\green{\mathcal{V}}}
+\newcommand{\ourseqW}{\green{\mathcal{W}}}
+\newcommand{\ourseqM}{\blue{\mathcal{M}}}
+\makeatletter
+\def\@eA#1{\@ifnextchar[{\@eeeA{#1}}{\@ifnextchar_{\@eeeeA{#1}}{\@ifnextchar'{\@eeeeeA{#1}}{\@eeA{#1}}}}}
+\def\@eeA#1{\ifmmode\text{$\varepsilon$-A#1}\else$\varepsilon$-A#1\fi\xspace}
+\def\@eeeA#1[#2]{\ifmmode\text{$#2$-A#1}\else$#2$-A#1\fi\xspace}
+\def\@eeeeA#1_#2{\ifmmode\text{$\varepsilon_{#2}$-A#1}\else$\varepsilon_{#2}$-A#1\fi\xspace}
+\def\@eeeeeA#1'{\ifmmode\text{$\varepsilon'$-A#1}\else$\varepsilon'$-A#1\fi\xspace}
+\newcommand\eAU{\@eA{U}}
+\newcommand\eAXU{\@eA{XU}}
+\makeatother
+\newcommand\MACauth{\mathrm{AUTH}}
+\newcommand\MACverif{\mathrm{VER}}
+\newcommand{\roundnb}{\rho}
+\newcommand{\model}[3]{{\textsf{Model($#1$, lin=#2, output=#3)}}}
+
+
+%===========TRANSISTOR=======================
+\newcommand\keyspacee{\mathcal{K}}
+\newcommand\outspace{\mathcal{S}}
+\newcommand\keyevent{k}
+\newcommand\outevent{s}
+\newcommand\keyvar{K}
+\newcommand\outvar{S}
+\newcommand\fsmspace{\mathcal{X}}
+\newcommand\fsmvar{X}
+\newcommand\coolName{\texttt{Transistor}\xspace}
+\newcommand\minimalLength{correlation-immune length\xspace}
+%components transistor textsf
+\newcommand\plaintextSpace{\mathcal{P}}
+\newcommand\mainField{\FF_{p}}
+\newcommand\evenRing{\mathbb{Z}_t}
+\newcommand\LFSRlen{\mathsf{len}}
+\newcommand\pseudoKS{\orange{\mathcal{K}}}
+\newcommand\whitening{\blue{\mathcal{W}}}
+\newcommand\cX{\green{X}}
+\newcommand\cK{\orange{K}}
+\newcommand\cW{\blue{W}}
+\newcommand\cS{\red{S}}
+\newcommand\thesbox{\mathsf{S}}
+\newcommand\mixmat{M}
+\newcommand\filter{\red{\mathsf{\phi}}}
+\newcommand\fsmState[1]{\green{X}^{(#1)}}
+%operations
+\newcommand\subWords{\mathsf{SubDigits}}
+\newcommand\mixColumns{\mathsf{MixColumns}}
+\newcommand\shiftRows{\mathsf{ShiftRows}}
+\newcommand\subW{\mathsf{SD}}
+\newcommand\mixC{\mathsf{MC}}
+\newcommand\shiftR{\mathsf{SR}}
+\newcommand\pr[0]{\mathrm{Pr}}
+% latex magic for eprint version
+\newif\ifeprint
+\eprinttrue
+% \eprintfalse
+
+
+
+%=============APN FUNCTIONS
+\newcommand{\FFinter}{\mathbb{F}_{2^{k}}^{\ell}}
+\newcommand\weight[2]{\mathrm{w}_{#1}\left( #2 \right)}
+\newcommand{\functionspace}[2]{\mathcal{F}(#1, #2)}
+\newcommand{\FFinterbis}{\mathbb{F}_{2^{k'}}^{\ell'}}
+\newcommand{\linclass}{\mathcal{C}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\AutLE}{\mathrm{Aut}_{\mathrm{LE}}}
+\newcommand{\gologlu}{G{\"{o}}lo{\u{g}}lu}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\cycl}[1]{{\sigma}_{#1}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\zeroes}{\mathcal{Z}}
+\newcommand{\origins}{\mathcal{O}}
+\newcommand{\gammazero}{{\gamma^{\circ}}}
+\newcommand{\Gammastar}{\Gamma^{\circ}}
+\newcommand{\aspb}{ASPP}
+\NewDocumentCommand{\mult}{m m}{
+	\mathrm{M}_{{#2}}
+}
+\newcommand{\Gstar}{G^{\circ}}
+
+%============ Latin ===========
+\newcommand{\eg}{\textit{e.g.\@}}
+\newcommand{\cf}{\textit{c.f.\@}}
+\newcommand{\ie}{\textit{i.e.\@}}
+\newcommand{\etal}{\textit{et al.\@}}
+
+
+% ======== Togle for midori figure =========
+\newtoggle{midoriconstant}
+\newtoggle{midorikey}
+\newtoggle{midorisbox}
+\newtoggle{midorilinear}
+\newtoggle{midorishuffle}
+\newtoggle{midorinumbering}
+\newtoggle{midorishufflenumbering}
+\newtoggle{midorishufflenumberingout}
+\newtoggle{AESshiftrowsin}
+\newtoggle{AESshiftrowsout}
+\newtoggle{AESconstant}
+\newtoggle{AESSR}
+\newtoggle{stateempty}
+
+\newtoggle{SPNaccolade}
+
+\newtoggle{SPNtwoS}
+
+\newtoggle{figureSPNnoDetail}
+\newtoggle{figureSPNaddroundkey}

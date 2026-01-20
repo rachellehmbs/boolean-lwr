@@ -1,0 +1,35 @@
+\begin{tikzpicture}[scale=0.4]
+
+%(x,y)
+	\node[draw, fill = red!10] (EK) at (0,0) {$\blockcipher_{\key}$}; 
+	\node[left = 4em of EK] (xdot) {}; 
+	\node[right = 4em of EK] (ydot) {}; 
+	\draw[-latex] (xdot) -- (EK.west); 
+	\draw[-latex] (EK.east) -- (ydot); 
+	
+	\node[left = 1em of xdot] (x) {$X$};
+	\node[right = 1em of ydot] (y) {$Y$};
+	
+
+%(x+din, y+din)
+
+
+	\node[below = 2.7em of x] (xd) {$X+{\color{rouge3}\din}$}; 
+	\draw[latex-latex,dashed,color=rouge3] (x) -- (xd) node[midway,left] {$\rouge{\din}$}; 
+
+
+	\node[below = 2.7em of y] (yprime) {$Y'$}; 
+
+	\node[draw, below = 2.5em of EK, fill = red!10] (EK2) {$\blockcipher_{\key}$}; 
+	\node[left = 4em of EK2] (xdot2) {}; 
+	\node[right = 4em of EK2] (ydot2) {}; 
+	\draw[-latex] (xdot2) -- (EK2.west); 
+	\draw[-latex] (EK2.east) -- (ydot2); 
+	
+
+	\draw[latex-latex,dashed,color=vert3] (y) -- (yprime) node[midway,right] {$\ver{\dout}$?}; 
+
+
+
+
+  \end{tikzpicture}

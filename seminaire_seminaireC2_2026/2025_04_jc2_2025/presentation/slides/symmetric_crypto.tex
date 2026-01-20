@@ -1,0 +1,137 @@
+% !TEX root = ../slides.tex
+\newtoggle{diffinput}
+\newtoggle{rotinput}
+\newtoggle{diffoutput}
+\newtoggle{rotoutput}
+\newtoggle{diffboxinput}
+\newtoggle{diffboxoutput}
+\newtoggle{rotdiffinput}
+\newtoggle{rotdiffoutput}
+\newtoggle{affineinput}
+\newtoggle{affineoutput}
+\newtoggle{x}
+\newtoggle{y}
+\newtoggle{colorvars}
+
+\section{Symmetric Cryptography}
+\subsection{A bit of context}
+\begin{frame}
+	%\frametitle{\subsecname}
+	\begin{mybox}[oigreen]{Block cipher}
+		A family of bijections $\green{\mathcal{E}} = \left(E_\red{k}\right)_{\red{k}\in \red{K}}$:
+			 $\quad \quad \quad \forall \ \red{k}\in \red{K}, \quad \quad E_\red{k} \from \FF_2^n \xrightarrow{\sim} \FF_2^n.$
+	\end{mybox}
+	\begin{columns}[T,totalwidth=15cm]
+	\begin{column}{.5\textwidth}
+	\centering
+	\begin{tikzpicture}
+	%	\scriptsize		
+		\coordinate (nw) at (0, 5);
+		\coordinate (sw) at (0, 0);
+		\coordinate (ne) at (6, 5);
+		\coordinate (se) at (6, 0);
+		
+
+
+			\draw[very thick,oiblue,rounded corners=30pt] ($(nw)+(2, -.6)$) rectangle ($(se)+(-.2, .6)$) ;
+		\draw[very thick,oigreen,rounded corners=15pt] ($(nw)+(3, -1.5)$) rectangle ($(se)+(-1.3, 1.5)$) ;
+
+		\draw (3.7,1.9) node[] {{\tiny X} $E_{\red{k}}$};
+
+		
+		\draw[very thick,oiblue] ($ (ne) + (-.25, -1.4) $) --++(.6,0.7) node[right=1]{$\mathrm{Bij}(\FF_2^n)$};
+		\node[very thick,oigreen] at ($ (ne) + (-1.1, -2) $) {\green{$\mathcal{E}$}};
+		\end{tikzpicture}
+	
+	\end{column}
+
+	\begin{column}{.5\textwidth}
+	\centering
+	\vspace{35pt}
+	$$ \orange{y} = E_{\red{k}}(\purple{x}) \quad \quad \iff \quad \quad \purple{x} = (E_{\red{k}})^{-1}(\orange{y}) $$
+	\end{column}
+
+
+	\end{columns}
+
+
+	\begin{mybox}[gray]{Kerckhoffs}
+	\begin{itemize}
+		\item[-] \color{gray} Publicly known bijections $\cyan{\mathcal{E}}$
+		\item[-] Only the choice of $E_{\red{k}}$ by $A$ and $B$ is unknown
+	\end{itemize}
+	\end{mybox}
+
+\end{frame}
+\begin{frame}
+	\frametitle{Block ciphers in practice}
+	\vfill
+		\vspace{-10pt}
+		$$ \orange{y} = E_{\red{k}}(\purple{x}) \quad \quad \iff \quad \quad \purple{x} = (E_{\red{k}})^{-1}(\orange{y}) $$
+\vspace{5pt}		
+\begin{mybox}[black]{{\color{oigreen} Definition: } {\color{black}Indistinguishability}}
+$[\ E \xleftarrow{\$} \orange{\mathcal{E}} \ ]$ The block is {\color{gray}\emph{\textbf{indistinguishable}}} from a random bijection if $[ \ F \xleftarrow{\$} \blue{\mathrm{Bij}}(\FF_2^{n}) \ ].$
+	\end{mybox}
+\vspace{20pt}
+\begin{mybox}[Theorem]{Major constraints}
+$\card{\red{K}} = 2^{128}$, $n = 64, 128$
+\begin{itemize}
+	\item[-] $\orange{\mathcal{E}}$ should be {\color{gray}\textbf{\emph{easily implemented}}},
+	\item[-] $\orange{\mathcal{E}}$ should be {\color{gray}\textbf{\emph{``easily'' analyzed}}}.
+\end{itemize}
+\end{mybox}
+
+
+\end{frame}
+
+\begin{frame}
+
+	\frametitle{Substitution Permutation Network (SPN)}
+	\vspace{-10pt}
+	\begin{mybox}[oiblue]{3-step round function}
+		\begin{itemize}
+				\item[-] \green{Local non-linear} layer, \orange{global linear} layer, and \cyan{key/constant addition}
+				\vspace{1pt}
+				\item[-] \red{Repeat} $r$ times
+			\end{itemize}
+	\end{mybox}
+	
+		\begin{center}
+		 \adjustbox{scale=0.55}{\input{figures/spn.tex}}
+	\end{center}
+	
+	\begin{mybox}[oired]{}
+		$\green{\mathcal{E}}$ should be \red{easily implemented} \ \ \red{\faCheckSquareO}
+	\end{mybox}
+
+\end{frame}
+
+
+\subsection{Differential distinguisher}
+\begin{frame}
+	\frametitle{\subsecname}
+			\begin{mybox}[oiblue]{Differential distinguisher}
+			Find $\orange{\alpha,\beta}$ st. for many $\red{k}$, $\quad E_{\red{k}}(x + \orange{\alpha}) = E_{\red{k}}(x) + \orange{\beta} \quad $ has many solutions $x$.
+		\end{mybox}
+
+
+	\begin{mybox}[oigreen]{Random permutation $F$}
+		$F(x + \orange{\alpha}) + F(x) = \orange{\beta}$ with proba $2^{-n}$.
+	\end{mybox}
+	\pause
+	\begin{mybox}[oiorange]{Wide trail strategy}
+		\begin{itemize}
+			\item[-] \green{Sbox} layer, $\leadsto$ $\green{S}(x + \orange{\alpha}) = \green{S}(x) + \orange{\beta}$ must have \green{few} solutions for all $\orange{\alpha, \beta}$
+			\item[-] \orange{Linear} layer must diffuse \orange{a lot}
+			\item[-] \cyan{Key schedule} should be built carefully.
+		\end{itemize}
+	\end{mybox}
+	\pause
+	\vspace{10pt}
+	\begin{mybox}[oired]{\centering How much \textbf{differentially-resistant} can an Sbox be?}
+	\end{mybox}
+
+\end{frame}
+
+
+

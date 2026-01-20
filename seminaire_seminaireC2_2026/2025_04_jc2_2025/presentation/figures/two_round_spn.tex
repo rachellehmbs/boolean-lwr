@@ -1,0 +1,53 @@
+% !TeX root = ../slides_uvsq.tex
+\begin{tikzpicture}[scale=1]
+	
+	\foreach \xshift in {0, 3.7} 
+	{
+	\begin{scope}[xshift=\xshift cm]
+		\foreach \y in {0, 1.5, 4.5}
+		{
+			%sbox
+			\draw[thick, draw=black ,fill=white,drop shadow] (0.5,\y) rectangle node[midway] {\large \black{$S$}} +(1,1) ;
+			
+			%wires
+			\foreach \smally in {1, 2, 3, 4} {
+			\draw (-.1, \y + .2*\smally) -- +(.6, 0);
+			\draw (1.5, \y + .2*\smally) -- +(.5, 0);
+			\draw (3, \y + .2*\smally) -- +(.6, 0);
+			
+			%\ifthenelse{\not{\equal{\xshift}{0}}}{	\draw (3.7, \y + .2*\smally) -- +(.5, 0);}{}
+			
+			%xors
+			\draw[thick, draw=ptred] (3.6,\y + .2*\smally) circle (0.1cm);
+			\draw[thick, draw=ptred] (3.6, \y + .2*\smally) -- +(0, 0.1)
+			(3.6, \y + .2*\smally) -- +(0, -0.1)
+			(3.6, \y + .2*\smally) -- +(-.1, 0)
+			(3.6, \y + .2*\smally) -- +(.1, 0);
+
+
+			}
+		}
+		\draw[draw=white] (0.5,3) rectangle node[midway] {\large \black{$\vdots$}} +(1,1) ;
+		
+		\draw[thick, draw=black ,fill=white,drop shadow] (2,0) rectangle node[midway] {\large \black{$L$}} +(1,5.5) ;
+		
+	\end{scope}
+
+	\draw[thick, draw=ptred] (0, 4.5 + .2*4) -- +(0, 0.7) node[above] {\red{$rk_{0}$}};
+	\draw[thick, draw=ptred] (3.6, 4.5 + .2*4) -- +(0, 0.7) node[above] {\red{$rk_{1}$}};
+	\draw[thick, draw=ptred] (7.3, 4.5 + .2*4) -- +(0, 0.7) node[above] {\red{$rk_{2}$}};
+			\foreach \y in {0, 1.5, 4.5}{
+				\foreach \smally in {1, 2, 3, 4} {
+			\draw[thick, draw=ptred] (0,\y + .2*\smally) circle (0.1cm);
+			\draw[thick, draw=ptred] (0, \y + .2*\smally) -- +(0, 0.1)
+			(0, \y + .2*\smally) -- +(0, -0.1)
+			(0, \y + .2*\smally) -- +(-.1, 0)
+			(0, \y + .2*\smally) -- +(.1, 0);
+			}
+			}
+	
+	}
+
+	%\draw[draw=ptred, thick,decorate,decoration={brace, amplitude=5pt}] (3.3, 5.6) -- node[midway, above=.3cm] {\red{Key addition}} +(.6, 0);
+
+\end{tikzpicture}

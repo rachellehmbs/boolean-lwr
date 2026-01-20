@@ -1,0 +1,36 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=pi_generalized_low_unif]
+\frametitle{Functions with low linearity}
+
+\recapbox{ $\cPi|_{\cLL \setminus \cFF} \from \quad 
+	\cgamma\cphi \ \mapsto \ \orangeG(\cgamma) + \blueF(\cphi) 
+$ $\quad \quad \quad$ $\cGamma, \cO$, sys. of reps. $\quad \quad \quad $  $\clambda \in \cLL, \cgamma \in \cGamma, \cphi \in \cFF$
+
+\vspace{5pt}
+$\red{\widehat{\Pi}}_{\beta}(\alpha) \vcentcolon= \sum\limits_{\clambda \in \cLL} (-1)^{\trlftwo(\alpha \clambda + \beta \cPi(\clambda))}$
+}
+\pause
+\begin{mybox}[cblue]{A specific choice for $\cGamma$}
+$[\cLL: \cFF] = 2\quad  $
+%\quad  \card{\cGamma} = 2^{t} + 1, \ \ \card{\mathcal{\cFF^*}} = 2^{t} -1 \quad \quad \gcd(2^t - 1, 2^t + 1) = 1$.
+%\vspace{10pt}
+$\implies$ $\cGamma$ can be the subgroup $\orange{\GG}$ of order $2^t + 1$.
+\end{mybox}
+\pause
+\begin{mybox}[cgreen]{Functions with low linearity}
+$\cGamma = \orange{\GG}$, $\blueF = \lightblue{\mathrm{Id}}. \quad \quad$
+\pause
+% \begin{itemize}
+% 	\item[-] $|\cHh_{\cphi_\beta}(\trlf(\alpha)) - \cHh_{\cphi_\beta}(0)| \leq 2\times 2^t$ \vspace{5pt}
+% 	\item[-] $|\sum\limits_{\cgamma \in \cGamma \setminus \cFF} (-1)^{\trlf(\beta\orangeG(\cgamma))} \  \lightblue{\widehat{Id}}_{ \trlf(\beta)}(\trlf(\alpha\cgamma))| \leq 2\times 2^t$
+% \end{itemize}
+\vspace{5pt}
+For $\forall \ \alpha, \forall \ \beta \neq 0, \quad |\cPih_{\beta}(\alpha)| \leq 2^{t + 2}$. 
+
+\hfill Best known bijections achieve $ \leq 2^{t+1}$
+
+\end{mybox}
+
+
+\end{frame}

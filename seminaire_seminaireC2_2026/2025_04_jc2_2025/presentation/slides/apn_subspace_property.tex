@@ -1,0 +1,36 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=APN_and_subspace_property]
+\frametitle{Subspace property and APNness}
+\vspace{-10pt}
+
+\recapbox{\emph{Subspace prop}: $\forall \ \clambda, \quad \cF(\clambda\cFF) = \cF(\clambda)\cFF$. \hfill $ \cF(\clambda\cphi) = \cF(\clambda)\cGl(\cphi)$, with $\cGl\from \cFF \xrightarrow{\sim} \cFF$
+
+\hspace*{15pt} $N_{\clambda} \vcentcolon= \frac{\card{F^{-1}(\clambda\cFF)}}{\card{\cFF}}$ $\quad \quad \mathcal{N}_i \vcentcolon= \set{\cgamma \in \cGamma, N_\cgamma = i}$
+
+\hspace*{15pt} Subspace prop.\@ when $\cLL = \brown{\FF_{2^{2t}}}, \cFF =\lightblue{\FF_{2^{t}}} $ $\implies$ $\quad \cFh(0, \beta) = 2^{t}(N_{\beta^{-1}} - 1)$}
+
+\pause
+
+\begin{mybox}[cblue]{Necessary condition to be APN}
+$\cF$ \blue{quadratic} satisfying the subspace property. $[\cLL : \cFF] = 2$.
+\begin{itemize}
+ 	\item[-] If $\cF$ is APN then $\mathcal{N}_0 + \mathcal{N}_2 \geq \frac{2(2^{t}+ 1)}{3} $
+ 	\item[-] If $\mathcal{L}(\cF) = 2^{t + 1}$ and $\mathcal{N}_0 + \mathcal{N}_2 \geq \frac{2(2^{t}+ 1)}{3} $ then $\cF$ is APN.
+ \end{itemize} 
+
+Proof: \hfill[BerCanChaLai06]
+\end{mybox}
+
+\pause 
+
+\begin{mybox}[cred]{One already-solved case\hfill[Gologlu2023, ChaLis21]}
+$\cF$ \blue{quadratic} cyclotomic when $[\cLL : \cFF] = 2$.
+
+\begin{itemize}
+	\item[-] If $t \neq 3$: $\quad \cF \text{ APN} \quad \iff \quad  \cF \sim_{\text{CCZ}} \text{Gold power} $
+	\item[-] If $ t = 3$: $\quad \cF \text{ APN} \quad \iff \quad  \cF \sim_{\text{CCZ}} \text{Gold power or }  \cF \sim_{\text{CCZ}} \kim.$
+\end{itemize}
+
+\end{mybox}
+\end{frame}

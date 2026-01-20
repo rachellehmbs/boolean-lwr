@@ -1,0 +1,33 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=spectral_properties]
+\frametitle{Spectral point of view (1/2)}
+\vspace{-10pt}
+\recapbox{ \emph{Subspace prop}: $\forall \ \clambda, \quad \cF(\clambda\cFF) = \cF(\clambda)\cFF$. \hfill $ \cF(\clambda\cphi) = \cF(\clambda)\cGl(\cphi)$, with $\cGl \from \cFF \xrightarrow{\sim} \cFF$\vspace{5pt}
+
+ \hspace*{15pt} $\cFh(\alpha, \beta) \vcentcolon= \sum\limits_{\clambda \in \cLL} (-1)^{\alpha\cdot\clambda + \beta\cdot\cF(\clambda)}$
+ }
+
+\vspace{-5pt}
+\pause
+
+\begin{mybox}[cred]{Decomposition of Walsh coefficients}
+  $\cGamma$ system of representatives, $\alpha, \beta \in \cLL$. $\cF \from \cLL \to \cLL$ satisfying the $\cFF$-subspace property. Then: $$\cFh(\alpha, \beta) = C + \sum_{\cgamma \in \cGamma} \cGhl\left(\trlf\left(\alpha \cgamma\right), \trlf\left(\beta \cF(\cgamma)\right)\right).$$
+\vspace{-2pt}
+  %Proof: $\clambda = \cgamma\cphi$ and trace transitivity $\trlftwo{} = \tr[\FF][\FF_2] \comp \trlf$
+\end{mybox}
+
+\vspace{-5pt}
+\pause
+
+\begin{mybox}[cblue]{Symmetries of Walsh coefficients}
+  Let $\blue{G} \from \cFF \xrightarrow{\sim} \cFF$. $\cF$ satisfies the subspace property with $\cGl = \blue{G} \ \forall \ \clambda$ if and only if:
+  \vspace{-3pt}
+  $$ \forall  \alpha,\beta \in \cLL, \ \forall \cphi \in \cFF^*, \quad \cFh(\alpha, \beta \blue{G}(\cphi)) = \cFh(\alpha \cphi^{-1}, \beta). $$
+  %Proof: In that case, $\forall \ \cphi, \quad \cF\comp M_{\cphi} = M_{\blue{G}(\cphi)}\comp \cF$
+\end{mybox}
+%\includegraphics[scale=.1]{figures/kim_lat}
+%\includegraphics[scale=.1]{figures/kim_lat}
+
+
+\end{frame}

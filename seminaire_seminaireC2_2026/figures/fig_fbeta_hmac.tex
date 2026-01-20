@@ -1,0 +1,128 @@
+\begin{figure}
+  \centering
+  % \colorlet{colorA}{red!0!green!50!white}
+  % \colorlet{colorB}{red!33!green!50!white}
+  % \colorlet{colorC}{red!67!green!50!white}
+  % \colorlet{colorD}{red!100!green!50!white}
+  
+  \colorlet{colorA}{red!50!white}
+  \colorlet{colorB}{colorA>wheel,1,4}
+  \colorlet{colorC}{colorA>wheel,2,4}
+  \colorlet{colorD}{colorA>wheel,3,4}
+  
+  \begin{tikzpicture}[xscale=.6,yscale=.6,
+    level distance=1.2cm, sibling distance=1cm,
+    edge from parent/.style={draw,<-}]
+    
+%\only<1>{
+    \foreach \i in {0,1,...,6} {
+      \node[point] (x\i) at ($(\i*360/7:1.2cm)$) {};
+      %\node at ($(\i*360/7:0.85cm)$) {{\scriptsize$x_{\i}$}};
+    }    
+        
+          
+    \foreach \i\j in {0/1,1/2,2/3,3/4,4/5,5/6,6/0} {
+      \draw[->] (x\i) to (x\j);
+    }
+
+    
+   \node[ipoint] at (x2) {} child[grow=north west,shift={(0,-.2)}]
+    { node[point]  {}
+      child[grow = west] { node[point] {} }
+    };
+    %
+    \node[ipoint] at (x3) {} 
+    child[grow=west,shift={(0,-.15)}]
+    { node[point] (tx3) {}
+      child[grow=west] { node[point] (tx2) {}  child { node[point] (tx1) {} child { node[point] {} } child { node[point] (tx0) {} child{ node[point] {}} } } 
+      }
+      child [grow=north west]{node[point] {} child[grow=west] { node[point] {} } child[grow= north west] { node[point] {} child[grow = west]{node[point] {} child[grow= west] { node[point] {} child { node[point] {} } child {node[point] {}}} }} }
+          }
+          child[grow=south west,shift={(0,-.15)}]
+    { node[point]  {} child[grow= west] { node[point] {} } 
+    };
+  
+
+    %
+    \node[ipoint] at (x1) {} 
+    child[grow=north east]
+    { node[point] {}
+      child[grow=east] { node[point] {} child { node[point] {} } child { node[point] {} } }
+    }
+;
+    \node[ipoint] at (x6) {} child[grow= east,shift={(0,-0.15)}]
+    { node[point] {}
+    };
+    %
+    \node[ipoint] at (x0) {} 
+    child[grow= north east,shift={(0,-0.15)}]
+    { node[point]  {}
+      child[grow=  east] { node[point] {} } 
+    }
+    child[grow = east] { node[point] {} }
+    ;
+
+%%%%%%%%%%%%
+    \begin{scope}[xshift = 7cm, yshift = 0cm]
+    
+     \foreach \i in {0,1,...,3} {
+      \node[point] (x2\i) at ($(\i*360/4:0.6cm)$) {};
+    }    
+    \foreach \i\j in {0/1,1/2,2/3,3/0} {
+      \draw[->] (x2\i) to (x2\j);
+    }
+   \node[ipoint] at (x20) {} child[grow= east,shift={(0,-.2)}]
+    { node[point] {}
+      child[grow = east] { node[point] {} }
+      child[grow = south east] { node[point] {} }
+    };
+    %
+    \node[ipoint] at (x21) {} 
+    child[grow=north,shift={(0,-.15)}]
+    { node[point]  {}
+    };
+
+    \end{scope}
+    
+        \begin{scope}[xshift = 11cm, yshift = 1cm]
+    
+           \node[point] (xseul) at (0,0) {};
+           \draw[->] (xseul) to[in=140,out=40,looseness=10] (xseul);
+
+    \end{scope}
+    
+    
+
+
+\only<1->{
+    \node[color=vert3] at ([yshift = -3.5mm] tx0.south) {\footnotesize $x_1$};
+    \node[point,color=vert3] at (tx0) {}; 
+    }
+    \only<2->{
+    \node[color=vert3] at ([yshift = -3.5mm] tx1.south) {\footnotesize $x_2$};
+        \node[point,color=vert3] at (tx1) {}; 
+    }
+    \only<3->{
+    \node[color=vert3] at ([yshift = -3.5mm] tx2.south) {\footnotesize $x_3$};
+        \node[point,color=vert3] at (tx2) {}; 
+    }
+    \only<4->{
+     %       \node[point,color=vert3] at (x1) {}; 
+            \node[point,color=vert3] at (tx3) {}; 
+           \node[point,color=vert3] at (x3) {}; 
+            \node[point,color=vert3] at (x4) {};
+            \node[point,color=rouge3] at (x5) {};
+                                                
+\node[color=rouge3] at ([yshift = -3mm] x5.south)  {\footnotesize $x_{\cipherlength}$};
+    }
+
+
+
+
+    \node at (5,-2) {\footnotesize Graph of $h_\beta$}; 
+  \end{tikzpicture}
+
+
+
+\end{figure}
+

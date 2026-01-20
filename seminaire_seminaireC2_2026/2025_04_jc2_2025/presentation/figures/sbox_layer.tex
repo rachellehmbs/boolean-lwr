@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Ascon state
+%
+% public domain (CC0 1.0 https://creativecommons.org/publicdomain/zero/1.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetikzlibrary{shadows}
+
+\begin{tikzpicture}[thick, scale=0.5]
+  \draw[fill=white, drop shadow] (0,0) rectangle (32,3.5);
+  \draw (0,.7) -- (32,.7)
+                (0,1.4) -- (32,1.4)
+                (0,2.1) -- (32,2.1)
+                (0,2.8) -- (32,2.8);
+                
+  \foreach \x in {1,...,63}
+  \draw (0.5*\x, 0) -- (.5*\x, 3.5);
+  
+    \draw (33,.35) node {$X_4$}
+         ++(0,.7) node {$X_3$}
+         ++(0,.7) node {$X_2$}
+         ++(0,.7) node {$X_1$}
+         ++(0,.7) node {$X_0$};
+  	
+    \draw[line width=2, color=corange,fill=white,drop shadow={shadow xshift=.7ex}] (2.4,-.6) rectangle +(.7, 4.7);
+    \draw[line width =1.5, color=corange,<->] (2.75, -.1) -- (2.75, 3.6);
+\end{tikzpicture}

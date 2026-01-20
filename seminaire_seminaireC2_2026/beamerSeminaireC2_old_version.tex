@@ -1,0 +1,1308 @@
+\documentclass[aspectratio=169,rgb,dvipsnames]{beamer}
+\usetheme{anssi}
+
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{calrsfs}
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage[ruled,vlined,french]{algorithm2e}
+\usepackage{array}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{algorithmic}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{ulem}
+\usepackage{multirow}
+%\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{fontawesome}
+%\usepackage{fourier} %warning symbol
+\usepackage{bm}
+\usepackage{changepage}
+\usepackage{cancel}
+\usepackage{ marvosym }
+\usepackage{jigsaw}
+\usepackage{changepage}
+\usepackage{rotating}
+\usepackage{stmaryrd}
+\usepackage{makecell}
+
+%TikZ
+\renewcommand{\arraystretch}{1}
+\usetikzlibrary{patterns}
+\usetikzlibrary{keccak}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows}
+\usetikzlibrary{crypto.symbols}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{shapes.geometric, shapes.gates.logic.US}
+\usetikzlibrary{fit,calc,positioning,automata}
+\usetikzlibrary {decorations.pathmorphing, decorations.pathreplacing, decorations.shapes}
+
+\usepackage{standalone} % Necessary to skip headers of {standalone} documents
+\usepackage{tikzscale} % To use \includegraphics with TikZ code
+
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+% Comment the line below for faster compilation and misaligned figures
+\usetikzlibrary{bbox}
+\usetikzlibrary{fit}
+\tikzstyle{sponge}=[rectangle, rounded corners=.25cm, minimum width=.5cm, minimum height=3cm, draw]
+\tikzstyle{ipoint}=[shape=circle,inner sep=0pt,minimum size=3pt,outer sep=1pt]
+\tikzstyle{point}=[ipoint,fill]
+\tikzstyle{xpoint}=[ipoint,draw]
+\tikzstyle{cpoint}=[point,outer sep=0pt]
+
+\colorlet{pcolor}{green!60!black}
+\colorlet{mcolor}{pcolor!20!white}
+\colorlet{bcolor}{mcolor!50!pcolor}
+
+
+%\usepackage{colortbl}
+\newcommand{\rouge}{\textcolor{rouge3}}
+\newcommand{\ver}{\textcolor{vert3}}
+\newcommand{\bleu}{\textcolor{NavyBlue}}
+
+%\newcommand{\correcttilde}[1]{\text{\~{}}{#1}}
+
+\input{macros_soutenance.tex}
+  
+%\makeatother
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+%\makeatletter
+\setbeamertemplate{navigation symbols}{}
+
+\title{Boolean Modeling and Analysis of Learning With Rounding}
+\author[]{\normalsize Jules Baudrin, \underline{Rachelle Heim Boissier}, François-Xavier Standaert}
+\institute{\small Université Catholique de Louvain}
+\centering
+\date{Jan. 2025}
+
+\begin{document}
+\maketitle
+\AtBeginSection[]
+{
+ \begin{frame}<beamer>
+ \frametitle{Outline}
+ \tableofcontents[currentsection]
+ \end{frame}
+}
+
+
+
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+
+
+\section{Introduction: motivation and setting}
+
+\begin{frame}{Hard learning problems}
+\small 
+
+\begin{exampleblock}{}
+Learning With Error (LWE), Learning With Rounding (LWR), Learning Parity with Noise (LPN) \\
+\end{exampleblock}
+and their ring/module variants.
+
+\medskip
+\flushleft
+Central importance in \ver{post-quantum cryptography}
+\begin{itemize}
+\item Encryption, Key encapsulation mechanisms: CRYSTALS-Kyber, Saber 
+\smallskip
+\item Signatures: CRYSTALS-Dilithium, BLISS
+\end{itemize}
+
+
+\medskip
+
+and in \ver{symmetric cryptography}:
+\begin{itemize}
+\item Essentially to build (key homomorphic) PRFs for a variety of applications.
+\smallskip
+\item E.g. distributed PRFs, proxy re-encryption, updatable encryption (Boneh et al., 2013)
+\end {itemize}
+
+\bigskip
+\vfill
+
+\end{frame}
+
+%%%%%%
+%%%%%%
+%%%%%%
+
+\begin{frame}{Learning With Errors}
+\small
+
+In a nutshell: solving a \rouge{noisy} \bleu{linear system} over a ring. 
+
+\smallskip
+
+\begin{exampleblock}{Search Learning With Errors (Regev 05)}
+
+{Parameters:} $q \in \NN$, $n \in \NN^{*}$, \bleu{small (Gaussian) distribution $\chi$} over $\ZZ_q$,  \rouge{secret $\vecx$} $\drawfrom \ZZ_{q}^n$ 
+
+\medskip
+
+{Given} samples from the distribution 
+\begin{align*}
+\mathcal{D}^{\mathsf{LWE}} = \{ \ (\veca, \langle \veca , \rouge{\vecx} \rangle + e), \ \veca \drawfrom \ZZ_{q}^n, \ e \leftarrow \bleu{\chi} \ \}
+\end{align*}
+
+\smallskip
+
+{Find} \rouge{$\vecx$}. 
+ %drawn uniformly drawn in $\ZZ_{q}^n$ from 
+
+\end{exampleblock}
+
+\medskip
+
+\pause
+\ver{Decision LWE}: distinguish from $\mathcal{D}_0 = \{(\veca, r)\mid \veca \drawfrom \ZZ_{q}^n, r \drawfrom  \ZZ_{q}\} $
+
+\pause
+
+\medskip
+\begin{itemize}
+\item Security level is determined by \rouge{$n$}, \rouge{$q$}, and \rouge{standard deviation $\sigma$} of $\chi$. 
+\item Drawback: LWE cannot be used to build \bleu{deterministic primitives} such as PRFs. 
+\end{itemize}
+
+\vfill
+
+\end{frame}
+
+%%%%%%
+%%%%%%
+%%%%%%
+
+\begin{frame}{Learning with Rounding}
+ 
+ \small
+ {\it `A way of partially `\rouge{derandomizing}' the LWE problem, i.e. generating errors efficiently and \ver{deterministically}'.} 
+ 
+ \vspace{-4mm}
+ \flushright
+{\footnotesize Banerjee, Peikert, Rosen, EC' 2012.}
+
+\smallskip
+
+\begin{exampleblock}{Search Learning With Rounding}
+
+{Parameters:} $q \in \NN$, $p,n \in \NN^{*}$, $p < q$, \bleu{rounding function} $\bleu{\round{\cdot}_{p}} : \ZZ_{q} \rightarrow \ZZ_{p} $, \rouge{secret $\vecx$} $\drawfrom \ZZ_{q}^n$
+
+\medskip
+
+{Given} samples from the distribution 
+\begin{align*}
+\mathcal{D}^{\mathsf{LWR}} = \{ \ (\veca, \round{\langle \veca , \rouge{\vecx} \rangle}_p ), \ \veca \drawfrom \ZZ_{q}^n \ \}
+\end{align*}
+
+\smallskip
+
+{Find} \rouge{$\vecx$}. 
+ %drawn uniformly drawn in $\ZZ_{q}^n$ from 
+
+\end{exampleblock}
+
+\flushleft
+
+\textbf{Today:} PQ cryptography (e.g. Saber [B+18]), symmetric cryptography (PRFs indeed). 
+
+\vfill 
+\end{frame}
+
+%%%%%%
+%%%%%%
+%%%%%%
+
+\begin{frame}{Power-of-two moduli}
+ \small 
+ 
+ \flushleft
+ \textbf{Today:} Many use-cases rely on LWR with a power-of-two modulus.
+ 
+ \only<1>{
+\begin{exampleblock}{Search Learning With Rounding}
+
+{Parameters:} $q \in \NN$, $p,n \in \NN^{*}$, $p < q$, \bleu{rounding function} $\bleu{\round{\cdot}_{p}} : \ZZ_{q} \rightarrow \ZZ_{p} $, \rouge{secret $\vecx$} $\drawfrom \ZZ_{q}^n$
+
+\medskip
+
+{Given} samples from the distribution 
+\begin{align*}
+\mathcal{D}^{\mathsf{LWR}} = \{ \ (\veca, s_{\veca} = \round{\langle \veca , \rouge{\vecx} \rangle}_p ), \ \veca \drawfrom \ZZ_{q}^n \ \}
+\end{align*}
+
+\smallskip
+
+{Find} \rouge{$\vecx$}. 
+ %drawn uniformly drawn in $\ZZ_{q}^n$ from 
+
+\end{exampleblock}
+}
+
+ \only<2->{
+\begin{exampleblock}{Search Learning With Rounding}
+
+{Parameters:} $q \in \NN$, $p,n \in \NN^{*}$, $p < q$, \bleu{rounding function} $\bleu{\round{\cdot}_{2^p}} : \ZZ_{2^q} \rightarrow \ZZ_{2^p} $, \rouge{secret $\vecx$} $\drawfrom \ZZ_{2^q}^n$
+
+\medskip
+
+{Given} samples from the distribution 
+\begin{align*}
+\mathcal{D}^{\mathsf{LWR}} = \{ \ (\veca, s_{\veca} = \round{\langle \veca , \rouge{\vecx} \rangle}_p ), \ \veca \drawfrom \ZZ_{2^q}^n \ \}
+\end{align*}
+
+\smallskip
+
+{Find} \rouge{$\vecx$}. 
+ %drawn uniformly drawn in $\ZZ_{q}^n$ from 
+
+\end{exampleblock}
+}
+
+\flushleft
+\pause 
+\pause
+
+In this case: the \bleu{rounding function $\round{\cdot}_{2^p}$} simply removes the \rouge{$q-p$} least significant bits.  
+
+\begin{itemize}
+\item Security level is determined by \rouge{$n$}, \rouge{$q$} and \rouge{$q-p$}: noise $\sim Uniform[-2^{q-p},0)$ 
+\end{itemize}
+ \hfill e.g. LightSaber: $n = 512, q-p = 3$, dPRF LaKey $n = 256, q-p = 4$. 
+ 
+\pause
+%
+%\medskip
+%\textbf{Why is this case interesting?} We can use \ver{symmetric-key} techniques to analyse it.
+
+
+\end{frame}
+
+
+%%%%%%
+%%%%%%
+%%%%%%
+
+\begin{frame}{Hardness}
+
+\small
+\flushleft
+\vspace{-4mm}
+\textbf{Theory}
+\begin{itemize}
+\item \rouge{LWE:} Solid theoretical foundations (e.g. Brakerski et al. 13).
+\item \ver{LWR} is \bleu{as hard as} LWE (asymptotic reduction, underlying assumptions). 
+
+\end{itemize}
+
+\bigskip
+
+\textbf{Practice}
+\begin{itemize}
+\item Parameter selection driven by \rouge{best known attacks} (Lattice estimator, Albrecht et al.)
+\end{itemize}
+
+ \begin{exampleblock}{}
+
+ {\it `The hardness of (ring or module) LWR can be analyzed as an LWE problem, since there is no known attacks that make use of the additional structure offered by these variants'.} 
+ 
+  \flushright
+\vspace{-3mm}
+{\footnotesize SABER specifications}
+  \end{exampleblock}
+  
+\smallskip
+\centering
+{\bf Open question:} what does a deterministic error do to (practical) security?
+
+\vfill
+\end{frame}
+
+
+%%%%%%
+%%%%%%
+%%%%%%
+
+
+\begin{frame}{Linearisation attack by Arora \& Ge (2011)}
+
+\small
+
+\begin{itemize}
+\item Low noise, large number of samples (not SABER). 
+\end{itemize}
+
+\begin{exampleblock}{}
+\textbf{Parameters:} $n \in \NN^{*}$, Noise in set $E$.  
+
+\smallskip
+Any sample $(\ver{\veca}, s_{\ver{\veca}} = \langle \ver{\veca}, \rouge{\vecx} \rangle + e_0)$, yields the following equation in the secret:
+\begin{align*}
+\prod_{e \in E} (s_{\ver{\veca}} -  \langle \ver{\veca}, \rouge{\vecx} \rangle - e) = 0  \tag{degree \bleu{$\card{E}$} polynomial} . 
+\end{align*}
+
+%\footnotesize
+%\flushright
+%A polynomial of degree \bleu{$T$} in \bleu{$n$} over $\ZZ_q$ has at most $\binom{n+T}{T}$ monomials. 
+
+\smallskip
+\textbf{Linearisation:} $\binom{n+\bleu{\card{E}}}{\bleu{\card{E}}}$ in data, $\binom{n+\bleu{\card{E}}}{\bleu{\card{E}}}^{\omega}$ in time, $\omega$ linear algebra constant.
+
+\footnotesize
+\flushright
+\textbf{And Gröbner?} Some asymptotic results for prime or odd moduli \rouge{(not $2^q$)}.  
+
+\end{exampleblock}
+
+\small
+\begin{itemize}
+\item \textbf{LWE}: Gaussian distribution: bounded noise for a well-chosen number of samples.
+\item \textbf{LWR}: $T = 2^{q-p}$. 
+\end{itemize}
+
+
+
+\pause
+\begin{alertblock}{}
+Our main result: in the case of LWR, one can do better.
+\end{alertblock}
+
+\end{frame}
+
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+
+\section{A symmetric point of view}
+
+\begin{frame}{A symmetric point of view}
+
+\small
+\flushright
+
+Def: A \bleu{Boolean} function is a function $f : \FF_2^s \longrightarrow \FF_2$.
+
+
+\medskip
+\flushleft
+\only<1,2>{
+\textbf{Ingredients} to generate an LWR sample: $({\veca} , \ s_{{\veca}} = \round{\langle {\veca}, \rouge{\vecx} \rangle}_p)$. 
+\begin{minipage}{0.75\textwidth}
+\begin{itemize}
+\item Inner product $\langle  \cdot,  \cdot \rangle : \ver{\ZZ_{2^q}^n} \times \ver{\ZZ_{2^q}^n} \rightarrow \ver{\ZZ_{2^q}} $
+\item Rounding function $\round{\cdot}_{2^p} : \ver{\ZZ_{2^q}} \rightarrow \ver{\ZZ_{2^p}} $.
+\end{itemize}
+\end{minipage}
+\pause
+\begin{minipage}{0.23\textwidth}
+\centering
+Identify $\ver{\ZZ_{2^q}}$ with $\bleu{\FF_2^{q}}$.
+\end{minipage}
+}
+\only<3->{
+\textbf{Ingredients} to generate an LWR sample: $({\veca} , \ s_{{\veca}} = \round{\langle {\veca}, \rouge{\vecx} \rangle}_p)$. 
+\begin{minipage}{0.75\textwidth}
+\begin{itemize}
+\item Inner product $\langle  \cdot,  \cdot \rangle : \bleu{(\FF_2^{q})^n} \times \bleu{(\FF_2^{q})^n} \rightarrow \bleu{\FF_2^{q}} $
+\item Rounding function $\round{\cdot}_{2^p} : \bleu{\FF_2^{q}} \rightarrow \bleu{\FF_2^{p}} $.
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.23\textwidth}
+\centering
+Identify $\ver{\ZZ_{2^q}}$ with $\bleu{\FF_2^{q}}$.
+\end{minipage}
+}
+\smallskip
+
+
+%\pause
+%Let us identify $\ver{\ZZ_{2^m}}$ with $\bleu{\FF_2^m}$.
+
+\medskip
+\pause
+\pause
+\pause
+\begin{exampleblock}{}
+\centering
+The LWR function $(\veca, \vecx) \mapsto \round{\langle  \veca,  \vecx \rangle}_{2^p} $ is a \rouge{vectorial Boolean function}. 
+\end{exampleblock}
+
+\centering
+\smallskip
+Symmetric crypto $\heartsuit$ Boolean functions
+
+\flushleft
+The \textbf{LWR problem} looks like other symmetric-key problems ($\approx$ Weak-PRF).
+
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Boolean monomials}
+
+\small
+
+\begin{itemize}
+\item $x[i]$ is the bit of index $i$ of $x$. 
+\item \bleu{$R$} is the multivariate polynomial ring $\FF_2[x[0], \ldots, x[s-1]]$ quotiented by the \bleu{field equations} $x[i]^2 + x[i]$. 
+\end{itemize}
+
+\flushleft
+
+\begin{exampleblock}{}
+\textbf{Boolean monomial.} Let $x, m \in \FF_2^s$. $x^m$ denotes the monomial $$\prod_{i, \ m[i] = 1} x[i]  \in \bleu{R}\,.$$
+\end{exampleblock}
+
+\pause
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item[] Since $3 = (11)_2$, $x^{3}$ is the product of the two least significant bits of $x$, $x[0]x[1]$.
+\pause
+\item[] Since $4 = 2^2 = (100)_2$, $x^{4}$ is the third bit of $x$, $x[2]$.
+\pause
+\item[] Since $2^i = (10\ldots0)_2$, $x^{2^{i}}$ is the $i+1$th bit of $x$, $x[i]$.
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Symmetric point of view on LWR}
+
+\small
+\begin{exampleblock}{}
+\centering
+The LWR function $(\veca, \vecx) \mapsto \round{\langle  \veca,  \vecx \rangle}_{2^p} $ is a \rouge{vectorial Boolean function}. 
+\end{exampleblock}
+\flushleft
+
+It has domain $\ZZ_{2^q}^n \times \ZZ_{2^q}^n$ (or \bleu{$(\FF_2^q)^n \times (\FF_2^q)^n$}) and co-domain $\ZZ_{2^p}$ (or \bleu{$\FF_2^p$}). %\hfill NB: $2nq$-bit input.
+
+\begin{alertblock}{}
+We study the composition of the inner product with a (product of) bit:
+\begin{align*}
+F^{m,n} : (\veca, \vecx) \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \qquad \quad F^{m,n}_{\veca} : \vecx \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \,.
+\end{align*}
+\end{alertblock}
+
+%This Boolean function returns the (product of) bit(s) of the LWR sample $\langle  \veca,  \vecx \rangle$.
+\pause
+\bigskip
+\textbf{Most important example:} 
+\begin{itemize}
+%\item \rouge{$m = 2^{0} = 1$}. $F^{1,n}$ returns the LSB of $\langle  \veca,  \vecx \rangle$. 
+%
+%The rounding function removes the $q-p$ LSBs: this bit \bleu{does not appear} in the LWR sample. 
+
+\item  \rouge{$m = 2^{q-p}$}. $F^{2^{q-p},n}$ returns the $q-p+1$th bit of  $\langle  \veca,  \vecx \rangle$.
+
+This corresponds to the \rouge{LSB of the LWR sample}. 
+\end{itemize}
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Algebraic Normal Form}
+
+
+\footnotesize
+\flushleft
+
+\vspace{-4mm}
+\begin{exampleblock}{}
+The \rouge{Algebraic Normal Form} (ANF) of $f : \FF_2^s \rightarrow \FF_2$ is the \bleu{unique} multivariate polynomial 
+\begin{align*}
+\sum_{u \in \FF_{2}^s} \alpha_u(f) x^u \in \bleu{R} \qquad  \text{ s.t. } \qquad  \forall x \in \FF_2^s, \quad f(x) = \sum_{u \in \FF_2^m} \alpha_u(f) x^u  \,.
+\end{align*}
+
+\smallskip
+\textbf{Algebraic degree}. $$\ \deg(f) \coloneq \max_{u \in \FF_2^m | \alpha_u \neq 0}\hw(u). $$
+\end{exampleblock}
+
+\pause
+\begin{block}{}
+\textbf{Example.} $f : \FF_2^2 \rightarrow \FF_2$ defined by $f(00) = 0, f(01) = 1, f(10) = 0, f(11) = 0$. 
+\begin{align*}
+f = x[1]x[0] + x[0] = x^{3} + x^{1}  \qquad \qquad \text{degree 2.}
+\end{align*}
+\end{block}
+
+\pause
+%\smallskip
+%The coefficients and the evaluations of $f$ satisfy:
+%\begin{align*}
+%\forall x, u \in \FF_2^m, \quad \alpha_u(f) = \sum_{x \preceq u} f(x) \text{ and } f(x) = \sum_{u \preceq x} \alpha_u (f) \,. 
+%\end{align*}
+\smallskip
+Computing the ANF of a function is a necessary step for algebraic attacks. But it is \rouge{hard}: 
+\begin{itemize}
+\item costs \bleu{$s 2^{s-1}$}, requires to \ver{store the full LUT} of size \bleu{$2^s$}. 
+\item \rouge{\textbf{LWR:} $s = 2nq > 256$}. 
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Boolean point of view on LWR}
+
+\flushleft
+\footnotesize
+\vspace{-3mm}
+\begin{minipage}{0.5\textwidth}
+$
+\begin{aligned}
+F^{m,n} : (\FF_2^q)^n \times (\FF_2^q)^n &\longrightarrow \quad \FF_2 \\ 
+(\ver{\veca} , \rouge{\vecx}) \quad &\longmapsto \left( \langle  \ver{\veca},  \rouge{\vecx} \rangle \right)^m  \,. 
+\end{aligned}
+$
+\end{minipage}
+\begin{minipage}{0.09\textwidth}
+$\quad$
+\end{minipage}
+\begin{minipage}{0.39\textwidth}
+e.g. $m = 2^{q-p}$ is the LSB of the sample. 
+\end{minipage}
+
+\pause
+\begin{exampleblock}{}
+\textbf{(Generalised) Boolean monomial.} Let $\ver{\vecu}, \rouge{\vecv} \in (\FF_2^q)^n$. $\ver{\veca^{\vecu}}\rouge{\vecx^{\vecv}}$ denotes the monomial 
+\begin{align*}
+\ver{\veca^{\vecu}}\rouge{\vecx^{\vecv}} = \prod_{i \in \intset{0,n}} \ver{a_i^{u_i}} \rouge{x_i^{v_i}}, \quad \text{ where } \ver{a_i^{u_i}} \rouge{x_i^{v_i}} \text{ is the Boolean monomial } \ver{\prod_{j, u_i[j] = 1} a_i[j]} \rouge{\prod_{j, v_i[j] = 1} x_i[j]}  \,. 
+\end{align*}
+\end{exampleblock}
+
+\pause
+\smallskip
+For each random $\ver{\veca}$, the function in $\{ F^{m,n}_{\ver{\veca}} \coloneq F^{m,n}({\ver{\veca}} , \cdot) \}$ is evaluated on the secret \rouge{$\vecx$} to yield $s_{\ver{\veca}}$. 
+
+\smallskip
+If we can compute the ANF of $F^{m,n}_{\ver{\veca}}$, we obtain an equation in the secret \rouge{$\vecx$}:
+\begin{align*}
+\sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n}_{\ver{\veca}}) \ \rouge{\vecx}^{\vecv}  = (s_{\ver{\veca}})^{m/2^{q-p}} \,. 
+\end{align*}
+
+\pause
+\vspace{-2mm}
+\begin{alertblock}{}
+To do so, we study the ANF of $\bleu{F^{m,n}}$:
+\vspace{-1mm}
+\begin{align*}
+\sum_{(\vecu, \vecv) \in  \ZZ_{2^q}^n \times  \ZZ_{2^q}^n} \ \alpha_{\vecu,\vecv} \ \ver{\veca^{\vecu}} \rouge{\vecx^{\vecv}}  \onslide<5>{= \sum_{\vecv \in \ZZ_{2^q}^n} \ver{\alpha_{\vecv}} \ \rouge{\vecx^{\vecv}}} \qquad \text{ where } \alpha_{\vecu,\vecv} \in \FF_2, \, \onslide<5>{ \ver{\alpha_{\vecv}} = \sum_{\vecu \in  \ZZ_{2^q}^n} \alpha_{\vecu, \vecv} \ \ver{\veca^{\vecu}}} \,. 
+\end{align*} 
+
+\onslide<5>{and thus $\alpha_{\vecv}(F^{m,n})(\veca) = \alpha_{\vecv}(F^{m,n}_{\veca})$.}
+\end{alertblock}
+
+\end{frame}
+
+
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+
+\section{Theoretical analysis of the ANF}
+
+\begin{frame}{Set of exponents}
+
+\small
+\vspace{-5mm}
+\begin{align*}
+F^{m,n}(\veca, \vecx) =  (\langle\ver{\veca} , \rouge{\vecx}\rangle)^m = \Bigl(\sum \ver{a_i} \times \rouge{x_i} \Bigr)^m = \sum_{\vecv \in \ZZ_{2^q}^n} \ver{\alpha_{\vecv}} \ \rouge{\vecx^{\vecv}} \text{ where } \alpha_{\vecv} \text{ Boolean polynomial in } \ver{\veca} \,.
+\end{align*} 
+
+\vspace{-2mm}
+\begin{exampleblock}{}
+Let $\bleu{S^n_k} $ be the set of \bleu{ordered partitions} of length $n$ of $k$. \hfill $\card{S^n_k} = \binom{n+k-1}{k}$.  
+%\footnotesize
+%$$S^3_{2} = \{ (3,0,0), (0,3,0), (0,0,3), (2,1,0), (2,0,1), (1,2,0), (0,2,1), (1, 0, 2), (0, 1,2), (1,1,1) \} \,.$$
+\end{exampleblock}
+
+
+\smallskip
+\footnotesize
+Combining results from \ver{Braeken and Semaev (FSE, 2005)} on the ANF of addition and multiplication:
+
+\small
+\begin{alertblock}{}
+{\footnotesize \textbf{Theorem (Exponents).} }
+ \vspace{-3mm}
+ $$\exponents_{\rouge{\vecx}}(F^{m, n}) \subset \bigcup_{i = 1}^{m} S^n_i \,.$$
+ \vspace{-2mm}
+\end{alertblock}
+
+\pause
+\footnotesize
+\begin{block}{}
+Let us look at $\exponents_{\rouge{\vecx}}(F^{2, 4})$.
+\footnotesize
+\begin{align*}
+S^4_{2} = \{ \bleu{(2,0,0,0), (0,2,0,0)}, &(0,0,2,0), (0,0,0,2), \bleu{(1,1,0,0)}, \\
+& (1,0,1,0), (1,0,0,1), (0,1,1,0), (0,1,0,1), (0,0,1,1) \}  \\
+S^4_{1} = \{ (1,0,0,0), (0,1,0,0), &(0,0,1,0), (0,0,0,1) \} \,. 
+\end{align*}
+\small
+Thus possible $\rouge{\vecx^{\vecv}}$: $\bleu{x_0^2} = x_0[1] , \  \bleu{x_1^2} = x_1[1] \ , \ldots, \ \bleu{x_0^1x_1^1} = x_0[0]x_1[0] \, \ldots$
+\end{block}
+
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Comparison with Arora-Ge}
+\small
+ 
+ \footnotesize
+ \begin{block}{}
+Recall $ \exponents_{\rouge{\vecx}}(F^{m, n}) \subset \bigcup_{i = 1}^{m} S^n_i$. \hfill \textbf{Conjecture}: $\exponents_{\rouge{\vecx}}(F^{m, n}) = \bigcup_{i = 1}^{m} S^n_i$ when $m$ is a power of two.
+\end{block}
+
+\pause
+\vspace{-3mm}
+\flushleft
+\textbf{Important corollaries:}
+\begin{itemize}
+\item  \textbf{Degree.} $\deg(F^{m,n}) \leq m$. If $m \leq n$, we can also show $\deg_{\rouge{\vecx}}(F^{m,n}) = m$.
+\item \textbf{Number of monomials.} $\card{\exponents_{\rouge{\vecx}}(F^{m, n})} \leq \binom{n+m}{m}$. Conjectured equality when $m$ is a power of two.
+\end{itemize}
+
+
+\pause
+\begin{exampleblock}{}
+\begin{itemize}
+\item If we use the LSB of the sample ($m = 2^{q-p}$), \rouge{same number of monomials} (Surprising!)
+
+\pause
+\item Once the $q-p$ LSBs are recovered, the cost of recovering the full secret is \bleu{negligible}. 
+
+\pause
+\item Benefit of working over \ver{$\FF_2$} rather than $\ZZ_{2^q}$: 
+\begin{enumerate}
+\item \footnotesize operations are \rouge{cheaper} (we gain at least $q$). 
+\item \footnotesize it's a field. 
+\end{enumerate}
+\end{itemize}
+\end{exampleblock}
+
+\pause
+\smallskip
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{A remaining issue}
+
+Computing the ANF is the \rouge{bottleneck}. 
+
+\medskip
+\small
+\flushleft
+\textbf{Möbius transform} costs \ver{$s2^{s-1}$ in time} and \bleu{$2^s$ in memory} where $s$ is the number of variables. 
+
+\begin{alertblock}{}
+%\textbf{A last corollary.}
+\begin{itemize}
+\item \textbf{Number of variables.} $F^{m, n}$ depends on at most $\rouge{s = n \cdot (\lfloor \log_2(m) \rfloor + 1)}$ variables of $\vecx$.
+\end{itemize}
+\end{alertblock}
+NB: this simply comes from the fact that the ith bit of the sum depends only on the i-1 LSBs of the terms.
+
+\end{frame}
+
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+%%%%%%%%%%
+
+\section{Effective computation of the ANF}
+
+\begin{frame}{Overview}
+\small
+\flushleft
+\begin{alertblock}{}
+\begin{enumerate}
+\item The ANF can be computed for \rouge{arbitrary large $n$} and for \rouge{$m$ up to $16$}. 
+
+\begin{itemize}
+\item \footnotesize NB: used in practice! $m = 8$ for SABER, $m = 16$ for LaKEY.
+\end{itemize}
+
+\item Our methods allows to compute additional \rouge{relevant metrics} of the linearised system.
+\begin{itemize}
+\item \footnotesize (upper bound on the) rank, relevant change of basis, sparsity. 
+\end{itemize}
+\end{enumerate}
+\end{alertblock}
+
+\pause
+\smallskip
+\textbf{More precisely}, we reduce
+\begin{itemize}
+\item the study of the ANF of $F^{m,n}$ to the study of a relevant \bleu{system of representatives};
+\item the study of  \ver{$F^{m,n}$ for all values $n \geq m$} to the study of \ver{$F^{m,m}$}. 
+\end{itemize}
+
+\pause
+\medskip
+\textbf{How?} Most our results stem from the \ver{commutativity of modular addition}... 
+
+\pause
+\hfill ... formalised using \rouge{group actions}. 
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Group actions (1)}
+\footnotesize 
+
+\begin{exampleblock}{}
+A (left) \textbf{group action} of a group $(\GG, \circ)$ on a set $E$ is a function $\GG \times E \longrightarrow E, (\sigma, x) \longmapsto \sigma \cdot x$ such that
+\begin{itemize}
+\item For all $x \in E, \ \mathrm{id} \cdot x = x $ ;
+\item For all $\sigma, \tau \in \GG, \ x \in E, \  \sigma \cdot (\tau \cdot x) = (\sigma \circ \tau) \cdot x$ .  
+\end{itemize}
+\end{exampleblock}
+
+
+\flushleft
+The symmetric group $(\Sfrak_n, \circ)$ acts on:
+\begin{itemize} 
+\item vectors of size $n$.  $\qquad (\sigma, \vecu) \longmapsto \sigma \cdot \vecu \coloneq (u_{\sigma^{-1}(0)}, \ldots, u_{\sigma^{-1}(n-1)})$
+\item ordered pairs of vectors. $\qquad (\sigma, (\vecu, \vecv)) \longmapsto \sigma \cdot (\vecu, \vecv) =  (\sigma \cdot \vecu, \sigma \cdot \vecv) $.
+
+\item Boolean monomials
+    \begin{align*}
+        (\sigma , \vecx^{\vecv}) \ \mapsto \ \sigma \cdot (\vecx^{\vecv}) \coloneq \vecx^{\sigma^{-1} \cdot \vecv}   \quad \text{and} \quad (\sigma , \veca^{\vecu}\vecx^{\vecv}) \ \mapsto \ \sigma \cdot (\veca^{\vecu}\vecx^{\vecv}) \coloneq \veca^{\sigma^{-1} \cdot \vecu}\vecx^{\sigma^{-1} \cdot \vecv}\,.
+    \end{align*}
+\end{itemize}
+
+\begin{block}{}
+\textbf{Example.} 
+Let $\vecu = (2,0,0,0)$, $\vecv = (\rouge{3},0,\ver{1},\bleu{1})$, $\sigma = (0 \ 2 \ 1) \in \Sfrak_4$. 
+Since
+\begin{align*}
+%\vecx^{\vecv} = \rouge{x_0^2} \ver{x_2^1} \bleu{x_3^1} = \rouge{x_0[0] x_0[1]} \ver{x_2[0]} \bleu{x_3[0]} 
+\sigma^{-1} \cdot \vecu = (0,0,2,0) \quad \text{ and } \quad \sigma^{-1} \cdot \vecv = (0  , \ver{1} ,\rouge{3},  \bleu{1} )\,, 
+\end{align*}
+it comes that $\sigma \cdot (\veca^{\vecu} \vecx^{\vecv}) = \veca^{\sigma^{-1} \cdot \vecv} \vecx^{\sigma^{-1} \cdot \vecv} = a_2^2 \ver{x_1^1}\rouge{x_2^3}\bleu{x_3^1} = a_2[1] \ver{x_1[0]} \rouge{x_2[0] x_2[1]} \bleu{x_3[0]}$.
+\end{block}
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Group actions (2)}
+
+\footnotesize
+\begin{exampleblock}{}
+Let $(\GG, \circ)$ a group, $E$ a set, $(\sigma, x) \longmapsto \sigma \cdot x$ a group action. 
+\begin{itemize}
+\item \textbf{Orbit.} For any $x \in E$, $\rouge{\orb(x) = \{ \sigma \cdot x, \ \sigma \in \GG \}} \subset E$. 
+\item \textbf{Stabilizer.} For any $x \in E$, $\rouge{ \stab(x) = \{ \sigma, \ \sigma \cdot x = x \} }$ subgroup of $\GG$. 
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{}
+\textbf{Example.} 
+Let $\vecv = (\rouge{3},1,\ver{1})$, $\Sfrak_3 = \{ \textrm{id}, (0 \ 1), (0 \ 2), (2 \ 1), (0 \ 1\ 2), (0 \ 2\ 1) \}$. 
+\begin{itemize}
+\item $\orb(\vecv) = \{  (3,1,1), (1,3,1), (1,1,3) \}$. 
+\item $\stab(\vecv) = \{  \textrm{id}, (1 \ 2) \}$. 
+\end{itemize}
+\end{block}
+
+\flushleft
+\textbf{Important properties}
+\begin{alertblock}{}
+\begin{itemize}
+\item The set of orbits $\{\orb(x), \ x \in E\}$ is a partition of E. 
+\item It thus induces an equivalence relation $\sim$ defined as $x \sim x'$ if and only if $x' \in \orb(x)$.
+\item For any $x \in E$,
+\vspace{-2mm}
+\begin{align*}
+\card{\orb(x)} \cdot \card{\stab(x)} = \card{\GG} \,. 
+\end{align*}
+\end{itemize}
+
+\vspace{-2mm}
+\end{alertblock}
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{$\Sfrak_n$-invariant Boolean functions}
+
+\footnotesize
+\flushleft
+%We can   
+The action on monomials extends linearly to \textbf{Boolean functions}. \hfill  \scriptsize (since  $\sigma \cdot (\veca^{\vecu }\vecx^{\vecv}) = (\sigma \cdot \veca)^{\vecu} (\sigma \cdot \vecx)^{\vecv}$)
+
+\footnotesize
+\begin{exampleblock}{}
+Let $\bleu{f \in \ZZ_{2^{q}}^n \rightarrow \FF_2}$, $\rouge{F : \ZZ_{2^{q}}^n \times \ZZ_{2^{q}}^n \rightarrow \FF_2}$. We define $\sigma \cdot \bleu{f}$ and $\sigma \cdot \rouge{F}$ as:
+$$
+\sigma \cdot \bleu{f} (\vecx) = \bleu{f} (\sigma \cdot \vecx) \quad \text{ and } \quad \sigma \cdot \rouge{F}(\veca, \vecx) \coloneq \rouge{F}(\sigma \cdot \veca,\sigma \cdot \vecx) \,.
+$$
+%    $$
+%    \rowcolors{5}{white}{white}
+%\begin{array}{ccccccc}
+%    \Sfrak_n \times \FF_2^{(\ZZ_{2^{q}}^n)} &\longrightarrow&  \FF_2^{(\ZZ_{2^{q}}^n)} &\quad \quad \quad \quad\quad&    \Sfrak_n \times \FF_2^{(\ZZ_{2^{q}}^n \times \ZZ_{2^{q}}^n)} &\longrightarrow&  \FF_2^{(\ZZ_{2^{q}}^n)} \\
+%       (\sigma, f)  &\longmapsto&  \sigma \cdot f& \quad \quad \quad \quad\quad &(\sigma, F)  &\longmapsto& \sigma \cdot F\,, 
+%\end{array}
+%$$
+%with $\sigma \cdot f (\vecx) = f(\sigma \cdot \vecx)$ and $\sigma \cdot F(\veca, \vecx) \coloneq  F(\sigma \cdot \veca,\sigma \cdot \vecx)$.
+\end{exampleblock}
+
+\flushleft
+To formalise the \ver{symmetries} of $F^{m,n}$, we introduce the notion of \rouge{\textbf{$\GG$-invariance}}.
+\begin{alertblock}{}
+Let $\GG$ be a subgroup of $\Sfrak_n$. The function $ \bleu{f} $ (resp. $\rouge{F}$) is \rouge{$\GG$-invariant} if it satisfies:
+$$ \forall  \sigma \in \GG, \quad \sigma \cdot  \bleu{f}  =  \bleu{f}  \quad \text{ (resp. } \quad\forall  \sigma \in \GG, \quad \sigma \cdot \rouge{F} = \rouge{F} \text{)}\,. $$
+\end{alertblock}
+%{\scriptsize In the presentation, we will use only $\Sfrak_n$-invariance.}
+%This is strictly equivalent to $\GG \subset \stab(f)$ (resp. $\GG \subset \stab(F)$). 
+
+\begin{block}{}
+\textbf{Example.} 
+The function  $f : \vecx = (x_0, x_1) \longmapsto x_{0,0} x_{0,1} + x_{1,0}x_{1,1}$
+%\begin{align*}
+%    %f \quad : \quad  \ZZ_{2^1}^2 \quad \quad &\longrightarrow \quad \quad \FF_2 \\
+%    f : \vecx = (x_0, x_1) \quad &\longmapsto \quad x_{0,0} x_{0,1} + x_{1,0}x_{1,1}
+%\end{align*}
+is $\Sfrak_n$-invariant since % since for any $\vecx$ and any $\sigma  \in \Sfrak_2$, $\sigma \cdot f(\vecx) = f(\vecx)$:
+ $$f(\vecx) = x_0^3 + x_1^3 = x_1^3 + x_0^3 = (0 \ 1) \cdot f( \vecx)\,.$$ 
+NB: it is however \rouge{not symmetric} since $ f(\rouge{x_{0,1}}, x_{0,0}, \bleu{x_{1,1}}, x_{1,0}) \neq f(\bleu{x_{1,1}}, x_{0,0}, \rouge{x_{0,1}}, x_{1,0})$.
+\end{block}
+
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Reduction to a system of representatives}
+\footnotesize
+\flushleft
+Let $F : \ZZ_{2^q}^n \times  \ZZ_{2^q}^n \longmapsto \FF_2^n$. Recall
+\begin{align*}
+F(\ver{\veca}, \rouge{\vecx}) = \sum_{(\ver{\vecu},\rouge{\vecv}) \in \ZZ_{2^q}^n \times \ZZ_{2^q}^n  } \alpha_{(\ver{\vecu}, \rouge{\vecv})}(F) \ver{\veca^{\vecu}} \rouge{\vecx^{\vecv}} = \sum_{\rouge{\vecv} \in \ZZ_{2^q}^n} \alpha_{\rouge{\vecv}}(F) \rouge{\vecx^{\vecv}} \quad \text{ where } \quad \alpha_{\rouge{\vecv}}(F) = \sum_{\ver{\vecu} \in \ZZ_{2^q}^n} \alpha_{\ver{\vecu}, \rouge{\vecv}}(F) \ver{\veca^{\vecu}} \,.
+\end{align*}
+
+\pause
+\begin{exampleblock}{}
+Let $\GG$ be a subgroup of $\Sfrak_n$. The following statements are equivalent:
+\begin{itemize}
+\item[(i)] $F$ is $\GG$-invariant. 
+\item[(ii)]  $\forall \sigma \in \GG, \forall \vecu \in \ZZ_{2^q}^n, \forall \vecv \in \ZZ_{2^q}^n, \quad \rouge{\alpha_{\sigma \cdot (\vecu, \vecv)}(F) = \alpha_{(\vecu,\vecv)}(F)}$.
+ \item[(iii)] $\forall \sigma \in \GG, \forall \vecv \in \ZZ_{2^q}^n, \quad \bleu{\sigma \cdot \alpha_{\vecv}(F)  = \alpha_{\sigma^{-1} \cdot \vecv}(F)}$. 
+ \end{itemize}
+\end{exampleblock}
+
+\pause
+By commutativity of modular addition:
+\small
+\begin{alertblock}{}
+\centering
+$F^{m,n}$ is $\Sfrak_n$-invariant. 
+\end{alertblock}
+
+\pause
+\footnotesize
+\begin{itemize}
+\item We can study $\{\alpha_{\ver{\vecu}, \rouge{\vecv}}(F^{m,n}) \}$ using one element per orbit. 
+\item Coefficients $\alpha_{\rouge{\vecv}}(F^{m,n})$ and $\alpha_{\rouge{\vecv'}}(F^{m,n})$ such that $\rouge{\vecv} \sim \rouge{\vecv'}$ can computed one from the other.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Scaling}
+
+\footnotesize
+\begin{alertblock}{}
+    Let $m \in \NN^{\star}$ and $\vecu,\vecv \in \NN^d$. 
+    For any $n \geq d$, $\sigma \in \Sfrak_{n}$, 
+    \begin{align*}
+        \alpha_{(\vecu,\vecv)}(F^{m,d}) = \alpha_{\sigma \cdot (\tilde\vecu, \tilde\vecv)} (F^{m,n}) \,,
+    \end{align*}
+where
+$$
+\tilde{\vecu}
+=
+\bigl(
+u_0,\dots,u_{d-1},
+\underbrace{0,\dots,0}_{n-d\text{ zeros}}
+\bigr)
+\qquad 
+\tilde{\vecv}
+=
+\bigl(
+v_0,\dots,v_{d-1},
+\underbrace{0,\dots,0}_{n-d\text{ zeros}}
+\bigr) \,.
+$$
+%{\rowcolors{2}{}{}
+%$$\forall i \in \intset{0, n-1}, \  \tilde{u}_i \coloneq \begin{cases}
+%  u_i & \text{if } i \leq d-1 \\    
+%  0 & \text{if } d \leq i
+%\end{cases} \ \text{and} \ \tilde{v}_i \coloneq 
+%\begin{cases}
+%  v_i & \text{if } i \leq d-1 \\    
+%  0 & \text{if } d \leq i
+%\end{cases} \,.$$
+%}
+\end{alertblock}
+
+\pause
+
+\begin{itemize}
+\item $F^{m,m}$ allows to understand $F^{m,n}$ for all $n \geq m$. 
+\pause
+\item Any term of $F^{m,n}$ with a support of size $d$ can be derived from $F^{m,d}$. 
+\end{itemize}
+
+\pause
+\flushleft
+\textbf{Underlying assumption:} for all $\vecu, \vecv$ such that $\alpha_{\vecu, \vecv}\neq0$, $\supp(\vecu) = \supp(\vecv)$. Stems from:
+\begin{align*} 
+F^{m,n} (\veca,\vecx) = (\langle \veca, \vecx \rangle)^m  = \Bigl(\sum \rouge{a_i x_i} \Bigr)^m \,.
+\end{align*}
+%
+%\begin{block}{}
+%\textbf{Example.} $d = 2$, $n = 3$. Let $\vecu = (1,2)$, $\vecv = (1,1)$. Then $\tilde{\vecu} = (1,2,0)$,  $\tilde{\vecv} = (1,1,0)$. 
+%\end{block}
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Effective computation of the ANF}
+
+
+\footnotesize
+\flushleft
+\vspace{-5mm}
+Recall: \rouge{$S^n_m$ ordered} partitions of length $n$ of $m$. Let \bleu{$\mathcal{C}^n_m$} be a system of representatives (\bleu{unordered} partitions). 
+
+\begin{exampleblock}{}
+\vspace{-5mm}
+    \begin{align*}
+        F^{m,n} (\veca, \vecx) = \sum_{\substack{ \vecc \in \bleu{\C^n_{m}}} } 
+\only<1>{\sum_{\vecc' \in \orb(\vecc) } \  \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i} }
+\only<2>{\sum_{\vecc' \in \orb(\vecc) } \  \ver{\prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}} }
+\only<3>{\rouge{ \sum_{\vecc' \in \orb(\vecc) } \  \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}} }
+\only<4->{\sum_{\vecc' \in \orb(\vecc) } \ \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}}
+        = \sum_{\substack{  \bleu{\vecc \in \C^n_{m}}} } 
+\only<1>{\sum_{ \vecc' \in \orb(\vecc)}  H_{\vecc'}( \veca, \vecx)}
+\only<2>{\sum_{ \vecc' \in \orb(\vecc)}  \ver{H_{\vecc'}( \veca, \vecx)}}
+\only<3>{ \rouge{ \sum_{ \vecc' \in \orb(\vecc)} H_{\vecc'}( \veca, \vecx)}}
+\only<4->{\sum_{ \vecc' \in \orb(\vecc)}  H_{\vecc'}( \veca, \vecx)}
+  =  \sum_{\substack{ \bleu{\vecc \in \C^n_{m}}} }   
+  \only<1,2>{
+  G_{\vecc}( \veca, \vecx) }
+  \only<3>{
+    \rouge{G_{\vecc}( \veca, \vecx) }}
+  \only<4->{
+    G_{\vecc}( \veca, \vecx) 
+    }   \,. %= \sum_{\substack{ \vecc \in \C^n_{m}} } G_{\vecc}(\veca,\vecx) \,, 
+\end{align*}
+\vspace{-2mm}
+\end{exampleblock}
+
+\pause
+\pause
+\begin{alertblock}{}
+ \textbf{Theorem.}   Let $\vecc \in \ZZ_{2^q}^n$, $(\vecu, \vecv) \in \ZZ_{2^q}^n \times \ZZ_{2^q}^n$. Define
+    $E_{\vecc}(\vecu, \vecv) \coloneq \exponents(H_{\vecc}) \cap \orb(\vecu, \vecv)$.
+    For any $\sigma \in \Sfrak_n$,
+    \begin{align*}
+         \alpha_{\sigma \cdot (\vecu, \vecv)}(G_{\vecc}) \quad = \quad  \alpha_{(\vecu, \vecv)} (G_{\vecc})\quad  = \quad  \frac{\card{E_{\vecc}(\vecu,\vecv)}n!}{\card{\stab(\vecc)}\card{\orb(\vecu, \vecv)}} \mod{2} \,. 
+    \end{align*}
+\end{alertblock}
+
+\pause
+\begin{itemize}
+\item[(i)] For all canonical $\vecc$, compute ${\{ (\vecu, \vecv)^{\star}, \alpha_{(\vecu, \vecv)^{\star} } (G_{\vecc}) = 1 \}}$ from $H_{\vecc'}$ for some $\vecc' \in \orb(\vecc)$. (Theorem) 
+%\pause $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
+\pause
+\item[(ii)] Compute a SOR of the ANF of $F^{m,n}$ from the $G_{\vecc}$'s i.e. $\ver{\{ (\vecu, \vecv)^{\star}, \alpha_{(\vecu, \vecv)^{\star} } (F^{m,n}) = 1 \}}$. % for some $\vecc' \in \orb(\vecc)$. \hfill $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
+%\item[(i)] Compute ANF of $G_{\vecc}$ from $H_{\vecc'}$ for a single $\vecc' \in \orb(\vecc)$. \hfill $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
+\pause
+\item[(iii)] Compute the \rouge{multiset $\{\!\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}\!\}$}. %with cardinal equal to $\card{\{\vecv^{\star},  \alpha_{\vecv^{\star}\}} \neq 0}$. 
+\end{itemize}
+
+\vspace{-1mm}
+\hfill {\scriptsize \textbf{NB:} $\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}$ is \rouge{not} a SOR of $\{ \alpha_{\vecv}(F^{m,n}) \neq 0 \} /\! \sim$}. 
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Effective computation of the number of monomials}
+\flushleft
+\footnotesize
+
+\vspace{-4mm}
+\textbf{Recall.} For each random $\ver{\veca}$, the function in $\{ F^{m,n}_{\ver{\veca}} \coloneq F^{m,n}({\ver{\veca}} , \cdot) \}$ is evaluated on the secret \rouge{$\vecx$} to yield $s_{\ver{\veca}}$. 
+
+\smallskip
+If we can compute the ANF of $F^{m,n}_{\ver{\veca}}$, we obtain an equation in the secret \rouge{$\vecx$}:
+\begin{align*}
+\sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n}_{\ver{\veca}}) \ \rouge{\vecx}^{\vecv}  = \sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n})(\ver{\veca}) \ \rouge{\vecx}^{\vecv}  = (s_{\ver{\veca}})^{m/2^{q-p}} \,. 
+\end{align*}
+
+\pause
+
+\vspace{-2mm}
+\begin{exampleblock}{}
+\textbf{NB:} Number of monomials in the system: 
+$$\card{\bigcup_{\veca \in \ZZ_{2^q}^n} \{\vecv, \alpha_{\vecv}(F^{m,n}_{\veca}) \neq 0 \}} =  \card{\{ \vecv, \alpha_{\vecv}(F^{m,n}) \neq 0 \}}  \,. $$
+\end{exampleblock}
+
+\pause
+
+\begin{itemize}
+\item Our algorithm returned the \rouge{multiset $\{\!\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}\!\}$}, which has cardinal equal to $\card{\{\vecv^{\star},  \alpha_{\vecv^{\star}\}} \neq 0}$.
+\end{itemize}
+
+\small
+\centering
+$\text{ Nr of monomials } =  \card{\{ \vecv, \alpha_{\vecv} \neq 0 \} } =  \sum_{\vecv^{\star},  \alpha_{\vecv^{\star}} \neq 0} \orb(\alpha_{\vecv^{\star}}) \binom{n}{\card{\supp(\vecv^{\star})}}$
+
+\pause
+
+\smallskip
+\begin{alertblock}{}
+\centering
+In practice, when $m$ is a power of two, this is \rouge{always} equal to the upper bound $\binom{n+m}{m} - 1$. 
+\end{alertblock}
+
+%dire qq part que nombre de monomes vaut tant pour m puissance de 2
+
+%dire définition de Qmn
+
+\end{frame}
+
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Effective computation of other parameters}
+
+\footnotesize
+\flushleft
+
+By default, linearisation basis is the set of monomials. \textbf{One can do better.}
+
+\begin{block}{}
+\textbf{Example.} Assume two monomials $\rouge{\vecx}^{\vecv_1}$ and  $\rouge{\vecx}^{\vecv_2}$ always appear together in the system.
+\begin{itemize}
+\item It is interesting to replace these monomials by  $\rouge{\vecx}^{\vecv_1} + \rouge{\vecx}^{\vecv_2}$ in the linearisation basis. 
+\item Less variables: improved cost of solving the linear system. 
+\item Ideal situation: being able to compute the rank and relevant basis (not there yet). 
+\end{itemize} 
+\end{block}
+
+\begin{alertblock}{}
+Our approach allows us to compute
+\begin{itemize} 
+\item The set 
+\begin{align*}
+Q^{m,n} = \set{ Q_{\alpha} , \alpha \in \polycoeff_{\vecx}(F^{m,n}) },  \text{ where } \forall\alpha, \  Q_{\alpha} \coloneq \sum_{\vecv \in \NN^n | \alpha_{\vecv}(F^{m,n}) = \alpha} \vecx^{\vecv} \in \FF_2[\vecx]. 
+\end{align*}
+\item The average sparsity in both generating families (monomials, $Q^{m,n}$). 
+\item The rank is a WIP
+\end{itemize}
+\end{alertblock}
+
+\end{frame}
+
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Our results: Upper bound on the rank}
+
+\small
+\flushleft
+\textbf{Ratio $ \card{Q^{m,n}} / \binom{n+m}{m}-1$ as a function of $n$, for $n \in \intset{m,  4096}$}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\linewidth]{02_10_25_plot.pdf}
+   % \caption{$\frac{\card{\mathcal{Q}^{m,n}}}{\card{\exponents_{\vecx}(F^{m,n})}}$ as a function of $n$, for $n \in \intset{m,  4096}$.} 
+    %\label{fig:rank}
+\end{figure}
+
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Our results: Sparsity}
+
+\flushleft
+\small 
+\textbf{Average fraction of terms in a random equation $F^{m, n}_{\veca}(\vecx)$ as a function of $n$.}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\linewidth]{02_10_25_avg_sparsity_Qnm.pdf}
+    %\caption{} 
+  %  \label{fig:sparsity}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Improvements over Arora-Ge}
+
+\flushleft
+\small
+
+\textbf{Comparison to the linearisation attack by Arora \& Ge using $\omega = 3$}.
+
+\hfill and cost of modular addition/multiplication $\approx q-p$.
+
+\begin{table}[]
+    \centering
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{.6}
+    \begin{tabular}{cc|c|c|c}
+        \toprule
+        $m = 2^{q-p}$ & $n$ & \makecell{Arora-Ge} & \makecell{Our work\\ {\small ($\leq$ rank only)}}  &  \makecell{Our work\\ {\small ($\leq$ rank and sparsity)}} \\
+        \midrule
+        
+        &  $64$  & $2^{106.4}$ & \rouge{$2^{97.8}$} &  \bleu{$2^{87.2}$} \\
+       \multirow{-1}{*}{$8$}  & $128$ & $2^{129.3}$ & \rouge{$2^{121.8}$} & \bleu{$2^{110.8}$}\\
+        & \ $256$ \ & $2^{152.7}$ & \rouge{$2^{145.9}$} & \bleu{$2^{134.7}$} \\
+        \midrule
+        & $64$  & $2^{170.7}$ &  \rouge{$2^{157.2}$}& {\small Non-available} \\
+        \multirow{-1}{*}{\ $16$ \ } & $128$ & $2^{214.6}$ &  \rouge{$2^{202.00}$}& {\small Non-available} \\
+        & $256$ & $2^{260.5}$ & \rouge{$2^{250.1}$} & {\small Non-available} \\
+        \bottomrule
+    \end{tabular}
+    \vspace{1mm}
+\end{table}
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Conclusion and open problems}
+
+\flushleft
+\small
+
+\textbf{Resolution techniques}
+
+Other observations (see the paper): Surrepresentation of LSBs (of $\veca$ and $\vecx$).
+\begin{itemize}
+\item In guess-and-solve strategies: it makes sense to guess LSBs first. 
+\item Time-data trade-offs: wait for $\veca$ with many even $a_i$'s. 
+\end{itemize}
+
+\smallskip
+
+Would love some help with resolution techniques
+
+\smallskip
+
+Remaining mathematical open problems such as proving the nr of monomials. 
+
+\smallskip
+
+Other applications of group actions in symmetric crypto. 
+
+
+\end{frame}
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+
+\bibliographystyle{alpha}
+%\bibliography{bibpresaes.bib}
+\end{document}
+

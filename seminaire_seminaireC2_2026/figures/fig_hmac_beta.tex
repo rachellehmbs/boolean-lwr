@@ -1,0 +1,104 @@
+\begin{tikzpicture}[scale=0.4]
+	%\path[anchor=east] (-1,0.5) node{\footnotesize $\pad(M)=$};
+
+
+\only<1>{
+\node[anchor = north west] at (-3,2.8) {\footnotesize $M = M_1 ||\cdots || M_{L}$}; 
+
+	\path (2,0.5) node{\footnotesize $M_{1}$};
+	\path ( 4+2,0.5) node{\footnotesize $M_{2}$};
+	\path ( 8+2,0.5) node{\footnotesize $M_{3}$};
+	\path (14+2,0.5) node{\footnotesize $M_{L}$};
+	\path (18+2,0.5) node{\footnotesize $|M| = L$};
+	
+}
+\only<2->{
+\node[anchor = north  west] at (-3,2.8) {\footnotesize  $M = \beta ||\cdots || \beta = \beta^L$}; 
+
+	\path (2,0.5) node{\footnotesize $\beta$};
+	\path ( 4+2,0.5) node{\footnotesize $\beta$};
+	\path ( 8+2,0.5) node{\footnotesize $\beta$};
+	\path (14+2,0.5) node{\footnotesize $\beta$};
+	\path (18+2,0.5) node{\footnotesize $L$};
+}
+	%% Separations in the message
+	
+	
+
+
+	%% Compressions functions 
+	\begin{scope}[shift={(0.5,-4)}]
+		\node [draw,trapezium,trapezium left angle=60,trapezium right angle=0,minimum height=0.7cm,fill=Melon!10,shift={(1.15,0.4)},rotate=-90] 
+		{\begin{sideways}$h$\end{sideways}};
+		\draw[-latex] ++(1.5,+4) -- ++(0,-2) -- ++(0.5,0);
+		\draw[-latex] ++(0,0.7) node[left]{\footnotesize $I_{\rouge{K}}$}-- ++(2,0);
+		
+		\draw (1.3,3) --++ (0.4,0.3);
+		\draw (0.8,3.1) node{\footnotesize $n$};
+		
+		\draw (0.9,0.4) --++ (0.4,0.4);
+		\draw (0.9,1.1) node{\footnotesize $n$};
+		
+		%\draw[fill=vert3!20] (5.5,0) rectangle (6.8,6);
+
+	\end{scope}
+
+	\begin{scope}[shift={(4.5,-4)}]
+		\node [draw,trapezium,trapezium left angle=60,trapezium right angle=0,minimum height=0.7cm,fill=Melon!10,shift={(1.15,0.4)},rotate=-90] 
+		{\begin{sideways}$h$\end{sideways}};
+		\draw[-latex] ++(1.5,+4) -- ++(0,-2) -- ++(0.5,0);
+		\draw[-latex] ++(-0.2,0.7) --  ++(2.2,0);
+		
+				\only<3->{
+		\draw[fill=vert3!15] (0.1,0) rectangle (1.2,2);
+		\node[thick] (xm4) at (0.7,1) {\small $x_{1}$};
+		}
+	\end{scope}
+
+	\begin{scope}[shift={(8.5,-4)}]
+		\node [draw,trapezium,trapezium left angle=60,trapezium right angle=0,minimum height=0.7cm,fill=Melon!10,shift={(1.15,0.4)},rotate=-90] 
+		{\begin{sideways}$h$\end{sideways}};
+		\draw[-latex] ++(1.5,+4) -- ++(0,-2) -- ++(0.5,0);
+		\draw[-latex] ++(-0.2,0.7) -- ++(2.2,0);
+		
+		\only<3->{
+		\draw[fill=vert3!15] (0.1,0) rectangle (1.2,2);
+		\node[thick] (xm4) at (0.7,1) {\small $x_{2}$};
+		}
+		
+	\end{scope}
+
+
+	\begin{scope}[shift={(12.5,-4)}]
+		\draw[-latex] ++(-0.2,0.7) -- ++(0.75,0) node[right]{\footnotesize $\cdots$} ;
+	\end{scope}
+	
+		\begin{scope}[shift={(14.5,-4)}]
+		\node [draw,trapezium,trapezium left angle=60,trapezium right angle=0,minimum height=0.7cm,fill=Melon!10,shift={(1.15,0.4)},rotate=-90] 
+		(h) {\begin{sideways}$h$\end{sideways}};
+		\draw[-latex] ++(1.5,+4) -- ++(0,-2) -- ++(0.5,0);
+		\draw[-latex] ++(0.2,0.7) --  ++(1.8,0);
+		%\draw[-latex] ++(3.8,0.7) --  ++(1,0);
+		%\path (2.95,0.9) node{ $h$};
+	
+
+	\end{scope}
+	
+			\begin{scope}[shift={(18.5,-4)}]
+		\node [draw,trapezium,trapezium left angle=60,trapezium right angle=0,minimum height=0.7cm,fill=Melon!10,shift={(1.15,0.4)},rotate=-90] 
+		(h) {\begin{sideways}${\color{Melon!10}h}$\end{sideways}};
+		\draw[-latex] ++(1.5,+4) -- ++(0,-2) -- ++(0.5,0);
+		\draw[-latex] ++(-0.2,0.7) --  ++(2.3,0);
+		\draw[-latex] ++(3.8,0.7) --  ++(1,0);
+		\path (2.95,0.9) node{\footnotesize $g_{\rouge{K}}$};
+
+		\draw[fill=vert3!15] (0.1,0) rectangle (1.2,2);
+		\only<3->{
+		\node[thick] (xm4) at (0.7,1) {\small $x_{L}$};
+		}
+	\end{scope}
+
+
+	\path (14+7+1+1.8,-3.3) node{\footnotesize $T$};
+	
+\end{tikzpicture}

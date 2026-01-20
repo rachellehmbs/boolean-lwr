@@ -1,0 +1,140 @@
+\begin{tikzpicture}
+	\node[inner sep=0pt] (s5) at (3.5,0) {${\color{oiorange}\alpha_u} v_0v_1v_2v_3v_4v_5v_{6}v_{7} $};
+	\node[inner sep=0pt] (s52) at (3.4,-1.1) {${\color{oiorange}\alpha_u} = {\color{oiorange}\beta_0} \left( {\color{oiblue} \prod\limits_{i = 1}^7  ?} + {\color{oired} \prod\limits_{i = 1}^7  ?}  + \cdots \right)$};
+	\node[inner sep=0pt] (r4) at (3.5,-2.7) {$ R_4 $};
+	
+	
+	
+	\node[inner sep=0pt] (trail0) at (0,2.5) {Trail $ t_0 $};
+	\node[inner sep=0pt] (s41) at (0,1.2) {$ v_0v_1v_2v_3 $};
+	\node[inner sep=0pt] (s42) at (0,-1.2) {$ v_4v_5v_6v_7 $};
+	\node[inner sep=0pt] (r3l) at (0,-2.7) {$ R_3 $};
+	
+	
+	\node[inner sep=0pt] (trail1) at (7,2.5) {Trail $ t_1 $};
+	\node[inner sep=0pt] (s43) at (7,1.2) {$ v_0v_1v_6v_7 $};
+	\node[inner sep=0pt] (s44) at (7,-1.2) {$ v_2v_3v_4v_5 $};
+	\node[inner sep=0pt] (r3r) at (7,-2.7) {$ R_3 $};
+	
+	
+	
+	\node[inner sep=0pt] (s31) at (-2,1.8) {$ v_0v_1 $};
+	\node[inner sep=0pt] (s32) at (-2,0.6) {$ v_2v_3 $};
+	
+	\node[inner sep=0pt] (s33) at (-2,-0.6) {$ v_4v_5 $};
+	\node[inner sep=0pt] (s34) at (-2,-1.8) {$ v_6v_7 $};
+	
+	\node[inner sep=0pt] (r2l) at (-2,-2.7) {$ R_2 $};
+	
+	
+	
+	
+	\node[inner sep=0pt] (s35) at (9,1.8) {$ v_0v_7 $};
+	\node[inner sep=0pt] (s36) at (9,0.6) {$ v_1v_6 $};
+	
+	\node[inner sep=0pt] (s37) at (9,-1.8) {$ v_2v_5 $};
+	\node[inner sep=0pt] (s38) at (9,-0.6) {$ v_3v_4 $};
+	
+	\node[inner sep=0pt] (r2r) at (9,-2.7) {$ R_2 $};
+	
+	
+	
+	
+	\node[inner sep=0pt] (v01) at (-3.2,2) {$ {\color{oiorange} \beta_{0}}v_0 $};
+	\node[inner sep=0pt] (v11) at (-3.2,1.6) {{\color{oiblue} ?}$ v_1 $};
+	\draw[-,thick] (v01.east) -- (s31.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v11.east) -- (s31.west)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (v21) at (-3.2,0.8) {{\color{oiblue} ?}$v_2 $};
+	\node[inner sep=0pt] (v31) at (-3.2,0.4) {{\color{oiblue} ?}$v_3 $};
+	\draw[-,thick] (v21.east) -- (s32.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v31.east) -- (s32.west)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (v41) at (-3.2,-0.4) {{\color{oiblue} ?}$ v_4 $};
+	\node[inner sep=0pt] (v51) at (-3.2,-0.8) {{\color{oiblue} ?}$ v_5 $};
+	\draw[-,thick] (v41.east) -- (s33.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v51.east) -- (s33.west)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (v61) at (-3.2,-2) {{\color{oiblue} ?}$ v_6 $};
+	\node[inner sep=0pt] (v71) at (-3.2,-1.6) {{\color{oiblue} ?}$ v_7 $};
+	\draw[-,thick] (v61.east) -- (s34.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v71.east) -- (s34.west)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (r1l) at (-3.2,-2.7) {$ R_1 $};
+	
+	
+	
+	
+	
+	\node[inner sep=0pt] (v02) at (10.2,2) {${\color{oiorange} \beta_{0}} v_0 $};
+	\node[inner sep=0pt] (v12) at (10.2,1.6) {{\color{oired} ?}$ v_7 $};
+	\draw[-,thick] (v02.west) -- (s35.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v12.west) -- (s35.east)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (v22) at (10.2,0.8) {{\color{oired} ?}$v_1 $};
+	\node[inner sep=0pt] (v32) at (10.2,0.4) {{\color{oired} ?}$ v_6 $};
+	\draw[-,thick] (v22.west) -- (s36.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v32.west) -- (s36.east)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (v42) at (10.2,-0.4) {{\color{oired} ?}$ v_3 $};
+	\node[inner sep=0pt] (v52) at (10.2,-0.8) {{\color{oired} ?}$ v_4 $};
+	\draw[-,thick] (v42.west) -- (s38.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v52.west) -- (s38.east)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (v62) at (10.2,-2) {{\color{oired} ?}$ v_2 $};
+	\node[inner sep=0pt] (v72) at (10.2,-1.6) {{\color{oired} ?}$ v_5$};
+	\draw[-,thick] (v62.west) -- (s37.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (v72.west) -- (s37.east)
+	node[above=10pt,midway,] {};
+	
+	\node[inner sep=0pt] (r1r) at (10.2,-2.7) {$ R_1 $};
+	
+	
+	\draw[-,thick] (s31.east) -- (s41.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (s32.east) -- (s41.west)
+	node[above=10pt,midway,] {};
+	
+	\draw[-,thick] (s33.east) -- (s42.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (s34.east) -- (s42.west)
+	node[above=10pt,midway,] {};
+	
+	\draw[-,thick] (s35.west) -- (s43.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (s36.west) -- (s43.east)
+	node[above=10pt,midway,] {};
+	
+	\draw[-,thick] (s37.west) -- (s44.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (s38.west) -- (s44.east)
+	node[above=10pt,midway,] {};
+	
+	
+	\draw[-,thick] (s41.east) -- (s5.west)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (s42.east) -- (s5.west)
+	node[above=10pt,midway,] {};
+	
+	\draw[-,thick] (s43.west) -- (s5.east)
+	node[above=10pt,midway,] {};
+	\draw[-,thick] (s44.west) -- (s5.east)
+	node[above=10pt,midway,] {};
+	
+	
+		\end{tikzpicture}

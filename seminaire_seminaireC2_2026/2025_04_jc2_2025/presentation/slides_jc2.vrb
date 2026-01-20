@@ -1,0 +1,39 @@
+\frametitle{Differential cryptanalysis}
+\vspace{-.4cm}
+% \begin{recap}
+% $\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$.\hfill $[\ E \xleftarrow{\$} \mathcal{E} \ ]$  or $[ \ F \xleftarrow{\$} \mathrm{Bij}(\FF_2^{n}) \ ]$ ?
+% \end{recap}
+$\purple{F} \from \FFspace \to \FFspace$.
+\begin{mybox}{Principle}{}{}
+Studies for each input difference $\din \neq 0$, the \emph{distribution of output differences}:
+    $$\forall \ \dout \in \FFspace, \quad \PP_{x \xleftarrow{\$} \FFspace}\left[\purple{F}(x + \din) + \purple{F}(x) = \dout\right] = \ ? $$
+\end{mybox}
+
+\begin{center}
+
+\begin{tikzcd}
+\only<1-3>{
+                        x  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[opacity=0]{r}[name=uparrow,opacity=0]{\gray{F^{(0)}}} & \white{x^{(1)}} \arrow[leftrightarrow,opacity=0]{d}{\seconddiff} \arrow[dashed,opacity=0]{r}{} &  \white{x^{(R-1)}} \arrow[opacity=0]{r}[opacity=0]{\gray{F^{(r-1)}}} \arrow[leftrightarrow,opacity=0]{d}{}{\beforelastdiff} &  \purple{F}(x) \arrow[leftrightarrow]{d}{\dout}[]{}
+                        \\
+                        y \arrow[opacity=0]{r}{}[swap,name=bottomarrow,opacity=0]{\gray{F^{(0)}}} & \white{y^{(1)}}  \arrow[dashed,opacity=0]{r}{}[swap]{} &  \white{y^{(R-1)}} \arrow[swap,opacity=0]{r}{}[opacity=0]{\gray{F^{(r-1)}}} &   \purple{F}(y)
+                        %\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+                        }
+                        % \only<4>{      x  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[opacity=1]{r}[name=uparrow,opacity=1]{\gray{F^{(0)}}} & x^{(1)} \arrow[leftrightarrow,opacity=1]{d}{\seconddiff} \arrow[dashed,opacity=1]{r}{} &  x^{(R-1)} \arrow[opacity=1]{r}[opacity=1]{\gray{F^{(r-1)}}} \arrow[leftrightarrow,opacity=1]{d}{}{\beforelastdiff} &  \purple{F}(x) \arrow[leftrightarrow]{d}{\dout}[]{}
+                        % \\
+                        % y \arrow[opacity=1]{r}{}[swap,name=bottomarrow,opacity=1]{\gray{F^{(0)}}} & y^{(1)}  \arrow[dashed,opacity=1]{r}{}[swap]{} &  y^{(R-1)} \arrow[swap,opacity=1]{r}{}[opacity=1]{\gray{F^{(r-1)}}} &   \purple{F}(y)
+                        % }
+
+\end{tikzcd}
+\end{center}
+
+\pause
+\begin{mybox}{Average over all bijections}{}{}
+For all $(\din \neq 0, \dout)$, the equation $\purple{F}(x + \din) + \purple{F}(x) = \dout$ has 1 solution $x$ \emph{on average}.
+\end{mybox}
+
+
+\pause
+\begin{mybox}{Differential distinguisher\hfill {\small\purple{[BihSha91]}}}{}{}
+$(\din, \dout)$ such that for many $\red{k}$, $\quad E_{\red{k}}(x + \din) + E_{\red{k}}(x) = \dout$ has many solutions $x$.
+\end{mybox}
+

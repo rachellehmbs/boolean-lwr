@@ -1,0 +1,676 @@
+% !TEX root = ../slides_jc2.tex
+
+\section{Introduction}
+
+
+\begin{frame}
+\frametitle{Linear self-equivalence : a unifying PoV on the known families of APN functions}
+
+\input{tabular/tab_apn_12}
+
+% \onslide<2->{
+% \begin{tikzpicture}[overlay]
+%      \node[fill=white] at (11.5,.6) {\inlinebox{ + a lot of sporadic examples for small $n$}};
+%  \end{tikzpicture}}
+
+ \onslide<2>{
+\begin{tikzpicture}[overlay]
+    %  \node[fill=white] at (8,6) {\inlinebox{\red{Where to look for a new function ?}}};
+    % \node[fill=white] at (8,3) {\inlinebox{\red{Intersection between families ?}}};
+     \node[fill=white] at (8,4.5) {\inlinebox{\orange{\large Hopefully clearer in 20 min ?}}};
+ \end{tikzpicture}}
+
+\end{frame}
+
+
+
+
+
+% \begin{frame}\frametitle{Searching for ideal components}
+
+% \begin{center}
+% \begin{tikzpicture}
+%     %   \scriptsize     
+%         \coordinate (nw) at (0, 5);
+%         \coordinate (sw) at (0, 0);
+%         \coordinate (ne) at (6, 5);
+%         \coordinate (se) at (6, 0);
+
+%             \draw[very thick,oiblue,rounded corners=30pt] ($(nw)+(2, -.6)$) rectangle ($(se)+(-.2, .6)$) ;
+%         \draw[very thick,oiorange,rounded corners=10pt] ($(nw)+(2.2, -1.5)$) rectangle ($(se)+(-3.1, 2.5)$) ;
+
+%         \draw[very thick,oired,rounded corners=2pt] ($(nw)+(2.3, -2.1)$) rectangle + (.2, -.2) ;
+
+%         % \draw (3.5,2.7) node[] {{\tiny X} $E_{\red{k}}$};
+
+        
+%         \draw[very thick,oiblue] ($ (ne) + (-.25, -1.4) $) --++(.6,0.7) node[right=1]{Cryptography};
+%         \draw[very thick,oiorange] ($ (nw)+(2.3, -1.6) $) --++(-.6,0.7) node[left=1]{Symmetric cryptography};
+%         \draw[very thick,oired] ($ (nw)+(2.3, -2.2) $) --++(-.6,-0.7) node[left=1]{Cryptographic Boolean functions};
+% \end{tikzpicture}
+% \end{center}
+
+% \begin{mybox}{Using optimal components}{}{}
+% \begin{itemize}
+%     \item[-] to reach a high security at \emph{lower costs}
+%     \item[-] to achieve ideal properties \emph{assumed in security proofs}
+% \end{itemize}
+% \end{mybox}
+
+% \begin{columns}[t]
+% \begin{column}{0.3\textwidth}
+% \begin{mybox}{Cryptanalysis}{}{}
+% \begin{itemize}
+%     \item[-] A specific attack\dots
+%     \item[-] \dots then generalized
+% \end{itemize}
+% \end{mybox}
+
+% \end{column}
+% \begin{column}{0.4\textwidth}
+% \onslide<2>{
+%     \begin{mybox}{Theoretical study}{}{}
+% \begin{itemize}
+% \item[-] Definition of ``resistance''
+% \item[-] Study of optimal objects
+% \end{itemize}
+% \end{mybox}
+% }
+% \end{column}
+
+% \begin{column}{0.3\textwidth}
+% \begin{mybox}{Design}{}{}
+% \begin{itemize}
+%     \item[-] Security arguments
+% \end{itemize}
+% \end{mybox}
+% \end{column}
+% \end{columns}
+
+%\end{frame}
+
+\begin{frame}\frametitle{Outline}
+
+\begin{itemize}
+    \item[\bulletpoint] From Differential cryptanalysis to APN functions
+    \item[\bulletpoint] Polynomial representations of vectorial Boolean functions
+    \item[\bulletpoint] APN state of the art
+    \item[\bulletpoint] Our unified point of view on the known APN functions
+
+\end{itemize}
+
+\end{frame}
+
+% \section{Symmetric encryption}
+% %========================= Encryption ========================
+% \subsection{}
+% \begin{frame}
+% \frametitle{Symmetric encryption}
+% \vspace{-.3cm}
+% \begin{goal}
+% Ensure \emph{confidentiality} under the assumption of a \emph{shared secret} \red{\faKey}.
+% \end{goal}
+
+% \begin{center}
+% \begin{tikzpicture}
+% \node (A) at (0,0)
+%     {\includegraphics[height=1.24cm]{figures/shadok_A3} \blue{A}, \red{\faKey}};
+% \node (B) at (6,0)
+%     {\purple{B},\red{\faKey} \includegraphics[height=1.25cm]{figures/shadok_B3}};
+
+% \draw[<->,thick] (A.east) -- (B.west) node[midway] (mid) {} ;
+
+% \onslide<2>{
+% \draw[thick, draw=oigray ,fill=white,drop shadow] (.6,-2.2) rectangle node[midway] {\large \black{$E$}} +(.8,.8) ;
+% \draw[->, thick] (1,-.8) -- +(0,-.5);
+% \draw[draw=oigray, fill=oigray] (.8, -1.4) -- (1, -1.55) -- (1.2, -1.4);
+
+% \draw[thick, draw=oigray ,fill=white,drop shadow] (5.2,-2.2) rectangle node[midway] {\large \black{$E^{-1}$}} +(.8,.8) ;
+% \draw[->, thick] (5.6,-.8) -- +(0,-.5);
+% \draw[draw=oigray, fill=oigray] (5.4, -1.4) -- (5.6, -1.55) -- (5.8, -1.4);
+
+
+% \node at (-.5, -1.8) {\blue{\faFileTextO}};
+% \node at (7.1, -1.8) {\blue{\faFileTextO}};
+
+% \draw[->, thick] (-.25, -1.8) -- +(0.8,0);
+% \draw[<-, thick] (6.9, -1.8) -- +(-0.8,0);
+% \draw[->, thick] (1.5, -1.8) -- node[midway, fill=white] {\red{\faEnvelope}} +(3.6,0);
+% }
+% \end{tikzpicture}
+
+% \end{center}
+
+% \onslide<2>{
+% \begin{constraints}
+% \begin{itemize}
+%     \item[\bulletpoint] Secure
+%     \item[\bulletpoint] Easily implemented
+%     \item[\bulletpoint] Arbitrary-long messages
+% \end{itemize}
+% \end{constraints}
+% }
+
+% \end{frame}
+
+% \begin{frame}\frametitle{Building a symmetric encryption scheme}
+
+% \begin{center}
+%     \begin{tikzpicture}
+%     %[thick, draw=oigray ,fill=white,drop shadow] % prev rounded corners=1ex,fill=red!20,draw
+%         \foreach \x in {0, 1, 2} {
+%             \node (f\x) at ($\x*(2.5cm,0)$) [minimum size=1cm,thick, draw=oigray, fill=white, drop shadow] {$E_{\red{k}}$};
+%             \node (p\x) [above of=f\x, node distance=1.5cm, circle, draw] {};
+%             \node (m\x) [above of=p\x, node distance=1cm] {$m_\x$};
+%             %\node (k\x) [left of=f\x, node distance=1.5cm] {$k$};
+%             \node (c\x) [below of=f\x, node distance=1.5cm] {$c_\x$};
+%             \draw[-] (p\x.north) -- (p\x.south);
+%             \draw[-] (p\x.east) -- (p\x.west);
+%             \draw[-latex] (m\x) -- (p\x);
+%             \draw[-latex] (p\x) -- (f\x);
+%             %\draw[-latex] (k\x) -- (f\x);
+%             \draw[-latex] (f\x) -- (c\x);
+%         }
+%         \node (iv) [left of=p0, node distance=1.5cm] {$IV$};
+%         \draw[-latex] (iv) -- (p0);
+
+%         \foreach \x in {0, 1} {
+%         \draw[-latex] ($(c\x) + (0,0.6cm)$) -| +(0.8cm,2.4cm) -- ($(p\x) + (2.4cm,0)$);
+
+%         \begin{scope}
+%             \node at (6.4,0) {$\cdots\cdots$};
+%         \end{scope}
+
+%         \begin{scope}
+%             \node (f) at (9.6cm,0) [minimum size=1cm,thick, draw=oigray, fill=white, drop shadow] {$E_{\red{k}}$};
+%             \node (p) [above of=f, node distance=1.5cm, circle, draw] {};
+%             \node (m) [above of=p, node distance=1cm] {$m_n$};
+%             %\node (k) [left of=f, node distance=1.5cm] {$k$};
+%             \node (c) [below of=f, node distance=1.5cm] {$c_n$};
+%             \draw[-] (p.north) -- (p.south);
+%             \draw[-] (p.east) -- (p.west);
+%             \draw[-latex] (m) -- (p);
+%             \draw[-latex] (p) -- (f);
+%             %\draw[-latex] (k) -- (f);
+%             \draw[-latex] (f) -- (c);
+%             \draw[-] ($(c) + (-2.5,0.6cm)$) -- ($(c) + (-1.7,0.6cm)$);
+%             \draw[-latex] ($(c) + (-1.7,0.6cm)$) |- + (0cm,2.4cm) -- (p);
+%         \end{scope}
+%         }
+
+%     \end{tikzpicture}
+%     \end{center}
+
+%     \begin{mybox}{Ingredients}{}{}
+%         \begin{itemize}
+%             \item[\bulletpoint] a \red{key-dependent} transformation of $n$-bit words (\textit{e.g.} $n = 128$).\hfill \emph{Block cipher}
+%             \item[\bulletpoint] a chaining method to handle arbitrary-long messages \hfill \emph{Mode of operation}
+%         \end{itemize}
+%     \end{mybox}
+
+% \end{frame}
+
+
+\section{From differential cryptanalysis to APN functions}
+\subsection{}
+\begin{frame}
+\frametitle{Security of block ciphers}
+
+\vspace{-.8cm}
+
+\vspace{.5cm}
+\begin{mybox}{Block cipher}{}{}
+A family of bijections $\blockcipher$ of $\FFspace$.
+$$\blockcipher = \left(E_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$$
+\end{mybox}
+
+\begin{center}
+\begin{tikzpicture}
+
+\draw[thick, draw=oigray ,fill=white,drop shadow] (.6,-2.2) rectangle node[midway] {\large $E$} +(.8,.8) ;
+\draw[->, thick] (1,-.8) node[above] {$\red{k} = $ \red{\faKey}} -- +(0,-.5);
+\draw[draw=oigray, fill=oigray] (.8, -1.4) -- (1, -1.55) -- (1.2, -1.4);
+
+\draw[thick, draw=oigray ,fill=white,drop shadow] (5.2,-2.2) rectangle node[midway] {\large \black{$E^{-1}$}} +(.8,.8) ;
+\draw[->, thick] (5.6,-.8) node[above] {\red{$k$}} -- +(0,-.5);
+\draw[draw=oigray, fill=oigray] (5.4, -1.4) -- (5.6, -1.55) -- (5.8, -1.4);
+
+
+\node at (-.5, -1.8) {\gray{\faFileTextO}};
+\node at (7.1, -1.8) {\gray{\faFileTextO}};
+
+\draw[->, thick] (-.25, -1.8) -- +(0.8,0);
+\draw[<-, thick] (6.9, -1.8) -- +(-0.8,0);
+\draw[->, thick] (1.5, -1.8) -- node[midway, fill=white] {\red{\faEnvelope}} +(3.6,0);
+\end{tikzpicture}
+
+\end{center}\pause
+
+\begin{mybox}{Ideal block cipher}{}{}
+A \emph{random} family of bijections.
+
+\vspace{.4cm}
+In practice, $\blockcipher$ should be \emph{indistinguishable} from a random family of bijections
+
+\vspace{-.1cm}
+\begin{itemize}
+    \item[\bulletpoint] to satisfy assumptions of security proofs
+    \item[\bulletpoint] to avoid stronger attack (\eg{} key recoveries)
+\end{itemize}
+\end{mybox}
+
+
+\end{frame}
+
+\begin{comment}
+    
+\subsection{Security of block ciphers}
+\begin{frame}\frametitle{\subsecname}
+\vspace{-.5cm}
+\only<1>{
+\begin{definition}[Block cipher]
+A family of bijections $\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$
+\end{definition}
+}
+\only<2->{
+\begin{definition}[\emph{Secure} block cipher]
+A family of bijections $\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$ which \emph{behaves ideally}.
+\end{definition}
+}
+
+\onslide<3>{
+\begin{center}
+
+\scalebox{.8}{
+\begin{tikzpicture}
+    %   \scriptsize     
+        \coordinate (nw) at (0, 5);
+        \coordinate (sw) at (0, 0);
+        \coordinate (ne) at (6, 5);
+        \coordinate (se) at (6, 0);
+        
+
+
+            \draw[very thick,oipurple,rounded corners=30pt] ($(nw)+(2, -.6)$) rectangle ($(se)+(-.2, .6)$) ;
+        \draw[very thick,oiorange,rounded corners=15pt] ($(nw)+(3, -1.5)$) rectangle ($(se)+(-1.9, 2.3)$) ;
+
+        \draw (3.5,2.7) node[] {{\tiny X} $E_{\red{k}}$};
+
+        
+        \draw[very thick,oipurple] ($ (ne) + (-.25, -1.4) $) --++(.6,0.7) node[right=1]{$\mathrm{Bij}(\FF_2^n)$};
+        \node[very thick,oiorange] at ($ (ne) + (-1.6, -2) $) {\orange{$\mathcal{E}$}};
+\end{tikzpicture}
+}
+\end{center}
+
+\begin{definition}[Indistinguishability]
+A \emph{random-looking} family: $[\ \orange{E \xleftarrow{\$} \mathcal{E}} \ ]$ \emph{indistinguishable} from  $[ \ \purple{F \xleftarrow{\$} \mathrm{Bij}(\FF_2^{n})} \ ].$
+
+Otherwise:
+\vspace{-.1cm}
+\begin{itemize}
+    \item[\bulletpoint] contradicts the assumptions of modes
+    \item[\bulletpoint] leads to key recoveries.
+\end{itemize}
+\end{definition}
+}
+\end{frame}
+\end{comment}
+
+
+
+% \subsection{Iterated block ciphers}
+% \begin{frame}
+% \frametitle{\subsecname}
+% \vspace{-.5cm}
+% \begin{mybox}{Block cipher}{}{}
+% A family of bijections $\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$.
+% \end{mybox}
+% %\scalebox{.65}{\input{figures/iterated}} 
+% \vspace{.3cm}
+% \only<1>{
+% \begin{center}
+% \toggletrue{figureSPNnoDetail}
+% \scalebox{.6}{\input{figures/iterated_v2}}
+% \end{center}
+% }
+
+% \only<2>{
+% \begin{center}
+% \toggletrue{figureSPNnoDetail}
+% \toggletrue{figureSPNaddroundkey}
+% \scalebox{.6}{\input{figures/iterated_v2}}
+% \end{center}
+% }
+
+
+% \only<3->{
+% \begin{center}
+% \toggletrue{figureSPNaddroundkey}
+% \scalebox{.6}{\input{figures/iterated_v2}}
+% \end{center}
+% }
+
+% \end{frame}
+
+
+%\section{Differential cryptanalysis}
+% \input{slides/section_title}
+
+\begin{frame}[fragile]
+\frametitle{Differential cryptanalysis}
+\vspace{-.4cm}
+% \begin{recap}
+% $\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$.\hfill $[\ E \xleftarrow{\$} \mathcal{E} \ ]$  or $[ \ F \xleftarrow{\$} \mathrm{Bij}(\FF_2^{n}) \ ]$ ?
+% \end{recap}
+$\purple{F} \from \FFspace \to \FFspace$. 
+\begin{mybox}{Principle}{}{}
+Studies for each input difference $\din \neq 0$, the \emph{distribution of output differences}:
+    $$\forall \ \dout \in \FFspace, \quad \PP_{x \xleftarrow{\$} \FFspace}\left[\purple{F}(x + \din) + \purple{F}(x) = \dout\right] = \ ? $$
+\end{mybox}
+
+\begin{center}
+
+\begin{tikzcd}
+\only<1-3>{
+                        x  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[opacity=0]{r}[name=uparrow,opacity=0]{\gray{F^{(0)}}} & \white{x^{(1)}} \arrow[leftrightarrow,opacity=0]{d}{\seconddiff} \arrow[dashed,opacity=0]{r}{} &  \white{x^{(R-1)}} \arrow[opacity=0]{r}[opacity=0]{\gray{F^{(r-1)}}} \arrow[leftrightarrow,opacity=0]{d}{}{\beforelastdiff} &  \purple{F}(x) \arrow[leftrightarrow]{d}{\dout}[]{}
+                        \\
+                        y \arrow[opacity=0]{r}{}[swap,name=bottomarrow,opacity=0]{\gray{F^{(0)}}} & \white{y^{(1)}}  \arrow[dashed,opacity=0]{r}{}[swap]{} &  \white{y^{(R-1)}} \arrow[swap,opacity=0]{r}{}[opacity=0]{\gray{F^{(r-1)}}} &   \purple{F}(y)
+                        %\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+                        }
+                        % \only<4>{      x  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[opacity=1]{r}[name=uparrow,opacity=1]{\gray{F^{(0)}}} & x^{(1)} \arrow[leftrightarrow,opacity=1]{d}{\seconddiff} \arrow[dashed,opacity=1]{r}{} &  x^{(R-1)} \arrow[opacity=1]{r}[opacity=1]{\gray{F^{(r-1)}}} \arrow[leftrightarrow,opacity=1]{d}{}{\beforelastdiff} &  \purple{F}(x) \arrow[leftrightarrow]{d}{\dout}[]{}
+                        % \\
+                        % y \arrow[opacity=1]{r}{}[swap,name=bottomarrow,opacity=1]{\gray{F^{(0)}}} & y^{(1)}  \arrow[dashed,opacity=1]{r}{}[swap]{} &  y^{(R-1)} \arrow[swap,opacity=1]{r}{}[opacity=1]{\gray{F^{(r-1)}}} &   \purple{F}(y)
+                        % }
+            
+\end{tikzcd}
+\end{center}
+
+\pause
+\begin{mybox}{Average over all bijections}{}{}
+For all $(\din \neq 0, \dout)$, the equation $\purple{F}(x + \din) + \purple{F}(x) = \dout$ has 1 solution $x$ \emph{on average}.
+\end{mybox}
+
+
+\pause
+\begin{mybox}{Differential distinguisher\hfill {\small\purple{[BihSha91]}}}{}{}
+$(\din, \dout)$ such that for many $\red{k}$, $\quad E_{\red{k}}(x + \din) + E_{\red{k}}(x) = \dout$ has many solutions $x$.
+\end{mybox}
+
+\end{frame}
+
+
+\subsection{Resisting against differential attacks}
+\begin{frame}\frametitle{\subsecname}
+\vspace{-.5cm}
+
+\begin{mybox}{Differential distinguisher\hfill {\small\purple{[BihSha91]}}}{}{}
+$(\din, \dout)$ s.t for many $\red{k}$, $\quad E_{\red{k}}(x + \din) + E_{\red{k}}(x) = \dout$ has many solutions $x$.
+\end{mybox}
+
+\pause
+\begin{mybox}{Differential resistance}{}{}
+For all $(\din, \dout)$ and all keys $\red{k}$, $\quad E_{\red{k}}(x + \din) + E_{\red{k}}(x) = \dout$ has \emph{few} solutions.
+\end{mybox}
+
+% \begin{mybox}{For a random bijection \purple{$F$}}{}{}
+% $\purple{F}(x + \din) + \purple{F}(x) = \dout$ has 1 solution $x$ on average.
+% \end{mybox}
+%If $x$ is a solution of Eq.~\eqref{eq:diff}, then so is $x + \din$.  \hfill$\implies \ $ even number of solutions $\delta_{F}(\din, \dout)$
+
+\pause
+\vspace{-.3cm}
+\begin{mybox}{How to achieve this}{}{}
+For all $(\din, \dout)$,  $\quad \purple{S}(x + \din) + \purple{S}(x) = \dout$ has \emph{few} solutions.
+\end{mybox}
+\pause
+
+$$ \delta_{\purple{S}}(\din, \dout) = \card{\set{x \mid \purple{S}(x + \din) + \purple{S}(x) = \dout}}$$
+
+
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+
+    \scalebox{.5}{\input{figures/two_round_spn}}
+
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+
+
+$\PP[\din, \cyan{\Delta}, \dout] \leq \left(\frac{\max\limits_{a \neq 0, b} \delta_{\purple{S}}(a, b)}{2^{m}}\right)^{d(\green{L})}$
+
+
+\end{column}
+\end{columns}
+
+
+
+% \vspace{.3cm}
+% \begin{itemize}
+%     \item[\bulletpoint] For all $\din$, there exists $\dout$ such that $\delta_{\purple{F}}(\din, \dout) >0$\pause
+%     \item[\bulletpoint] For all $\din \neq 0 , \dout$, $x$ is a solution iff $x + \din$ is a solution. \hfill $\delta_{\purple{F}}(\din, \dout)$ is even.
+% \end{itemize}
+% \pause
+
+% \begin{mybox}{Definition}{APN function}{\purple{\small[NybKnu92]}}\label{def:apn}
+%     A function $F$ is APN if: $\quad \forall \ \din\neq 0, \dout, \quad \delta_{F}(\din, \dout) \leq 2$.
+% \end{mybox}
+\end{frame}
+
+\begin{frame}\frametitle{Differentially-optimal functions}
+\begin{mybox}{How to achieve this}{}{}
+For all $\din\neq 0, \dout $  $\quad \delta_{\purple{S}}(\din, \dout) = \card{\set{x \mid \purple{S}(x + \din) + \purple{S}(x) = \dout}}$ should be \emph{low}.
+\end{mybox}\pause
+
+\vspace{.5cm}
+\begin{itemize}
+    \item[\bulletpoint] For all $\din$, there exists $\dout$ such that $\delta_{\purple{S}}(\din, \dout) >0$\pause
+    \item[\bulletpoint] For all $\din \neq 0 , \dout$, $x$ is a solution iff $x + \din$ is a solution. \hfill $\delta_{\purple{S}}(\din, \dout)$ is even.
+\end{itemize}
+\pause
+
+\vspace{1cm}
+\begin{mybox}{Almost perfect non-linear (APN) function}{}{\purple{\small[NybKnu92]}}
+    A function $\purple{F}$ is APN if: $\quad \forall \ \din\neq 0, \dout, \quad \delta_{\purple{F}}(\din, \dout) \leq 2$.
+\end{mybox}
+
+\end{frame}
+
+\begin{frame}[t]\frametitle{Almost perfect non-linear (APN) function}
+
+\begin{mybox}{Definition}{APN function}{\purple{\small[NybKnu92]}}
+    A function $\purple{F}$ is APN if: $\quad \forall \ \din\neq 0, \dout, \quad \delta_{\purple{F}}(\din, \dout) \leq 2$.
+\end{mybox}
+
+\pause
+\begin{mybox}{A typical classification problem}{}{}
+\begin{itemize}
+    \item[-] \green{Easy} definition
+    \item[-] \red{Hard} to find new instances (even for small $n$)
+    \item[-] \red{Hard} to classify the known instances
+    \item[-] Lots of open problems
+\end{itemize}
+\end{mybox}
+
+\pause
+\begin{mybox}{Big APN problem}{}{\purple{\small[BDMW10]}}
+Find $F\from \FFspace \to \FFspace$ which is APN, \emph{bijective} for an \emph{even} $n$.
+
+\hfill A \emph{single} example is known for $n=6$.\hfill 
+\end{mybox}
+
+\end{frame}
+
+\begin{comment}
+
+\subsection{Finding an APN function}
+\begin{frame}
+\frametitle{\subsecname}
+\vspace{-.5cm}
+
+% \begin{center}
+% $4$ bits $\approx$ a pair of $2$-bit words $\approx$ a $4$-bit word    
+% \end{center}
+
+
+\begin{mybox}{Use alternative representations}{}{}
+$F \from \FF_{2}^{4} \to \FF_{2}^{4}, \begin{pmatrix}
+x_{0}\\ x_{1}\\ x_{2}\\ x_{3}
+\end{pmatrix} \mapsto \begin{pmatrix}
+    x_0x_2 + x_0 + x_1x_2 + x_1x_3\\ 
+x_0x_1 + x_0x_2 + x_2x_3 + x_3\\ 
+x_0x_1 + x_0x_2 + x_0x_3 + x_1x_2 + x_1x_3 + x_2x_3 + x_2\\ 
+x_1x_3 + x_1 + x_2x_3 + x_2 + x_3
+\end{pmatrix}$
+\pause
+
+\vspace{.5cm}
+$F \from \FF_{4}^{2} \to \FF_{4}^{2}, (x_{0}, x_{1}) \mapsto \begin{pmatrix}\orange{\alpha_{0}}x_{0}^3 + x_{0}^2x_{1} + \orange{\alpha_{1}}x_{0}x_{1}^2 + \orange{\alpha_{2}}x_{1}^3\\
+\orange{\alpha_{3}}x_{0}^3 + \orange{\alpha_{4}}x_{0}^2x_{1} + \orange{\alpha_{5}}x_{0}x_{1}^2\end{pmatrix}$\hfill $\alpha_{i} \in \FF_{4}$.
+\pause
+
+\vspace{.5cm}
+$F \from \FF_{16} \to \FF_{16}, X \mapsto X^{3}$\hfill 3 representations of the \emph{``same''} function
+\end{mybox}
+
+\onslide<4>{
+$$  (X + \plaindiff)^{3} + X^{3} = \plaindiff X^{2} + \plaindiff^{2} X + \plaindiff^{3}$$
+
+Quadratic equation $\implies$ at most 2 solutions $\implies$ APN ! }
+
+
+\end{frame}
+
+\subsection{A (not so welcoming) state of the art}
+\begin{frame}
+\frametitle{\subsecname}
+
+\input{tabular/tab_apn_12}
+
+\onslide<2->{
+\begin{tikzpicture}[overlay]
+     \node[fill=white] at (11.5,.6) {\inlinebox{ + a lot of sporadic examples for small $n$}};
+ \end{tikzpicture}}
+
+ \onslide<3>{
+\begin{tikzpicture}[overlay]
+     \node[fill=white] at (8,6) {\inlinebox{\red{Where to look for new function ?}}};
+
+     \node[fill=white] at (8,4.5) {\inlinebox{\red{How to prove that a new $F$ is \emph{actually} new ? }}};
+ \end{tikzpicture}}
+
+\end{frame}
+
+
+\subsection{Step 1: understanding the SotA}
+\begin{frame}
+\frametitle{\subsecname}
+
+\begin{mybox}{Theorem}{Linear self-equivalence}{\small \purple{[\blue{B}CanteautPerrin24]}}
+For (almost) any $F$ presented before, there exists $\AA, \BB$ linear bijective such that:
+$$ F \comp \AA = \BB \comp F$$
+\end{mybox}
+
+\pause
+\begin{corollary}
+    Any of the pen-and-paper APN functions are still \emph{very close to be} monomial.
+\end{corollary}
+\pause
+    Let $c \in \FF_{16}$ and $F \from X \mapsto X^{3}$. Then $F(cX) = c^{3}X^{3} = c^{3}F(X^{3})$
+
+    $ \AA \from X \mapsto cX, \BB \from X \mapsto c^{3}X.$ 
+
+\pause
+\begin{mybox}{A lot of open questions}{}{}
+    \begin{itemize}
+        \item[-] Inherent property of APN functions or due to a Human bias ?
+        \item[-] Find more APN with a related structure or without !
+    \end{itemize}
+\end{mybox}
+
+\end{frame}
+
+
+
+\subsection{Steps 2 and 3: classify then search}
+\begin{frame}
+\frametitle{\subsecname}
+
+\begin{mybox}{Classification}{}{}
+\begin{itemize}
+    \item[-] Implementation of the pen-and-paper families \hfill(almost done)
+    \item[-] \emph{Data base} of the known functions \hfill(in progress)
+    \item[-] Compute all interesting \emph{invariants} (e.g existence of $\AA, \BB$. . .) \hfill (not started)
+\end{itemize}
+\end{mybox}
+\pause
+
+\begin{mybox}{Search}{}{}
+\begin{itemize}
+    \item[-] Generic tree search for APN with a fixed $\AA, \BB$ \hfill(based on \purple{[BeiBriLea21]}, done)
+    \item[-] Optimization \hfill(not started)
+    \item[-] Search functions with more branches (in 4/5/6 variables ?)\hfill(not started)
+    \item[-] Search functions with high degree (another open problem)\hfill(not started)
+\end{itemize}
+\end{mybox}
+\end{frame}
+
+
+\subsection{Take away}
+\begin{frame}
+\frametitle{\subsecname}
+
+\begin{mybox}{APN functions}{}{}
+\begin{itemize}
+    \item[-] \emph{Optimal} objects w.r.t \emph{differential} cryptanalysis
+    \item[-] Very little is known, finding/classifying is hard
+    \item[-] Not trendy, but exciting !
+\end{itemize}
+\end{mybox}
+
+
+\begin{mybox}{Big APN Problem}{}{\purple{\small[BDMW10]}}
+Find an APN bijection $F \from \FFspace \to \FFspace$ with $n > 6$ even.
+\end{mybox}
+
+\begin{mybox}{Work in progress}{}{}
+\begin{itemize}
+    \item[-] Data base of APN functions + invariants
+    \item[-] Search for functions with more branches
+    \item[-] Search for functions with high degree
+\end{itemize}
+\end{mybox}
+\end{frame}
+
+
+\subsection{References}
+\begin{frame}
+\frametitle{\subsecname}
+\vspace{-1cm}
+\begin{mybox}{My bedside readings}{}{}
+\begin{itemize}
+    \item[-] Anne Canteaut, \emph{Lecture Notes on Cryptographic Boolean Functions} (available online, easily-accessible course)
+    \item[-] Rudolf Lidl \& Harald Niederreiter, \emph{Finite fields} (my must-read about finite fields, with all standards results (and way more))
+    \item[-] Claude Carlet, \emph{Boolean Functions for Cryptography and Coding Theory} (available online, not my favorite book, but it has the benefit of pointing toward 1000+ articles)
+\end{itemize}
+\end{mybox}
+
+\begin{mybox}{Papers cited in prev. slides}{}{}
+\begin{itemize}
+    \item[-] [BihSha91]  Biham \& Shamir, \emph{Differential Cryptanalysis of the Data Encryption Standard}
+    \item[-] [NybKnu92] Nyberg \& Knudsen, \emph{Provable Security Against Differential Cryptanalysis}, CRYPTO 92
+    \item[-] [BDMW10] Browning, Dillon, McQuistan \& Wolfe, \emph{An APN Permutation in Dimension Six}, Fq9 conference 2009 (Finite Fields and their Applications)
+    \item[-] [BauCanPer24] Baudrin, Canteaut, Perrin, \emph{Linear self-equivalence of the known families of APN functions: a unified point of view} (submitted)
+    \item[-] [BeiBriLea21] \emph{Linearly self-equivalent APN permutations in small dimension}, IEEE IT 2021
+\end{itemize}
+\end{mybox}
+
+\end{frame}
+\end{comment}
+
+
+
+
+

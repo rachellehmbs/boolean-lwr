@@ -1,0 +1,106 @@
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da4702862410452642] 
+\draw    (74.7,92.9) -- (88.1,92.9) ;
+\draw [shift={(91.1,92.9)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da24928462569727294] 
+\draw    (74.7,75.97) -- (74.7,92.9) ;
+%Straight Lines [id:da6615407747520088] 
+\draw    (68.96,135.21) -- (88.1,135.21) ;
+\draw [shift={(91.1,135.21)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da29476224933779394] 
+\draw    (115.69,92.9) -- (129.09,92.9) ;
+\draw [shift={(132.09,92.9)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da7640512417649705] 
+\draw    (115.69,75.97) -- (115.69,92.9) ;
+%Straight Lines [id:da9164509039575808] 
+\draw    (108.13,135.57) -- (129.43,135.39) ;
+\draw [shift={(132.43,135.36)}, rotate = 179.5] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da6190318536455224] 
+\draw    (156.69,92.9) -- (170.08,92.9) ;
+\draw [shift={(173.08,92.9)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da7245162190140635] 
+\draw    (156.69,75.97) -- (156.69,92.9) ;
+%Straight Lines [id:da024122253609291322] 
+\draw    (148.98,135.36) -- (170.37,135.17) ;
+\draw [shift={(173.37,135.15)}, rotate = 179.5] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da7945892604436211] 
+\draw    (190.95,135.21) -- (204.34,134.99) ;
+\draw [shift={(207.34,134.94)}, rotate = 179.05] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da47767795150294234] 
+\draw    (73.88,138.59) -- (75.52,131.82) ;
+%Straight Lines [id:da5777352824373028] 
+\draw    (73.06,88.67) -- (76.34,84.43) ;
+%Shape: Trapezoid [id:dp1624180667956412] 
+\draw   (91.54,76.36) -- (108,86.23) -- (108.01,152.48) -- (91.55,152.49) -- cycle ;
+%Shape: Trapezoid [id:dp6444325735409739] 
+\draw   (132.74,76.84) -- (149.19,86.71) -- (149.21,152.97) -- (132.75,152.97) -- cycle ;
+%Shape: Trapezoid [id:dp9232893809577918] 
+\draw   (173.74,76.63) -- (190.2,86.5) -- (190.21,152.75) -- (173.76,152.76) -- cycle ;
+%Straight Lines [id:da00847755918298998] 
+\draw    (222.27,92.9) -- (235.67,92.9) ;
+\draw [shift={(238.67,92.9)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da017350870573524357] 
+\draw    (222.27,75.97) -- (222.27,92.9) ;
+%Straight Lines [id:da45558922876798613] 
+\draw    (221.44,135.27) -- (236.98,135.2) ;
+\draw [shift={(239.98,135.18)}, rotate = 179.71] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da4207977184146039] 
+\draw    (257.52,135.21) -- (276.66,135.21) ;
+\draw [shift={(279.66,135.21)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Shape: Trapezoid [id:dp2300893245250466] 
+\draw   (239.33,76.63) -- (255.79,86.5) -- (255.8,152.75) -- (239.34,152.76) -- cycle ;
+%Straight Lines [id:da8741754796293131] 
+\draw    (264.9,93.57) -- (278.3,93.57) ;
+\draw [shift={(281.3,93.57)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da275693163408272] 
+\draw    (264.9,76.65) -- (264.9,93.57) ;
+%Straight Lines [id:da4803317131272573] 
+\draw    (300.16,135.89) -- (319.29,135.89) ;
+\draw [shift={(322.29,135.89)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Shape: Trapezoid [id:dp7688426905359351] 
+\draw   (281.96,77.31) -- (298.42,87.18) -- (298.43,153.43) -- (281.97,153.43) -- cycle ;
+%Shape: Rectangle [id:dp6826531038472321] 
+\draw  [color={rgb, 255:red, 255; green, 255; blue, 255 }  ,draw opacity=1 ] (52.91,49.28) -- (388.91,49.28) -- (388.91,160.28) -- (52.91,160.28) -- cycle ;
+%Shape: Free Drawing [id:dp10474634767672741] 
+\draw  [color={rgb, 255:red, 208; green, 2; blue, 27 }  ,draw opacity=1 ][line width=1.5] [line join = round][line cap = round] (140.18,66.66) .. controls (134.82,64.13) and (120.08,55.48) .. (112.58,57.86) .. controls (110.08,58.65) and (109.59,62.44) .. (109.38,65.06) .. controls (108.77,72.77) and (108.73,80.66) .. (110.18,88.26) .. controls (110.54,90.13) and (119.64,105.93) .. (120.18,110.66) .. controls (121.43,121.58) and (113.89,157.86) .. (132.98,158.26) .. controls (136.89,158.34) and (140.68,156.83) .. (144.58,156.66) .. controls (147.78,156.52) and (153.33,159.74) .. (154.18,156.66) .. controls (157.59,144.32) and (154.87,92.53) .. (153.78,88.26) .. controls (151.63,79.8) and (144.72,73.33) .. (140.18,65.86) ;
+
+% Text Node
+\draw (94.95,110.5) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle h$};
+% Text Node
+\draw (70.95,61.53) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle \beta $};
+% Text Node
+\draw (135.94,109.7) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle h$};
+% Text Node
+\draw (176.94,109.7) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle h$};
+% Text Node
+\draw (63.76,79.7) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle n$};
+% Text Node
+\draw (70.52,120.67) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle n$};
+% Text Node
+\draw (242.52,109.7) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle h$};
+% Text Node
+\draw (204.42,125.71) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$\dotsc $};
+% Text Node
+\draw (56.3,128.02) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$I_{\key}$};
+% Text Node
+\draw (284.15,108.52) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle g_{\key}$};
+% Text Node
+\draw (253.12,62.4) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle |M|$};
+% Text Node
+\draw (323.81,129.42) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize]  {$MAC_{\key}( M)$};
+% Text Node
+\draw (111.95,61.53) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle \beta $};
+% Text Node
+\draw (152.95,61.53) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle \beta $};
+% Text Node
+\draw (217.95,62.53) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize] [align=left] {$\displaystyle \beta $};
+
+
+
+\end{tikzpicture}

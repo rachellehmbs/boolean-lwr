@@ -1,0 +1,102 @@
+\begin{tikzpicture}[scale=0.27]
+
+\tikzset{SpongePerm/.style=rounded corners=4pt,};
+%\tikzset{edge/.style=-latex new, arrow head=8pt};
+%\tikzset{edgee/.style=latex new-latex new, arrow head=8pt};
+
+\node[anchor = east] at (35,0){}; 
+
+\begin{scope}[xshift=2.7cm]
+
+\foreach \z in {0,1} {
+\begin{scope}[xshift=(\z+1)*6.3cm]
+
+\draw[fill=Melon!10,SpongePerm] (-0.3,0) rectangle node {\footnotesize$h$} ++(1,10);
+
+    \draw[->,>=latex,thick]  (-5.6,2)-- (-.3,2)  ;
+     \draw[-,thick] (-1.4,8)  --++ (0,3.3);
+        \draw[->,>=latex,thick] (-1.4,8)  --++ (1.1,0);
+        
+    \draw (-1.4,11.5) node[above] {\footnotesize$\beta$};
+
+  \end{scope}
+}
+  %%
+  
+    \begin{scope}[xshift=13.3cm]
+
+    \draw (4.3,2) node {\large \ldots};
+    \draw[->,>=latex,thick]  (0,2)--++ (3.5,0) ;
+  \end{scope}
+%%  
+
+\begin{scope}[xshift=22cm]
+
+
+\draw[fill=Melon!10,SpongePerm] 
+    	(2.8,0) rectangle node {\footnotesize$F_{final}$} ++(2.5,10);
+
+    
+
+
+        \draw[-,thick] (-0.7,8)  --++ (0,3.3);
+       \draw[->,>=latex,thick] (-0.75,8)  --++ (3.55,0);
+       
+       
+     \draw[->,>=latex,thick]  (-3.5,2)--++ (6.3,0)  ;
+     
+
+    \draw (-0.5,11.5) node[above]  {\footnotesize$\beta$};
+
+
+         
+         
+    \draw[thick] (5.3,6) --++ (1.1,0);
+    
+    \draw[->,>=latex,thick] (6.4,6) --++ (0,5.5);
+   \draw (6.4,12) node[above] {\footnotesize$\tagAEAD$};
+  
+       
+  \end{scope}
+
+\end{scope}
+
+%%%%
+
+\begin{scope}[xshift=-3cm]
+
+
+\draw[->,>=latex,thick] (0,5) node[left] {\footnotesize$(\key,\nonce)$} -- ++ (1.3,0);
+%\draw[->,>=latex,thick] (2.5,12) node[above] {\footnotesize$\associateddata$} -- ++ (0,-2);
+
+\draw[fill=Melon!10,SpongePerm] 
+    	(1.5,0) rectangle node {\footnotesize$F_{init}$} ++(2,10);
+	
+	
+ \draw[->,>=latex,thick]  (3.5,8)--++ (2,0)  ;
+ \draw[->,>=latex,thick]  (3.5,2)--++ (2,0)  ;
+
+\draw (4.0,7.7) --++ (0.2,0.6);
+\draw (4.1,7.2) node{\footnotesize $r$};
+
+\draw (4.,1.7) --++ (0.2,0.6);
+\draw (4.1,1.2) node{\footnotesize $c$};
+
+\draw[fill=NavyBlue!30] (5.5,6) rectangle (6.8,10);
+\draw[fill=vert3!20] (5.5,0) rectangle (6.8,6);
+\node[thick] (xm1) at (6.2,3) {\small $x_0$};
+
+ \end{scope}
+ 
+ \draw[fill=vert3!20] (10.5,0) rectangle (11.8,6);
+\node[thick] (xm2) at (11.2,3) {\small $x_1$};
+
+\draw[fill=vert3!20] (16.8,0) rectangle (18.1,6);
+\node[thick] (xm3) at (17.5,3) {\small $x_2$};
+
+
+\draw[fill=rouge3!15] (23.5,0) rectangle (26,6);
+\node[thick] (xm4) at (24.8,3) {\small $x_{L-1}$};
+
+
+\end{tikzpicture}

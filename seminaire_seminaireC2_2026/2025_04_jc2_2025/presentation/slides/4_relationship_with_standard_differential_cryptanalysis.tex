@@ -1,0 +1,181 @@
+% !TEX root = ../slides.tex
+\section{Relationship with standard differential cryptanalysis}
+
+\input{slides/section_title}
+
+% \subsection{XXXX}
+% \begin{frame}\frametitle{\subsecname}
+
+
+
+% \end{frame}
+
+\subsection{From commutative cryptanalysis back to differential cryptanalysis}
+\begin{frame}[fragile]
+	\frametitle{\subsecname}
+\vspace{-.5cm}
+	\begin{recap}[Commutative interpretation for ``almost''-Midori]
+	Under weak-key hypothesis, there exists an affine bijective mapping $\alayer$ such that:
+	\vspace{-.2cm}
+		$$\alayer \comp \purple{F} = \purple{F} \comp \alayer\quad \text{for every layer } \purple{F}.$$
+	\end{recap}
+
+		\begin{center}
+		\adjustbox{scale=1.1}{		\begin{tikzcd}
+				x^{(0)}  \arrow[]{d}{\alayer} \arrow[]{r}[name=uparrow]{F_{\red{k^{(0)}}}} & x^{(1)} \arrow[]{d}{\alayer} \arrow[dashed]{r}{} &  x^{(R-1)} \arrow[]{r}{F_{\red{k^{(0)}}}} \arrow[]{d}{}{\alayer} &  E_{\red{k}}(x^{(0)}) \arrow[]{d}{\alayer}
+				\\
+				y^{(0)} \arrow[]{r}{}[swap,name=bottomarrow]{F_{\red{k^{(0)}}}} & y^{(1)}  \arrow[dashed]{r}{}[swap]{} &  y^{(R-1)} \arrow[swap]{r}{}{F_{\red{k^{(0)}}}} &   E_{\red{k}}(y^{(0)})\\
+				%			\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+				%\orange{\Delta_0} \arrow[]{r}{?} &  \orange{\Delta_1} \arrow[dashed]{r}{?} & \orange{\Delta_{r-1}} \arrow[]{r}{?} & \orange{\Delta_r}
+			\end{tikzcd} }
+	\end{center}
+\vspace{-1cm}
+\pause
+\begin{mybox}{Differential cryptanalysis}{}{}
+Commutative cryptanalysis restricted to $\alayer(x) = \id(x) + \plaindiff$
+\end{mybox}
+\vspace{-.6cm}
+\begin{center}
+	\begin{tikzcd}
+			x^{(0)}  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[]{r}[name=uparrow]{F_{\red{k^{(0)}}}} & x^{(1)} \arrow[leftrightarrow]{d}{\seconddiff} \arrow[dashed]{r}{} &  x^{(R-1)} \arrow[]{r}{F_{\red{k^{(R-1)}}}} \arrow[leftrightarrow]{d}{}{\difference{R-1}} &  \black{E}_{\red{k}}(x^{(0)}) \arrow[leftrightarrow]{d}{\dout}[]{}
+						\\
+						y^{(0)} \arrow[]{r}{}[swap,name=bottomarrow]{F_{\red{k^{(0)}}}} & y^{(1)}  \arrow[dashed]{r}{}[swap]{} &  y^{(R-1)} \arrow[swap]{r}{}{F_{\red{k^{(R-1)}}}} &   \black{E}_{\red{k}}(y^{(0)})
+						%\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+\end{tikzcd}
+	\end{center}
+
+
+	% \begin{center}
+	% 	\adjustbox{scale=1.1}{		\begin{tikzcd}
+	% 			x_0  \arrow[]{d}{\red{\alayer}^{\red{\star}}} \arrow[]{r}[name=uparrow]{R_0} & x_1 \arrow[]{d}{\red{\alayer}^{\red{\star}}} \arrow[dashed]{r}{} &  x_{r-1} \arrow[]{r}{R_{r-1}} \arrow[]{d}{}{\red{\alayer}^{\red{\star}}} &  E(x_0) \arrow[]{d}{\red{\alayer}^{\red{\star}}}
+	% 			\\
+	% 			z_0 \arrow[]{r}{}[swap,name=bottomarrow]{R_0} & z_1  \arrow[dashed]{r}{}[swap]{} &  z_{r-1} \arrow[swap]{r}{}{R_{r-1}} &   E(z_0)\\
+	% 			%			\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+	% 			%\orange{\Delta_0} \arrow[]{r}{?} &  \orange{\Delta_1} \arrow[dashed]{r}{?} & \orange{\Delta_{r-1}} \arrow[]{r}{?} & \orange{\Delta_r}
+	% 		\end{tikzcd} }
+	% \end{center}
+	
+	\begin{mybox}{}{}{}
+		$$ \mathbb{P}_{x \xleftarrow{\$} X}(\underbrace{\red{\alayer}^{\red{\star}} \to \red{\alayer}^{\red{\star}} \to \dots \to \red{\alayer}^{\red{\star}}}_{r \text{ times}}) = 1, \quad \text{for \red{any} } r ! $$
+	\end{mybox}
+
+\end{frame}
+
+\subsection{Differential interpretation of a commutative distinguisher}
+\begin{frame}[fragile]
+	\frametitle{\subsecname}
+	
+	\begin{columns}[c, totalwidth=15cm]
+		\begin{column}[c]{6.5cm}
+			\adjustbox{scale=1.1}{		\begin{tikzcd}
+					x^{(0)}  \arrow[]{d}{\alayer}[swap]{\difference{0}} \arrow[]{r}[name=uparrow]{F_{\red{k^{(0)}}}} & x^{(1)} \arrow[]{d}{\alayer}[swap]{\difference{1}} \arrow[dashed]{r}{} &  x^{(R-1)} \arrow[]{r}{F_{\red{k^{(R-1)}}}} \arrow[]{d}{}{\alayer}[swap]{\difference{R-1}} &  E_{\red{k}}(x^{(0)}) \arrow[]{d}{\alayer}[swap]{\difference{R}}
+					\\
+					y^{(0)} \arrow[]{r}{}[swap,name=bottomarrow]{F_{\red{k^{(0)}}}} & y^{(1)}   \arrow[dashed]{r}{}[swap]{} &  y^{(R-1)}  \arrow[swap]{r}{}{F_{\red{k^{(R-1)}}}} &   E_{\red{k}}(y^{(0)})\\
+					%			\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+					%\orange{\Delta_0} \arrow[]{r}{?} &  \orange{\Delta_1} \arrow[dashed]{r}{?} & \orange{\Delta_{r-1}} \arrow[]{r}{?} & \orange{\Delta_r}
+				\end{tikzcd}
+			}
+		\end{column}
+		\begin{column}[c]{5.5cm}
+			$\difference{i} \vcentcolon = x^{(i)} \xor y^{(i)} = x^{(i)} \xor \alayer(x^{(i)})$
+		\end{column}
+		
+	\end{columns}
+	\pause
+	\vspace{-15pt}
+	\begin{mybox}{Observation}{}{}
+	Let $C \from x \mapsto x \xor \pcomA(x)$. Then $C(\FF_{2}^{4}) = \set{\orange{\delta}, \orange{\delta'}}$ where $\orange{\delta} \neq \orange{\delta'}$.
+%		$\blue{\delta}  = \blue{\mathtt{0xf}}, \quad \blue{\Delta} = \blue{\delta}^{\otimes 16}, \quad \orange{\delta'}  = \orange{\mathtt{0xa}}, \quad \orange{\Delta'} = \orange{\delta'}^{\otimes 16}.$
+		% $\blue{\delta}  = \blue{\mathtt{0xf}}, \quad \orange{\delta'}  = \orange{\mathtt{0xa}}.$
+		\vspace{10pt}
+%		\begin{itemize}%[leftmargin=0.2cm]
+%			\item[-]$\mathbb{P}_{x \xleftarrow{\$} X}\left(\red{A}^{\red{\star}}(x) = x + \blue{\delta}\right) = \frac{1}{2} \quad \mathbb{P}_{x \xleftarrow{\$} X}\left(\red{A}^{\red{\star}}(x) = x + \orange{\delta'}\right) = \frac{1}{2}$.
+%			
+%			\item[-]$\forall x, \quad x + \red{\alayer}^{\red{\star}}(x) \in \{ \blue{\delta}, \orange{\delta'}\}^{16}$.
+%		\end{itemize}
+
+
+$\forall \ \blue{\Delta} \in  \{ \orange{\delta}, \orange{\delta'}\}^{16}, \  \mathbb{P}_{x \xleftarrow{\$} \FF_{2}^{64}}\left(x + \alayer(x) = \blue{\Delta}\right) = 2^{-16}$
+\end{mybox}
+\pause
+\begin{mybox}{Surprising differential interpretation}{}{}
+A differential pair $(x, x + \blue{\Delta})$ coincides with a commutative pair $(x, \alayer(x))$ with proba $2^{-16}$
+		\vspace{5pt}
+$$ \blue{\Delta} \xrightarrow{2^{-16}} \alayer \xrightarrow{1} \cdots \xrightarrow{1} \alayer  \xrightarrow{2^{-16}} \blue{\Delta} $$
+	\end{mybox}
+	
+\end{frame}
+
+\subsection{Weak-key differential interpretation}
+\begin{frame}
+	\frametitle{\subsecname}
+	\vspace{-.5cm}
+	\begin{mybox}{Recap}{}{}
+		Under weak-key hypothesis:
+		\begin{itemize}%[leftmargin=0.5cm]
+		\item[-] $\mathbb{P}_{x \xleftarrow{\$} X}\left(\plaindiff \rightarrow \{ \orange{\delta}, \orange{\delta'}\}^{16}\right) \geq 2^{-16}$ for any $\plaindiff \in \{ \orange{\delta}, \orange{\delta'}\}^{16}$.
+		\item[-] If output differences are uniformly distributed, then:
+
+		$\mathbb{P}_{x \xleftarrow{\$} X}\left(\plaindiff \to \plaindiff'\right) \approx 2^{-32}$ for any $\plaindiff, \plaindiff' \in \{ \orange{\delta}, \orange{\delta'}\}^{16}$ 
+			\item[-] Holds for \emph{infinitely many rounds} !
+		\end{itemize}
+	\end{mybox}
+	\pause
+	\begin{columns}[T, totalwidth=15cm]
+		\begin{column}[T]{7.5cm}
+			Standard case : \emph{quite low} $\mathbb{P}_{\red{k},x}$
+			\input{figures/aes_9R_CK.tex}
+			{\tiny Part of 9-round chosen-key distinguisher for AES-128.\\\vspace{-5pt}
+				Figure by J. Jean, extracted from Tikz for Cryptographers [Jean16].}
+		\end{column}
+		\pause
+		\begin{column}[T]{7.5cm}
+			This work: \emph{high} $\mathbb{P}_{x}$ for \emph{some} $k$
+			\input{figures/midori_distinguisher_comparison}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+
+\subsection{Weak-key Differential interpretation, part 2}
+\begin{frame}[c]
+	\frametitle{\subsecname}
+
+	\begin{center}
+		\includegraphics[scale=.065]{figures/plot_differential_interpretation_mar_2024_2.png}
+	\end{center}
+	\pause
+	\vspace{-.5cm}
+	\begin{mybox}{Caution}{}{}
+		\begin{itemize}
+			\item[-] \emph{Same observations} for the CAESAR candidate \textsc{SCREAM}.
+			\item[-] \emph{Same idea} can be used to \emph{hide} probability-1 differential trails. \hfill\purple{[C:BFLNS23]}
+		\end{itemize}
+
+	\end{mybox}
+	\begin{mybox}{Good news}{}{}
+		Probability-1 commutative trails can be \emph{automatically} detected !
+	\end{mybox}
+
+	
+%	\begin{columns}[T, totalwidth=15cm]
+%	\begin{column}[T]{8cm}
+%
+%		\begin{mybox}[cblue]{The designers' work}
+%			\blue{Estimate} $\mathbb{E}_{\red{k} \xleftarrow{\$} \red{K}}\left( \#\set{x \ \mathrm{st.} \ E_{\red{k}}(x + \orange{\alpha}) = E_{\red{k}}(x) + \orange{\beta}}\right)$  and \blue{assume} representativeness.
+%			
+%			{\color{bluefig}Blue} curve.
+%		\end{mybox}			
+%	\end{column}
+%	\begin{column}[T]{7.5cm}
+%	\begin{mybox}[cred]{This work}
+%		Find \red{non-average keys} with \\ \red{easily-distinguishable} property.
+%		
+%		{\color{violetfig}Purple} and {\color{redfig}red} curves.
+%	\end{mybox}
+%
+%
+%	\end{column}
+%\end{columns}
+%	
+\end{frame}

@@ -1,0 +1,175 @@
+\begin{figure}
+  \centering
+  
+  \begin{tikzpicture}[xscale=.6,yscale=.6,
+    level distance=1.2cm, sibling distance=1cm,
+    edge from parent/.style={draw,<-}]
+    
+    \begin{scope}
+    \foreach \i in {0,1,...,6} {
+      \node[point] (x\i) at ($(\i*360/7:1.25cm)$) {};
+      \node at ($(\i*360/7:0.85cm)$) {};
+    }    
+    \foreach \i\j in {0/1,1/2,2/3,3/4,4/5,5/6,6/0} {
+      \draw[->] (x\i) to (x\j);
+    }
+
+    \node[ipoint] at (x2) {} 
+    	child[grow=north east] { node[point] (c2) {}
+      						child[grow = north] { node[point] (c1) {} 
+								child[grow = north] { node[point] (c0) {} 
+										child[grow = north] { node[point] {}}
+								}
+								child[grow = north east]{ node[point] {}} 
+						}
+    	}
+	child[grow=north] {    node[point] (cc3) {}
+						child[grow = north west] {node[point] (cc2) {} 
+								child[grow = north] {node[point] (cc1) {}
+											child[grow = north] {node[point] {}}
+											child[grow = north] {node[point] {}}								} 
+						}
+						child[grow = north] {node[point] {} 
+											child[grow = north] {node[point] {}}
+											}
+    	};
+
+    
+    \begin{scope}[on background layer]
+ \only<2->{
+      \draw[line width=2pt,NavyBlue!50,->] (c0) -- (c1) -- (c2) -- (x2) -- (x3);
+ } 
+   
+ \only<3->{
+      \node[point,minimum size=6pt,fill=vert3] at (x3) {};
+      \draw[dashed,->,line width=2pt,vert3!50,bend left=40] (x3) to node[fill,circle] (g1) {} (cc1);
+      }
+\only<4->{
+
+      \draw[line width=2pt,Melon!50,->] (cc1) -- (cc2) -- (cc3) -- (x2) -- (x3) -- (x4) -- (x5);
+}
+    \end{scope}
+\only<3->{
+    \node at (g1) {$\gamma$};
+    }
+
+   \node at (0,-2.2) {{\small $M_0 = \bleu{\beta^L} || \ver{\gamma} || {\color{Melon}\beta^L}$}};
+
+
+\end{scope}
+
+
+\begin{scope}[xshift = 7cm] 
+    \foreach \i in {0,1,...,6} {
+      \node[point] (x\i) at ($(\i*360/7:1.25cm)$) {};
+      \node at ($(\i*360/7:0.85cm)$) {};
+    }    
+    \foreach \i\j in {0/1,1/2,2/3,3/4,4/5,5/6,6/0} {
+      \draw[->] (x\i) to (x\j);
+    }
+
+    \node[ipoint] at (x2) {} 
+    	child[grow=north east] { node[point] (c2) {}
+      						child[grow = north] { node[point] (c1) {} 
+								child[grow = north] { node[point] (c0) {} 
+										child[grow = north] { node[point] {}}
+								}
+								child[grow = north east]{ node[point] {}} 
+						}
+    	}
+	child[grow=north] {    node[point] (cc3) {}
+						child[grow = north west] {node[point] (cc2) {} 
+								child[grow = north] {node[point] (cc1) {}
+											child[grow = north] {node[point] {}}
+											child[grow = north] {node[point] {}}								} 
+						}
+						child[grow = north] {node[point] {} 
+											child[grow = north] {node[point] {}}
+											}
+    	};
+
+    
+    \begin{scope}[on background layer]
+ \only<5->{
+      \draw[line width=2pt,NavyBlue!50,->] (c0) -- (c1) -- (c2) -- (x2) -- (x3);
+ } 
+  \only<6->{
+   \draw[line width=2pt,NavyBlue!50,->] (x3) -- (x4) -- (x5) -- (x6) -- (x0) -- (x1) -- (x2) -- (x3);
+  }
+ \only<7->{
+      \node[point,minimum size=6pt,fill=vert3] at (x3) {};
+      \draw[dashed,->,line width=2pt,vert3!50,bend left=40] (x3) to node[fill,circle] (g1) {} (cc1);
+      \node at (g1) {$\gamma$};
+
+      }
+\only<8->{
+      \draw[line width=2pt,Melon!50,->] (cc1) -- (cc2) -- (cc3) -- (x2) -- (x3) -- (x4) -- (x5);
+}
+    \end{scope}
+
+   \node at (0,-2.2) {{\small $M_1 = \bleu{\beta^{L+\ell}} || \ver{\gamma} || {\color{Melon}\beta^L}$}};
+
+
+\end{scope}
+
+
+\begin{scope}[xshift = 14cm] 
+    \foreach \i in {0,1,...,6} {
+      \node[point] (x\i) at ($(\i*360/7:1.25cm)$) {};
+      \node at ($(\i*360/7:0.85cm)$) {};
+    }    
+    \foreach \i\j in {0/1,1/2,2/3,3/4,4/5,5/6,6/0} {
+      \draw[->] (x\i) to (x\j);
+    }
+
+    \node[ipoint] at (x2) {} 
+    	child[grow=north east] { node[point] (c2) {}
+      						child[grow = north] { node[point] (c1) {} 
+								child[grow = north] { node[point] (c0) {} 
+										child[grow = north] { node[point] {}}
+								}
+								child[grow = north east]{ node[point] {}} 
+						}
+    	}
+	child[grow=north] {    node[point] (cc3) {}
+						child[grow = north west] {node[point] (cc2) {} 
+								child[grow = north] {node[point] (cc1) {}
+											child[grow = north] {node[point] {}}
+											child[grow = north] {node[point] {}}								} 
+						}
+						child[grow = north] {node[point] {} 
+											child[grow = north] {node[point] {}}
+											}
+    	};
+
+    
+    \begin{scope}[on background layer]
+ \only<9->{
+      \draw[line width=2pt,NavyBlue!50,->] (c0) -- (c1) -- (c2) -- (x2) -- (x3);
+ } 
+   
+ \only<10->{
+      \node[point,minimum size=6pt,fill=vert3] at (x3) {};
+      \draw[dashed,->,line width=2pt,vert3!50,bend left=40] (x3) to node[fill,circle] (g1) {} (cc1);
+          \node at (g1) {$\gamma$};
+      }
+\only<11->{
+      \draw[line width=2pt,Melon!50,->] (cc1) -- (cc2) -- (cc3) -- (x2) -- (x3) -- (x4) -- (x5);
+}
+\only<12->{
+\draw[line width=2pt,Melon!50,->] (x3) -- (x4) -- (x5) -- (x6) -- (x0) -- (x1) -- (x2) -- (x3);
+}
+    \end{scope}
+
+   \node at (0,-2.2) {{\small $M_2 = \bleu{\beta^L} || \ver{\gamma} || {\color{Melon}\beta^{L+\ell}}$}};
+
+
+\end{scope}
+
+
+  \end{tikzpicture}
+
+
+
+\end{figure}
+

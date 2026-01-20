@@ -1,0 +1,76 @@
+\begin{tikzpicture}[inner sep = 0em,transform canvas={scale=0.9}]
+
+\begin{scope}[xshift=-5cm]
+%%%%%
+\node[draw, fill=cyan!15,trapezium,trapezium left angle=145,trapezium right angle=145,minimum height=2em] (h) {$h$};
+\node[below = 1em of h] (add1) {$\boxplus$} ;
+
+\node[above left  = 1em and  1.5em of h] (x1) {$X_{1}$};
+\node[above left  = 1em and -0.5em of h] (x2) {$X_{2}$};
+\node[above right = 1em and -0.5em of h] (x3) {$X_{3}$};
+\node[above right = 1em and  1.5em of h] (x4) {$X_{4}$};
+\node[right = 1em of x4] (x5) {$X_{5}$} ;
+
+\draw[-latex] (x1) -- (x1|-h.north);
+\draw[-latex] (x2) -- (x2|-h.north);
+\draw[-latex] (x3) -- (x3|-h.north);
+\draw[-latex] (x4) -- (x4|-h.north);
+\draw[-latex] (h) -- (add1);
+\draw[-latex] (x5) |- (add1);
+
+%\node [draw, densely dotted, fit = (h) (x1.west|-h) (x5|-h) (add1), inner sep = 0.7em] (g) {};
+%\node [below = 5em of x1.west] {$g$};
+
+%%%%%
+%\node[draw, fill=cyan!15,trapezium,trapezium left angle=145,trapezium right angle=145,minimum height=2em, right = 6em of h] (h) {$h$};
+%\node[below = 1em of h] (add2) {$\boxplus$} ;
+%
+%\node[above left  = 1em and  1.5em of h] (x6) {$X_{6}$};
+%\node[above left  = 1em and -0.5em of h] (x7) {$X_{7}$};
+%\node[above right = 1em and -0.5em of h] (x8) {$X_{8}$};
+%\node[above right = 1em and  1.5em of h] (x9) {$X_{9}$};
+%\node[right = 1em of x9] (x10) {$X_{10}$} ;
+%
+%\draw[-latex] (x6) -- (x6|-h.north);
+%\draw[-latex] (x7) -- (x7|-h.north);
+%\draw[-latex] (x8) -- (x8|-h.north);
+%\draw[-latex] (x9) -- (x9|-h.north);
+%\draw[-latex] (h) -- (add2);
+%\draw[-latex] (x10) |- (add2);
+%
+%\node [draw, densely dotted, fit = (h) (x6.west|-h) (x10|-h) (add2), inner sep = 0.7em] (g) {};
+%\node [below = 5em of x6.west] {$g$};
+%
+%%%%%%
+\node[draw, fill=cyan!15,trapezium,trapezium left angle=145,trapezium right angle=145,minimum height=2em, right = 20em of h] (h3) {$h$};
+\node[below = 1em of h3] (add3) {$\boxplus$} ;
+
+\node[above left  = 1em and  1.5em of h3] (x56) {$X_{56}$};
+\node[above left  = 1em and -0.5em of h3] (x57) {$X_{57}$};
+\node[above right = 1em and -0.5em of h3] (x58) {$X_{58}$};
+\node[above right = 1em and  1.5em of h3] (x59) {$X_{59}$};
+\node[right = 1em of x59] (x60) {$X_{60}$} ;
+
+\draw[-latex] (x56) -- (x56|-h.north);
+\draw[-latex] (x57) -- (x57|-h.north);
+\draw[-latex] (x58) -- (x58|-h.north);
+\draw[-latex] (x59) -- (x59|-h.north);
+\draw[-latex] (h3) -- (add3);
+\draw[-latex] (x60) |- (add3);
+%
+%\node [draw, densely dotted, fit = (h) (x56.west|-h) (x60|-h) (add3), inner sep = 0.7em] (g) {};
+%\node [below = 5em of x56.west] {$g$};
+%
+%%%%%%
+\node (t) at ($(x5)!0.5!(x56)$) {$\cdots$};
+
+\node[yshift = -2em] (add) at ($(add1)!0.5!(add3)$) {$\boxplus$};
+\draw[-latex] (add1) |- (add);
+%\draw[-] (add2) |- (add);
+\draw[-latex] (add3) |- (add);
+%
+\node[below = 1em of add] (out) {};
+\node[below = 0.25em of out] {$Z_i \in \mathbb{Z}_{16}$};
+\draw[-latex] (add) -- (out);
+\end{scope}
+\end{tikzpicture}

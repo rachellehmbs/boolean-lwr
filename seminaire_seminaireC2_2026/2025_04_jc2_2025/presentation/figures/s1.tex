@@ -1,0 +1,36 @@
+
+    \begin{tikzpicture}
+	
+	
+	\definecolor{cblue}{HTML}{3F71A1}
+	\definecolor{corange}{HTML}{E09F1F}
+	\definecolor{cgreen}{HTML}{36C190}
+	\definecolor{cred}{HTML}{C2554F}
+        
+        \node (init)[rounded corners=1ex, align=center,draw]  [node distance=1.5cm]{\footnotesize \begin{tabular}{c}
+        	{\color{cgreen} $ v_0 $}	\\ \hline
+        	{\color{corange} $ a_0 $} 	\\
+        	{\color{corange} $ b_0 $}  	\\ 
+        	{\color{corange} $ c_0 $}   	\\ 
+        	{\color{corange} $ d_0 $}   	\\	
+        \end{tabular}};
+        
+        % \node (capacity) [align=center] [left of=init, node distance=2.2cm] {\scriptsize{{Unknown capacity}}};
+   % \node (externalstate) [,align=center] [above of=capacity, node distance=.7cm] {\scriptsize{Chosen external state}};
+
+    
+    \node (s1)[right of = init, rounded corners=1ex, align=center,draw]  [node distance=3cm]{\footnotesize\begin{tabular}{c}
+    		{\color{corange}$ (a_0 + 1)$}{\color{cgreen}$ v_0 $} $+ \cdots $		\\ \hline
+    		{\color{cgreen}$ v_0 $} $ + \cdots$ 				\\ \hline
+    		$ \cdots $  					\\ \hline
+    		{\color{corange}$ (c_0 + d_0 + 1)$}{\color{cgreen}$ v_0$} $ + \cdots $  	\\ \hline
+    		{\color{corange}$ a_0$}{\color{cgreen}$ v_0 $}$ + \cdots $
+    \end{tabular}};
+
+    
+    \draw[-latex] ($ (s1.east) + (0.9, -0.3)$) -- ($ (s1.east) + (0.3, -0.3)$)  node[midway, right]{$\ \ \ {\color{corange}  \gamma_0} \vcentcolon = {\color{corange}c_0 + d_0 + 1} $};
+        \draw[-latex] ($ (s1.east) + (0.9, 0.6)$) -- ($ (s1.east) + (0.3, 0.6)$)  node[midway, right]{$\ \ \  {\color{corange} \beta_0 } \vcentcolon = {\color{corange} a_0 + 1} $};
+   
+
+\draw[-latex] ($ (init.east) + (0.1,0) $ )-- ($ (s1.west) - (0.1, 0)$) node[midway, below]{ \footnotesize $ S_1 $};
+	\end{tikzpicture}

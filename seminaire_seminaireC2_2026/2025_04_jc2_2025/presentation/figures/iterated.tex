@@ -1,0 +1,60 @@
+% !TeX root = ../these.tex
+\begin{tikzpicture}[scale=1]
+	
+	\foreach \xshift in {0, 2.5, 8} 
+	{
+	\begin{scope}[xshift=\xshift cm]
+
+			
+			%wires
+			\begin{scope}[decoration={
+    markings,
+    mark=at position 0.8 with {\arrow{Stealth}}}
+    ] 
+
+			\draw[postaction={decorate}, thick] (.5, 1.7) -- +(0, -.7);		
+
+			\draw[postaction={decorate}, thick] (-1.5, .5) -- +(1.5, 0);
+
+			\ifthenelse{\not{\equal{\xshift}{0}}}{	\draw[postaction={decorate}, thick] (1, .5) -- +(1.5, 0);}
+
+			\end{scope}
+
+		
+			%sbox
+			\draw[thick, draw=oigray ,fill=white,drop shadow] (0,0) rectangle node[midway] {\huge \gray{$F$}} +(1 , 1) ;
+
+	\end{scope}
+
+	\draw[dashed, thick] (5, .5) -- +(1.5, 0);
+				\begin{scope}[decoration={
+    markings,
+    mark=at position 0.5 with {\arrow{Stealth}}}
+    ] 
+			% \draw[postaction={decorate}] (1, 1.5) -- +(2, 0);
+			\end{scope}
+
+
+}
+	\begin{scope}[decoration={
+    markings,
+    mark=at position 0.5 with {\arrow{Stealth}}}
+    ] 
+	\draw[postaction={decorate}, thick] (5, 2.8) node[above]{\red{$k$}} -- +(0, -.5);
+	\end{scope}
+
+	% \draw[draw=oired, thick,decorate,decoration={brace, amplitude=10pt}] (1.25, -.25) -- node[midway, below=.3cm] {{Round $0$}} +(-1.5, 0);
+	% \draw[draw=oired, thick,decorate,decoration={brace, amplitude=10pt}] (3.75, -.25) -- node[midway, below=.3cm] {{Round $1$}} +(-1.5, 0);
+	% \draw[draw=oired, thick,decorate,decoration={brace, amplitude=10pt}] (9.25, -.25) -- node[midway, below=.3cm] {{Round $R-1$}} +(-1.5, 0);
+
+	\node[oired] at (1, 1.35) {$\roundk{0}$};
+	\node[oired] at (3.5, 1.35) {$\roundk{1}$};
+	\node[oired] at (9.25, 1.35) {$\roundk{R-1}$};
+
+	\node at (-1.8, 0.5) {\Large $\gray{m}$};
+	\node at (10.7, 0.5) {\Large $\gray{c}$};
+
+	\draw[thick, draw=oired ,fill=white,drop shadow] (0,1.7) -- node[midway, above=.01] {\large \red{Key schedule}} (9,1.7) -- (8, 2.3) -- (1, 2.3) -- (0,1.7); 
+	% rectangle node[midway] {\huge \green{$F$}} +(1 , 3) ;
+	\draw[draw=oigray, thick,decorate,decoration={brace, amplitude=10pt}] (9, -.3) -- node[midway, below=.3cm] {\huge $\gray{E_{\red{k}}} = \gray{F}_{\red{k^{(R-1)}}}  \comp \cdots \comp \gray{F}_{\red{k^{(1)}}} \comp \gray{F}_{\red{k^{(0)}}} $} +(-9, 0);
+\end{tikzpicture}

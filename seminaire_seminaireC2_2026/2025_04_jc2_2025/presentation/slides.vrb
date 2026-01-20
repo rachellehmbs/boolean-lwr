@@ -1,0 +1,34 @@
+\frametitle{\subsecname}
+\vspace{-.4cm}
+% \begin{recap}
+% $\blockcipher = \left(\black{E}_{\red{k}} \from \FFspace \bij \FFspace\right)_{\red{k} \in \keyspace}$.\hfill $[\ E \xleftarrow{\$} \mathcal{E} \ ]$  or $[ \ F \xleftarrow{\$} \mathrm{Bij}(\FF_2^{n}) \ ]$ ?
+% \end{recap}
+
+\begin{center}
+If \purple{$F$} is random, the difference $\dout$ between two ciphertexts
+
+ is expected to be \emph{uniformly distributed}%, even when the difference $\din$ between plaintexts is chosen.
+\end{center}
+
+%\only<1>{
+\begin{center}
+\begin{tikzcd}
+                        x  \arrow[leftrightarrow]{d}{\din}[]{} \arrow[opacity=0]{r}[name=uparrow,opacity=0]{\gray{F^{(0)}}} & \white{x^{(1)}} \arrow[leftrightarrow,opacity=0]{d}{\seconddiff} \arrow[dashed,opacity=0]{r}{} &  \white{x^{(R-1)}} \arrow[opacity=0]{r}[opacity=0]{\gray{F^{(r-1)}}} \arrow[leftrightarrow,opacity=0]{d}{}{\beforelastdiff} &  \purple{F}(x) \arrow[leftrightarrow]{d}{\dout}[]{}
+                        \\
+                        y \arrow[opacity=0]{r}{}[swap,name=bottomarrow,opacity=0]{\gray{F^{(0)}}} & \white{y^{(1)}}  \arrow[dashed,opacity=0]{r}{}[swap]{} &  \white{y^{(R-1)}} \arrow[swap,opacity=0]{r}{}[opacity=0]{\gray{F^{(r-1)}}} &   \purple{F}(y)
+                        %\arrow[to path={(uparrow) node[midway, scale=1.2, left=0.05cm] {$\circlearrowleft$} (bottomarrow)}]{}
+
+\end{tikzcd}
+\end{center}
+
+\pause
+\begin{mybox}{For a random bijection \purple{$F$}}{}{}
+$\purple{F}(x + \din) + \purple{F}(x) = \dout$ has 1 solution $x$ on average.
+\end{mybox}
+
+
+\pause
+\begin{mybox}{Differential distinguisher\hfill {\small\purple{[BihSha91]}}}{}{}
+$\din \neq 0, \dout$ s.t for many $\red{k}$, $\quad E_{\red{k}}(x + \din) + E_{\red{k}}(x) = \dout$ has many solutions $x$.
+\end{mybox}
+

@@ -1,0 +1,37 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=subspace-property-cyclotomy]
+\frametitle{Subspace property and Cyclotomy}
+\vspace{-10pt}
+
+\recapbox{ \emph{Subspace prop}: $\forall \ \clambda, \quad \quad \quad \ \cF(\clambda\cFF) = \cF(\clambda)\cFF$
+
+\hspace*{15pt} \emph{Cyclotomic}: $\exists \ d, \forall \ \clambda, \forall \ \cphi, \quad \cF(\cphi\clambda) = \cphi^d \cF(\clambda)$}
+
+\pause
+\begin{mybox}[cblue]{Trivial relations}
+\begin{itemize}
+	\item[-] Cyclotomic $\implies$ $\forall \ \clambda, \quad \cF(\clambda\cFF) \subset \cF(\clambda)\cFF$.
+	\item[-] Cyclotomic mapping satisfies the \blue{subspace property} $\quad \iff $ $\quad x \mapsto x^d$ \red{bijective} over $\cFF$
+\end{itemize}
+
+\end{mybox}
+
+\pause
+\begin{mybox}[cgreen]{Generalized cyclotomic mapping \hfill [BorsWang22]}
+$\cGG \subset \cLL^*$ a subgroup. $\cF \from \cLL \to \cLL$ is a generalized cyclotomic mapping over $\cGG$ if:
+\vspace{-5pt}
+$$ \forall \ \clambda \in \cLL, \orange{\exists \ d_\lambda}, \forall \ \cphi \in \cGG, \quad \cF(\cphi\clambda) = \cphi^{\orange{d_\lambda}} \cF(\clambda)$$
+
+\end{mybox}
+
+\pause
+\begin{mybox}[cred]{More trivial relations}
+\begin{itemize}
+	\item[-] Gen. cyclotomic $\implies$ $\forall \ \clambda, \quad \cF(\clambda\cFF) \subset \cF(\clambda)\cFF$.
+	\item[-] Gen. cyclotomic mapping satisfies the \blue{subspace property} $\ \iff \ $ $\forall \ \clambda, $ $\gcd(\orange{d_\lambda}, \card{\cFF^*}) = 1$
+\end{itemize}
+\end{mybox}
+
+
+\end{frame}

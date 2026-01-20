@@ -1,0 +1,25 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=kim_mapping]
+\frametitle{The enigmatic Kim function}
+\recapbox{$\cLL = \brown{\FF_{2^6}}, \cFF = \lightblue{\FF_{2^3}} \hfill \clambda \black{\in} \cLL, \cphi \black{\in} \cFF, \cgamma \black{\in} \cGamma.$}
+
+\begin{mybox}[cblue]{Kim mapping \hfill[BDMW10]}
+\vspace{-20pt}
+	\begin{align*}
+	\kim \from \quad \brown{\LL} \quad &\to \quad \brown{\LL}\\
+	 \clambda \quad &\mapsto \quad \clambda^3 + \clambda^{10} + u\clambda^{24};
+	\end{align*}
+	 \text{for a specific} $u\in \cLL$.
+\end{mybox}
+\pause
+
+\begin{mybox}[cred]{Key observation\hfill[BDMW10]}
+$\cphi \in \cFF, \clambda \in \cLL$
+$$ \kim(\cphi \clambda) = (\cphi\clambda)^3 + (\cphi\clambda)^{10} + u(\cphi\clambda)^{24} =  \cphi^3\kim(\clambda) $$
+
+because $ 3 \equiv 10 \equiv 24 \bmod{7}$ and $\card{\cFF^*} = 7$.
+
+\end{mybox}
+
+\end{frame}

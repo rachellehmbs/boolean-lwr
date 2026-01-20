@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+	
+	\definecolor{cblue}{HTML}{3F71A1}
+	\definecolor{corange}{HTML}{E09F1F}
+	\definecolor{cgreen}{HTML}{36C190}
+	\definecolor{cred}{HTML}{C2554F}
+	\definecolor{deepmagenta}{HTML}{9F0162}
+	
+	 \node[draw] at (8.5, 0) (init) [rounded corners=1ex, align=center,draw]  { \begin{tabular}{c}
+			\color{cgreen} $ v_0, \ \cdots, v_{63} $	\\ \hline \hline
+			\color{corange} $ a_0, \ \cdots, a_{63}$ 	\\ \hline
+			\color{corange}$ b_0, \ \cdots, b_{63} $  	\\ \hline
+			\color{corange}$ c_0, \ \cdots, c_{63} $  	\\ \hline
+			\color{corange}$ d_0, \ \cdots, d_{63} $  	\\	
+	\end{tabular}};
+
+
+	\node (capacity) [align=center] [right of=init, node distance=3.3cm] {\small Unknown internal state};
+	\node (externalstate) [align=center] [above of=capacity, node distance=.9cm] {\small Chosen external state};
+	\node (caption) [spongephase, align = center, below of = capacity, left of = externalstate, left=0.4cm, below = 1.67cm] {{\color{cred}$ \Sigma_{\mathrm{E}} $} State before encryption};
+
+    \SpongeInitInner{$k \| N$}{}
+   \draw (P.south) +(-.6,-1) node[spongephase] (phase) {Initialization};
+   %\SpongeXorInner{$\hskip-4pt 0^* \| k$}
+   \SpongeStep\SpongePhaseSep[cred]{}
+   
+\SpongeEncrypt{$ \mathbf{P_0 }$~~}{~~$C_0 $}{$ p^6 $}{}{}
+\draw (P.south) +(-1.5,-0.63) node[spongephase] (phase) {\color{cred}{$ \Sigma_{\mathrm{E}} $}};
+\draw (P.south) +(0,-1.04) node[spongephase] (phase) {Encryption};
+\SpongeEncrypt{$ 0^* $~~}{~~$ \mathbf{C_1} $}{}{}{}
+
+
+
+\end{tikzpicture}

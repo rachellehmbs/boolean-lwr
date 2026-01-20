@@ -1,0 +1,28 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=]
+\frametitle{Cyclotomic mappings}
+
+\recapbox{$\kim \from \clambda \quad \mapsto \quad \clambda^3 + \clambda^{10} + u\clambda^{24}.$ \hfill $\kim(\cphi\clambda) = \cphi^3 \kim(\clambda) \quad \forall \cphi \in \cFF, \clambda \in \cLL.$ }
+
+\pause
+\begin{mybox}[cgreen]{Cyclotomic mapping \hfill[Wang07]}
+$\cGG \subset \cLL^*$ a subgroup. $\cF \from \cLL \to \cLL$ is a cyclotomic mapping of order $d$ over $\cGG$ if:
+\vspace{-5pt}
+$$ \forall \ \clambda \in \cLL, \forall \ \cphi \in \cGG, \quad \cF(\cphi\clambda) = \cphi^d \cF(\clambda). $$
+\hfill \green{Here:  {\color{black}$\cGG = \cFF^{*}$}}
+\end{mybox}
+\pause
+
+\begin{mybox}[cblue]{Polynomial characterization}
+$\cF \from \clambda \mapsto \sum_{i = 0}^{2^n -1} a_i\clambda^i$ is a cyclotomic mapping of order $d$ over $\cGG$ iff $ a_i\neq 0 \implies i \equiv d \bmod{\card{\cGG}}$.
+\end{mybox}
+\pause
+\vspace{5pt}
+\begin{itemize}
+	\item[-] Also known as \blue{Wan Lidl polynomials} \hfill [WanLidl91]
+	\item[-] Studies about \orange{graphs} or \orange{permutations} 	\hfill [AkbWan07, BorPanWan23, Laigle-Chapuy07]
+	\item[-] only a \red{few} about \orange{cryptographic properties}  \hfill [ChenCoulter23, Gologlu23, BeiBriLea21]
+\end{itemize}
+
+\end{frame}

@@ -1,0 +1,38 @@
+% !TEX root = ../slides.tex
+
+\begin{frame}[label=pi_generalized]
+\frametitle{Generalizing $\pi$}
+
+\recapbox{ $\cpi|_{\cLL \setminus \cFF} \from \quad 
+	\cgamma\cphi \ \mapsto \ \orangeG(\cgamma) + \blueF(\cphi) 
+$ $\quad \quad \quad$ $\cGamma, \cO$, sys. of reps. $\quad \quad \quad $  $\clambda \in \cLL, \cgamma \in \cGamma, \cphi \in \cFF$
+}
+
+\onslide<2->{
+\begin{mybox}[cblue]{Generalizing $\pi$}
+\onslide<2->{
+$[\cLL: \cFF] = 2\quad  \quad \quad  \card{\cLL^*} = 2^{2t} -1 = (2^{t} -1)(2^{t} + 1) \quad \quad \quad  \card{\cGamma} = 2^{t} + 1, \quad \card{\cO} = \card{\cFF} = 2^{t}$.}
+
+\onslide<3->{
+$$\cPi|_{\cLL \setminus \cFF} \from \quad 
+	\cgamma\cphi \ \mapsto \ \orangeG(\cgamma) + \blueF(\cphi)
+$$
+\vspace{5pt}
+ where  $\orangeG \from \cGamma\setminus\cFF \xrightarrow{\sim} \cO, \quad \blueF \from \cFF \xrightarrow{\sim} \cFF$, with $\blueF(0) = 0$ and $\cPi(\cFF) = \cO$.}
+\end{mybox}
+}
+
+\onslide<4->{
+\begin{mybox}[cgreen]{Walsh coefficients of {\normalsize \color{black}$\cPi$}}
+\onslide<4->{
+\vspace{5pt}
+$\cPih_{\beta}(\alpha) \vcentcolon= \sum\limits_{\clambda \in \cLL} (-1)^{\trlftwo(\alpha \clambda + \beta \cPi(\clambda))}$}
+\onslide<5->{
+ \hfill $\cH \from \cFF \to \cFF, \ x \mapsto \ \trlf(\cgamma_\beta \cPi(x))$ \vspace{10pt}
+
+ $$\cPih_{\beta}(\alpha) = \quad \cHh_{\cphi_\beta}(\trlf(\alpha)) - \cHh_{\cphi_\beta}(0)  \quad + \quad \sum\limits_{\cgamma \in \cGamma \setminus \cFF} (-1)^{\trlf(\beta\orangeG(\cgamma))} \  \blueFh_{\trlf(\beta)}(\trlf(\alpha\cgamma))$$
+}
+\end{mybox}
+}
+
+\end{frame}

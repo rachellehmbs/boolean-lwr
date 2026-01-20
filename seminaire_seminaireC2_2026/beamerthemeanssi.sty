@@ -1,0 +1,952 @@
+%\institute[ANSSI]{Agence nationale de la s\'ecurit\'e des syst\`emes
+  %d'information}
+% Introduction %<<<1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Déclarations des variables globales utilisées par le reste du thème %<<<2
+\newif\ifSSI@draft\SSI@draftfalse
+\newif\ifCMYK\CMYKfalse
+\newif\ifSSI@xaz\SSI@xazfalse
+\let\restrictedleft\relax
+\let\restrictedright\relax
+\let\condensedfont\relax
+% taille du logo dans l'en-tête des pages
+\def\taillelogo{50pt}
+% taille du logo dans la page de titre
+%\def\taillelogotitre{60pt}
+\def\taillelogotitre{100pt}
+%\def\logotitre{theme_imgs/20160712_logo_anssi_final}
+\def\logotitre{logo_UCLouvain_format_jpg_RVB.jpg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+\usetikzlibrary{backgrounds, positioning, fit}
+
+\RequirePackage{array}
+\RequirePackage{pgfpages}
+\RequirePackage{graphicx}
+\RequirePackage{etoolbox}
+
+\DeclareGraphicsExtensions{.pdf,.PDF,.png,.PNG,.jpg,.jpeg,.JPG,.JPEG,.eps,.EPS}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Options <<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<handout>{\CMYKtrue}
+\DeclareOption{draft}{\SSI@drafttrue}
+\DeclareOption{brouillon}{\SSI@drafttrue}
+\DeclareOption{akzidenz}{\SSI@xaztrue}
+\DeclareOption{CMYK}{\CMYKtrue}
+\DeclareOption{CMJN}{\CMYKtrue}
+\DeclareOption{RGB}{\CMYKfalse}
+\DeclareOption{RVB}{\CMYKfalse}
+\DeclareOption{DR}{\def\restrictedleft{Diffusion restreinte}}
+\DeclareOption{SF}{\def\restrictedright{Sp\'ecial France}}
+\DeclareOption{DRSF}{\def\restrictedleft{Diffusion restreinte}%
+  \def\restrictedright{Sp\'ecial France}}
+\DeclareOption{CD}{\def\restrictedleft{Confidentiel d\'efense}}
+\DeclareOption{CDSF}{\def\restrictedleft{Confidentiel d\'efense}%
+  \def\restrictedright{Sp\'ecial France}}
+\DeclareOption{physicalpages}{\let\SSI@physicalpages 1}
+\ProcessOptions\relax
+\ifSSI@xaz
+\IfFileExists{t1xaz.fd}{%
+\def\sfdefault{xaz}
+\def\condensedfont{\def\mddefault{c}\def\bfdefault{bc}\mdseries}
+}{\SSI@xazfalse
+\PackageWarning{beamerthemeanssi}{%
+Requesting font Akzidenz Grotesk, which is not installed.}%
+}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Définitions des couleurs %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifCMYK
+% Couleurs ANSSI, converties Pantone -> CMYK (pantone.com/color-finder) <<<
+\definecolor{7694C}{cmyk}{1,.57,.09,.52}
+\definecolor{7463C}{cmyk}{1,.63,.12,.67}
+\definecolor{485C}{cmyk}{0,.95,1,0}
+\definecolor{422C}{cmyk}{.19,.12,.13,.34}
+\definecolor{536C}{cmyk}{.34,.17,.02,.07}
+\definecolor{290C}{cmyk}{.23,0,.01,0}
+\definecolor{7541C}{cmyk}{.07,.01,.03,.02}
+\definecolor{255C}{cmyk}{.53,.96,.10,.24}
+\definecolor{710C}{cmyk}{0,.84,.46,0}
+\definecolor{326C}{cmyk}{.81,0,.39,0}
+\definecolor{7433C}{cmyk}{.08,.90,.16,.24}
+\definecolor{493C}{cmyk}{.02,.57,.17,.03}
+\definecolor{7474C}{cmyk}{.96,.09,.32,.29}
+\definecolor{524C}{cmyk}{.10.,23,0,0}
+\definecolor{705C}{cmyk}{0,.11,.03,0}
+\definecolor{566C}{cmyk}{.17,0,.12,0}
+%>>>
+\else
+% Couleurs ANSSI, converties Pantone -> RGB (pantone.com/color-finder) <<<
+\definecolor{7694C}{RGB}{1,66,106}
+\definecolor{7463C}{RGB}{0,43,73}
+\definecolor{485C}{RGB}{218,41,28}
+\definecolor{422C}{RGB}{158,162,162}
+\definecolor{536C}{RGB}{162,178,200}
+\definecolor{290C}{RGB}{185,217,235}
+\definecolor{7541C}{RGB}{217,225,226}
+\definecolor{255C}{RGB}{114,36,108}
+\definecolor{710C}{RGB}{224,62,82}
+\definecolor{326C}{RGB}{0,178,169}
+\definecolor{7433C}{RGB}{167,58,100}
+\definecolor{493C}{RGB}{220,134,153}
+\definecolor{7474C}{RGB}{0,118,129}
+\definecolor{524C}{RGB}{213,194,216}
+\definecolor{705C}{RGB}{245,218,223}
+\definecolor{566C}{RGB}{185,220,210}
+%>>>
+\fi
+% P: principal; S: secondaire; p: pastel
+% numérotées dans l'ordre de la plus claire à la plus foncée [cf. X11]
+\colorlet{bleu4}{7463C} % P
+\colorlet{bleu3}{7694C} % P
+\colorlet{bleu2}{536C}  % Pp
+\colorlet{bleu1}{290C}  % Pp
+\colorlet{gris2}{422C}  % P
+\colorlet{gris1}{7541C} % Pp
+\colorlet{rouge4}{485C} % P
+\colorlet{rouge3}{710C} % S
+\colorlet{rouge2}{493C} % S
+\colorlet{rouge1}{705C} % Sp
+\colorlet{vert3}{326C} % S used to be 7474C
+\colorlet{vert2}{566C}  % S used to be 326C
+\colorlet{vert1}{566C}  % Sp 
+\colorlet{mauve3}{255C} % S
+\colorlet{mauve2}{7433C}% S
+\colorlet{mauve1}{524C} % Sp
+\colorlet{bleu}{bleu3}
+\colorlet{rouge}{rouge4}%>>>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Templates Beamer utilisés par ce qui suit %<<<1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fond de slide %<<<2
+% adapted from wallpaper.sty
+\newdimen\tileheight
+\newdimen\tilewidth
+\newdimen\tileX \newdimen\tileY
+\newdimen\tilecropX \newdimen\tilecropY
+\newbox\tilebox
+\def\SSI@tile#1#2#3#4{\@ifnextchar[%
+  {\SSI@tile@{#1}{#2}{#3}{#4}{,}}{\SSI@tile@{#1}{#2}{#3}{#4}{}[]}}%
+\def\SSI@tile@#1#2#3#4#5[#6]#7{\begingroup%
+  \baselineskip\z@ \lineskip\z@
+  \setbox0\hbox{\includegraphics[#6]{#7}}%
+  \setbox\tilebox\hbox{\includegraphics[width=#3,height=#4#5#6]{#7}}%
+  \tileY\z@ \vtop to 0pt{\loop%
+    \tilecropY #2 \advance \tilecropY -\tileY
+    \ifdim\tilecropY < #4
+      \multiply\tilecropY -1 \advance\tilecropY #4
+      \Gscale@div\tmp\tilecropY{#4}\tilecropY=\tmp\ht0
+      \else \tilecropY\z@ \fi
+    \tileX\z@\rlap{\loop%
+    \tilecropX #1 \advance \tilecropX -\tileX
+    \ifdim\tilecropX < #3
+      \multiply\tilecropX -1 \advance\tilecropX #3
+      \Gscale@div\tmp\tilecropX{#3}\tilecropX=\tmp\wd0
+      \else \tilecropX\z@ \fi
+    \dimen0 \tilecropY \advance\dimen0 \tilecropX
+    \ifdim \dimen0=\z@ \copy\tilebox\else
+      \ifdim\tilecropX>\z@ \dimen0 #1 \advance \dimen0 -\tileX \else\dimen0 #3\fi
+      \ifdim\tilecropY>\z@ \dimen1 #2 \advance \dimen1 -\tileY \else\dimen1 #4\fi
+      \edef\@ptions{[width=\the\dimen0,height=\the\dimen1#5#6,clip,%
+        trim={0pt \the\tilecropY\space\the\tilecropX\space 0pt}]}%
+      \expandafter\includegraphics\@ptions{#7}%
+    \fi
+    \advance\tileX #3
+    \ifdim\tileX<#1\repeat}%
+    \ifdim\tileX<#1\unskip\fi
+    \advance\tileY#4 \ifdim\tileY<#2\repeat\vss}%
+\endgroup}
+\defbeamertemplate{background canvas}{tiled}[1]{%
+  \SSI@tile{\the\paperwidth}{\the\paperheight}%
+    {31pt}{41pt}{theme_imgs/fond-anssi}%
+  \vtop to 0pt{\vskip -9.55ex\SSI@restricted\vss}%
+}
+\defbeamertemplate{background canvas}{framed}%
+  {\vtop to 0pt{\rlap{\begin{tikzpicture}
+  \draw[draw=gris2] (current page.north west) rectangle
+    (current page.south east);\end{tikzpicture}}\vss}%
+  \vtop to 0pt{\vskip -\paperheight\SSI@restricted\vss}%
+    }
+% \defbeamertemplate{background canvas}{framed}{}
+% Insertion des marques de restriction
+  \def\SSI@rbox#1{\fbox{\vrule height 7.5pt depth 2.5pt width 0pt%
+    \bf\MakeUppercase{#1}}}
+\def\SSI@restricted{\vtop to 0pt{\begingroup\fboxrule 2pt\scriptsize
+  \hsize\paperwidth \rlap{\hskip .25\hsize
+    \hbox to 0pt{\hss\ifx\restrictedleft\relax\else
+      {\color[rgb]{1,0,0}\SSI@rbox\restrictedleft}\fi\hss}%
+    \hskip .5\hsize
+    \hbox to 0pt{\hss\ifx\restrictedright\relax\else
+      {\color[rgb]{0,0,1}\SSI@rbox\restrictedright}\fi\hss}%
+  \hskip .25\hsize}%
+\endgroup\vss}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Blocs sans titre %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\SSI@rectangle#1{\par\medskip
+ \ifx\insertblocktitle\empty\else
+  \par\vskip\medskipamount%
+  {\parskip\z@
+  \begin{beamercolorbox}[colsep=.75ex]{block title#1}%
+    \usebeamerfont*{block title#1}\strut\insertblocktitle
+  \end{beamercolorbox}\par}%
+  \ifbeamercolorempty[bg]{block title#1}{}%
+  {\ifbeamercolorempty[bg]{block body#1}{}{\nointerlineskip\vskip-0.5pt}}%
+ \fi
+  \usebeamerfont{block body#1}%
+  \begin{beamercolorbox}[colsep=.75ex,vmode]{block body#1}%
+    \ifbeamercolorempty[bg]{block body#1}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate*{block begin}{rectangle}{\SSI@rectangle{}}
+\defbeamertemplate{block alerted begin}{rectangle}{\SSI@rectangle{ alerted}}
+\defbeamertemplate{block example begin}{rectangle}{\SSI@rectangle{ example}}
+\defbeamertemplate*{block end}{rectangle}{\par\end{beamercolorbox}\medskip}
+
+\def\defineblocktemplate#1{%
+\defbeamertemplate*{block #1 begin}{rectangle}{\SSI@rectangle{ #1}}%
+\defbeamertemplate*{block #1 end}{rectangle}{\par\end{beamercolorbox}\medskip}%
+\defbeamertemplate{block #1 begin}{framed}[1][\fboxrule]%
+  {\SSI@framed{##1}{ #1}}%
+\defbeamertemplate{block #1 end}{framed}{%
+  \end{beamerframebox}\vskip\smallskipamount}%
+}
+\def\defineblockenv#1#2{%
+  \defineblocktemplate{#1}%
+  \newenvironment<>{#1block}[1]{%
+    \begin{actionenv}##2%
+    \def\insertblocktitle{##1}\par%
+    \mode<presentation>{\setbeamercolor{local structure}{parent=alerted text}}%
+      \usebeamertemplate{block #1 begin}#2}
+  {\par\usebeamertemplate{block #1 end}\end{actionenv}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Blocs encadrés %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% beamerfbox <<<
+\define@key{beamerfbox}{wd}{\def\beamer@fbox@wd{#1}}
+\define@key{beamerfbox}{ht}{\def\beamer@fbox@ht{#1}}
+\define@key{beamerfbox}{dp}{\def\beamer@fbox@dp{#1}}
+\define@key{beamerfbox}{leftskip}{\def\beamer@fbox@ls{#1}}
+\define@key{beamerfbox}{rightskip}{\def\beamer@fbox@rs{#1}}
+\define@key{beamerfbox}{left}[0pt]{\def\beamer@fbox@ls{0pt}\def\beamer@fbox@rs{#1 plus1fill}}
+\define@key{beamerfbox}{center}[0pt]{\def\beamer@fbox@ls{#1 plus1fill}\def\beamer@fbox@rs{#1 plus1fill}}
+\define@key{beamerfbox}{right}[0pt]{\def\beamer@fbox@ls{#1 plus1fill}\def\beamer@fbox@rs{0pt}}
+\define@key{beamerfbox}{sep}{\def\beamer@fbox@sep{#1}}
+\define@key{beamerfbox}{colsep}{\def\beamer@fbox@colsep{#1}}
+\define@key{beamerfbox}{colsep*}{\def\beamer@fbox@colseps{#1}}
+\define@key{beamerfbox}{frame}{\def\beamer@fbox@fcolor{\usebeamercolor[fg]{#1}}}
+\define@key{beamerfbox}{frame width}{\def\beamer@fbox@fw{#1}}
+\define@key{beamerfbox}{ignorebg}[true]{\csname beamer@fbox@ignorebg#1\endcsname}
+\define@key{beamerfbox}{vmode}[]{\def\beamer@vmode{}}
+\define@key{beamerfbox}{top}[true]{\csname beamer@fbox@top#1\endcsname}
+\define@key{beamerfbox}{bot}[true]{\csname beamer@fbox@bot#1\endcsname}
+
+\newif\ifbeamer@fbox@ignorebg
+\newif\ifbeamer@fbox@top
+\newif\ifbeamer@fbox@bot
+%>>>
+% beamerframebox: adapted from beamercolorbox in beamerbasecolor.sty <<<
+\newenvironment{beamerframebox}[2][]{
+  \begingroup%
+    \def\beamer@fbox@coladd{0pt}%
+    \def\beamer@vmode{\leavevmode}%
+    \setkeys{beamerfbox}{%
+      wd=\textwidth,ht={},dp={},%
+      leftskip=0pt,rightskip=0pt plus1fil,%
+      sep=0pt,colsep=0pt,colsep*=0pt,top=true,bot=true,%
+      frame=normal text,frame width=\fboxrule,ignorebg=false}%
+    \setkeys{beamerfbox}{#1}%
+    \ifbeamercolorempty[bg]{#2}{\@tempswafalse}{\@tempswatrue}%
+    \ifbeamer@fbox@ignorebg\@tempswafalse\fi%
+    \def\beamer@fbox@color{#2}%
+    \hsize=\beamer@fbox@wd%
+    \setbox\beamer@tempbox=\hbox\bgroup\vbox\bgroup%
+      \leftskip=\beamer@fbox@ls%
+      \advance\leftskip by\beamer@fbox@sep%
+      \rightskip=\beamer@fbox@rs%
+      \advance\rightskip by\beamer@fbox@sep%
+      \ifbeamer@fbox@ignorebg%
+        \colorlet{beamer@temp@color}{bg}%
+        \usebeamercolor[fg]{#2}%
+        \colorlet{bg}{beamer@temp@color}%
+      \else%
+        \usebeamercolor[fg]{#2}%
+      \fi%
+      \if@tempswa%
+        \advance\leftskip by\beamer@fbox@colsep%
+        \advance\rightskip by\beamer@fbox@colsep%
+        \ifdim\beamer@fbox@colsep=0pt\else\vskip\beamer@fbox@colsep\fi%
+        \ifdim\beamer@fbox@colseps=0pt\else\vskip\beamer@fbox@colseps\fi%
+      \fi%
+      \ifdim\beamer@fbox@sep=0pt\else\vskip\beamer@fbox@sep\fi%
+      \beamer@vmode\ignorespaces}{%
+      \ifdim\beamer@fbox@sep=0pt\else\vskip\beamer@fbox@sep\fi%
+      \if@tempswa\ifdim\beamer@fbox@colsep=0pt\else\vskip\beamer@fbox@colsep\fi\fi%
+      \if@tempswa\ifdim\beamer@fbox@colseps=0pt\else\vskip\beamer@fbox@colseps\fi\fi%
+    \egroup\egroup%
+    \wd\beamer@tempbox=\hsize%
+    \@tempdima=\wd\beamer@tempbox%
+    \ifx\beamer@fbox@ht\@empty%
+    \else%
+      \ht\beamer@tempbox=\beamer@fbox@ht%
+    \fi%
+    \ifx\beamer@fbox@dp\@empty%
+    \else%
+      \dp\beamer@tempbox=\beamer@fbox@dp%
+    \fi%
+      \if@tempswa\setbox\beamer@tempbox=\hbox{\vbox{%
+        \usebeamercolor{\beamer@fbox@color}%
+        \advance\hsize by 2\beamer@fbox@colseps\relax%
+        \hskip-\beamer@fbox@colseps%
+        \fboxsep=0pt\colorbox{bg}{%
+          \hskip\beamer@fbox@colseps%
+          \hbox{\box\beamer@tempbox}%
+          \hskip\beamer@fbox@colseps%
+        }%
+        \hskip-\beamer@fbox@colseps%
+      }}\fi%
+      \ifdim\@tempdima>\textwidth%
+        \setbox\beamer@tempbox=\hbox to\textwidth{\hskip0pt minus\beamer@leftmargin\relax\box\beamer@tempbox\hskip0pt minus\beamer@rightmargin\relax}%
+      \fi%
+  \@tempdima\beamer@fbox@fw
+  \advance\@tempdima\dp\beamer@tempbox
+  \hbox{\if@tempswa\hskip -\beamer@fbox@colseps\fi
+    \hskip-\beamer@fbox@fw
+    \lower\@tempdima\hbox{\vbox{%
+    \ifbeamer@fbox@top{\beamer@fbox@fcolor\hrule\@height\beamer@fbox@fw}\fi
+    \hbox{{\beamer@fbox@fcolor\vrule\@width\beamer@fbox@fw}%
+    \hskip \beamer@fbox@colseps\box\beamer@tempbox\kern -\beamer@fbox@colseps
+    {\beamer@fbox@fcolor\vrule\@width\beamer@fbox@fw}}%
+    \ifbeamer@fbox@bot{\beamer@fbox@fcolor\hrule\@height\beamer@fbox@fw}\fi}}%
+  }%
+  \endgroup%
+}%>>>
+% block [framed] template%<<<
+\def\SSI@framed#1#2{\par\medskip
+ \ifx\insertblocktitle\empty\def\beamer@ftop{true}\else
+ \def\beamer@ftop{false}\par\vskip\medskipamount%
+  \begin{beamerframebox}[sep=.75ex,bot=false,frame=block frame#2,
+    frame width=#1,ignorebg=true]{block title#2}%
+    \usebeamercolor[fg]{block title#2}%
+    \usebeamerfont*{block title#2}\strut\insertblocktitle
+  \end{beamerframebox}%
+ {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title#2}{}%
+  {\ifbeamercolorempty[bg]{block body#2}{}{\nointerlineskip\vskip-0.9pt}}%
+ \fi
+ \vskip -1pt
+  \usebeamerfont{block body#2}%
+  \begin{beamerframebox}[sep=.75ex,vmode,top=\beamer@ftop,%
+    frame=block frame#2,frame width=#1,ignorebg=true]{block body#2}%
+    \ifbeamercolorempty[bg]{block body#2}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate{block begin}{framed}[1][\fboxrule]%
+  {\SSI@framed{#1}{}}%
+\defbeamertemplate{block end}{framed}{%
+  \end{beamerframebox}\vskip\smallskipamount}
+\defbeamertemplate{block alerted begin}{framed}[1][\fboxrule]%
+  {\SSI@framed{#1}{ alerted}}%
+\defbeamertemplate{block alerted end}{framed}{%
+  \end{beamerframebox}\vskip\smallskipamount}
+\defbeamertemplate{block example begin}{framed}[1][\fboxrule]%
+  {\SSI@framed{#1}{ example}}%
+\defbeamertemplate{block example end}{framed}{%
+  \end{beamerframebox}\vskip\smallskipamount}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thème extérieur %<<<1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% page de titre %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\maketitle}{
+  {
+  \ifSSI@draft\else\mode<beamer>{\usebackgroundtemplate[tiled]}\fi
+  \begin{frame}[plain,noframenumbering]
+    \titlepage
+  \end{frame}
+  }
+}
+
+
+\setbeamersize{text margin left = 1.5em, text margin right = 1.5em}
+
+%\setbeamerfont{titre pres}{series=\Large\bfseries}
+%\setbeamerfont{author pres}{size=\large, family=\rm}
+
+\setbeamertemplate{title page}{
+  \centering
+
+  \vspace*{\fill}
+ 
+  \includegraphics[width=\taillelogotitre]{\logotitre}
+  %\hspace{4mm}
+%  \includegraphics[width=40mm]{logo-UVSQ-2020-RVB.png}
+  
+  \dimen0 \taillelogotitre \vskip .3\dimen0
+
+  \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par
+
+  \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+
+\vspace{6mm}
+  \usebeamerfont{author}\usebeamercolor[fg]{default}{\LARGE \insertauthor}
+
+\bigskip
+  \usebeamercolor[fg]{default}{\footnotesize \insertinstitute}\par
+
+  \usebeamercolor[fg]{default}{\scriptsize \insertdate}\par
+
+  \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par
+  \vfill \vbox{}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% gestion des sections et subsections %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Template {section} crée (ou non) une page de section.
+
+\AtBeginSection[\usebeamertemplate{section*}]%
+  {\usebeamertemplate{section}}
+\AtBeginSubsection[\usebeamertemplate{subsection*}]%
+  {\usebeamertemplate{subsection}}
+% template pour section toc %<<<3
+\defbeamertemplateparent{all in toc}{section in toc,subsection in toc,%
+section in toc shaded,subsection in toc shaded}{}
+\def\SSI@sectionno#1{\hbox to 1.5em{\hss
+  % expandafter: pour forcer une expansion de \inserttocsectionnumber (etc.)
+  % avant de comparer à la chaîne vide avec l'astuce habituelle \relax
+  \expandafter\ifx\expandafter\relax#1\relax\else #1. \fi}}
+\defbeamertemplate{section in toc}{page}{{\leavevmode
+  \usebeamerfont{section title}\usebeamercolor[fg]{section title}%
+  \SSI@sectionno{\inserttocsectionnumber}\inserttocsection\par}}
+\defbeamertemplate{section in toc shaded}{page}{{\leavevmode
+  \usebeamerfont{section title}\usebeamercolor[fg]{section title shaded}%
+  \SSI@sectionno{\inserttocsectionnumber}\inserttocsection\par}}
+\defbeamertemplate{subsection in toc}{page}{\leavevmode
+  \usebeamerfont{subsection title}\usebeamercolor[fg]{subsection title}
+  \leftskip=5ex\llap{\vrule width1ex height1ex\kern1ex}%
+  \inserttocsubsection\par}
+\defbeamertemplate{subsection in toc shaded}{page}{\leavevmode
+  \usebeamerfont{subsection title}\usebeamercolor[fg]{subsection title shaded}
+  \leftskip=5ex\llap{\vrule width1ex height1ex\kern1ex}%
+  \inserttocsubsection\par}
+
+% les templates pour section / subsection %<<<3
+\defbeamertemplateparent{section/subsection}{section,subsection}{}
+\defbeamertemplateparent{sections}{section,section*}{}
+\defbeamertemplateparent{subsections}{subsection,subsection*}{}
+\defbeamertemplateparent{sections/subsections}{sections,subsections}{}
+
+\long\def\SSI@sectionpage#1{\begingroup\usebeamertemplate{fond section}%
+  \ifbeamer@inframe #1 \else \frame[plain,c,noframenumbering]{#1}\fi\endgroup}
+% [default] - juste le (Numéro. Titre de section)
+\def\SSI@sectionpagetitle#1#2#3{\SSI@sectionpage{%
+    \begin{centering}
+      \begin{beamercolorbox}[sep=12pt,center,#1]{section title}
+        \usebeamerfont{section title}%
+        #2
+      \end{beamercolorbox}
+      \begin{beamercolorbox}[sep=12pt,center,#1]{part title}
+        \vbox {\hbox to\hsize{\hss\vrule height 2.5pt width 30pt\hss} \strut}
+      \end{beamercolorbox}
+      \begin{beamercolorbox}[sep=12pt,center,#1]{subsection title}
+        \usebeamerfont{subsection title}%
+        #3
+      \end{beamercolorbox}
+    \end{centering}
+  }}
+\def\sectioncomment#1{\def\SSI@sectioncomment{#1}}
+\let\SSI@sectioncomment\empty
+\defbeamertemplate*{section}{default}[1][]
+  {\SSI@sectionpagetitle{#1}{\insertsectionnumber.~\insertsection}{\SSI@sectioncomment}%
+  \let\SSI@sectioncomment\empty}
+\defbeamertemplate*{section*}{default}[1][]
+  {\SSI@sectionpagetitle{#1}{\insertsection}{\empty}}
+\defbeamertemplate*{subsection}{default}[1][]
+  {\SSI@sectionpagetitle{#1}{\insertsectionnumber.~\insertsection}{\insertsubsection}}
+\defbeamertemplate*{subsection*}{default}[1][]
+  {\SSI@sectionpagetitle{#1}{\insertsectionnumber.~\insertsection}{\insertsubsection}}
+
+% [empty] - pas de page de section
+\defbeamertemplate{section}{empty}{}
+\defbeamertemplate{subsection}{empty}{}
+\defbeamertemplate{section*}{empty}{}
+\defbeamertemplate{subsection*}{empty}{}
+
+% [toc] - une table des matières à chaque section
+\defbeamertemplate{section}{toc}[1][]{\SSI@sectionpage{%
+  \setbeamertemplate{all in toc}[page]%
+  \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide,#1]
+}}
+\defbeamertemplate{subsection}{toc}[1][]{\SSI@sectionpage{%
+  \setbeamertemplate{all in toc}[page]%
+  \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,#1]
+}}
+\defbeamertemplate{section*}{toc}[1][]{
+%   \addtocontents{toc}{\protect\beamer@sectionintoc{\the\c@section}{\secname}{\the\c@page}{\the\c@part}{0}}%
+  \SSI@sectionpage{%
+  \setbeamertemplate{all in toc}[page]%
+  \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide,#1]}%
+}
+\defbeamertemplate{subsection*}{toc}{}
+
+% thèmes %<<<3
+% theme 1: fond identique à celui de la page de titre
+\setbeamercolor{subsection title}{parent={section title}}
+\setbeamercolor{subsection title shaded}{parent={section title shaded}}
+
+\defbeamertemplate*{fond section}{gris}{%
+  \setbeamercolor{background canvas}{bg=gris1}%
+  \setbeamercolor{section title}{fg=bleu4}%
+  \setbeamercolor{section title shaded}{fg=bleu2}%
+  \setbeamercolor{section subtitle}{fg=black}%
+  \ifSSI@draft\else \mode<beamer>{\usebackgroundtemplate[tiled]}\fi
+}
+% theme 2: fond bleu
+\defbeamertemplate{fond section}{bleu}{%
+  \setbeamercolor{background canvas}{bg=bleu4}%
+  \setbeamercolor{section title}{fg=white}%
+  \setbeamercolor{section title shaded}{fg=bleu2}%
+  \setbeamercolor{section subtitle}{fg=white}%
+  \setbeamercolor{progress bar in section page}{bg=white}
+  \mode<handout>{\setbeamercolor{section title}{fg=bleu3}%
+    \setbeamercolor{section subtitle}{fg=bleu3}}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% haut et bas des slides %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{headline}{tiled}{%
+  \ifSSI@draft\else
+  \vbox to 0pt{\SSI@tile{\the\paperwidth}{15pt}%
+    {31pt}{41pt}{theme_imgs/fond-anssi}\vss}%
+  \fi
+  \SSI@restricted
+}
+\defbeamertemplate{headline}{empty}{\SSI@restricted}
+\defbeamertemplate*{frametitle}{centre}{%
+  \vskip 15pt
+  \begin{beamercolorbox}[wd=\the\hsize,sep=2pt]{frametitle}
+  \centering\usebeamerfont{frametitle}\insertframetitle\par
+%  \vskip -.333\baselineskip
+%  \hbox to\hsize{\hss\vrule height 2.5pt width 30pt\hss}%
+  \end{beamercolorbox}
+}
+
+\addtobeamertemplate{footline}{}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left,leftskip=2ex]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshortauthor~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=2ex]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\def\nztotalframenumber{%
+ \ifdim \inserttotalframenumber pt<\insertframenumber pt \insertframenumber
+ \else \inserttotalframenumber\fi}
+
+\setbeamercolor{progress bar in head/foot}{fg=bleu2}
+\setbeamercolor{footline}{bg=gris1}
+\defbeamertemplate*{footline}{progress bar}{%
+  \dimen0 \paperwidth
+  \divide \dimen0 \nztotalframenumber
+  \multiply \dimen0 \insertframenumber
+  \dimen1 \paperwidth \advance \dimen1 -\dimen0
+  \leavevmode\rlap{{\usebeamercolor[fg]{progress bar in head/foot}%
+    \vrule width \dimen0 height 2.25ex depth 1ex
+    \usebeamercolor[bg]{footline}%
+    \vrule width \dimen1 height 2.25ex depth 1ex}}%
+  \leavevmode%
+  \hbox to \paperwidth{\hss%
+    \begin{beamercolorbox}[ignorebg,wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left,leftskip=2ex]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ignorebg,wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshortauthor~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ignorebg,wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=2ex]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+      \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}%
+\defbeamertemplate{footline}{pageno}{%
+  \smash{\raise .8ex \hbox to\paperwidth{\hss\insertframenumber\hskip .8ex}}%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ajout d'un frame personnalisé pour les questions (par exemple) %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providebool{SSI@standout}
+\define@key{beamerframe}{standout}[true]{%
+  \booltrue{SSI@standout}
+  \begingroup
+    \setkeys{beamerframe}{c}
+    \setkeys{beamerframe}{noframenumbering}
+    \setkeys{beamerframe}{plain}
+    \mode<beamer>{
+      \setbeamercolor{background canvas}{bg=bleu}
+      \setbeamercolor{normal text}{fg=white}
+    }
+    \mode<handout>{
+      % \setbeamercolor{background canvas}{bg=bleu}
+      \setbeamercolor{normal text}{fg=black}
+    }
+      \usebeamercolor[fg]{normal text}
+
+
+    \centering
+}
+  \apptocmd{\beamer@reseteecodes}{%
+    \ifbool{SSI@standout}{
+      \endgroup
+      \boolfalse{SSI@standout}
+    }{}
+  }{}{}
+
+% Thème intérieur %<<<1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuration thème intérieur %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useinnertheme{rectangles}
+\setbeamertemplate{blocks}[rectangle]
+% \setbeamertemplate{title page}[default][rounded=false,shadow=false]
+
+% quand framebreak est utilisé, ne commencer à numéroter qu'à 2
+\setbeamertemplate{frametitle continuation}[from second]
+
+% enlève l'icône dans la bibliography, et remplace par le motif de citation
+\setbeamertemplate{bibliography item}[text]
+
+% couleur du trait en dessous du titre des pages
+% \setbeamercolor{trait}{fg=red}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rectangles %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\SSI@petitcadre#1#2{\leavevmode
+  \usebeamercolor[bg]{#1}% BACKGROUND COLOR for compatibility
+  \lower.4ex\hbox to 0pt{%
+    \vrule height 2.25ex width .1ex depth 0ex
+    \vbox to 2.25ex{\hsize 2.05ex \hrule height .1ex width \hsize \vss
+    \hrule height .1ex width \hsize}%
+    \vrule height 2.25ex width .1ex depth 0ex\hss}%
+  \hbox to 2.25ex{\hss #2\hss}%
+}
+\defbeamertemplate{section in toc}{framed}{%
+  \leftskip=1.75ex
+  \SSI@petitcadre{section number projected}{\inserttocsectionnumber}%
+  \hskip 1.25ex \inserttocsection}%
+
+% copied from beamerbaseauxtemplates.sty
+\defbeamertemplate{subsection in toc}{framed}
+{\leavevmode\leftskip=5ex\llap{%
+    \usebeamercolor[bg]{subsection number projected}%
+    \vrule width1ex height1ex\kern1ex}\inserttocsubsection\par}
+
+\defbeamertemplate{subsubsection in toc}{framed}
+{\leavevmode\normalsize\usebeamerfont{subsection in
+    toc}\leftskip=7ex\usebeamerfont{subsubsection in toc}%
+  \llap{%
+    \usebeamercolor[bg]{subsubsection number projected}%
+    \vrule width0.75ex height0.75ex\kern1ex}\inserttocsubsubsection\par}
+
+\defbeamertemplate{enumerate item}{framed}{\leavevmode
+  \SSI@petitcadre{item projected}{\insertenumlabel}}
+\defbeamertemplate{enumerate subitem}{framed}{\leavevmode
+  \SSI@petitcadre{subitem projected}{\insertsubenumlabel}}
+\defbeamertemplate{enumerate subsubitem}{framed}{\leavevmode
+  \SSI@petitcadre{subsubitem projected}{\insertsubsubenumlabel}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Polices %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamerfont{title}{family=\sffamily,series=\condensedfont\Large\bfseries}
+\setbeamerfont{subtitle}{family=\sffamily,series=\condensedfont\large\normalfont}
+\setbeamerfont{author}{family=\sffamily,series=\condensedfont\normalfont}
+
+\setbeamerfont{frametitle}{family=\sffamily,series=\condensedfont\large\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Couleurs %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Couleurs
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{default}{fg=black}
+\setbeamercolor{alerted text}{fg=rouge4}
+\setbeamercolor{example text}{fg=vert3}
+
+\setbeamercolor{block title}{fg=white,bg=bleu4}
+\setbeamercolor{block body}{fg=black,bg=NavyBlue!10}
+\setbeamercolor{block frame}{fg=bleu4}
+\setbeamercolor{block title alerted}{fg=white,bg=rouge4!70}
+\setbeamercolor{block body alerted}{fg=black,bg=rouge1}
+\setbeamercolor{block frame alerted}{parent=alerted text}
+\setbeamercolor{block title example}{fg=white,bg=vert3!70}
+\setbeamercolor{block body example}{fg=black,bg=vert3!13}
+\setbeamercolor{block frame example}{parent=example text}
+
+\setbeamerfont{block title}{size=\small}
+\setbeamerfont{alertblock title}{size=\footnotesize}
+\setbeamerfont{exampleblock title}{size=\scriptsize}
+
+% couleur du texte de la page de titre
+\setbeamercolor{title}{fg=bleu4}
+\setbeamercolor{subtitle}{fg=black}
+
+\setbeamercolor{frametitle}{fg=rouge4}
+\setbeamercolor{structure}{fg=bleu4}
+
+\setbeamercolor{title in head/foot}{fg=black,bg=gris1}
+\setbeamercolor{author in head/foot}{parent=title in head/foot}
+\setbeamercolor{date in head/foot}{parent=title in head/foot}
+
+% couleur d'arrière plan de la barre de navigation en haut du slide
+\setbeamercolor{navigation}{fg=bleu4}
+\setbeamerfont{navigation}{series=\small}
+
+% couleur et police du bas des pages
+\setbeamercolor{footnote}{bg=gris2}
+\setbeamerfont{footnote}{series=\bfseries}
+
+\setbeamercolor{tableau header}{fg=black,bg=gris2}
+\setbeamercolor{tableau odd}{fg=black,bg=gris1}
+\setbeamercolor{tableau}{fg=black,bg=bleu2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tableaux (colortbl) %<<<1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{colortbl} % Version couleur %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Playing with colortbl%<<<
+% definining \tablecolor: the default color for a table
+\let\orig@CT@setup\CT@setup
+\let\CT@tablecolor\@empty
+\let\CT@tablefg\@empty
+\let\CT@rowfg\@empty
+%
+\def\tablecolor#1{\def\CT@tablecolor{#1}}
+% defining \tablebgalt: alternating colors for table rows
+\let\CT@tablebgaltI\@empty
+\let\CT@tablebgaltII\@empty
+\let\CT@tablefgaltI\@empty
+\let\CT@tablefgaltII\@empty
+\def\tablebgalt#1#2{\def\CT@tablebgaltI{#1}\def\CT@tablebgaltII{#2}}
+\def\tablefgalt#1#2{\def\CT@tablefgaltI{#1}\def\CT@tablefgaltII{#2}}
+\def\tablefg#1{\noalign{\gdef\CT@tablefg{#1}}}
+\def\rowfg#1{\noalign{\gdef\CT@rowfg{#1}}}
+\newcount\tablerow \def\CT@samerow{\global\advance\tablerow -1}
+\def\CT@thisrowfg#1{\global\setbox\z@ \hbox{{\color{#1}\unhbox \z@}}}
+% modifying start/save macros%<<<
+\def\CT@start{}
+\def\CT@end{}
+\ifx\CT@row@color\undefined \let\CT@row@color\relax\fi
+% \def\CT@start{\usebeamertemplate{tableau begin}}
+% \def\CT@end{\usebeamertemplate{tableau end}}
+\defbeamertemplateparent{tableau}{tableau begin,tableau end}
+
+
+\def\SSI@saveCT{%
+  \let\CT@arc@save\CT@arc@
+  \let\CT@drsc@save\CT@drsc@
+  \let\CT@row@color@save\CT@row@color
+  \let\CT@cell@color@save\CT@cell@color
+  \let\CT@tablebgaltI@save\CT@tablebgaltI
+  \let\CT@tablebgaltII@save\CT@tablebgaltII
+  \def\CT@tablerowsave{\the\tablerow}\tablerow 0
+  \begingroup
+  \let\CT@setup\orig@CT@setup
+}
+\def\SSI@restoreCT{%
+  \endgroup
+  \global\let\CT@arc@\CT@arc@save
+  \global\let\CT@drsc@\CT@drsc@save
+  \global\let\CT@row@color\CT@row@color@save
+  \global\let\CT@cell@color\CT@cell@color@save
+  \let\CT@tablebgaltI\CT@tablebgaltI@save
+  \let\CT@tablebgaltII\CT@tablebgaltII@save
+  \expandafter \tablerow \CT@tablerowsave
+}
+% \defbeamertemplate*{tableau begin}{color}{%
+%   \usebeamercolor{tableau odd}\colorlet{t1.fg}{fg}\colorlet{t1.bg}{bg}%
+%   \usebeamercolor{tableau}\colorlet{t2.fg}{fg}\colorlet{t2.bg}{bg}%
+%   \usebeamercolor{tableau header}\colorlet{h.bg}{bg}\colorlet{h.fg}{fg}%
+%   \def\arraystretch{1.2}%
+%   \tablefgalt{t1.fg}{t2.fg}%
+%   \tablebgalt{t1.bg}{t2.bg}%
+%   \SSI@saveCT
+%   \def\+{\noalign{\CT@samerow}}%
+%   \global\let\CT@cell@color\relax
+%   %
+%   \def\CT@setup{\orig@CT@setup
+%     % bg by priority: alternate / table
+%     \ifx\CT@tablebgaltI\@empty
+%       \ifx\CT@tablecolor\@empty\else\CT@color{\CT@tablecolor}\fi
+%     \else \ifodd\tablerow \CT@color{\CT@tablebgaltI}%
+%       \else \CT@color{\CT@tablebgaltII}\fi\fi
+%     % fg by priority: alternate / row / table
+%     \ifx\CT@tablefgaltI\@empty
+%       \ifx\CT@rowfg\@empty \else \CT@thisrowfg{\CT@rowfg}\fi
+%       \ifx\CT@tablefg\@empty \else \CT@thisrowfg{\CT@tablefg}\fi
+%     \else \ifodd\tablerow \CT@thisrowfg{\CT@tablefgaltI}\else
+%       \CT@thisrowfg{\CT@tablefgaltII}\fi\fi
+%   }%
+%   \CT@everycr{\noalign{\global\let\CT@row@color\relax
+%     \global\let\CT@rowfg\@empty
+%     \global\advance\tablerow 1}\the\everycr}%
+%     \def\entete{\+\rowcolor{h.bg}\rowfg{h.fg}%
+%       \vrule width 0pt depth 1.5ex}%
+%   \def\CT@start{\SSI@saveCT}%
+%   \def\CT@end{\SSI@restoreCT}%
+%   \expandafter\def\expandafter\@tabarray\expandafter{%
+%     \expandafter\let\expandafter\CT@do@color\expandafter\relax\@tabarray
+%     }%
+% }
+% \defbeamertemplate*{tableau end}{color}{%
+% \defbeamertemplate*{tableau end}{color}{
+% }
+%>>>
+\usepackage{booktabs} % Version booktabs (handout) %<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Changes #1 to a unique token (will be different from anything else when
+% compared with \ifx). And ignore spaces while we're at it.
+\def\makeunique#1{\gdef#1{\let#1#1\ignorespaces}\ignorespaces}
+\def\SSI@noalign#1{%
+  \global\CT@everycr{}%
+  \cr\noalign{\vskip-\normalbaselineskip#1}%
+  \global\CT@everycr{\futurenonspacelet\token\SSI@tableline}%
+}
+\newif\ifSSI@apresentete\SSI@apresentetefalse
+\def\SSI@tableline{%
+%   \ifnum \tablerow=0 % Top rule
+%     \SSI@noalign{\hrule\@height \heavyrulewidth}%
+%   \else
+  \ifx\token\+\relax\else
+  \ifx\token\entete
+    \global\SSI@apresentetetrue
+    \SSI@noalign{\hrule\@height \heavyrulewidth}\else
+  \ifx\token\end
+    \SSI@noalign{\hrule\@height \heavyrulewidth\vskip-\normalbaselineskip}%
+    \global\CT@everycr{}\else
+  \ifSSI@apresentete
+    \global\SSI@apresentetefalse
+    \SSI@noalign{\color{gris2}\hrule\@height\heavyrulewidth}%
+    \else
+    \SSI@noalign{\color{gris1}\hrule \@height\lightrulewidth}%
+    \fi
+  \fi\fi\fi\ignorespaces
+}
+\defbeamertemplate{tableau begin}{book}{%
+  \let\CT@row@color\relax
+  \makeunique\entete
+  \makeunique\+
+  \global\CT@everycr{\futurenonspacelet\token\SSI@tableline}%
+}
+\defbeamertemplate{tableau end}{book}{%
+  \global\CT@everycr{}%
+  \CT@everycr{\noalign{\global\let\CT@row@color\relax}\the\everycr}%
+}
+% \setbeamertemplate{tableau}[book]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% L'environnement tableau (cf ci-dessus)%<<<2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment<>{tableau}[1]{\begin{actionenv}%
+  \def\CT@start{\usebeamertemplate{tableau begin}}%
+  \def\CT@end{\usebeamertemplate{tableau end}}%
+  \begin{tabular}{#1}}
+  {\end{tabular}\end{actionenv}}
+%>>>1
+% Spécifiques modes présentation/handout %<<<1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\setbeamermode#1{\gdef\beamer@currentmode{#1}\SSI@modeparams}
+\ifx\beamerforcemode\undefined
+\else\global\let\beamer@currentmode\beamerforcemode\fi
+% Les planches invisbles en mode handout <handout:0>
+% ne seront pas numérotées
+% http://tex.stackexchange.com/a/49806/3323, modifié maison (\lccode)
+\def\SSI@hideinvis{\lccode`\~=`\#\lowercase{%
+  \pretocmd{\beamer@@@@frame}{\alt<~1>{}{\beamer@noframenumberingtrue}}{}{}}%
+  \lccode`\~=0}
+
+% Correction des \pageref:%<<<
+% 1. \pageref fait référence aux numéros de *page*, qui sont différents à la
+% fois des numéros de slide et de frame. Groumpf.
+% 2. \thepage augmente pour une raison mystérieuse pendant
+% \beamer@origlabel. On corrige ça en le remplaçant temporairement par la
+% macro \SSI@savepage.
+% (en fait c'est probablement de la faute de pgfpages)
+\def\SSI@patchlabels#1{%
+  \let\insertframenumber\thepage
+\ifx#1\undefined\else
+  \patchcmd#1{\thepage}{\SSI@savepage}{}{}
+  \pretocmd#1{\xdef\SSI@savepage{\thepage}}{}{}
+  \global\let\SSI@patchlabels\@gobble
+\fi
+}
+%>>>
+
+% On stocke les paramètres [handout]-spécifiques dans une macro,
+% histoire de pouvoir l'appeler dans \setbeamermode ci-dessus.
+\def\SSI@modeparams{%
+  \mode<handout>{%
+
+
+% Utilisation du logo sans texte, qui passe mieux à l'impression.
+\def\logotitre{theme_imgs/20160712_logo_anssi_s}
+
+\ifx\SSI@physicalpages 1
+  % Patch contre pgfpages de la numérotation des pages
+  \AtBeginDocument{\SSI@hideinvis \SSI@patchlabels\label}
+\fi
+
+% Style des planches: moins d'aplats, plus de cadres.
+\setbeamertemplate{background canvas}[framed]
+\pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=5mm]
+\setbeamertemplate{footline}[pageno]
+\setbeamertemplate{blocks}[framed]
+\setbeamertemplate{enumerate items}[framed]
+% \setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{sections/subsections in toc}[framed]
+\setbeamertemplate{block alerted begin}[framed][1pt]
+\setbeamertemplate{block alerted end}[framed]
+\setbeamertemplate{navigation symbols}{\relax}
+\setbeamertemplate{headline}[default]
+\setbeamertemplate{sections/subsections}[empty]
+\setbeamertemplate{tableau}[book]
+
+\setbeamercolor*{title}{fg=rouge4}
+\setbeamercolor*{palette}{fg=bleu}
+\setbeamercolor{block title}{fg=bleu4}
+\setbeamercolor*{block title alerted}{parent=alerted text}
+\setbeamercolor*{block title example}{parent=example text}
+% Si on veut avoir des polices avec serif :
+% \def\rmdefault{ptm}% FIXME en attendantLe Monde
+% \def\beamer@tsfont{\rmfamily}
+% \def\beamer@sfont{\rmfamily}
+% \def\familydefault{\rmdefault}
+}}
+\SSI@modeparams
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% :vim: fdm=marker fmr=<<<,>>>:

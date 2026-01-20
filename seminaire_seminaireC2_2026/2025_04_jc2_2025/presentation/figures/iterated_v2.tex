@@ -1,0 +1,77 @@
+% !TeX root = ../slides_uvsq.tex
+\begin{tikzpicture}[scale=1]
+	
+	\foreach \xshift in {0, 3.7, 10.4} 
+	{
+	\begin{scope}[xshift=\xshift cm]
+		\foreach \y in {0, 1.5, 4.5}
+		{
+			\iftoggle{figureSPNnoDetail}{}{
+			%sbox
+			\draw[thick, draw=oicyan ,fill=white,drop shadow] (0.5,\y) rectangle node[midway] {\huge \cyan{$S$}} +(1,1) ;
+			}
+			
+			%wires
+			\foreach \smally in {1, 2, 3, 4} {
+			\draw (-.1, \y + .2*\smally) -- +(.6, 0);
+			\draw (1.5, \y + .2*\smally) -- +(.5, 0);
+			\draw (3, \y + .2*\smally) -- +(.6, 0);
+			
+			%\ifthenelse{\not{\equal{\xshift}{0}}}{	\draw (3.7, \y + .2*\smally) -- +(.5, 0);}{}
+			
+			\iftoggle{figureSPNaddroundkey}{
+			%xors
+			\draw[thick, draw=oired] (3.6,\y + .2*\smally) circle (0.1cm);
+			\draw[thick, draw=oired] (3.6, \y + .2*\smally) -- +(0, 0.1)
+			(3.6, \y + .2*\smally) -- +(0, -0.1)
+			(3.6, \y + .2*\smally) -- +(-.1, 0)
+			(3.6, \y + .2*\smally) -- +(.1, 0);
+
+			}{
+						\draw[thick, draw=oired, opacity=0] (3.6,\y + .2*\smally) circle (0.1cm);
+			\draw[thick, draw=oired, opacity=0] (3.6, \y + .2*\smally) -- +(0, 0.1)
+			(3.6, \y + .2*\smally) -- +(0, -0.1)
+			(3.6, \y + .2*\smally) -- +(-.1, 0)
+			(3.6, \y + .2*\smally) -- +(.1, 0);
+			}
+
+
+			}
+		}
+
+		\iftoggle{figureSPNnoDetail}{
+		\draw[thick, draw=oigray ,fill=white,drop shadow] (0.5,0) rectangle node[midway] {\huge \gray{$F$}} +(2.5, 5.5);
+		}
+		{
+		\draw[draw=white] (0.5,3) rectangle node[midway] {\huge \cyan{$\vdots$}} +(1,1) ;
+		
+		\draw[thick, draw=oiorange ,fill=white,drop shadow] (2,0) rectangle node[midway] {\huge \orange{$L$}} +(1,5.5) ;
+		}
+		
+	\end{scope}
+
+	\iftoggle{figureSPNaddroundkey}{
+	\draw[thick, draw=oired] (3.6, 4.5 + .2*4) -- +(0, 0.7) node[above] {\red{$rk_{0}$}};
+	\draw[thick, draw=oired] (7.3, 4.5 + .2*4) -- +(0, 0.7) node[above] {\red{$rk_{1}$}};
+	\draw[thick, draw=oired] (14, 4.5 + .2*4) -- +(0, 0.7) node[above] {\red{$rk_{R}$}};
+	}{
+	\draw[thick, draw=oired,opacity=0] (3.6, 4.5 + .2*4) -- +(0, 0.7) node[above,opacity=0] {\red{$rk_{0}$}};
+	\draw[thick, draw=oired,opacity=0] (7.3, 4.5 + .2*4) -- +(0, 0.7) node[above,opacity=0] {\red{$rk_{1}$}};
+	\draw[thick, draw=oired,opacity=0] (14, 4.5 + .2*4) -- +(0, 0.7) node[above,opacity=0] {\red{$rk_{R}$}};
+	}
+	
+	\foreach \y in {0, 1.5, 4.5}
+	{
+		\foreach \smally in {1, 2, 3, 4} {
+		\draw[dashed,oigray] (7.3, \y + .2*\smally) -- +(3, 0);
+		}
+	}
+		\draw[draw=white] (8.2, 3) -- node[midway] {$\gray{\cdots}$} +(1, 1);
+	}
+
+	\iftoggle{figureSPNnoDetail}{}{
+	\draw[draw=oicyan, thick,decorate,decoration={brace, amplitude=10pt}] (0.5, 5.6) -- node[midway, above=.3cm] {\cyan{Sbox layer}} +(1, 0);
+	\draw[draw=oiorange, thick,decorate,decoration={brace, amplitude=10pt}] (3, -.2) -- node[midway, below=.3cm] {\orange{Linear layer}} +(-1, 0);
+	}
+
+\end{tikzpicture}

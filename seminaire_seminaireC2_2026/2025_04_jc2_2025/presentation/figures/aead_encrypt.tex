@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+	\definecolor{deepmagenta}{HTML}{9F0162}
+	\definecolor{veronesegreen}{HTML}{009F81}
+	\definecolor{brilliantrose}{HTML}{FF5AAF}
+	\definecolor{brightteal}{HTML}{00FCCF}
+	\definecolor{frenchviolet}{HTML}{8400CD}
+	\definecolor{dodgerblue}{HTML}{008DF9}
+	\definecolor{capri}{HTML}{00C2F9}
+	\definecolor{plum}{HTML}{FFB2FD}
+	\definecolor{carmine}{HTML}{A40122}
+	\definecolor{vividcrimson}{HTML}{E20134}
+	\definecolor{burningorange}{HTML}{FF6E3A}
+	\definecolor{brightsparkyellow}{HTML}{FFC33B}
+	
+	\SpongeInitInner{$\text{IV} \| K \| N$}{$p^a$}
+	\draw (P.south) +(0,-1) node[spongephase] (phase) {Initialization};
+	\SpongeXorInner{$\hskip-4pt 0^* \| K$}
+	\SpongeStep\SpongePhaseSep[deepmagenta]{$ \Sigma_{\mathrm{AD}} $}
+	
+	\SpongeAbsorb{$A_1$}{$p^b$}{$r$}{$c$}
+	\SpongeStep
+	\SpongeEtc
+	\SpongeAbsorb{$A_s$}{$p^b$}{$r$}{$c$}
+	%\draw[red] (2,0) -- (2,1);
+	
+	\draw (x|-phase) node[spongephase] {Associated Data};
+	\SpongeXorInner{$\hskip-4pt 0^* \| 1$}
+	\SpongeStep\SpongePhaseSep[dodgerblue]{$ \Sigma_{\mathrm{E}} $}
+	
+	\SpongeEncrypt{$P_1$}{$C_1$}{$p^b$}{$r$}{$c$}
+	\SpongeEtc
+	\SpongeEncrypt{\hskip-8pt$P_{t\!-\!1}$}{$C_{t\!-\!1}$\hskip-8pt\null}{$p^b$}{$r$}{$c$}
+	\draw (x|-phase) node[spongephase] {Plaintext};
+	\SpongeEncryptFinal{$P_t$}{$C_t$}{$r$}{$c$}
+	\SpongeStep\SpongePhaseSep[veronesegreen]{{$ \Sigma_{\mathrm{F}} $}}
+	
+	\SpongeXorInner{$K \| 0^* \hskip-4pt$}
+	\SpongeStep
+	\SpongePermute{$p^a$}
+	\draw (P|-phase) node[spongephase] {Finalization};
+	\SpongeStep
+	\draw (Si-|Sc) coordinate[xor] (x)
+	(x|-I) node[var] (Kf) {$K$}
+	(x|-O) node[var] (T) {$T$};
+	\draw[next] (P.yinner) -- (x);
+	\draw[next] (Kf) -- (x);
+	\draw[next] (x)  -- node[bitwidth, swap] {128} (T);
+\end{tikzpicture}

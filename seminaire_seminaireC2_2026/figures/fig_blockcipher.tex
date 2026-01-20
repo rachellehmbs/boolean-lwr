@@ -1,0 +1,20 @@
+\begin{tikzpicture}[scale=0.9]  
+  
+  	\node[thick] (x) at (0,0) {$X$};
+	\draw[fill=vert3!10] (-0.5,-1.80) rectangle node{$\blockcipher$} ++(1,1);
+	\draw[-latex] (x) -- (0,-0.80) node[midway,left] {$n$};
+	
+	\node[thick] (y) at (0,-2.6) {$Y$};
+	\draw[latex-] (y) --(0,-1.8) node[midway,left] {$n$};
+	
+	\draw (-0.05,-0.53) -- (0.05,-0.48); 
+	\draw (-0.05,-2.08) -- (0.05,-2.03); 
+	
+	\node[thick] (k) at (-1.3,-1.3) {$\key$}; 
+	\draw[-latex] (k) -- (-0.5,-1.3) node[midway,above] {$\keylen$}; 
+	
+	\draw (-0.8,-1.25) -- (-0.85,-1.35);
+	
+
+  
+   \end{tikzpicture}

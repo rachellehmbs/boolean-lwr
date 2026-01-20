@@ -1,0 +1,45 @@
+
+\begin{tikzpicture}[scale=0.3]
+
+  \tikzstyle{every node}=[transform shape];
+
+  % Alice
+  \node (label) at (0,0) {\includegraphics[height=7cm]{figures/canal_alice_dep.png}};
+  \node (alice) at (0,-4) {\Huge\bf Alice};
+  
+
+  \node[below = 1em of alice] (alicekey) {\Huge  $\rouge{\key},M$};
+  
+      \onslide<2,3,4,5>{
+    \node[below = 1em of alicekey] (ctalice) {\Huge $\ver{T} = MAC(\rouge{\key},M)$ };
+  }
+  
+  % Bob
+  \node (label) at (30,0) {\includegraphics[height=7cm]{figures/canal_bob_dep.png}};
+  \node (bob) at (30,-4) {\Huge\bf Bob};
+  \node[below = 1em of bob] (bobkey) {\Huge \rouge{$\key$}};
+      \onslide<5>{
+    \node[below = 1em of bobkey] (msgbob){\Huge if $MAC( \rouge{K}, \bleu{M'}) == \bleu{T'}$ }; 
+     \node[below right = 0em and -17em of msgbob] (msgbob2){\Huge return $True$ }; 
+  }
+
+  % Eve
+  \node (label) at (15,-6) {\includegraphics[height=7cm]{figures/canal_eve_dep.png}};
+  \node (label) at (15,-10) {\Huge\bf Eve};
+  \draw[<-, line width=1mm,draw=black!30] (12,-7) -- ++(-3,0) -- node[left,align=center] { \color{black!30}\Huge\bf Listen \\ \huge \color{black!30} (Confidentiality)} ++(0,+5);
+  \draw[->, line width=1mm] (18,-7) -- ++(+3,0) --  node[right,align=center] {\Huge\bf Modify \\ \huge (Integrity) } ++(0,+5);
+
+
+  % Canal
+  \draw[line width=1mm] (4,-1) ellipse (0.7 and 1);
+  \draw[line width=1mm] (25,-2) arc (-90:90:1);
+
+  \draw[line width=1mm] (4,0) -- ++(21,0);
+  \draw[line width=1mm] (4,-2) -- ++(21,0);
+  \node (channel) at (14.5, 1) {\Huge\bf Unreliable channel of communication};
+  \onslide<3,4,5>{
+    \node[below right = 3em and -15em of channel] {\Huge  $(M,\ver{T}) \quad$  \Lightning\Lightning\Lightning $\quad (\bleu{M'},\bleu{T'}) $   };
+  } 
+    
+\end{tikzpicture}
+

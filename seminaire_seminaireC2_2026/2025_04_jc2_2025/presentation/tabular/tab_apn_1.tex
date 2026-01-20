@@ -1,0 +1,19 @@
+% !TEX root = ../slides.tex
+\renewcommand\arraystretch{1.3} 
+\begin{tabular}{c<{\onslide<2->}c<{\onslide}}
+% \visible<2->{\toprule}
+\rctt\textbf{Univariate} &  \textbf{Observations}\\
+% \midrule
+$x^{2^s + 1} + ax^{2^{(3-i)k + s} + 2^{ik}}$ & cyclotomic\\
+\rct$x^{2^s + 1} + ax^{2^{(4-i)k + s} + 2^{ik}} $ & cyclotomic\\
+$ax^{2^k + 1} + x^{2^s +1} + x^{2^{s + k} + 2^k} + bx^{2^{k + s} + 1} + b^{2^{k}}x^{2^s + 2^k}$ & $\lin$  biprojective\\
+\rct$x^{3} + a^{-1}\tr[\FF_{2^n}][\FF_2](a^3x^9)$ & cyclotomic/($\lin$) frob.\\
+$x^{3} + a^{-1}\tr[\FF_{2^n}][\FF_{2^3}](a^3x^9 + a^6x^{18})$ & cyclotomic/($\lin$) frob.\\
+\rct$x^{3} + a^{-1}\tr[\FF_{2^n}][\FF_{2^3}](a^6x^{18} + a^{12}x^{36})$ &  cyclotomic/($\lin$) frob.\\
+$ax^{2^s + 1} + a^{2^k}x^{2^{2k} + 2^{k + s}} + bx^{2^{2k} + 1} + ca^{2^k + 1}x^{2^{s} + 2^{k + s}}$ & cyclotomic\\
+\rct$a^{2}x^{2^{2k + 1} + 1} + b^{2}x^{2^{k +1} + 1} + ax^{2^{2k} + 2} + bx^{2^{k} + 2} + dx^{3}$ & cyclotomic\\
+$ x^3 + ax^{2^{s+i} + 2^i} + a^2x^{2^{k+1} + 2^k} + x^{2^{s + i + k} + 2^{i + k}}$ & $\lin$ biprojective\\
+\rct$ a\tr[\FFfield][\subfield](bx^{2^i + 1}) + a^{2^k}\tr[\FFfield][\subfield](cx^{2^s + 1})$ & $\lin$ biprojective\\
+$ L(x)^{2^k + 1} + bx^{2^k + 1} $ & ?\\
+% \visible<2->{\bottomrule}
+\end{tabular}

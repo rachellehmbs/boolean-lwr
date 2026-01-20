@@ -1,0 +1,366 @@
+% !TEX root = ../slides_jc2.tex
+\section{Polynomial representations of Boolean functions}
+
+\begin{frame}
+\frametitle{Linear self-equivalence : a unifying PoV on the known families of APN functions}
+
+\input{tabular/tab_apn_12}
+
+% \onslide<2->{
+% \begin{tikzpicture}[overlay]
+%      \node[fill=white] at (11.5,.6) {\inlinebox{ + a lot of sporadic examples for small $n$}};
+%  \end{tikzpicture}}
+
+ \onslide<2>{
+\begin{tikzpicture}[overlay]
+    %  \node[fill=white] at (8,6) {\inlinebox{\red{Where to look for a new function ?}}};
+    % \node[fill=white] at (8,3) {\inlinebox{\red{Intersection between families ?}}};
+     \node[fill=white] at (8,4.5) {\inlinebox{\orange{\large Hopefully clearer in 12 min ?}}};
+ \end{tikzpicture}}
+
+\end{frame}
+
+\input{slides/section_title}
+% \begin{frame}\frametitle{Representing a vectorial Boolean function}
+% \vspace{-10pt}
+% $$F \from \FFspace \to \FFspace, \begin{pmatrix}x_{1}\\  \vdots\\  x_{n}
+	
+% \end{pmatrix} \mapsto \begin{pmatrix}F_{1}(x_{1}, \dotsc, x_{n})\\  \vdots\\  F_{n}(x_{1}, \dotsc, x_{n})
+	
+% \end{pmatrix}.$$
+
+% Each $F_{i}: \FFspace \to \FF_{2}$ is a \emph{coordinate}.\pause
+
+% \vspace{.5cm}
+% A \emph{component} of $F$ is a linear combination of coordinate: $\alpha \cdot F \vcentcolon= \sum_{i=0}^{n-1} \alpha_{i} F_{i}$.\pause
+
+% \vspace{.5cm}
+% \begin{mybox}{Representations we won't look at}{}{}
+% \begin{itemize}
+% 	\item[\bulletpoint] Truth table / \emph{graph} of $F$: $\graph_{F} = \set{(x, F(x)), x \in \FFspace}$
+% 	\item[\bulletpoint] \emph{Walsh transform}: Fourier transform of all components $\alpha \cdot F: \FFspace \to \FF_{2}  \subset \CC $
+% \end{itemize}
+% \end{mybox}
+
+% \end{frame}
+
+
+\begin{frame}\frametitle{Polynomial representations (1/2)}
+\vspace{-10pt}
+$$F \from \cFFspace \to \cFFspace, \begin{pmatrix}x_{1}\\  \vdots\\  x_{n}
+    
+\end{pmatrix} \mapsto \begin{pmatrix}F_{1}(x_{1}, \dotsc, x_{n})\\  \vdots\\  F_{n}(x_{1}, \dotsc, x_{n})
+    
+\end{pmatrix}.$$
+\pause
+\begin{theorem}[Lagrange multivariate interpolation]
+$f \from (\FF_{q})^{m} \to \FF_{q}$ admits a polynomial representation in $\FF_{q}[X_{1}, \dotsc, X_{m}]/ (X_{1}^{q} + X_{1}, \dotsc, X_{m}^{q} + X_{m})$.
+\end{theorem}\pause
+
+
+\begin{mybox}{Algebraic Normal Form (ANF)}{}{}
+$(q = 2, m=n)$. Each coordinate is a polynomial of $\FF_{2}[X_{1}, \dotsc, X_{n}]/ (X_{1}^{2} + X_{1}, \dotsc, X_{n}^{2} + X_{n})$
+\end{mybox}\pause
+
+\begin{center}
+$F \from \cyan{\FF_{2}^{4}} \to \cyan{\FF_{2}^{4}}, \begin{pmatrix}
+x_{0}\\ x_{1}\\ x_{2}\\ x_{3}
+\end{pmatrix} \mapsto \begin{pmatrix}
+    x_0x_2 + x_0 + x_1x_2 + x_1x_3\\ 
+x_0x_1 + x_0x_2 + x_2x_3 + x_3\\ 
+x_0x_1 + x_0x_2 + x_0x_3 + x_1x_2 + x_1x_3 + x_2x_3 + x_2\\ 
+x_1x_3 + x_1 + x_2x_3 + x_2 + x_3
+\end{pmatrix}$
+\end{center}
+
+%\emph{Algebraic degree} : $\algdeg(F) \vcentcolon= \max\limits_{1 \leq i \leq n} \deg(F_{i})$.\hfill Here $\algdeg(F) = 2$
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Polynomial representations (2/2)}
+\vspace{-.5cm}
+\begin{theorem}[Lagrange multivariate interpolation]
+$f \from (\FF_{q})^{m} \to \FF_{q}$ admits a polynomial representation in $\FF_{q}[X_{1}, \dotsc, X_{m}]/ (X_{1}^{q} + X_{1}, \dotsc, X_{m}^{q} + X_{m})$.
+\end{theorem}\pause
+
+
+\begin{mybox}{$\FF_{2}$-space isomorphisms}{}{}
+$$\quad \quad \cFFspace \quad \simeq \quad \cFFfield \quad \simeq \quad \cFFinter, \text{ with } n = \ell k.$$
+\end{mybox}\pause
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\begin{mybox}{Univariate representations}{$q = 2^{n}, m = 1$}{}
+$F \from \cFFspace \to \cFFspace$ can be seen as $\widetilde{F} \from \cFFfield \to \cFFfield$.
+
+
+\begin{align*}
+	\widetilde{F} \from \orange{\FF_{2^{4}}} &\to \orange{\FF_{2^{4}}}\\ 
+	X &\mapsto \orange{\alpha_{0}}X^{12} + \orange{\alpha_{1}}X^{6} + \orange{\alpha_{2}}X^{3}
+\end{align*}
+\end{mybox}
+
+\end{column}\pause
+\begin{column}{0.5\textwidth}
+
+\begin{mybox}{Multivariate representations}{$q = 2^{k}, m = \ell$}{}
+$F \from \cFFspace \to \cFFspace$ can be seen as $\widetilde{F} \from \cFFinter \to \cFFinter$.
+
+
+\begin{align*}\widetilde{F} \from \purple{\FF_{2^{2}}^{2}} &\to \purple{\FF_{2^{2}}^{2}}\\ \begin{pmatrix}x_{0}\\  x_{1}\end{pmatrix} &\mapsto \begin{pmatrix}\purple{\alpha_{0}}x_{0}^3 + x_{0}^2x_{1} + \purple{\alpha_{1}}x_{0}x_{1}^2 + \purple{\alpha_{2}}x_{1}^3\\
+\purple{\alpha_{3}}x_{0}^3 + \purple{\alpha_{4}}x_{0}^2x_{1} + \purple{\alpha_{5}}x_{0}x_{1}^2\end{pmatrix}
+\end{align*}
+\end{mybox}
+\end{column}
+\end{columns}
+
+\begin{center}
+    \emph{Up to a choice of bases!}
+\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Polynomial representations and APN functions}
+\vspace{-.5cm}
+ $$ \delta_{F}(\din, \dout) = \card{\set{x, F(x + \din) + F(x) = \dout}} $$\pause
+
+ $\orange{A} \from (\FFspace, +) \to (U, \black{+_{_{U}}})$ and $\orange{B} \from (V, \black{+_{_{V}}}) \to (\FFspace, +)$ linear bijective mappings.
+
+ Then $\orange{A}\comp F\comp \orange{B} \from (V, \black{+_{_{V}}}) \to (U, \black{+_{_{U}}})$\pause
+
+
+
+% $$
+% \begin{array}{ccccc}
+% \orange{A}\comp F\comp \orange{B}(x \ \black{+_{_{V}}} \ \din) \ &\black{+_{_{U}}}& \  \orange{A}\comp F\comp \orange{B}(x) &=& \dout\\\pause 
+% %\orange{G} (F\comp \red{H}(x \ \red{+_{_{V}}} \ \din) &+& F\comp \red{H}(x)) &=& \dout \\ 
+%  F\comp \orange{B}(x \ \black{+_{_{V}}} \ \din) &+& F\comp \orange{B}(x) &=& \orange{A}^{-1}(\dout) \\\pause
+%   F( \orange{B}(x) + \orange{B}(\din)) &+& F\comp \orange{B}(x) &=& \orange{A}^{-1}(\dout) \\\pause
+%     %F( y + \red{H}(\din)) &+& F(y) &=& \orange{G}^{-1}(\dout)
+% \end{array}
+% $$
+
+\begin{proposition}
+\begin{itemize}
+	\item[\bulletpoint] $\forall \din, \dout, \quad \delta_{F}(\orange{B}(\din), \orange{A}^{-1}(\dout)) = \delta_{\orange{A}F\orange{B}} (\din, \dout)$ 
+	\item[\bulletpoint] $F$ is APN if and only if $\orange{A}\comp F\comp \orange{B}$ is APN.
+\end{itemize}
+\end{proposition}
+
+\begin{definition}[Linear equivalence]
+    $F_{1} \lin F_{2}$ if $\quad \exists \ \orange{A}, \orange{B}$, bijective linear s.t. $\quad \orange{A} \comp F_{1} \comp \orange{B} = F_{2}$.
+\end{definition}
+
+% \begin{corollary}[Freedom of choice]
+% 	Sometimes easier to prove that $F$ is APN using \emph{another representation}.
+% \end{corollary}
+
+\end{frame}
+
+\begin{comment}
+    
+
+
+\subsection{Equivalence relations}
+\begin{frame}
+\frametitle{\subsecname}
+\vspace{-.4cm}
+
+\begin{columns}[c]
+\begin{column}{0.7\textwidth}
+
+\begin{mybox}{Linear equivalence}{}{}
+$F_{1} \lin F_{2}$ if $\quad \exists \ \orange{A}, \orange{B}$, bijective \emph{linear} s.t. $\quad \orange{A} \comp F_{1} \comp \orange{B} = F_{2}$.
+\end{mybox}
+
+\onslide<2->{
+\begin{mybox}{Affine equivalence}{}{}
+$F_{1} \aff F_{2}$ if $\quad \exists \ \blue{A}, \blue{B}$, bijective \emph{affine} s.t. $\quad \blue{A} \comp F_{1} \comp \blue{B} = F_{2}$.
+\end{mybox}
+}
+\onslide<3->{
+\begin{mybox}{CCZ equivalence}{}{\purple{\small[CCZ98]}}
+$F_{1} \from \FFspace \to \FFspace$  $\ccz$  $F_{2} \from \FFspace \to \FFspace$ if: $\exists \ \purple{\mathcal{A}} \from \FFspace \times \FFspace \to \FFspace \times \FFspace$
+
+ bijective \emph{affine} s.t.
+\vspace{-.2cm}
+$$ \purple{\mathcal{A}} \left(\graph_{F_{1}}\right) = \graph_{F_{2}},$$
+
+where $\graph_{F} \vcentcolon= \set{(x, F(x), x \in \FFspace)}$.
+\end{mybox}}
+
+\onslide<4->{
+\begin{proposition}
+    If  $F_{1} \ccz F_{2}$, then $\quad F_{1}$ APN $\iff$ $F_{2}$ APN.
+\end{proposition}
+}
+
+\end{column}
+
+\begin{column}{0.3\textwidth}
+
+\vspace{.6cm}
+\begin{tikzpicture}[scale=.8]
+    %   \scriptsize     
+        % \coordinate (nw) at (0, 5);
+        % \coordinate (sw) at (0, 0);
+        % \coordinate (ne) at (6, 5);
+        % \coordinate (se) at (6, 0);
+        
+        \onslide<2->{
+        	\draw[very thick,oiblue, rounded corners=5pt] (0, -.2) rectangle node {Affine} (4, -3.8) ;
+            \draw[very thick,oiblue,rounded corners=5pt] (0, 0) rectangle (4,4) ;
+         \draw[very thick,oiorange,rounded corners=5pt] (.1, 2.05) rectangle +(3.8,.875) ;
+          \draw[very thick,oiorange,rounded corners=5pt] (.1, 3.025) rectangle +(3.8,.875) ;
+        \draw[very thick,oiorange,rounded corners=5pt] (.1, 1.075) rectangle +(3.8,.875) ;
+        \draw[very thick,oiorange,rounded corners=5pt] (.1, 0.1) rectangle node {Linear} +(3.8,.875) ;
+        }
+
+       	\onslide<3->{
+        \draw[very thick,oipurple,rounded corners=5pt] (-0.2, 4.2) rectangle (4.2,-4) ;
+        \draw[very thick, oipurple] (0.2, -4) -- +(.5, -.5) node[right=.4] {CCZ};}
+
+        % \draw[very thick,oiorange,rounded corners=15pt] ($(nw)+(3, -1.5)$) rectangle ($(se)+(-1.3, 1.5)$) ;
+
+
+        % \draw (3.7,1.9) node[] {{\tiny X} $E_{\red{k}}$};
+
+        
+        % \draw[very thick,oiblue] ($ (ne) + (-.25, -1.4) $) --++(.6,0.7) node[right=1]{$\mathrm{aff}(\FF_2^n)$};
+        % \node[very thick,oiorange] at ($ (ne) + (-1.1, -2) $) {\orange{$\mathcal{E}$}};
+\end{tikzpicture}
+
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+\end{comment}
+
+
+\subsection{Proper representatives for easier proofs}
+\begin{frame}
+\frametitle{\subsecname}
+
+% \begin{center}
+% $4$ bits $\approx$ a pair of $2$-bit words $\approx$ a $4$-bit word    
+% \end{center}
+\vspace{-.5cm}
+\begin{mybox}{4 linearly-equivalent functions}{}{}
+
+$F \from \cyan{\FF_{2}^{4}} \to \cyan{\FF_{2}^{4}}, \begin{pmatrix}
+x_{0}\\ x_{1}\\ x_{2}\\ x_{3}
+\end{pmatrix} \mapsto \begin{pmatrix}
+    x_0x_2 + x_0 + x_1x_2 + x_1x_3\\ 
+x_0x_1 + x_0x_2 + x_2x_3 + x_3\\ 
+x_0x_1 + x_0x_2 + x_0x_3 + x_1x_2 + x_1x_3 + x_2x_3 + x_2\\ 
+x_1x_3 + x_1 + x_2x_3 + x_2 + x_3
+\end{pmatrix}$
+\vspace{.5cm}
+
+$F \from \purple{\FF_{4}^{2}} \to \purple{\FF_{4}^{2}},  \begin{pmatrix}x_{0}\\  x_{1}\end{pmatrix} \mapsto \begin{pmatrix}\purple{\alpha_{0}}x_{0}^3 + x_{0}^2x_{1} + \purple{\alpha_{1}}x_{0}x_{1}^2 + \purple{\alpha_{2}}x_{1}^3\\
+\purple{\alpha_{3}}x_{0}^3 + \purple{\alpha_{4}}x_{0}^2x_{1} + \purple{\alpha_{5}}x_{0}x_{1}^2\end{pmatrix}$
+
+\vspace{.5cm}
+$F \from \orange{\FF_{16}} \to \orange{\FF_{16}}, X \mapsto \orange{\alpha_{0}}X^{12} + \orange{\alpha_{1}}X^{6} + \orange{\alpha_{2}}X^{3}$
+
+\onslide<2->{
+\vspace{.5cm}
+$F \from \orange{\FF_{16}} \to \orange{\FF_{16}}, X \mapsto X^{3}$}
+\end{mybox}
+\vspace{-1cm}
+\begin{align*}
+	\onslide<3->{F(X+ \plaindiff) + F(X) = \dout}\\
+	\onslide<4->{(X + \plaindiff)^{3} + X^{3} = \dout}\\ 
+	\onslide<5->{\plaindiff X^{2} + \plaindiff^{2} X + \plaindiff^{3} + \dout = 0}
+\end{align*}
+%$$  = (X + \plaindiff)^{3} + X^{3} = \plaindiff X^{2} + \plaindiff^{2} X + \plaindiff^{3}$$
+
+\onslide<6>{$\implies$ at most 2 solutions $\implies$ APN !}
+\end{frame}
+
+\begin{frame}
+\frametitle{Linear self-equivalence : a unifying PoV on the known families of APN functions}
+
+\input{tabular/tab_apn_12}
+
+% \onslide<2->{
+% \begin{tikzpicture}[overlay]
+%      \node[fill=white] at (11.5,.6) {\inlinebox{ + a lot of sporadic examples for small $n$}};
+%  \end{tikzpicture}}
+
+ \onslide<2>{
+\begin{tikzpicture}[overlay]
+    %  \node[fill=white] at (8,6) {\inlinebox{\red{Where to look for a new function ?}}};
+    % \node[fill=white] at (8,3) {\inlinebox{\red{Intersection between families ?}}};
+     \node[fill=white] at (8,4.5) {\inlinebox{\orange{\large Hopefully clearer in 5 min ?}}};
+ \end{tikzpicture}}
+
+\end{frame}
+
+\begin{comment}
+\begin{frame}\frametitle{The APN family tree}
+\vspace{-.5cm}
+\begin{mybox}{A common descent}{}{\small \purple{[Nyberg93]}}
+The function $F \from \FFfield \to \FFfield, X \mapsto X^{3}$ is APN.
+\begin{itemize}
+	\item[\bulletpoint] $F$ is a \blue{power mapping}
+	\item[\bulletpoint] $F$ is \orange{quadratic}: $\algdeg(F) = \hamming(3) = 2$
+\end{itemize}
+\end{mybox}\pause
+\vspace{-.5cm}
+
+\begin{chronology}[5]{1992}{2024}{15cm}[\textwidth]
+\eventpoint{1992}{ \ \ [NybKnu92]}[black][1][1]
+\eventpoint{1993}{ \ \ [Nyberg93]}[black][1][1]
+\eventspan{1992}{2001}{}[oiblue][.7][.2]
+\eventpoint{2006}{ \ \ [EKP06]}[black][1][1] %BCP06, 
+\eventspan{2006}{2024}{}[oiorange][.7][.2]
+\end{chronology}
+
+\begin{mybox}{Descendants}{}{}
+\begin{itemize}
+	\item[\bulletpoint] 6 infinite families of APN \blue{power mappings}, some are \emph{not quadratic}. %\small \purple{[Nyberg93, Dobbertin99a,99b,01]
+	\item[\bulletpoint] About 20 infinite families of \orange{quadratic} APN mappings.
+% 	\item[\bulletpoint] A lot of sporadic examples for $n \leq 9$
+\end{itemize}
+\end{mybox}\pause
+
+% \begin{mybox}{Descendant branch \#2: quadratic mappings}{}{}
+% \begin{itemize}
+% 	\item[\bulletpoint] About 20 infinite families of quadratic APN mappings.
+% 	\item[\bulletpoint] A lot of sporadic examples for $n \leq 9$
+% \end{itemize}
+% \end{mybox}
+
+\begin{mybox}{A single counter-example}{}{\small \purple{[BriLea08,EdePot09]}}
+A single APN function \emph{inequivalent} to a power mapping or a quadratic mapping is known.
+\end{mybox}
+
+\end{frame}
+\end{comment}
+
+
+\begin{comment}
+    
+
+\begin{frame}
+\frametitle{Infinite families of quadratic APN mappings}
+
+\input{tabular/tab_apn_12}
+
+% \onslide<2->{
+% \begin{tikzpicture}[overlay]
+%      \node[fill=white] at (11.5,.6) {\inlinebox{ + a lot of sporadic examples for small $n$}};
+%  \end{tikzpicture}}
+
+ \onslide<2>{
+\begin{tikzpicture}[overlay]
+     \node[fill=white] at (8,6) {\inlinebox{\red{Where to look for a new function ?}}};
+  	\node[fill=white] at (8,3) {\inlinebox{\red{Intersection between families ?}}};
+     \node[fill=white] at (8,4.5) {\inlinebox{\red{How to prove that a new $F$ is actually new ? }}};
+ \end{tikzpicture}}
+
+\end{frame}
+\end{comment}

@@ -1,0 +1,73 @@
+\tikzstyle{public} = [draw,fill=vert3!15]
+
+\begin{tikzpicture}[scale=0.25]
+
+    \node[public] (IV) at (-2,0) {IV};
+    \node[public, anchor=west] (XOF) at (0, 0) {XOF};
+    \draw[->] (IV) -- (XOF);
+    \node[public, anchor=west] (tau) at (1.5, -3) {Subset $\tau^i$};
+    \node[public, anchor=west] (sigma) at (1.5, -9) {Perm. $\sigma^i$};
+    \node[public, anchor=west] (whit) at (1.5, -13) {Whitening $m^i$};
+    \coordinate (XOFdep) at ($ (XOF.south west) + (0.5,0) $);
+    \draw[->] (XOFdep) |- (tau);
+    \draw[->] (tau) -- (tau -| 12, 0);
+    \draw[->] (XOFdep) |- (sigma);
+    \draw[->] (sigma) -- (sigma -| 12, 0);
+    \draw[->] (XOFdep) |- (whit);
+    \draw[->] (whit) -- (whit -| 12, 0);
+
+
+\begin{scope}[xshift=1.5cm,yshift=-9cm]
+    \draw[fill=gray!8] (10.5,-3) rectangle ++(14,6);
+\end{scope}
+
+\begin{scope}[xshift=1.5cm,yshift=-12.5cm]
+    \draw[->](11.5,-0.5) --(11.5,-2);
+    \draw[->](14.5,-0.5) --(14.5,-2);
+    \draw[->](17.5,-0.5) --++(0,-1.5);
+    \draw[->](20.5,-0.5) --++(0,-1.5);
+    \draw[->](23.5,-0.5) --++(0,-1.5);
+
+    \node[draw, fill=vert3!15,trapezium,trapezium left angle=145,trapezium right angle=145,minimum height=2em,minimum width=3.5cm] (f) at (17.5,-4){$f$};
+    \node[inner sep=0pt] at (17.5,-8.3) (add) {$\boxplus$};
+    \node[anchor=east] at (16,-8.3) (plaintext) {\small plaintext nibble};
+    \node[anchor=west] at (19,-8.3) (ciphertext) {\small ciphertext nibble};
+    \draw[->] (f.south)  -- node[right] {\small $Z_i \in \mathbb{Z}_{16}$} (add);
+    \draw[->] (plaintext) -- (add);
+    \draw[->] (add) -- (ciphertext);
+\end{scope}
+
+
+\draw[fill=rouge3!20] (12,-1) rectangle node{Key register}++(20,2);
+
+\node(nibbles) at (22,3) {\color{rouge3} \small $256$ nibbles $\in \mathbb{Z}_{16}$ ($=1024$ bits)};
+\draw[<->,rouge3](12,2) -- (32,2); 
+
+\node(nibbles) at (29.5,-5) {\color{rouge3} \small $60$ nibbles};
+\draw[<->,rouge3](12,-5) -- (26,-5); 
+%
+
+\draw[->](13,-1) --(13,-6); 
+\draw(13,-6) -- (16,-12);
+\draw(16,-12)  node[below]{$\boxplus$} --(16,-13);
+%
+\draw[->](16,-1) --(16,-6); 
+\draw(16,-6) -- (13,-12);
+\draw(13,-12) node[below]{$\boxplus$} --(13,-13);
+%
+\draw(22,-1) --(19,-3.5);
+\draw[->](19,-3.5) --(19,-6); 
+\draw(19,-6) --(25,-12);
+\draw(25,-12)  node[below]{$\boxplus$} --(25,-13);
+%
+\draw(26,-1) --(22,-3.5);
+\draw[->](22,-3.5) --(22,-6); 
+\draw(22,-6) --(19,-12);
+\draw(19,-12)  node[below]{$\boxplus$} --(19,-13); 
+%
+\draw(31,-1) --(25,-3.5);
+\draw[->](25,-3.5) --(25,-6); 
+\draw(25,-6) --(22,-12);
+\draw(22,-12)  node[below]{$\boxplus$} --(22,-13);
+%
+\end{tikzpicture}

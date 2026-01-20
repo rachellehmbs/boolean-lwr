@@ -1,0 +1,58 @@
+\begin{tikzpicture}[inner sep = 0.01em,scale=1.1]
+
+
+
+\node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 5em, minimum height=2em] (h) {};
+\node (hwrite) at (h.center) {\small $h$};
+
+\node[below = 2em of h] (add1) {} ;
+
+\node[above = 1em of h] (add2) {$\boxplus$};
+
+
+
+\node[right = 2em of add2] (m1) {\footnotesize whitening};
+
+\node[draw, fill=vert3!10, above = 1em of add2, rectangle, minimum width = 23mm, minimum height = 5mm] (reordering) { {\footnotesize reordering}};
+
+
+\node[above  = 3.4em and -3.5em of add2] (k1) {\small $(K_{a},K_{b},K_{c},K_{d})$};
+%\node[right = 1.8em of k1] {{\footnotesize $a < b < c < d$}};
+%\node[right = 1em of k1] (k5) {$K_{5}$} ;
+
+\draw[-latex] (m1) -- (add2);
+\draw[-latex] (k1) -- (reordering);
+\draw[-latex] (reordering) -- (h);
+\draw[-latex] (h) -- (add1);
+%\draw[-latex] (k5) |- (add1);
+
+%%%%%
+
+
+%\begin{scope}[yshift = 5.2em]
+%\draw (-0.08,0.55) --++  (0.15,0.15); 
+%\node[left] at (-0.1,0.6)  {\tiny $16$};
+%\end{scope}
+%
+%
+%\begin{scope}[yshift = 2.2em]
+%\draw (-0.08,0.55) --++  (0.15,0.15); 
+%\node[left] at (-0.1,0.6)  {\tiny $16$};
+%\end{scope}
+%
+%\begin{scope}[xshift = -1.7em,yshift = 1.15em]
+%\draw (-0.08,0.55) --++  (0.15,0.15); 
+%\node[left] at (0.1,0.4)  {\tiny $16$};
+%\end{scope}
+%
+%\begin{scope}[yshift = -3.5em]
+%\draw (-0.08,0.55) --++  (0.15,0.15); 
+%\node[left] at (-0.1,0.6)  {\tiny $1$};
+%\end{scope}
+
+\node[below = 6em of h] (up) {}; 
+\node[left = 2.5em of h] (left) {}; 
+
+ \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 2em, minimum height=0.7em, below = 0.3em of h] (lsb) {};
+ \node at (lsb.center) {\tiny lsb};
+\end{tikzpicture}

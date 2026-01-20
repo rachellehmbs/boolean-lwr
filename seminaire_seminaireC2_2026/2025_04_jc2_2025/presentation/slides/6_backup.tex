@@ -1,0 +1,228 @@
+% !TEX root = ../slides.tex
+\section{Appendix}
+\input{slides/section_title}
+
+	\subsection{The permutation}
+	\begin{frame}[label=page3]
+		\frametitle{\subsecname}
+		\vspace{-.3cm}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{mybox}{\centering A confusion/diffusion structure\dots}{}{}
+				
+						\begin{textblock*}{7cm}(.2cm,2.4cm)
+							\centering
+							{\scriptsize The state}
+							\scalebox{0.4}{\input{figures/state.tex}}
+							\vspace{-.2cm}
+							\[  p = {\color{oigreen} p_L} \comp {\color{oiorange} p_S}  \comp {\color{oiblue} p_C} \]
+						\end{textblock*}
+			
+						\begin{textblock*}{7cm}(0.2cm,4.5cm)
+							\centering
+							\scriptsize The constant addition {\color{oiblue} $ p_C $}
+							\scalebox{0.4}{\input{figures/add_cst.tex}}
+						\end{textblock*}
+			
+
+						\begin{textblock*}{7cm}(.2cm,5.9cm)
+							\centering
+							\scriptsize The substitution layer {\color{oiorange} $ p_S $} \scalebox{0.4}{\input{figures/sbox_layer.tex}}
+
+						\end{textblock*}
+										
+				
+						\begin{textblock*}{7cm}(.2cm,7.4cm)
+							\centering
+							\scriptsize The linear layer {\color{oigreen} $ p_L $}
+							\scalebox{0.4}{\input{figures/lin_layer.tex}}
+						\end{textblock*}
+					
+				\end{mybox}
+			\end{column}
+
+			\begin{column}{0.36\textwidth}
+				\begin{mybox}{\centering \dots studied algebraically}{}{}
+					\tiny
+					\vspace{15pt}
+					\begin{align*}
+						y_0 &= {\color{oired} \bm{x_4x_1}} + x_3 + {\color{oired} \bm{x_2x_1}} + x_2 + {\color{oired} \bm{x_1x_0}} + x_1 + x_0 \\
+						y_1 &= x_4 + {\color{oired} \bm{x_3x_2}} + {\color{oired} \bm{x_3x_1}} + x_3 + {\color{oired} \bm{x_2x_1}} + x_2 + x_1 + x_0 \\
+						y_2 &= {\color{oired} \bm{x_4x_3}} + x_4 + x_2 + x_1 + 1\\
+						y_3 &= {\color{oired} \bm{x_4x_0}} + x_4 + {\color{oired} \bm{x_3x_0}} + x_3 + x_2 + x_1 + x_0 \\
+						y_4 &= {\color{oired} \bm{x_4x_1}} + x_4 + x_3 + {\color{oired} \bm{x_1x_0}} + x_1
+					\end{align*}
+					%\vspace{-22pt}
+					\begin{center}
+						\scriptsize Algebraic Normal Form (ANF) of the {\color{oiorange} S-box}
+					\end{center}
+					%\pause
+					\vspace{5pt}
+					\begin{align*}
+						X_0 &= X_0 \xor \ (X_0 \ggg 19) \ \xor \ (X_0 \ggg 28) \\
+						X_1 &= X_1 \xor \ (X_1 \ggg 61) \ \xor \ (X_1 \ggg 39)  \\
+						X_2 &= X_2 \xor \ (X_2 \ggg 1) \ \xor \ (X_2 \ggg 6)  \\
+						X_3 &= X_3 \xor \ (X_3 \ggg 10) \ \xor \ (X_3 \ggg 17)  \\
+						X_4 &= X_4 \xor \ (X_4 \ggg 7) \ \xor \ (X_4 \ggg 41)
+					\end{align*}
+					%\vspace{-22pt}
+					\begin{center}
+						\scriptsize ANF of the linear layer {\color{oigreen} $ p_L $}
+					\end{center}
+
+				\end{mybox}
+			
+			\end{column}
+		\end{columns}
+
+	\end{frame}
+
+	\subsection{The nonce-misuse scenario}
+	\begin{frame}[label=page4]
+		\frametitle{\subsecname}
+		\begin{mybox}{Simplified setting of \Ascon-128}{}{}
+			\begin{center}
+				\scalebox{0.7}{\input{figures/nonce_misuse_attack.tex}}
+			\end{center}
+		\vspace{10pt}
+			\begin{itemize}[leftmargin=0cm]
+				\item[-] Many reuse of the {\color{oiorange} same $ (k, N) $ pair}.
+				\item[-] State recovery = {\color{oired} compromised confidentiality without interaction}.
+				\item[-] {\color{oigreen} No trivial key-recovery nor forgery} in that case.
+				\item[-] Different from the generic attack [ACNS:VauViz18].
+
+			\end{itemize}
+		\end{mybox}
+	
+	\end{frame}
+
+
+\subsection{Conditional cube}
+\begin{frame}
+	\frametitle{\subsecname}
+	\vspace{10pt}
+%	\begin{center}
+		\begin{itemize}[leftmargin=0.3cm]
+			\item[-] We look for $ {\color{oiorange}\alpha_u} $ with a {\color{oiblue} simple divisor}: $ \color{oiorange}\beta_0 $.
+			\item[-]  $\color{oiorange} \alpha_u $ {\color{oired} mostly unknown}, but we still get: $ {\color{oiorange}\alpha_u } = 1 \implies {\color{oiorange}\beta_0 } = 1$. 
+			\item[-] If $ \color{oiorange}\beta_0  $ is linear, we get a { \color{oiblue} linear system}.
+			
+		\end{itemize}
+%	\end{center}
+
+		% \pause
+				
+		% 	\only<2>{\begin{center}
+		% 		\scalebox{0.8}{\input{figures/trees_4.tex}}\end{center}}
+		\begin{center}
+				\scalebox{0.8}{\input{figures/trees_3.tex}}\end{center}
+
+\end{frame}
+
+	\subsection{Choosing conditional cubes by forcing linear divisors}
+	\begin{frame}[label=page5]
+		\frametitle{\subsecname}
+		\vspace{-.7cm}
+		\begin{mybox}{\nth{1} round}{}{}
+				\begin{center}
+				\scalebox{0.85}{\input{figures/s1.tex}}\\
+			\end{center}
+		\end{mybox}
+	\vspace{-8pt}
+	\pause
+		\begin{mybox}{\nth{2} round}{}{}
+			\begin{itemize}[leftmargin=0.3cm]
+				\item[-]For any $\color{oigreen} v_0v_i $, $  i \neq 0 $:
+				$ {\color{oiorange} \beta_0}P + {\color{oiorange} 1}Q  + {\color{oiorange} \gamma_0}R +  ({\color{oiorange}\beta_0 + 1})S$. 
+				\item[-] But for {\color{oired} some} $ i $: $ {\color{oiorange} \beta_0}P $ or $ {\color{oiorange} \gamma_0}R $.
+			\end{itemize}
+			
+%			\begin{itemize}[leftmargin=0.5cm]
+%				\item[-] For any $\color{oigreen} v_0v_i $, $  i \neq 0 $:
+%				$ {\color{oiorange} \beta_0}P + {\color{oiorange} 1}Q  + {\color{oiorange} \gamma_0}R +  ({\color{oiorange}\beta_0 + 1})S$.
+%				\vspace{5pt}
+%				\pause
+%				\item[-] coefficient for {\color{oired} some} $ i $: $ {\color{oiorange} \beta_0}P $ or $ {\color{oiorange} \gamma_0}R $.
+%			\end{itemize}
+		\end{mybox}
+
+
+
+	\end{frame}
+
+
+	\begin{frame}
+	    
+	
+	\begin{mybox}{\nth{6} round}{}{}
+		\frametitle{\subsecname}
+
+					\begin{itemize}[leftmargin=0.3cm]
+				\item[-] With {\color{oired} chosen u},
+				$ {\color{oiorange}\alpha_{u, \ j}} = {\color{oiorange}\beta_0}(\dots) + {\color{oiorange}\gamma_0}(\dots) $ , for all output coordinates. % ($ j \in \intset{0, 63}$).
+				\pause
+%				\vspace{5pt}
+				\item[-] $ \left({\color{oiorange}\alpha_{u, 0} }, \cdots,{\color{oiorange}\alpha_{u, 63} }\right) \neq (0,\cdots, 0) \implies {\color{oiorange}\beta_0} = 1 $ or ${\color{oiorange}\gamma_0} = 1  $
+				\pause
+				\item[-] In practice, {\color{oired} reciprocal also true!} $ [\,{\color{oiorange}\alpha_{u, \ j}} = 0, \ \forall \ j\ ]\,\ \implies {\color{oiorange}\beta_0} = 0 $ and ${\color{oiorange}\gamma_0 } = 0   $
+				\vspace{5pt}
+
+				\begin{columns}
+			\begin{column}{5cm}
+				\includegraphics[width=5cm]{figures/test0} %\\
+				%\scriptsize \centering Individual cancellations of each $ \color{oiorange} \alpha_{u,j} $\\ (1000 random internal states)
+			\end{column}
+			
+			\begin{column}{5cm}
+			\includegraphics[width=5cm]{figures/test1} %\\
+%				\scriptsize \centering Hamming weight of the cube-sum vectors \\(1000 random internal states)
+			\end{column}
+		\end{columns}
+
+\end{itemize}
+		\end{mybox}
+	\end{frame}
+
+
+\begin{frame}\frametitle{Midori}
+\includegraphics[width=14.5cm]{figures/midori_1}
+\end{frame}
+\begin{frame}\frametitle{Midori}
+\includegraphics[width=14.5cm]{figures/midori_2}
+\end{frame}
+\begin{frame}\frametitle{Midori}
+\includegraphics[width=14.5cm]{figures/midori_3}
+\end{frame}
+
+\begin{frame}\frametitle{Walsh spectrum of cyclotomic mappings}
+\includegraphics[width=14.5cm]{figures/wcc_1}
+\end{frame}
+\begin{frame}\frametitle{Streebog}
+\includegraphics[width=14.5cm]{figures/wcc_2}
+\end{frame}
+
+\begin{frame}\frametitle{}
+\includegraphics[width=14.5cm]{figures/thesis_1}
+\end{frame}
+\begin{frame}\frametitle{}
+\includegraphics[width=14.5cm]{figures/thesis_2}
+\end{frame}
+\begin{frame}\frametitle{}
+\includegraphics[width=14.5cm]{figures/thesis_3}
+\end{frame}
+
+\begin{frame}\frametitle{Brinckmann-Leander-Edel-Pott APN cubic}
+\begin{itemize}
+	\item[-] 7 non-trivial automorphisms
+	\item[-] Elementary divisors for $\calLL$ : $(X+1) $multiplicity 2, $(X+1)^{2}$ multiplicity 5
+	\item[-]  If $\calLL \sim \diag(A, B)$ then $(X+1)^{2}$ is among the elementary divisors of $A$ $\implies$ $\min(A) = (X+1)^{2}$ not irreducible.
+	\item[-] Cannot be cyclotomic mappings nor $\ell$-projective mappings.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{}
+\includegraphics[width=13cm]{figures/thesis_4}
+\end{frame}
+\begin{frame}\frametitle{}
+\includegraphics[width=13cm]{figures/thesis_5}
+\end{frame}

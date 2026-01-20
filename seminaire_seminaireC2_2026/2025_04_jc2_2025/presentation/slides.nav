@@ -1,0 +1,50 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\beamer@sectionpages {1}{1}}
+\headcommand {\beamer@subsectionpages {1}{1}}
+\headcommand {\sectionentry {1}{Symmetric cryptography}{2}{Symmetric cryptography}{0}}
+\headcommand {\beamer@subsectionpages {2}{1}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{2}{Boolean functions: a niche yet exciting topic}}
+\headcommand {\slideentry {1}{1}{1}{2/2}{Boolean functions: a niche yet exciting topic}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@subsectionpages {2}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{3}{Block cipher}}
+\headcommand {\slideentry {1}{2}{1}{3/3}{Block cipher}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{4}{Differential distinguisher}}
+\headcommand {\slideentry {1}{3}{1}{4/6}{Differential distinguisher}{0}}
+\headcommand {\beamer@framepages {4}{6}}
+\headcommand {\beamer@subsectionpages {4}{6}}
+\headcommand {\beamer@subsectionentry {0}{1}{4}{7}{Almost-perfect non-linear function (APN)}}
+\headcommand {\slideentry {1}{4}{1}{7/9}{Almost-perfect non-linear function (APN)}{0}}
+\headcommand {\beamer@framepages {7}{9}}
+\headcommand {\beamer@subsectionpages {7}{9}}
+\headcommand {\beamer@subsectionentry {0}{1}{5}{10}{Finding an APN function}}
+\headcommand {\slideentry {1}{5}{1}{10/13}{Finding an APN function}{0}}
+\headcommand {\beamer@framepages {10}{13}}
+\headcommand {\beamer@subsectionpages {10}{13}}
+\headcommand {\beamer@subsectionentry {0}{1}{6}{14}{A (not so welcoming) state of the art}}
+\headcommand {\slideentry {1}{6}{1}{14/16}{A (not so welcoming) state of the art}{0}}
+\headcommand {\beamer@framepages {14}{16}}
+\headcommand {\beamer@subsectionpages {14}{16}}
+\headcommand {\beamer@subsectionentry {0}{1}{7}{17}{Step 1: understanding the SotA}}
+\headcommand {\slideentry {1}{7}{1}{17/20}{Step 1: understanding the SotA}{0}}
+\headcommand {\beamer@framepages {17}{20}}
+\headcommand {\beamer@subsectionpages {17}{20}}
+\headcommand {\beamer@subsectionentry {0}{1}{8}{21}{Steps 2 and 3: classify then search}}
+\headcommand {\slideentry {1}{8}{1}{21/22}{Steps 2 and 3: classify then search}{0}}
+\headcommand {\beamer@framepages {21}{22}}
+\headcommand {\beamer@subsectionpages {21}{22}}
+\headcommand {\beamer@subsectionentry {0}{1}{9}{23}{Take away}}
+\headcommand {\slideentry {1}{9}{1}{23/23}{Take away}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\beamer@subsectionpages {23}{23}}
+\headcommand {\beamer@subsectionentry {0}{1}{10}{24}{References}}
+\headcommand {\slideentry {1}{10}{1}{24/24}{References}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\beamer@partpages {1}{24}}
+\headcommand {\beamer@subsectionpages {24}{24}}
+\headcommand {\beamer@sectionpages {2}{24}}
+\headcommand {\beamer@documentpages {24}}
+\headcommand {\gdef \inserttotalframenumber {11}}

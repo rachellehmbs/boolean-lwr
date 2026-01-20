@@ -1,0 +1,25 @@
+\begin{frame}\frametitle{About the naming}
+
+\begin{mybox}{Definition}{APN function}{\purple{\small[NybKnu92]}}\label{def:apn}
+    A function $F$ is APN if: $\quad \forall \ \din\neq 0, \dout, \quad \delta_{F}(\din, \dout) \leq 2$.
+\end{mybox}\pause
+
+\begin{mybox}{The linear case}{}{}
+$F$ linear.
+$$ F(x + \din) + F(x) \quad  = \quad F(x) + F(\din) + F(x) \quad  = \quad F(\din)$$
+
+$\din \neq 0$. $\quad \quad \delta_{F}(\din, \dout) = \left\{
+    \begin{array}{ll}
+        2^{n} & \text{ if } \dout = F(\din)\\
+        0 & \text{ otherwise.}
+    \end{array}
+\right.$
+\end{mybox}
+\pause
+\begin{mybox}{The APN case}{}{}
+$F$ APN. Then $ \forall \ \din\neq 0, \quad \card{\set{\dout, \ \ \delta_{F}(\din, \dout) > 0 }} = 2^{n-1}$.
+\end{mybox}
+
+
+
+\end{frame}

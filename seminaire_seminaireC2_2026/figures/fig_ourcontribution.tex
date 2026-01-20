@@ -1,0 +1,74 @@
+\begin{tikzpicture}[scale = 0.6]
+
+\node at (1.5,3) {\footnotesize Time complexity};
+\draw[densely dotted] (0,0) rectangle (24,2);
+\node at (24,2.75) {$2^c$};
+
+\only<1,2,3,6,7,8>{
+\fill[color=NavyBlue!20] (0,0) rectangle (12,2) node[midway]  {\bleu{Provable security}}; 
+}
+
+\onslide<2->{
+\node at (22.5,2.75) {\rouge{$2^{c}/\alpha$}};
+\draw[thick,densely dotted,color=rouge3] (22.5,-0.2) --++ (0,2.4); 
+\node at (22.5,-0.75) {\rouge{[JLM14]}};
+\node at (22.5,-1.5) {\rouge{[JLMSY19]}};
+}
+\only<3>{
+\fill[pattern={north east lines},pattern color=orange!15] (12,0) rectangle (22.5,2) node[midway] {\color{Melon} Security gap}; 
+}
+\only<4,5>{
+\node at (15,2.65) {\ver{$2^c / \sigma_d$}};
+\node at (15,-0.75) {\ver{[JLMSY19]}};
+\fill[pattern={north east lines},pattern color=orange!15] (15,0) rectangle (22.5,2) node[midway] {}; 
+}
+\only<4,5>{
+\fill[color=NavyBlue!20] (0,0) rectangle (15,2) node[midway]  {\bleu{Provable security}}; 
+}
+\only<6->{
+\node at (12,-1.5) {\ver{[JLMSY19]}};
+}
+\only<6>{
+\fill[pattern={north east lines},pattern color=orange!15] (12,0) rectangle (22.5,2) node[midway] {}; 
+}
+\only<7->{
+\node at (18,2.75) {\rouge{$2^{3c/4}$}};
+\draw[thick,densely dotted,color=rouge3] (18,-0.2) --++ (0,2.4); 
+\node at (18,-0.75) {\rouge{[GHKR23]}};
+%\node at (18,-1.4) {\rouge{\Lightning {\sc Xoodyak}\Lightning}};
+}
+\only<7>{
+\fill[color=rouge3!20] (18,0) rectangle (24,2) node[midway]  {\rouge{Generic attacks}}; 
+\fill[pattern={north east lines},pattern color=orange!15] (12,0) rectangle (18,2) node[midway] {}; 
+}
+\only<8->{
+\node at (15.5,2.75) {\rouge{$2^{2c/3}$}};
+\draw[thick,densely dotted,color=rouge3] (15.5,-0.2) --++ (0,2.4); 
+\node at (15.5,-0.75) {\rouge{[BHLS24]}};
+}
+\only<8>{
+\fill[color=rouge3!20] (15.5,0) rectangle (24,2) node[midway]  {\rouge{Generic attacks}}; 
+\fill[pattern={north east lines},pattern color=orange!15] (12,0) rectangle (15.5,2) node[midway] {}; 
+}
+\only<4>{
+\draw[vert3,thick,densely dotted] (15,-0.2) --++ (0,2.4) node[midway,right] {beyond birthday?}; 
+}
+\only<5>{
+\draw[vert3,thick,densely dotted] (15,-0.2) --++ (0,2.4) node[midway,right] {\cancel{beyond birthday?}}; 
+\draw[-latex,vert3, line width = 0.7mm] (15,1) -- (12,1) node[midway,below] {$\sigma_d = 2^{c/2}$}; 
+}
+\only<2,3,4,5,6>{
+\fill[color=rouge3!20] (22.5,0) rectangle (24,2) node[midway]  {\rouge{Generic attacks}}; 
+}
+\node at (12,2.75) {\bleu{$2^{c/2}$}};
+\draw[thick,densely dotted,color=NavyBlue] (12,-0.2) --++ (0,2.4); 
+\node at (12,-0.75) {\bleu{[BDPVA11]}};
+
+\only<2->{
+\node[anchor=west] at (0,-2.3) {$\alpha$: small constant};
+}
+\only<4->{
+\node[anchor=west] at (0,-3) {$\sigma_d$: number of online calls to $\permutation$ caused by forgery attempts};
+}
+
+  \end{tikzpicture}

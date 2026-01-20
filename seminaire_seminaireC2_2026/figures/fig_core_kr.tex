@@ -1,0 +1,39 @@
+\begin{tikzpicture}[scale=0.32]
+
+\begin{scope}
+\node[draw, fill=red!10, minimum width = 5em, minimum height = 10em] (list) at (0,0) {\scriptsize $(P,P'), (C,C')$};
+\node[above = 0em of list] (list_title) {\footnotesize Filtered pairs}; 
+
+
+\node[left = 0.3em of list.south west] (south_west_list) {};
+\node[left = 0.3em of list.north west] (north_west_list) {};
+\draw[densely dashed,latex-latex, rouge, thick]   (south_west_list.center) -- (north_west_list.center);
+\node[left = 0.7em of list] (proba0) {\footnotesize \rouge{$N$}};
+\node[left = 5em of list] (center) {};
+
+\node[below = 0.5em of list] {\scriptsize $P+P' \in \rouge{\setpt}$};
+\node[below = 1.6em of list] {\scriptsize $C+C' \in \bleu{\setct}$};
+
+
+\end{scope}
+
+\begin{scope}[xshift = 70em]
+\node[draw, fill=NavyBlue!10, minimum width = 5em, minimum height = 10em] (list2) at (0,0) {\scriptsize $(P,P'), (C,C'), \bm{K}$};
+\node[above = 0em of list2] (list2_title) {\footnotesize `Alarms'}; 
+
+
+\node[right = 0.3em of list2.south east] (south_west_list2) {};
+\node[right = 0.3em of list2.north east] (north_west_list2) {};
+\draw[densely dashed,latex-latex, NavyBlue, thick]   (south_west_list2.center) -- (north_west_list2.center);
+\node[right = 0.7em of list2] (proba0) {\footnotesize $\bleu{2^{p-n + \kappa'}}  $};
+
+\node[below = 0.25em of list2] {\scriptsize $ \bm{K} \in \mathbb{F}_2^{\kappa'}$ partially encrypts/decrypts};
+\node[below = 1.6em of list2] {\scriptsize $(P,P')$ to $\rouge{\din}, \quad (C,C')$ to $\bleu{\dout}$};
+
+\end{scope}
+
+\node[right = 0.3em of list.east] (arrow_beg) {};
+\node[left = 0.3em of list2.west] (arrow_end) {};
+ \draw[-latex,decorate, decoration=zigzag,thick,color=vert3!80]  (arrow_beg) -- node[above] {\footnotesize \ver{`Core' key recovery step}} (arrow_end) ;
+ 
+  \end{tikzpicture}

@@ -1,0 +1,47 @@
+\begin{tikzpicture}[scale=0.9]  
+  
+  \tikzset{edge/.style=-latex new, arrow head=4pt};
+    \tikzset{Redge/.style=latex new-, arrow head=4pt};
+  
+  \begin{scope}[xshift=8cm]
+  	\node[XOR,thick] (x3) at (0,0) {};
+	\draw[edge] (0,1) node[above] {$X_{t-1}$} -- (x3);
+	\draw[fill=vert3!10] (-0.5,-2) rectangle node{$\blockcipher_{\key}$} ++(1,1);
+	\draw[edge] (x3) -- ++(0,-1);
+	\draw[edge] (0,-2) -- ++(0,-1) node[below] {$Y_{t-1}$};
+  \end{scope}
+  
+  \begin{scope}[xshift=6cm]
+  	\node at (0,-1.5) {$\cdots\cdots$};
+	\draw[Redge] (x3) -- ++(-1,0) node[left] {$Y_{t-2}$};
+  \end{scope}
+  
+  \begin{scope}[xshift=4cm]
+  	\node[XOR,thick] (x2) at (0,0) {};
+	\draw[edge] (0,1) node[above] {$X_{2}$} -- (x2);
+	\draw[fill=vert3!10] (-0.5,-2) rectangle node{$\blockcipher_{\key}$} ++(1,1);
+	\draw[edge] (x2) -- ++(0,-1);
+	\draw[edge] (0,-2) -- ++(0,-1) node[below] {$Y_{2}$};
+  \end{scope}
+  
+  \begin{scope}[xshift=2cm]
+  	\node[XOR,thick] (x1) at (0,0) {};
+	\draw[edge] (0,1) node[above] {$X_{1}$} -- (x1);
+	\draw[fill=vert3!10] (-0.5,-2) rectangle node{$\blockcipher_{\key}$} ++(1,1);
+	\draw[edge] (x1) -- ++(0,-1);
+	\draw[edge] (0,-2) -- ++(0,-1) node[below] {$Y_{1}$};
+	\draw[edge] (0,-2.5) -- ++(1,0) -- ++(0,+2.5) -- (x2);
+  \end{scope}
+
+  \begin{scope}
+  	\node[XOR,thick] (x0) at (0,0) {};
+	\draw[edge] (0,1) node[above] {$X_{0}$} -- (x0);
+	\draw[fill=vert3!10] (-0.5,-2) rectangle node{$\blockcipher_{\key}$} ++(1,1);
+	\draw[edge] (x0) -- ++(0,-1);
+	\draw[edge] (0,-2) -- ++(0,-1) node[below] {$Y_{0}$};
+	\draw[edge] (0,-2.5) -- ++(1,0) -- ++(0,+2.5) -- (x1);
+	\draw[Redge] (x0) -- ++(-1,0) node[left] (IV) {$IV$};
+	\draw[edge] (IV) -- ++(0,-3) node[below] {$Y_{-1}$};
+	
+  \end{scope}
+  \end{tikzpicture}

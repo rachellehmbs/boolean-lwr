@@ -1,0 +1,151 @@
+\begin{tikzpicture}[inner sep = 0.01em,scale=0.9]  
+
+ \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 5em, minimum height=2em] (h) {};
+
+
+\node (hwrite) at (h.center) {\small $h$};
+
+ 
+ \only<1>{
+\node[below = 2em of h] (add1) {$\boxplus$} ;
+}
+\only<2,3>{
+\node[below = 2em of h] (add1) {\rouge{$\oplus$}} ;
+}
+
+
+
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $16$};
+
+\node[above  = 1em and -3.5em of h] (x1) {\footnotesize $X_{1}$ $X_{2}$ $X_{3}$ $X_{4}$};
+\node[right = 1.4em of x1] (x5) {\footnotesize $X_{5}$} ;
+
+\draw[-latex] (x1) -- (x1|-h.north);
+\draw[-latex] (h) -- (add1);
+\draw[-latex] (x5) |- (add1);
+
+%%%%%
+
+ \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 4em, minimum height=2em, right = 15em of h] (h3) {};
+ 
+
+\node (hwrite3) at (h3.center) {\small $h$};
+
+
+ \begin{scope}[xshift = 20.8em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $16$};
+ \end{scope}
+ 
+ \only<1>{
+\node[below = 2em of h3] (add3) {$\boxplus$} ;
+}
+\only<2,3>{
+\node[below = 2em of h3] (add3) {\rouge{$\oplus$}} ;
+}
+
+\node[above  = 1em and -3.5em of h3] (x56) {\footnotesize $X_{56}$ $X_{57}$ $X_{58}$ $X_{59}$};
+\node[right = 0.7em of x56] (x60) {\footnotesize $X_{60}$} ;
+
+\draw[-latex] (x56) -- (x56|-h.north);
+\draw[-latex] (h3) -- (add3);
+\draw[-latex] (x60) |- (add3);
+
+%%%%
+
+\node (t) at ($(hwrite)!0.6!(hwrite3)$) { $\cdots$};
+
+ \only<1>{
+\node[yshift = -1em] (add) at ($(add1)!0.5!(add3)$) {\small $\boxplus$};
+}
+\only<2,3>{
+\node[yshift = -1em] (add) at ($(add1)!0.5!(add3)$) {\rouge{$\oplus$}} ;
+}
+
+
+\draw[-latex] (add1) |- (add);
+\draw[-latex] (add3) |- (add);
+
+\node[below = 1.5em of add] (out) {};
+
+\only<1>{
+\node[below = 0.25em of out] {\footnotesize $Z_i \in \mathbb{Z}_{16}$};
+}
+\only<2,3>{
+\node[below = 0.25em of out] {\footnotesize $z_i \in \mathbb{F}_{2}$};
+}
+\draw[-latex] (add) -- (out);
+
+\only<1>{
+ \begin{scope}[xshift = 10.4em, yshift = -7.7em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+  \begin{scope}[xshift = 0em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+  \begin{scope}[xshift = 20.8em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+
+  \begin{scope}[xshift = 4.7em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+  \begin{scope}[xshift = 25.6em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+
+
+}
+\only<2,3>{
+ \begin{scope}[xshift = 10.4em, yshift = -7.7em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $1$};
+ \end{scope}
+   \begin{scope}[xshift = 0em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $1$};
+ \end{scope}
+  \begin{scope}[xshift = 20.8em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $1$};
+ \end{scope}
+ 
+ 
+  \begin{scope}[xshift = 4.7em, yshift = -2.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+  \begin{scope}[xshift = 25.6em, yshift = -2.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $4$};
+ \end{scope}
+ 
+  \begin{scope}[xshift = 4.7em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $1$};
+ \end{scope}
+  \begin{scope}[xshift = 25.6em, yshift = -4.5em]
+\draw (-0.06,0.65) --++  (0.12,0.12); 
+\node[left] at (-0.1,0.68)  {\tiny $1$};
+ \end{scope}
+}
+
+\only <2,3>{
+ \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 2em, minimum height=0.7em, below = 0.3em of h] (lsb) {};
+  \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 2em, minimum height=0.7em, below = 0.3em of h3] (lsb3) {};
+   \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 2em, minimum height=0.7em, right = 2.8em of lsb] (lsb5) {};
+    \node [draw, trapezium, trapezium left angle=130, trapezium right angle=130, fill=vert3!10, minimum width = 2em, minimum height=0.7em, right = 2.9em of lsb3] (lsb60) {};
+    
+  \node at (lsb.center) {\tiny lsb};
+    \node at (lsb3.center) {\tiny lsb};
+      \node at (lsb5.center) {\tiny lsb};
+    \node at (lsb60.center) {\tiny lsb};
+ 
+}
+  \end{tikzpicture}

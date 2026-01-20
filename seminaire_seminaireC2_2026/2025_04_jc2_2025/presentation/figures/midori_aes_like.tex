@@ -1,0 +1,332 @@
+% !TeX root = ../these.tex
+
+%\newtoggle{midoriconstant}
+%\newtoggle{midorikey}
+%\newtoggle{midorisbox}
+%\newtoggle{midorilinear}
+%\newtoggle{midorishuffle}
+
+
+
+\begin{tikzpicture}[thick, scale=.7]
+	\draw[color=white,fill=white, drop shadow] (0,0) rectangle (4,4);
+	% \draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	% (0,2) -- (4,2)
+	% (0,3) -- (4,3);
+	
+	
+	
+	% \foreach \x in {1,...,4} {
+	% 	\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	% }
+	% \foreach \y in {0,...,3} {
+	% 	\draw[gray, opacity=0.25] (0, \y+0.5) -- (4, \y +0.5);
+	% }
+	% \foreach \x in {0,...,3} {
+	% 	\draw[gray, opacity=0.25] (\x+0.5, 0) -- (\x +0.5,4);
+	% }
+	
+	%\draw[] (0,0) rectangle (4,4);
+	
+	
+	
+	%	\foreach \x in {4, 8, 12}
+	%	\draw[gray, thick,opacity=1] (1*\x, 0) -- (1*\x, 4);
+
+	\iftoggle{AESconstant}{
+		\foreach \x in {0,...,3} {
+			\foreach \y in {0,...,3} {
+				\draw[oired, very thick, fill=white] (1*\x, \y) rectangle (1*\x + 1, \y+1) node[midway] {$\scalemath{1.5}{\oplus}$};
+			}
+		}
+		
+	}{} %endif
+	
+	
+	\iftoggle{midoriconstant} {
+		\foreach \x in {0,...,3} {
+			\foreach \y in {0,...,3} {
+				\draw[oiblue, fill=white] (1*\x, \y) rectangle (\x + 1, \y+1);
+				\draw[oiblue, thick, opacity=0.3] (\x + 0.5, \y) --(\x + 0.5, \y + 1)
+				(\x, \y + 0.5) --(\x + 1, \y + 0.5);
+				\draw[oiblue, fill=oiblue, opacity=1] (\x +0.5, \y) -- +(0.5,0) -- +(0.5, 0.5);
+				\draw[oicyan, fill=oicyan, opacity=.5] (\x +0.5, \y) -- +(0,0.5) -- +(0.5, 0.5) node[midway, above=-.43cm, opacity=1, color=white] {$\bm{\oplus}$};
+		} 		}
+	}{} %endif
+	
+	\iftoggle{midorikey}{
+		\foreach \x in {0,...,3} {
+			\foreach \y in {0,...,3} {
+				\draw[oiblue, fill=white] (1*\x, \y) rectangle (\x + 1, \y+1);
+				
+				\foreach \z in {0,1} {
+					\foreach \t in {0,1} {
+						\draw[oiblue, fill=oiblue, opacity=1] (\x +0.5*\z, \y+0.5*\t) -- +(0.5,0) -- +(0.5, 0.5);
+						\draw[oicyan, fill=oicyan, opacity=.5] (\x +0.5*\z, \y+0.5*\t) -- +(0,0.5) -- +(0.5, 0.5) node[midway, above=-.43cm, opacity=1, color=white] {$\bm{\oplus}$};
+						
+				}}
+				\draw[gray, opacity=0.5] (0, \y+0.5) -- (4, \y +0.5);
+				\draw[gray, opacity=0.5] (\x+0.5, 0) -- (\x +0.5,4);
+				\draw[gray] (1*\x, \y) rectangle (\x + 1, \y+1);
+				%	\draw[gray, thick, opacity=0.3] (\x + 0.5, \y) --(\x + 0.5, \y + 1)
+				%(\x, \y + 0.5) --(\x + 1, \y + 0.5);
+		} 		}
+		\draw[oiblue] (0,0) rectangle (4,4);
+	}{} %endif
+	
+	\iftoggle{midorisbox}{
+		\foreach \x in {0,...,3} {
+			\foreach \y in {0,...,3} {
+				\draw[oicyan, very thick,fill=white] (1*\x, \y) rectangle (1*\x + 1, \y+1) node[midway] {$S$};
+			}
+		}
+		
+	}{} %endif
+
+
+	\iftoggle{stateempty}{
+		\foreach \x in {0,...,3} {
+			\foreach \y in {0,...,3} {
+				\draw[oigray, very thick, fill=white] (1*\x, \y) rectangle (1*\x + 1, \y+1);
+			}
+		}
+		
+	}{} %endif
+	
+	\iftoggle{midorilinear}{
+		\foreach \x in {0,...,3} {
+			\draw[oiorange, very thick, fill=white] (1*\x, 0) rectangle (1*\x + 1, 4) node[midway] {$M$};
+		}
+		
+	}{} %endif
+	
+	
+	\iftoggle{midorishuffle}{
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+	\foreach \y in {0,...,3} {
+		\draw[gray, opacity=0.25] (0, \y+0.5) -- (4, \y +0.5);
+	}
+	\foreach \x in {0,...,3} {
+		\draw[gray, opacity=0.25] (\x+0.5, 0) -- (\x +0.5,4);
+	}
+
+			\draw[color=oipurple] (0,0) rectangle (4,4);
+
+		\draw[color=oipurple,fill=white,drop shadow={shadow yshift=-.7ex}] (0,1) rectangle +(1, 1) node[pos=.5] (c1) {$\sigma(i)$};
+		\draw[color=oipurple,fill=white,drop shadow={shadow yshift=-.7ex}] (3,2) rectangle +(1,1) node[pos=.5] (c2) {$i$};
+		\draw [->, color=oipurple] (c1)+(0, -.7) to [in=300, out=330] node[below] {$ \ $} ($(c2)+(0,-.7)$) ;
+	}{} %endif
+
+	\iftoggle{midorinumbering}{
+	\draw[fill=white, drop shadow] (0,0) rectangle (4,4);
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+
+	\foreach \x in {0,...,3} {
+	\foreach \y in {0,...,3} {
+		\draw[color=gray] (1*\x, \y) rectangle (1*\x + 1, \y+1) node[midway] {$\number\numexpr\x*4 + 3-\y\relax$};
+	}
+}
+
+	% \draw[color=gray] (-1.5, 3) rectangle node[midway] {0} +(.5,.5);
+	% \draw[color=gray] (-1.5, 3.5) rectangle node[midway] {2} +(.5,.5);
+	% \draw[color=gray] (-2, 3) rectangle node[midway] {1} +(.5,.5);
+	% \draw[color=gray] (-2, 3.5) rectangle node[midway] {3} +(.5,.5);
+
+	% \draw[draw=gray, thick,decorate,decoration={brace, amplitude=10pt}] (-.1, 3) --  +(0, 1);
+
+
+
+	% \draw[color=gray] (-1.5, 1) rectangle node[midway] {9} +(.5,.5);
+	% \draw[color=gray] (-1.5, 1.5) rectangle node[midway] {\footnotesize11} +(.5,.5);
+	% \draw[color=gray] (-2, 1) rectangle node[midway] {\footnotesize10} +(.5,.5);
+	% \draw[color=gray] (-2, 1.5) rectangle node[midway] {\footnotesize12} +(.5,.5);
+
+	% \draw[draw=gray, thick,decorate,decoration={brace, amplitude=10pt}] (-.1, 1) --  +(0, 1);
+
+
+
+	}{} %endif
+
+
+	\iftoggle{midorishuffle}{
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+	\foreach \y in {0,...,3} {
+		\draw[gray, opacity=0.25] (0, \y+0.5) -- (4, \y +0.5);
+	}
+	\foreach \x in {0,...,3} {
+		\draw[gray, opacity=0.25] (\x+0.5, 0) -- (\x +0.5,4);
+	}
+
+			\draw[color=oipurple] (0,0) rectangle (4,4);
+
+		\draw[color=oipurple,fill=white,drop shadow={shadow yshift=-.7ex}] (0,1) rectangle +(1, 1) node[pos=.5] (c1) {$i$};
+		\draw[color=oipurple,fill=white,drop shadow={shadow yshift=-.7ex}] (3,2) rectangle +(1,1) node[pos=.5] (c2) {$\sigma(i)$};
+		\draw [->, color=oipurple] (c1)+(0, -.7) to [in=300, out=330] node[below] {$\sigma$} ($(c2)+(0,-.7)$) ;
+	}{} %endif
+
+
+		\iftoggle{AESshiftrowsin}{
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+	\foreach \y in {0,...,3} {
+		\draw[gray, opacity=0.25] (0, \y+0.5) -- (4, \y +0.5);
+	}
+	\foreach \x in {0,...,3} {
+		\draw[gray, opacity=0.25] (\x+0.5, 0) -- (\x +0.5,4);
+	}
+
+			\draw[color=oired] (0,0) rectangle (4,4);
+
+		\foreach \y in {0,...,3} {
+		\draw[color=black,fill=purple1] (0,\y) rectangle +(1, 1) node[pos=.5] (c1) {};
+		}
+		\foreach \y in {0,...,3} {
+		\draw[color=black,fill=purple2] (1,\y) rectangle +(1, 1) node[pos=.5] (c1) {};
+		}
+		\foreach \y in {0,...,3} {
+		\draw[color=black,fill=purple3] (2,\y) rectangle +(1, 1) node[pos=.5] (c1) {};
+		}
+		\foreach \y in {0,...,3} {
+		\draw[color=black,fill=purple4] (3,\y) rectangle +(1, 1) node[pos=.5] (c1) {};
+		}
+	}{} %endif
+
+
+	% \iftoggle{AESSR}{
+	% 	\foreach \y in {0,...,3} {
+	% 		\draw[oiorange, fill=white] (0,1*\y) rectangle (4, 1*\y + 1) node[midway] { << 1};
+	% 	}
+		
+	% }{} %endif
+
+
+	\iftoggle{AESshiftrowsout}{
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+	\foreach \y in {0,...,3} {
+		\draw[gray, opacity=0.25] (0, \y+0.5) -- (4, \y +0.5);
+	}
+	\foreach \x in {0,...,3} {
+		\draw[gray, opacity=0.25] (\x+0.5, 0) -- (\x +0.5,4);
+	}
+
+		% Row 0
+		\draw[color=black,fill=purple1] (0,3) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple2] (1,3) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple3] (2,3) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple4] (3,3) rectangle +(1, 1) node[pos=.5] (c1) {};
+
+		% Row 1
+		\draw[color=black,fill=purple2] (0,2) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple3] (1,2) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple4] (2,2) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple1] (3,2) rectangle +(1, 1) node[pos=.5] (c1) {};
+
+		% Row 2
+		\draw[color=black,fill=purple3] (0,1) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple4] (1,1) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple1] (2,1) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple2] (3,1) rectangle +(1, 1) node[pos=.5] (c1) {};
+
+		% Row 3
+		\draw[color=black,fill=purple4] (0,0) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple1] (1,0) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple2] (2,0) rectangle +(1, 1) node[pos=.5] (c1) {};
+		\draw[color=black,fill=purple3] (3,0) rectangle +(1, 1) node[pos=.5] (c1) {};
+	}{} %endif
+
+
+
+
+
+	\iftoggle{midorishufflenumbering}{
+	\draw[fill=white, drop shadow] (0,0) rectangle (4,4);
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+
+\draw[color=gray] (0, 0) rectangle +(1,1) node[midway] {\small\texttt{0x3}};
+\draw[color=gray] (0, 1) rectangle +(1,1) node[midway] {\small\texttt{0x2}};
+\draw[color=gray] (0, 2) rectangle +(1,1) node[midway] {\small\texttt{0x1}};
+\draw[color=gray] (0, 3) rectangle +(1,1) node[midway] {\small\texttt{0x0}};
+
+\draw[color=gray] (1, 0) rectangle +(1,1) node[midway] {\small\texttt{0x7}};
+\draw[color=gray] (1, 1) rectangle +(1,1) node[midway] {\small\texttt{0x6}};
+\draw[color=gray] (1, 2) rectangle +(1,1) node[midway] {\small\texttt{0x5}};
+\draw[color=gray] (1, 3) rectangle +(1,1) node[midway] {\small\texttt{0x4}};
+
+\draw[color=gray] (2, 0) rectangle +(1,1) node[midway] {\small\texttt{0xb}};
+\draw[color=gray] (2, 1) rectangle +(1,1) node[midway] {\small\texttt{0xa}};
+\draw[color=gray] (2, 2) rectangle +(1,1) node[midway] {\small\texttt{0x9}};
+\draw[color=gray] (2, 3) rectangle +(1,1) node[midway] {\small\texttt{0x8}};
+
+\draw[color=gray] (3, 0) rectangle +(1,1) node[midway] {\small\texttt{0xf}};
+\draw[color=gray] (3, 1) rectangle +(1,1) node[midway] {\small\texttt{0xe}};
+\draw[color=gray] (3, 2) rectangle +(1,1) node[midway] {\small\texttt{0xd}};
+\draw[color=gray] (3, 3) rectangle +(1,1) node[midway] {\small\texttt{0xc}};
+
+
+	}{} %endif
+	
+
+	\iftoggle{midorishufflenumberingout}{
+	\draw[fill=white, drop shadow] (0,0) rectangle (4,4);
+		\draw[gray, thick, opacity=1]  (0,1) -- (4,1)
+	(0,2) -- (4,2)
+	(0,3) -- (4,3);
+			\foreach \x in {1,...,4} {
+		\draw[gray, opacity=1] (1*\x, 0) -- (1*\x, 4);
+	}
+
+\draw[color=gray] (0, 0) rectangle +(1,1) node[midway] {\small\texttt{0x9}};
+\draw[color=gray] (0, 1) rectangle +(1,1) node[midway] {\small\texttt{0xe}};
+\draw[color=gray] (0, 2) rectangle +(1,1) node[midway] {\small\texttt{0x7}};
+\draw[color=gray] (0, 3) rectangle +(1,1) node[midway] {\small\texttt{0x0}};
+
+\draw[color=gray] (1, 0) rectangle +(1,1) node[midway] {\small\texttt{0xc}};
+\draw[color=gray] (1, 1) rectangle +(1,1) node[midway] {\small\texttt{0xb}};
+\draw[color=gray] (1, 2) rectangle +(1,1) node[midway] {\small\texttt{0x2}};
+\draw[color=gray] (1, 3) rectangle +(1,1) node[midway] {\small\texttt{0x5}};
+
+\draw[color=gray] (2, 0) rectangle +(1,1) node[midway] {\small\texttt{0x6}};
+\draw[color=gray] (2, 1) rectangle +(1,1) node[midway] {\small\texttt{0x1}};
+\draw[color=gray] (2, 2) rectangle +(1,1) node[midway] {\small\texttt{0x8}};
+\draw[color=gray] (2, 3) rectangle +(1,1) node[midway] {\small\texttt{0xf}};
+
+\draw[color=gray] (3, 0) rectangle +(1,1) node[midway] {\small\texttt{0x3}};
+\draw[color=gray] (3, 1) rectangle +(1,1) node[midway] {\small\texttt{0x4}};
+\draw[color=gray] (3, 2) rectangle +(1,1) node[midway] {\small\texttt{0xd}};
+\draw[color=gray] (3, 3) rectangle +(1,1) node[midway] {\small\texttt{0xa}};
+
+
+	}{} %endif
+	
+	
+	
+\end{tikzpicture}

@@ -1,0 +1,120 @@
+% 1. PACKAGES
+% 2. PACKAGES OPTIONS
+
+%=========================== 1. PACKAGES =======================================
+%===============================================================================
+
+% ========== Fonts =============================================================
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{bold-extra}
+\usepackage{microtype} % better looking text, needed for phdthesis
+\usepackage[ttscale=.875]{libertine}
+\usepackage{xspace} % \xspace in newcommand to handle spacing in macros
+\usepackage{bm} %bold math fonts
+%\usepackage{fancyvrb} verbatim environments
+
+
+% ========== Tikz ==============================================================
+\usepackage{tikz}
+\usetikzlibrary{math,arrows,crypto.symbols}
+\usepackage{pgfmath,pgffor} % variable declarations and for loop in tikz
+
+
+% ========== Maths =============================================================
+\usepackage{amsmath,amssymb,amsthm,mathtools,stmaryrd} % stmaryrd for [[  ]] 
+
+
+%========= TODONOTES TO BE REMOVED
+\usepackage{todonotes}
+
+% ========== Algo ==============================================================
+%\usepackage[chapter]{algorithm}
+%\usepackage{algorithmicx}
+%\usepackage[noend]{algpseudocode}
+
+
+% ========== Tables ============================================================
+\usepackage{multicol, multirow}
+\usepackage{booktabs} % toprule, midrule, bottomrule...
+
+
+% ========== Refs ============================================================
+\usepackage{hyperref}
+%\usepackage{hyperxmp} % metadata of refs
+%\@ifundefined{hyxmp@today@xmp}{\hyxmp@today}{\hyxmp@today@xmp}
+
+
+% ========== Others ==============
+\usepackage[dvipsnames]{xcolor} % multiple other colors
+\usepackage{graphicx} % includegraphics options
+\usepackage[nohints]{minitoc} % mini table of contents
+\usepackage{pdflscape} % handle landscape pages in pdf
+\usepackage[capitalise]{cleveref} % for using \cref
+%\usepackage[export]{adjustbox} resizebox, scalebox, rotatebox
+%\usepackage{xifthen} If then else 
+%\usepackage{footmisc} ways of changing the typesetting of footnotes
+
+
+% ========== Bibliography ======================================================
+% Biber is needed to use \newrefcontext
+% 1. the package
+%\usepackage[safeinputenc, backend=biber, doi=false, url=false, citestyle=authoryear, style=alphabetic, maxbibnames=99,maxcitenames=4,sorting=anyt,backref=true]{biblatex}
+% 2. The bibfile
+%\addbibresource{./my_biblio.bib}
+%\addbibresource{./cryptobib/abbrev2.bib}
+%\addbibresource{./cryptobib/crypto.bib}
+
+% 3. the bibliography (end of this file)
+
+% 4. The compilation line
+% safeinputenc,
+% run this to recompute the biblio
+% biber --output_safecharsset=full these
+
+
+%============================ 2. PACKAGE OPTIONS ===============================
+%===============================================================================
+
+% Remove some warnings
+\makeatletter
+\renewcommand{\@pnumwidth}{1.8em}% default is 1.55em
+\makeatother
+
+% ========== Subsubsection numbering ===========================================
+% By default, secnumdepth=2. In that case, subsubsections and paragraphs are the same. With secnumdepth=3, subsubsections are numbered.
+\setsecnumdepth{subsubsection}
+\setcounter{tocdepth}{2}
+
+
+% ========== Paragraph and word breaking criteria ==============================
+\tolerance=1200
+\hyphenpenalty=1000
+% \setlength{\parskip}{.4cm plus4mm minus3mm}
+
+
+% ========== Fancy chapter and Part headers ====================================
+\chapterstyle{xb}
+
+
+% ======= Minitoc parameters ===================================================
+\setcounter{parttocdepth}{0}
+\ptcpagenumbers
+\renewcommand\beforeparttoc{}
+\renewcommand\afterparttoc{}
+\mtcsetpagenumbers{parttoc}{on}
+\renewcommand{\ptctitle}{{Chapters}}
+\renewcommand{\ptifont}{\LARGE\bfseries\sffamily}
+\renewcommand{\mtifont}{\large\bfseries\sffamily}
+\mtcsetfeature{parttoc}{open}{\vspace{-2.2cm}}
+\makeatletter
+\let\ptc@pgno\null
+\makeatother
+\noptcrule
+%Put Parttoc on the part page
+\renewcommand{\afterpartskip}{\vfil\parttoc\vfil\newpage}
+
+
+

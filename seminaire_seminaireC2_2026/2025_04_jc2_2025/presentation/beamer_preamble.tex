@@ -1,0 +1,233 @@
+% !TEX root = ./slides_jc2.tex
+%!TEX program = lualatex
+\documentclass[t, aspectratio=1610, 10pt,dvipsnames]{beamer}
+
+% Font + Maths packages
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,stmaryrd,bm} % stmaryrd for [[  ]] 
+\usepackage{calc}
+\usepackage{chronology}
+\usepackage{array}
+% Tikz and options
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{overpic}
+\usepackage{centernot}
+
+\usetikzlibrary{cd, hobby, babel}
+\usetikzlibrary{shadows, calc}
+\usetikzlibrary{decorations.pathreplacing} 
+\usetikzlibrary{shadows,cipher,sponge}
+\usetikzlibrary{decorations.markings}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+\usetikzlibrary{ decorations.markings, arrows}
+%\usetikzlibrary{patterns}
+
+\usepackage{fontawesome}
+
+
+% Beamer layouts
+
+\usepackage{float} % use for tikz figures
+\usepackage[absolute,overlay]{textpos} % for textblock and absolute positioning
+\usepackage{multicol, multirow}
+\usepackage{adjustbox}
+\usepackage{tcolorbox}
+\usepackage{ifthen} %for spn figure
+\usepackage{enumitem} % for leftmargin option for itemize
+
+\usepackage{etoolbox} % for toggle and conditional variables, easy to use
+
+\usepackage{cancel} %  pour barrer du texte
+\usepackage{nth}
+\usepackage{booktabs} % midrule/toprule...
+
+\usepackage[table]{xcolor}
+%\usepackage[absolute,overlay]{textpos} 
+
+\newcommand{\Plus}{\mathord{\begin{tikzpicture}[baseline=0ex, line width=1.3, scale=0.08]
+								\draw (1,0) -- (1,2);
+								\draw (0,1) -- (2,1);
+
+\end{tikzpicture}}}
+
+
+%------------ Beamer colors -----------
+\definecolor{oiblack}{RGB}{0, 0, 0}
+\definecolor{oigreen}{RGB}{0, 158, 115}
+\definecolor{oiblue}{RGB}{0, 114, 178}
+\definecolor{oicyan}{RGB}{86, 180, 233}
+\definecolor{oiyellow}{RGB}{240, 228, 066}
+\definecolor{oiorange}{RGB}{230, 159, 0}
+\definecolor{oired}{RGB}{213, 094, 0}
+\definecolor{oipurple}{RGB}{204, 121, 167}
+
+\definecolor{ptblack}{RGB}{0, 0, 0}
+\definecolor{ptgreen}{RGB}{0, 153, 136}
+\definecolor{ptblue}{RGB}{68, 119, 187}
+\definecolor{ptcyan}{RGB}{51, 187, 238}
+\definecolor{ptyellow}{RGB}{240, 228, 066}
+\definecolor{ptorange}{RGB}{238, 119, 51}
+\definecolor{ptred}{RGB}{204, 51, 17}
+\definecolor{ptpurple}{RGB}{238, 51, 119}
+
+\definecolor{cgreen}{RGB}{0, 158, 115}
+\definecolor{cblue}{RGB}{0, 114, 178}
+\definecolor{ccyan}{RGB}{86, 180, 233}
+\definecolor{cyellow}{RGB}{240, 228, 066}
+\definecolor{corange}{RGB}{230, 159, 0}
+\definecolor{cred}{RGB}{213, 094, 0}
+\definecolor{cpurple}{RGB}{204, 121, 167}
+
+\definecolor{oigray}{RGB}{118, 118, 118}
+
+\definecolor{purple4}{RGB}{116, 40, 129}
+\definecolor{purple3}{RGB}{152, 110, 172}
+\definecolor{purple2}{RGB}{195, 164, 207}
+\definecolor{purple1}{RGB}{229, 212, 232}
+\definecolor{green1}{RGB}{217, 241, 213}
+\definecolor{green2}{RGB}{173, 212, 160}
+\definecolor{green3}{RGB}{92, 174, 99}
+\definecolor{green4}{RGB}{27, 121, 57}
+
+\renewcommand{\emph}[1]{{\color{ptorange}\textit{\textbf{#1}}}} % EMPHASIZED IN GRAY
+
+\newcommand{\white}[1]{{\color{white!0} #1}}
+\newcommand{\green}[1]{{\color{ptgreen} #1}}
+\newcommand{\blue}[1]{{\color{ptblue} #1}}
+\newcommand{\cyan}[1]{{\color{ptcyan} #1}}
+\newcommand{\yellow}[1]{{\color{oiyellow} #1}}
+\newcommand{\orange}[1]{{\color{ptorange} #1}}
+\newcommand{\red}[1]{{\color{ptred} #1}}
+\newcommand{\purple}[1]{{\color{ptpurple} #1}}
+\newcommand{\gray}[1]{{\color{oigray} #1}}
+\newcommand{\black}[1]{{\color{oiblack} #1}}
+
+
+%====== Table color
+\colorlet{sectioncolor}{ptblue}
+\colorlet{titletablecolor}{sectioncolor!40}
+\colorlet{tablecolor}{sectioncolor!15}
+% Colored column
+\newcolumntype{a}{>{\columncolor{tablecolor}}c}
+\newcolumntype{t}{>{\columncolor{titletablecolor}}c}
+\newcommand{\cct}{\cellcolor{tablecolor}}
+\newcommand{\ccw}{\cellcolor{white}}
+\newcommand{\cctt}{\cellcolor{titletablecolor}}
+\newcommand{\rct}{\rowcolor{tablecolor}}
+\newcommand{\rctt}{\rowcolor{titletablecolor}}
+
+% ----------- MY BEAMER THEME ----------------
+\useoutertheme{infolines}
+%\useoutertheme[subsection=false]{smoothbars}
+
+\setbeamercolor{frametitle}{fg=ptblue,bg=white}
+\setbeamercolor{subsection in head/foot}{fg=white, bg=oigreen}
+\setbeamercolor{section in head/foot}{fg=ptblue, bg=white}
+\setbeamercolor{author in head/foot}{fg=white, bg=oigreen}
+\setbeamercolor{title in head/foot}{fg=white, bg=oigreen}
+\setbeamercolor{date in head/foot}{fg=white, bg=oigreen}
+
+\usetheme{Frankfurt}
+
+\setbeamertemplate{headline}{}
+
+
+\makeatletter
+\setbeamertemplate{footline}{
+  \pgfuseshading{beamer@barshade}%
+  \vskip-0.05ex%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1ex,dp=0ex]{empty}
+  \begin{pgfpicture}
+    \begin{pgfscope}%
+      \ifbeamer@sb@subsection%
+        \pgfsetfillcolor{subsection in head/foot.bg}%
+      \else%
+        \pgfsetfillcolor{section in head/foot.bg}%
+      \fi%
+      \pgfpathrectangle{\pgfpoint{-.5\paperwidth}{-0.5ex}}{\pgfpoint{\paperwidth}{1ex}}%
+      \pgfsetfading{beamer@belowframetitlemask}{}%
+      \pgfusepath{fill}%
+    \end{pgfscope}%
+  \end{pgfpicture}%
+  \end{beamercolorbox}%
+  \ifbeamer@sb@subsection%
+    \vskip-9.75ex%
+  \else%
+    \vskip-6.85ex%
+  \fi%
+  \begin{beamercolorbox}[ignorebg,ht=2.25ex,dp=3.75ex]{section in head/foot}
+    \insertnavigation{0.93\paperwidth}
+    \raisebox{-.1cm}{\footnotesize \insertframenumber/\inserttotalframenumber}
+  \end{beamercolorbox}%
+  \ifbeamer@sb@subsection%
+    \begin{beamercolorbox}[ignorebg,ht=2.125ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+      \usebeamerfont{subsection in head/foot}\insertsubsectionhead
+    \end{beamercolorbox}%
+  \fi%
+}
+\makeatother
+
+\usepackage{appendixnumberbeamer}
+\beamertemplatenavigationsymbolsempty
+
+\setbeamerfont{frametitle}{size=\large}
+\setbeamertemplate{frametitle}[default][center]
+
+%----------- My color box ------------
+\tcbuselibrary{skins}
+
+\newtcolorbox{mybox}[3]{
+	beamer,
+	enhanced jigsaw,
+	adjusted title=flush center,
+	arc=0mm,
+	size=fbox,
+	colframe=white,
+	colback=white,
+	colbacktitle=white,
+	opacitybacktitle=0.3,
+	opacityback=0.1,
+	coltitle=black,
+	no shadow,
+	%boxrule=.4mm,
+  borderline west ={1.2pt}{-3pt}{ptblue},
+  overlay unbroken and last={%
+        \draw[line width=1.2pt, ptblue] (frame.south west) + (-.1cm,0)  -- ++(0:.2cm);},
+	titlerule=0mm,
+	top=0mm,
+	boxsep=1mm,
+	fonttitle=\normalsize\bfseries,
+	fontlower=\normalsize,
+	title={{\blue{#1}} \ifthenelse { \equal {#2} {} }{}{(#2)}\hfill#3},
+	before upper={\setbeamercolor{item}{fg=black}},
+	after upper={\setbeamercolor{item}{fg=normal color}},
+}
+
+\newenvironment{recap}[1][]{\mybox{Recap}{#1}{\recapsymbol}\ignorespaces}{\endmybox\ignorespacesafterend}
+\renewenvironment{definition}[1][]{\mybox{Definition}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+\newenvironment{proposition}[1][]{\mybox{Proposition}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+\renewenvironment{theorem}[1][]{\mybox{Theorem}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+% \renewenvironment{lemma}[1][]{\mybox[Lemma]{#1}\ignorespaces}{\endmybox\ignorespacesafterend}
+% \newenvironment{remark}[1][]{\mybox[Remark]{#1}\ignorespaces}{\endmybox\ignorespacesafterend}
+\newenvironment{assumption}[1][]{\mybox{Assumption}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+% \renewenvironment{problem}[1][]{\mybox[Problem]{#1}\ignorespaces}{\endmybox\ignorespacesafterend}
+\newenvironment{goal}[1][]{\mybox{Goal}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+\newenvironment{constraints}[1][]{\mybox{Constraints}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+\renewenvironment{example}[1][]{\mybox{Example}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+\renewenvironment{corollary}[1][]{\mybox{Corollary}{#1}{}\ignorespaces}{\endmybox\ignorespacesafterend}
+
+
+
+\newtcbox{\inlinebox}{
+hbox,
+  colback=white,% background color
+  on line,% don't add line breaks
+ % before upper=\vphantom{Ay},% ensure constant height
+}

@@ -1,0 +1,46 @@
+% !TEX root = ../slides.tex
+
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+\renewcommand\arraystretch{1.3} 
+\scalebox{.88}{
+\begin{tabular}{|c|}
+\toprule
+\rctt\textbf{Univariate}\\
+\midrule
+$x^{2^s + 1} + ax^{2^{(3-i)k + s} + 2^{ik}}$\\
+\rct$x^{2^s + 1} + ax^{2^{(4-i)k + s} + 2^{ik}} $\\
+$ax^{2^k + 1} + x^{2^s +1} + x^{2^{s + k} + 2^k} + bx^{2^{k + s} + 1} + b^{2^{k}}x^{2^s + 2^k}$\\
+\rct$x^{3} + a^{-1}\tr[\FF_{2^n}][\FF_2](a^3x^9)$\\
+$x^{3} + a^{-1}\tr[\FF_{2^n}][\FF_{2^3}](a^3x^9 + a^6x^{18})$\\
+\rct$x^{3} + a^{-1}\tr[\FF_{2^n}][\FF_{2^3}](a^6x^{18} + a^{12}x^{36})$\\
+$ax^{2^s + 1} + a^{2^k}x^{2^{2k} + 2^{k + s}} + bx^{2^{2k} + 1} + ca^{2^k + 1}x^{2^{s} + 2^{k + s}}$\\
+\rct$a^{2}x^{2^{2k + 1} + 1} + b^{2}x^{2^{k +1} + 1} + ax^{2^{2k} + 2} + bx^{2^{k} + 2} + dx^{3}$\\
+$ x^3 + ax^{2^{s+i} + 2^i} + a^2x^{2^{k+1} + 2^k} + x^{2^{s + i + k} + 2^{i + k}}$\\
+\rct$ a\tr[\FFfield][\subfield](bx^{2^i + 1}) + a^{2^k}\tr[\FFfield][\subfield](cx^{2^s + 1})$\\
+$ L(x)^{2^k + 1} + bx^{2^k + 1} $\\
+\bottomrule
+\end{tabular}}
+\end{column}
+\begin{column}{0.5\textwidth}
+% !TEX root = ../slides.tex
+\renewcommand\arraystretch{.9} 
+\scalebox{.77}{
+\begin{tabular}{|c|}
+\toprule
+\rctt \multicolumn{1}{c|}{\textbf{Multivariate}}\\ 
+\midrule
+$(x,y) \mapsto \left(\begin{array}{c} x^{2^s + 1} + ay ^{(2^s+1)2^i}\\ xy\end{array}\right)$\\
+\rct$(x,y) \mapsto \left(\begin{array}{c}x^{2^{2s} + 2^{3s}} + ax^{2^{2s}}y^{2^s} + by^{2^s+1}\\ xy\end{array}\right)$\\
+$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + x^{2^{s + k/2}}y^{2^{k/2}} + axy^{2^s} + by^{2^s+1}\\ xy\end{array}\right)$\\
+\rct$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + xy^{2^{s}} + y^{2^s + 1}\\ x^{2^{2s}+1} + x^{2^{2s}}y + y^{2^{2s} + 1}\end{array}\right)$\\
+$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + xy^{2^{s}} + y^{2^s + 1}\\ x^{2^{3s}}y + xy^{2^{3s}}\end{array}\right)$\\
+\rct$(x,y) \mapsto \left(\begin{array}{c}x^{2^s+1} + by^{2^s + 1}\\ x^{2^{s + k/2}}y + \frac{a}{b}xy^{2^{s + k/2}}\end{array}\right)$\\
+$(x,y) \mapsto \left(\begin{array}{c}x^{2^s + 1} + xy^{2^s} + ay^{2^s +1}\\ x^{2^{2s} + 1} + ax^{2^{2s}}y + (1 + a)^{2^s}xy^{2^{2s}} + ay^{2^{2s} + 1}\end{array}\right)$\\
+\rct$(x,y,z) \mapsto \left(\begin{array}{c}x^{2^s+1} + x^{2^s}z + yz^{2^s}\\x^{2^s}z + y^{2^s+1}\\xy^{2^s} + y^{2^s}z + z^{2^s+1}\end{array}\right)$\\
+$(x,y,z) \mapsto \left(\begin{array}{c}x^{2^s+1} + xy^{2^s} + yz^{2^s}\\xy^{2^s} + z^{2^s+1}\\x^{2^s}z + y^{2^s+1} + y^{2^s}z\end{array}\right)$\\
+\bottomrule
+\end{tabular}
+}
+\end{column}
+\end{columns}

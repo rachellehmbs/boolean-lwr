@@ -1,0 +1,61 @@
+\begin{tikzpicture}[scale=0.32]
+
+\node[draw, fill=red!10, minimum width = 5em, minimum height = 7em] (dist) at (0,0) {\footnotesize $\nrroundsdiff$ rounds};
+%\draw[decorate,decoration={brace,raise=0.2cm, amplitude = 6}]  (dist.south west) -- (dist.north west) ;
+%\node[left = 1em of dist] (distlabel) {\footnotesize Distinguisher};
+
+\node[above right = 0.2em and -4.3em of dist] {\footnotesize $(X,X') \quad \text{ s.t. } \quad X+X' = \rouge{\din}$};
+\node[below right = 0.2em and -4.3em of dist] {\footnotesize $(Y,Y') \quad \text{ s.t. } \quad Y+Y' = \ver{\dout}$};
+
+\node[right = 3.3em of dist.south east] (south_east_dist) {};
+\node[right = 3.3em of dist.north east] (north_east_dist) {};
+\draw[densely dashed,-latex, NavyBlue!80, thick]   (north_east_dist.center) -- (south_east_dist.center);
+\node[right = 4em of dist] (proba0) {\footnotesize {\color{NavyBlue!80} $2^{-\logdiffproba}$}};
+
+\only<1>{
+\node[above right = 3em and -4em of dist] (title) {\footnotesize Differential distinguisher}; 
+}
+
+\onslide<2,3,4,5>{
+
+\node[draw, fill=red!10, minimum width = 5em, minimum height = 2em, above = 5.5em of dist] (pt) at (0,0) {\footnotesize $\nrextraroundsp$ rounds};
+
+\node[left = 0.5em of pt.west] (kin) {\footnotesize $\key_{in}$}; 
+
+\node[draw, fill=red!10, minimum width = 5em, minimum height = 2em, below = 5.5em of dist] (ct) at (0,0) {\footnotesize $\nrextraroundsc$ rounds};
+
+\node[left = 0.5em of ct.west] (kout) {\footnotesize $\key_{out}$}; 
+
+\draw[-latex] (kin) -- (pt.west); 
+\draw[-latex] (kout) -- (ct.west); 
+
+\node[above right = 0.2em and -4.3em of pt] {\footnotesize $(P,P') \quad \text{ s.t. } \quad P+P' \in \rouge{\setpt}$ (dim \rouge{$d_{in}$})};
+\node[below right = 0.2em and -4.3em of ct] {\footnotesize $(C,C') \quad \text{ s.t. } \quad C+C' \in \ver{\setct}$ (dim \ver{$d_{out}$}) };
+
+\node[right = 3.7em of pt.south east] (south_east_pt) {};
+\node[right = 3.7em of pt.north east] (north_east_pt) {};
+\draw[densely dashed,-latex, NavyBlue!80, thick]  (south_east_pt.center)  -- (north_east_pt.center);
+\node[right = 4em of pt] (proba1) {\footnotesize {\color{NavyBlue!80} $1$} };
+
+\node[right = 3.3em of ct.south east] (under_ct_east) {};
+\node[right = 3.3em of ct.north east] (under_ct_west) {};
+\draw[densely dashed,-latex, NavyBlue!80, thick](under_ct_west.center) -- (under_ct_east.center) ;
+\node[right = 4em of ct] (proba2) {\footnotesize {\color{NavyBlue!80} $1$} };
+}
+
+\onslide<3,4,5>{
+
+\node[right = 3.2em of pt.south east] (south_east_pt2) {};
+\node[right = 3.2em of pt.north east] (north_east_pt2) {};
+\draw[densely dashed,-latex, rouge!80, thick]  (north_east_pt2.center)  -- (south_east_pt2.center);
+\node[right = 1em of pt] (proba3) {\footnotesize \rouge{$2^{-\dimsetpt}$} };
+
+\node[right = 3.2em of ct.south east] (south_east_ct2) {};
+\node[right = 3.2em of ct.north east] (north_east_ct2) {};
+%\draw[densely dashed,-latex, vert3!80, thick]   (south_east_ct2.center) -- (north_east_ct2.center);
+%\node[right = 1em of ct] (proba3) {\footnotesize \ver{$2^{-\dimsetct}$} };
+
+
+}
+
+  \end{tikzpicture}
