@@ -1,5 +1,0 @@
-\beamer@sectionintoc {1}{Introduction: motivation and setting}{2}{0}{1}
-\beamer@sectionintoc {2}{A symmetric point of view}{15}{0}{2}
-\beamer@sectionintoc {3}{Results}{33}{0}{3}
-\beamer@sectionintoc {4}{Some intuition}{51}{0}{4}
-\beamer@sectionintoc {5}{A taste of the algorithms}{59}{0}{5}
