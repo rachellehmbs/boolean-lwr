@@ -1,0 +1,161 @@
+\usepackage{etoolbox}	%% Comparison of integers
+\usepackage{xparse}		%% Parsing
+
+\usetikzlibrary{3d}		%% 3d canvas in TikZ
+
+%% Define the orientation of the state
+\tikzstyle{keccak}=[
+    x={(1.0cm,0.0cm)}, 
+    y={(0.0cm,0.8cm)},
+    z={(-0.4cm,-0.3cm)}
+]
+
+%% Default highlight colour
+\def\KeccakHighlightColour{black!30}
+
+%% Correct the plane
+\makeatletter
+\tikzoption{canvas is xy plane at z}[]{%
+  \def\tikz@plane@origin{\pgfpointxyz{0}{0}{#1}}%
+  \def\tikz@plane@x{\pgfpointxyz{1}{0}{#1}}%
+  \def\tikz@plane@y{\pgfpointxyz{0}{1}{#1}}%
+  \tikz@canvas@is@plane
+}
+\makeatother
+
+%% Draw the Keccak state with the provided dimensions
+\NewDocumentCommand{\KeccakDimension}{O{} m m m m m m}{%
+    \def\XGridMax{#2}
+    \def\YGridMax{#3}
+    \def\ZGridMax{#4}
+    \def\Xpos{#5}
+    \def\Ypos{#6}
+    \def\Zpos{#7}
+}%
+
+%% Draw the Keccak state with the provided dimensions
+\NewDocumentCommand{\KeccakDefColour}{O{} m}{%
+    \def\KeccakHighlightColour{#2}
+}%
+
+%% Draw the Keccak state with the provided dimensions
+\NewDocumentCommand{\KeccakState}{O{}}{%
+    \begin{scope}[canvas is xy plane at z=-\Zpos]
+      \draw [#1] (0+\Xpos,0+\Ypos) grid (\XGridMax+\Xpos,\YGridMax+\Ypos);
+    \end{scope}
+    \begin{scope}[canvas is yz plane at x=\XGridMax+\Xpos]
+      \draw [#1] (0+\Ypos,-\ZGridMax-\Zpos) grid (\YGridMax+\Ypos,-\Zpos);
+    \end{scope}
+    \begin{scope}[canvas is xz plane at y=\YGridMax+\Ypos]
+      \draw [#1] (0+\Xpos,-\ZGridMax-\Zpos) grid (\XGridMax+\Xpos,-\Zpos);
+    \end{scope}
+}%
+
+
+%% Highlight one side of the State
+\NewDocumentCommand{\KeccakPointZPlane}{O{} m m}{%
+    \def\XPoint{#2}
+    \def\YPoint{#3}
+    \begin{scope}[canvas is xy plane at z=-\Zpos]
+      \fill[\KeccakHighlightColour] (\XPoint+\Xpos,\YPoint+\Ypos) rectangle +(1,1);
+    \end{scope}
+}%
+
+%% Highlight one side of the State
+\NewDocumentCommand{\KeccakPointYPlane}{O{} m m}{%
+    \def\XPoint{#2}
+    \def\ZPoint{#3}
+    \begin{scope}[canvas is xz plane at y=\YGridMax+\Ypos]
+      \fill[\KeccakHighlightColour] (\XPoint+\Xpos,-\ZPoint-\Zpos) rectangle +(1,1);
+    \end{scope}
+}%
+
+%% Highlight one side of the State
+\NewDocumentCommand{\KeccakPointXPlane}{O{} m m}{%
+    \def\YPoint{#2}
+    \def\ZPoint{#3}
+    \begin{scope}[canvas is yz plane at x=\XGridMax+\Xpos]
+      \fill[\KeccakHighlightColour] (\YPoint+\Ypos,-\ZPoint-\Zpos) rectangle +(1,1);
+    \end{scope}
+}%
+
+%% Highlight one bit of the Keccak state with its coordinate
+%% \KeccakPoint<State size><Point coordinate>
+\NewDocumentCommand{\KeccakPoint}{O{} m m m}{%
+    \def\XPoint{#2}
+    \def\YPoint{#3}
+    \def\ZPoint{#4}
+   
+	\ifnumcomp{\ZPoint}{=}{0}{%
+        \ifnumcomp{\YGridMax}{>}{0}{%
+            \ifnumcomp{\XGridMax}{>}{0}{%
+                \begin{scope}[canvas is xy plane at z=-\Zpos]
+                  \fill[\KeccakHighlightColour] (\XPoint+\Xpos,\YPoint+\Ypos) rectangle +(1,1);
+                \end{scope}
+            }{}
+        }{}
+    }{}
+    \ifnumcomp{\XPoint+1}{=}{\XGridMax}{%
+        \ifnumcomp{\YGridMax}{>}{0}{%
+            \ifnumcomp{\ZGridMax}{>}{0}{%
+                \begin{scope}[canvas is yz plane at x=\XGridMax+\Xpos]
+                  \fill[\KeccakHighlightColour] (\YPoint+\Ypos,-\ZPoint-1-\Zpos) rectangle +(1,1);
+                \end{scope}
+            }{}
+        }{}
+    }{}
+	\ifnumcomp{\YPoint+1}{=}{\YGridMax}{%
+        \ifnumcomp{\ZGridMax}{>}{0}{%
+            \begin{scope}[canvas is xz plane at y=\YGridMax+\Ypos]
+              \fill[\KeccakHighlightColour] (\XPoint+\Xpos,-\ZPoint-1-\Zpos) rectangle +(1,1);
+            \end{scope}
+        }
+    }{}
+    \ifnumcomp{0}{=}{\YGridMax}{%
+        \begin{scope}[canvas is xz plane at y=\YGridMax+\Ypos]
+          \fill[\KeccakHighlightColour] (\XPoint+\Xpos,-\ZPoint-1-\Zpos) rectangle +(1,1);
+        \end{scope}
+    }{}
+}%
+
+\NewDocumentCommand{\KeccakXArrow}{O{} m m m m m m}{%
+    \def\XPoint{#2}
+    \def\YPoint{#3}
+    \def\ZPoint{#4}
+    \def\XXPoint{#5}
+    \def\YYPoint{#6}
+    \def\ZZPoint{#7}
+    \ifnumcomp{\XPoint}{=}{\XXPoint}{%
+        \begin{scope}[canvas is yz plane at x=\XGridMax+\Xpos]
+          \draw[* new-latex new, line width=1pt, arrow head=4pt] (\YPoint+.5+\Ypos,\ZPoint-.5-\Zpos) -- (\YYPoint+.5+\Ypos,-\ZZPoint-.5-\Zpos);
+        \end{scope} 
+    }{}   
+}%
+
+\NewDocumentCommand{\KeccakYArrow}{O{} m m m m m m}{%
+    \def\XPoint{#2}
+    \def\YPoint{#3}
+    \def\ZPoint{#4}
+    \def\XXPoint{#5}
+    \def\YYPoint{#6}
+    \def\ZZPoint{#7}
+    \ifnumcomp{\YPoint}{=}{\YYPoint}{%
+        \begin{scope}[canvas is xz plane at y=\YGridMax+\Ypos]
+          \draw[* new-latex new, line width=1pt, arrow head=4pt] (\XPoint+.5+\Xpos,\ZPoint-.5-\Zpos) -- (\XXPoint+.5+\Xpos,-\ZZPoint-.5-\Zpos);
+        \end{scope} 
+    }{}
+}%
+
+\NewDocumentCommand{\KeccakZArrow}{O{} m m m m m m}{%
+    \def\XPoint{#2}
+    \def\YPoint{#3}
+    \def\ZPoint{#4}
+    \def\XXPoint{#5}
+    \def\YYPoint{#6}
+    \def\ZZPoint{#7}
+    \ifnumcomp{\ZPoint}{=}{\ZZPoint}{%
+        \begin{scope}[canvas is xy plane at z=-\Zpos]
+          \draw[* new-latex new, line width=1pt, arrow head=4pt] (\XPoint+.5+\Xpos,\YPoint+.5+\Ypos) -- (\XXPoint+.5+\Xpos,\YYPoint+.5+\Ypos);
+        \end{scope} 
+    }{}
+}%

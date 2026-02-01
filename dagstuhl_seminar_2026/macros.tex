@@ -1,0 +1,365 @@
+% !TEX root = ./lwr.tex
+% Time-stamp: <2024-10-24 15:15:35>
+
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+
+\usepackage[english]{babel}
+
+%\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd} % for [[ ]] integer interval
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+
+\usepackage{hyperref}
+%\usepackage[a4paper]{geometry}
+\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = blue, citecolor = blue}
+
+\usepackage{graphicx} % including pictures
+\usepackage[export]{adjustbox} % use max width and max height for figures
+
+\usepackage{mathtools}
+\usepackage{pdflscape} % landscape, to be removed ?
+
+\usepackage{xparse} % for flexible newcommand 
+
+\usepackage{enumitem}
+\usepackage{caption}
+% \captionsetup[table]{format=hang,justification=raggedright,position=bottom,skip=15pt,textfont={sl},labelfont={bf}}
+% \captionsetup[figure]{format=hang,justification=raggedright,position=bottom,skip=15pt,textfont={sl},labelfont={bf}}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\algnewcommand{\LineComment}[1]{\State{\color{gray} \(\triangleright\) #1}}
+\usepackage{listings}
+
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shadows}
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
+\tikzstyle{fun}=[draw,very thick,fill=white]
+\tikzstyle{fork}=[shape=circle,inner sep=0pt,minimum size=3pt,fill=black]
+\tikzstyle{op}=[inner sep=2pt]
+
+\usepackage{ifthen}
+\usepackage{comment}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% To use monospace font in arrays easily
+\usepackage{array}
+\newcolumntype{t}{>{\tt}c}
+
+\usepackage{comment}
+
+
+% \theoremstyle{theorem}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{maintheorem}{Main Theorem}
+% \newtheorem{proposition}{Proposition}
+% \newtheorem{conjecture}{Conjecture}
+% \newtheorem{observation}{Observation}
+% \newtheorem{goal}{Goal}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{openproblem}{Open Problem}
+
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}
+% \newtheorem{caution}{Caution}
+
+% \theoremstyle{remark}
+% \newtheorem{remark}{Remark}
+
+\newcommand\constraints{\emph{\color{red}+1}}
+
+%\newcommand\LL{\mathcal{L}}
+\newcommand{\N}{\mathcal{N}}
+%\newcommand\Z{\mathcal{Z}}
+\newcommand\F{\mathbb{F}}
+\newcommand\ftwo{\mathbb{F}_2}
+\newcommand\field[1]{\mathbb{F}_{#1}}
+\newcommand\Zmod[1]{\mathbb{Z}/ {#1} \mathbb{Z}}
+\newcommand\proba[1]{\mathrm{Pr}\left[ #1  \right]}
+\newcommand\bigoh{\mathrm{O}}
+\newcommand\trace{\mathrm{Tr}}
+\newcommand\image{\mathrm{Im}}
+\newcommand\traceSub[1]{\mathrm{Tr}_{#1}}
+\newcommand\charac[1]{\mathds{1}_{#1}}
+
+\newcommand\xor{\textsc{xor}}
+\newcommand\xored{\textsc{xor}ed}
+\newcommand\xors{\textsc{xor}s}
+\newcommand\Tand{\textsc{And}}
+\newcommand\Tands{\textsc{And}s}
+
+
+\newcommand\kronecker[2]{\hat{\delta}\left( #1, #2 \right)}
+\newcommand\scalarprod[2]{#1 \cdot #2}
+\NewDocumentCommand{\walsh}{o}{
+	\IfNoValueTF {#1}
+	{W}
+	{W_{#1}}
+}
+%\newcommand\walsh[1]{\mathcal{W}_{#1}}
+\newcommand\ddt[1]{\delta_{#1}}
+\newcommand\identity{\mathcal{I}}
+% \newcommand\hweight[1]{\mathrm{hw}\left( #1 \right)}
+\newcommand\weight[2]{\Sigma\left( #2 \right)}
+\newcommand\coveredby{\preccurlyeq}
+\newcommand\lat[1]{\mathcal{W}_{#1}}
+
+%\newcommand\ind[2]{\mathbf{1}_{#1}\left( #2 \right)}
+
+\newcommand\closedbutterfly[3]{\mathsf{V}^{#1}_{#2, #3}}
+\newcommand\openbutterfly[3]{\mathsf{H}^{#1}_{#2, #3}}
+\newcommand\newbutterfly[1]{\mathsf{N}_{#1}}
+\newcommand\linearspan[1]{\langle #1 \rangle}
+\newcommand\rank{\mathrm{rank}}
+\newcommand\extract[1]{\mathcal{X}_{#1}}
+\newcommand\walshZeroes[1]{\mathcal{Z}_{#1}}
+\newcommand\ddtZeroes[1]{\mathcal{Z}^D_{#1}}
+
+\newcommand\spaceInput{\mathcal{V}}
+\newcommand\spaceOutput{\mathcal{V}^{\perp}}
+\newcommand\matSwap[1]{M_{#1}}
+\newcommand\maj{\mathrm{maj}}
+\newcommand\twistable[1]{#1-twistable}
+\newcommand\twotwoMat[4]{\left[ \begin{array}{cc} #1 & #2 \\ #3 & #4 \end{array} \right]}
+
+\newcommand\multInv{\mathcal{I}}
+
+\newcommand\Lstribog{\mathsf{L}}
+\newcommand\Sstribog{\mathsf{S}}
+\newcommand\Pstribog{\mathsf{P}}
+\newcommand\Kstribog{\mathsf{K}}
+\newcommand\Lfield{\mathsf{L}^{\mathsf{F}}}
+
+\newcommand\gen[1]{g_{#1}}
+\newcommand\pmin{p_{\mathrm{min}}}
+\newcommand\pkuz{p_{\mathrm{kuz}}}
+\newcommand\offset{\kappa}
+
+
+\newcommand\tklog{TKlog}
+\newcommand\tklogmath[1]{\mathscr{T}_{#1}}
+\newcommand\tkexp{TKexp}
+\newcommand\tkexpmath[1]{\mathscr{T}^{-1}_{#1}}
+\newcommand\fly{\log_{\alpha}^{\mathrm{FLY}}}
+\newcommand\logHN{\log_{\alpha}^{\mathrm{HN}}}
+
+\newcommand\qualDiff[1]{\mathsf{A}^{\mathrm{d}}_{ #1 }}
+\newcommand\qualLin[1]{\mathsf{A}^{\ell}_{ #1 }}
+
+\newcommand\addeq[2]{#1 \stackrel{\oplus}{\sim} #2}
+\newcommand\multeq[2]{#1 \stackrel{\odot}{\sim} #2}
+
+\newcommand\splitField[1]{\mathsf{Split}_{#1}}
+
+% \newcommand\jacobian[2]{\mathrm{Jac}_{#2}#1}
+\newcommand\jacobian[2]{\mathrm{Jac}\ \! #1 (#2)}
+\newcommand\Jlin[2]{\mathrm{Jac}_{\rm lin}\ \! #1 (#2)}
+\newcommand\partialDiff[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand\permSet[1]{\mathfrak{S}_{#1}}
+
+%% Macros Alain
+%% Vectors
+\newcommand{\word}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\av}{\word{a}}
+\newcommand{\bv}{\word{b}}
+\newcommand{\cv}{\word{c}}
+\newcommand{\dv}{\word{d}}
+\newcommand{\ev}{\word{e}}
+\newcommand{\gv}{\word{g}}
+\newcommand{\hv}{\word{h}}
+\newcommand{\mv}{\word{m}}
+\newcommand{\pv}{\word{p}}
+\newcommand{\uv}{\word{u}}
+\newcommand{\vv}{\word{v}}
+\newcommand{\wv}{\word{w}}
+\newcommand{\xv}{\word{x}}
+\newcommand{\yv}{\word{y}}
+\newcommand{\zv}{\word{z}}
+
+\newcommand{\GL}[2]{\mathbf{GL}_{#1}(#2)}
+\newcommand{\functionspace}[2]{\mathcal{F}(#1, #2)}
+\newcommand{\linclass}{\mathcal{C}}
+\newcommand{\FFspace}{\mathbb{F}_{2}^{n}}
+\newcommand{\FFfield}{\mathbb{F}_{2^{n}}}
+\newcommand{\FFinter}{\mathbb{F}_{2^{k}}^{\ell}}
+\newcommand{\FFinterbis}{\mathbb{F}_{2^{k'}}^{\ell'}}
+\newcommand{\subfield}{\FF_{2^{k}}}
+
+\newcommand{\ccz}{\sim_{\mathrm{CCZ}}}
+\newcommand{\ea}{\sim_{\mathrm{EA}}}
+\newcommand{\lin}{\sim_{\mathrm{lin}}}
+\newcommand{\aff}{\sim_{\mathrm{aff}}}
+
+\newcommand\comatrice{\mathsf{Cof}}
+
+
+%% Macros Jules
+%============ Maths/info======
+\newcommand{\re}{\mathrm{Re}}
+\newcommand{\rem}{\mathrm{rem}}
+\newcommand{\im}{\mathrm{Im}}
+%\newcommand{\tr}{\mathrm{Tr}}
+\newcommand{\xorm}{\oplus}
+\newcommand{\from}{\colon}
+\newcommand{\set}[1]{\left\{#1\right\}} % { }
+\newcommand{\spanset}[1]{\left\langle#1\right\rangle} % < >
+\newcommand{\intset}[1]{\llbracket #1 \rrbracket} % [[  ]]
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert} % absolute value | |
+\newcommand{\card}[1]{\left\lvert #1 \right\rvert} % cardinal | |
+\newcommand{\comp}{\circ}
+\newcommand{\modadd}[1]{\boxplus_{#1}} % modular addition
+\newcommand{\aes}{\mathrm{AES}}
+\renewcommand{\epsilon}{\varepsilon}
+
+
+%============ Ciphers ======
+\newcommand{\cipher}[1]{\textsc{#1}}
+\newcommand{\snow}{\cipher{Snow}}
+\newcommand{\misty}{\textsc{Misty}}
+
+%========= Maths sets=========
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+%\newcommand{\DD}{\mathbb{D}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\XX}{\mathbb{X}}
+
+\newcommand{\K}{\mathcal{K}}
+
+
+%Lucubrations notation
+\newcommand{\indicator}[1]{\mathbbm{1}_{#1}}
+\newcommand{\G}{\GG}
+\newcommand{\piclass}{\mathcal{P}_{ie}}
+\newcommand{\aspb}{ASPP}
+\newcommand{\bias}{\mathcal{E}}
+\NewDocumentCommand{\tr}{o o}{
+	\IfNoValueTF {#1}
+	{\mathrm{Tr}}
+	{\mathrm{Tr}_{{#1}/{#2}}}
+}
+\newcommand{\trlf}{\tr[\LL][\FF]}
+\newcommand{\trlfk}{\tr[\LL][\F_{2^k}]}
+\newcommand{\trlftwo}{\tr[\LL][\FF_{2}]}
+\newcommand{\trfftwo}{\tr[\FF][\FF_{2}]}
+\NewDocumentCommand{\mult}{m m}{
+	\mathrm{M}_{{#2}}
+}
+\let\phi=\varphi
+
+\newcommand{\gammazero}{{\gamma^{\circ}}}
+\newcommand{\Gammastar}{\Gamma^{\circ}}
+\newcommand{\cardfstar}{TODO}
+\newcommand{\cardg}{TODO}
+\newcommand{\cardl}{N}
+\newcommand{\familyname}{subspace function}
+\newcommand{\kim}{\kappa}
+\newcommand{\origins}{\mathcal{O}}
+\newcommand{\Gstar}{G^{\circ}}
+\newcommand{\ssp}{\mathrm{SSP}}
+\newcommand{\SSP}{\mathrm{SSP}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\AutLE}{\mathrm{Aut}_{\mathrm{LE}}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\id}{\mathrm{Id}}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\cycl}[1]{{\sigma}_{#1}}
+
+%============ Latin ===========
+\newcommand{\eg}{\textit{e.g.\@}}
+\newcommand{\cf}{\textit{c.f.\@}}
+%\newcommand{\ie}{\textit{i.e.\@}}
+\newcommand{\etal}{\textit{et al.\@}}
+
+
+%============ Colors ==============
+\definecolor{oiblack}{RGB}{0, 0, 0}
+\definecolor{oigreen}{RGB}{0, 158, 115}
+\definecolor{oiblue}{RGB}{0, 114, 178}
+\definecolor{oicyan}{RGB}{86, 180, 233}
+\definecolor{oiyellow}{RGB}{240, 228, 066}
+\definecolor{oiorange}{RGB}{230, 159, 0}
+\definecolor{oired}{RGB}{213, 094, 0}
+\definecolor{oipurple}{RGB}{204, 121, 167}
+
+\newcommand{\blue}[1]{{\color{oiblue} #1}}
+\newcommand{\green}[1]{{\color{oigreen} #1}}
+\newcommand{\cyan}[1]{{\color{oicyan} #1}}
+\newcommand{\yellow}[1]{{\color{oiyellow} #1}}
+\newcommand{\orange}[1]{{\color{oiorange} #1}}
+\newcommand{\red}[1]{{\color{oired} #1}}
+\newcommand{\purple}[1]{{\color{oipurple} #1}}
+
+\newcommand{\bfblue}[1]{{\mathbf{\color{blue} #1}}}
+
+%% Comments
+%\newcommand{\anne}[1]{\textcolor{green}{\bf [Anne : #1]}}
+%\newcommand{\alain}[1]{\blue{\bf [Alain : #1]}}
+%\newcommand{\leo}[1]{\textcolor{red}{\bf [Léo : #1]}}
+
+
+\newcommand{\gologlu}{Gölo{\u{g}}lu}
+\newcommand{\linearity}{\mathcal{L}}
+\newcommand{\maa}{\blue{\alpha}}
+\newcommand{\bb}{\blue{\beta}}
+\newcommand{\plaindiff}{\blue{\Delta}}
+\newcommand{\deriv}[1]{D_{#1}}
+\newcommand{\linspace}[1]{\mathrm{LS}(#1)}
+\newcommand{\ind}{\mathbf{1}}
+\renewcommand{\AA}{\orange{A}}
+\newcommand{\BB}{\orange{B}}
+\newcommand{\DD}{\orange{D}}
+\newcommand{\EE}{\orange{E}}
+\newcommand{\Caff}{\orange{C}}
+\newcommand{\hamming}{\mathrm{wt}}
+\newcommand{\zeroes}{\mathcal{Z}}
+\newcommand{\calAA}{\orange{\mathcal{A}}}
+\newcommand{\calLL}{\orange{\mathcal{L}}}
+\newcommand{\graph}{\mathcal{G}}
+\usepackage{upgreek}
+%\newcommand{\canon}[1]{\upxi^{(#1)}} 
+\newcommand{\din}{\blue{\Delta^{\mathrm{in}}}}
+\newcommand{\dout}{\blue{\Delta^{\mathrm{out}}}}
+
+\newcommand{\rct}{\rowcolor{gray!10}}
+\newcommand{\rctt}{\rowcolor{gray!35}}
+
+%multisets
+\newcommand*{\ldblbrace}{\{\mskip-5mu\{} 
+\newcommand*{\rdblbrace}{\}\mskip-5mu\}}
+\newcommand{\multiset}[1]{\ldblbrace #1 \rdblbrace}
+
+
+%ad hoc
+\newcommand{\errorsize}{\beta}
+
+%macaulay
+\newcommand{\md}{D}
+\newcommand{\macmat}{M_{\md}}
+\newcommand{\nrrm}{R_{\md}}
+\newcommand{\nrcm}{C_{\md}}

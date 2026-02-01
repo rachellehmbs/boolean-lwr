@@ -1,0 +1,258 @@
+\section{Additional slides}
+
+
+\begin{frame}{Two additional improvements}
+\flushleft
+\small
+\vspace{-3mm}
+\begin{enumerate}
+\item {\bf Sieving technique.}
+
+\small
+\begin{alertblock}{}
+\centering
+Use the differential constraints to filter out pairs that \ver{cannot follow the differential}, \rouge{regardless of the value of the key}.
+\end{alertblock}
+\smallskip 
+{\bf Pre-sieving}: Apply a sieve on all \rouge{S-boxes of the external rounds}
+\smallskip
+
+$\quad\rightarrow$ The key recovery is performed on \ver{$N' \leq N$ pairs}.
+\small 
+
+\bigskip
+\small
+
+\item {\bf Precomputing partial solutions.}
+
+\small
+\begin{alertblock}{}
+\centering
+\ver{Precompute} the partial solutions to some \rouge{subgraph}.
+\end{alertblock}
+
+\begin{itemize}
+\item \bleu{Impact} on the \ver{memory complexity} and the \ver{offline time} of the attack.
+\smallskip
+\item The \rouge{optimal key recovery strategy} depends on the memory and offline time allowed. 
+\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%
+
+\begin{frame}{Sieving}
+
+%\begin{exampleblock}{Idea behind the pre-sieving}
+%{\color{blue} Reduce the number of pairs} as quickly as possible to only keep the $N' \leq N$ pairs that satisfy the \rouge{differential constraints}.
+%\end{exampleblock}
+\bigskip
+
+\begin{alertblock}{}
+\centering
+{\bf Idea:} Use the differential constraints to filter out pairs that \ver{cannot follow the differential}, \rouge{regardless of the value of the key}.
+\end{alertblock}
+
+\medskip
+\begin{minipage}{3cm}
+\begin{itemize}
+\item Example:
+\end{itemize}
+\end{minipage}
+\begin{minipage}{5cm}
+${\tt (x_3,x'_3,x_2,x'_2,x_1\oplus x'_1,x_0\oplus x'_0)}$ 
+
+\medskip
+{\color{blue} Filter}: $\displaystyle  36/2^6 = \rouge{2^{-0.83}}.$
+\end{minipage}
+\begin{minipage}{3cm}
+\medskip
+\begin{center}
+\includegraphics[width=1.2cm]{figures/presieving.png}
+\end{center}
+\end{minipage}
+
+\bigskip
+
+\pause
+\begin{exampleblock}{Pre-sieving}
+Apply a sieve on all \rouge{S-boxes of the external rounds}. \\
+\smallskip
+\centering
+{\bf Advantage :} The key recovery is performed on \ver{$N' \leq N$ pairs}.
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+
+\begin{frame}{Precomputing partial solutions}
+\begin{block}{Idea}
+{\color{blue} Precompute} the partial solutions to some \rouge{subgraph}.
+\end{block}
+
+\begin{center}
+\includegraphics[width=2cm]{figures/precomputation1.png}
+\end{center}
+
+\begin{itemize}
+\item {\color{blue} Impact} on the \ver{memory complexity} and the \ver{offline time} of the attack.
+\bigskip
+\item The \rouge{optimal key recovery strategy} depends on how much memory and offline time are allowed. 
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%
+
+\begin{frame}{Other contributions of our paper [BHLS24]}
+
+\flushleft
+\footnotesize
+
+\vspace{-2mm}
+\begin{table}[t!]
+\centering
+\begin{tabular}{cccc}
+\toprule
+Target & Type & Time & Source \\
+\midrule
+\multirow{5}*{XOR} & \multirow{5}*{Preimage} & $2^{5n/6} \approx 2^{0.833n} $ & [EC:LeuWan15] \\
+& & $2^{2n/3} \approx 2^{0.667n} $ & [EC:Dinur16] \\
+& & $2^{5n/8} \approx 2^{0.625n} $ & [C:BWGG17] \\
+& & $2^{11n/18} \approx 2^{0.611n} $ & [JC:BDGLW20] \\
+& & \rouge{$2^{3n/5} \approx 2^{0.6n}$} & \rouge{Our work} \\
+\midrule
+\multirow{3}*{Zipper} & Second preimage, $L' \leq 2^{n/2}$ & $2^{5n/8} \approx 2^{0.625n} $ & [C:BWGG17] \\
+& Second preimage & $2^{3n/5} \approx 2^{0.6n}$ & [C:BWGG17] \\
+& Second preimage & \rouge{$2^{7n/12} \approx 2^{0.583n}$}& \rouge{Our work} \\
+\midrule
+\multirow{3}*{Hash-Twice} & \multirow{3}*{Second preimage} & $2^{2n/3} \approx 2^{0.667n}$ & [SAC:ABSK09] \\
+& & $2^{13n/22} \approx 2^{0.591n}$ & [JC:BDGLW20] \\
+& & \rouge{$2^{15n/26} \approx 2^{0.577n}$}& \rouge{Our work} \\
+%& \multirow{2}*{Second preimage, quantum} & $2^{n/2}$ & Brute-force \\
+%& & \rouge{$2^{3n/7} \approx 2^{0.459n}$} & \rouge{Our work} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+%%%%%%%%%%
+
+\begin{frame}{Nesting exceptional functions}
+\small
+\vspace{-2mm}
+
+\begin{enumerate} 
+\setlength{\itemsep}{4pt}
+\item Find $\cipherblock$ s.t. $h_{\cipherblock}$ has cycle length $ \leq 2^{\mu}$. \hfill \colorbox{rouge3!20}{$2^{c - \mu}$}.
+\item Find $\gamma$ s.t. $g_{\cipherblock,\altblock}$ has cycle length $\approx 2^{\nu}$.  \hfill \colorbox{rouge3!20}{$2^{c/2 + \mu - \nu}$}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item $g_{\cipherblock,\altblock}$ has a domain of size $2^{\mu}$ $\rightarrow$ try about \colorbox{rouge3!20}{$2^{\mu/2 - \nu}$} different $\gamma$'s.
+\item Checking the cycle length: \colorbox{rouge3!20}{$\approx 2^{\mu/2}$} applications of $g_{\cipherblock,\altblock}$.
+\item One application of $g_{\cipherblock,\altblock}$ costs \colorbox{rouge3!20}{$L \approx 2^{c/2}$} applications of $h$. 
+\end{itemize}
+\item One must try \colorbox{rouge3!20}{$2^{\nu}$} tags using messages of length \colorbox{rouge3!20}{$2^{(c+\mu)/2}$}.\hfill \colorbox{rouge3!20}{$2^{c/2 +  \mu/2 + \nu}$.}
+\end{enumerate}
+
+\begin{exampleblock}{\small Optimal trade-off}
+\centering
+\small For $\mu = 2c/7$ and $\nu = c/14$, we obtain a balanced total complexity \bleu{$2^{5c/7} < 2^{3c/4}$}.
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{A new improvement [BHLS24]}
+
+\small
+\begin{alertblock}{}
+\centering
+Define \rouge{\it nested exceptional functions} from the cycle $\mathcal{C}$ of $h_{\beta}$ to the cycle.
+\end{alertblock}
+
+\footnotesize
+
+\begin{itemize}
+\item When $L \gg 2^{c/2}$, processing ciphertexts of the form:
+\end{itemize}
+
+\vspace{-5mm}
+\begin{center}
+ \begin{tikzpicture}[xscale=.6,yscale=.6,
+    level distance=1.2cm, sibling distance=1cm,
+    edge from parent/.style={draw,<-}]
+    
+  \foreach \x in {0,1,2,3}{
+ 
+    	\foreach \i in {0,1,...,7} {
+      		\node[point] (b\i\x) at ($(7*0.9*\x + \i*0.9,0)$) {};
+		\node (braised\i\x) at ($(7*0.9*\x + \i*0.9,0.77)$) {};
+    	}    
+    	 \foreach \i in {1,2,4,5,6} {
+           	\node (bb\i\x) at ($(7*0.9*\x + 0.5+\i*0.9,0.5)$) {{\scriptsize$\cipherblock$}};
+    	}  
+   	 \foreach \i in {0} {
+           	\node (bb\i\x) at ($(7*0.9*\x + 0.5+\i*0.9,0.5)$) {{\scriptsize\ver{$\gamma$}}};
+    	}    
+    	\foreach \i\j in {1/2,2/3,4/5,5/6,6/7} {
+     		 \draw[->] (b\i\x) to (b\j\x);
+    	}
+	\foreach \i\j in {3/4} {
+		\draw[dotted] (b\i\x) to (b\j\x) ;
+   	 }
+      	\foreach \i\j in {0/1} {
+      		\draw[vert3,->] (b\i\x) to (b\j\x);
+   	 }
+	 
+	\draw[line width=0.5pt,densely dotted,-latex,in=-160,out=-20] (b0\x) to (b7\x) ;
+	\node at ($ (b0\x)!0.5!(b7\x) $) [below=3.8mm] {\scriptsize $g_{\beta, \ver{\gamma}}$};
+	
+	\draw[densely dashed, decorate, decoration={brace, amplitude=5pt}, thick, color=NavyBlue!70] (braised4\x) to (braised7\x); 
+	\node at ($ (braised4\x)!0.5!(braised7\x) $) [above=2mm] {\scriptsize \bleu{$\in \mathcal{C}$}};
+   }
+   \onslide<3>{
+     \foreach \x in {2,3}{
+   		\node[rouge3,point] (blow7\x) at ($(7*0.9*\x + 7*0.9,-1.3)$) {};
+   }
+   	\draw[densely dashed, decorate, decoration={brace, amplitude=5pt}, thick, color=rouge3!70] (blow73.east) to (blow72.west); 
+		\node at ($ (blow72)!0.5!(blow73) $) [below=2mm] {\scriptsize \rouge{$\in \mathcal{C'}$}};
+%   	\draw[densely dashed, decorate, decoration={brace, amplitude=5pt}, thick, color=NavyBlue!70] (braised4\x) to (braised7\x); 
+}
+\end{tikzpicture}
+\end{center}
+
+\vspace{-5mm}
+\flushleft $\quad$ iterates the function
+
+\vspace{-6mm}
+\begin{align*}
+g_{\cipherblock,\ver{\altblock}}: \bleu{\mathcal{C}} &\to \bleu{\mathcal{C}} \\
+  x &\mapsto h^*( \ver{\altblock} \| \cipherblock^{\cipherlength},x) \,.
+ \end{align*}
+%\end{exampleblock}
+\pause
+
+\vspace{-3mm}
+\begin{itemize}
+\setlength{\itemsep}{4pt}
+\item Finding an `exceptional' $\beta$ i.e. s.t. \bleu{$\mathcal{C}$} has length $2^{\mu}$ costs \colorbox{NavyBlue!20}{$2^{c-\mu}$}. \text{[GKHR23]}
+\pause
+\item Eventually, the \rouge{cycle $\mathcal{C'}$} of $g_{\cipherblock,\ver{\altblock}}$ is reached.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%
+
+\begin{frame}{Nested exceptional functions}
+
+\footnotesize
+
+\input{figures/fig_nesting.tex}
+
+
+
+\end{frame}
+
+%%%%%%%%%%
+

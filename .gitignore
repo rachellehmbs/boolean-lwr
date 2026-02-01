@@ -7,3 +7,5 @@
 *.nav
 *.out
 *.snm
+*.toc
+*.DS_Store
