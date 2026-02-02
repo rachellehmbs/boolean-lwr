@@ -298,7 +298,7 @@ In a nutshell: solving a \rouge{noisy} \bleu{linear system} over a ring.
 In this case: 
 
 \begin{itemize}
-\item the \bleu{$y \mapsto \round{y}_{2^p}$} removes the \rouge{$q-p$} LSBs.  
+\item \bleu{rounding function} $\bleu{\round{\cdot}_{p}} : \ZZ_{q} \rightarrow \ZZ_{p} $ removes the \rouge{$q-p$} LSBs.  
 \item Security level is determined by \rouge{$n$}, \rouge{$q$} and \rouge{$q-p$}: noise $\sim Uniform[-2^{q-p},0)$ 
 \end{itemize}
  \hfill e.g. LightSaber: $n = 512, q-p = 3$, dPRF LaKey $n = 256, q-p = 4$. 
@@ -360,10 +360,10 @@ In this case:
 \begin{frame}{Linearisation attack by Arora \& Ge (2011)}
 
 \small
-\vspace{-2mm}
-\begin{itemize}
-\item Low noise, large number of samples (not SABER). 
-\end{itemize}
+%\vspace{-2mm}
+%\begin{itemize}
+%\item Low noise, large number of samples (not SABER). 
+%\end{itemize}
 
 \vspace{-1mm}
 \begin{exampleblock}{}
@@ -384,7 +384,7 @@ Any sample $(\ver{\veca}, s_{\ver{\veca}})$, yields the following equation over 
 
 % \footnotesize
 % \flushright
-\textbf{Gröbner-based solving?} Some asymptotic results for prime or odd moduli \rouge{(not $2^q$)}.  
+%\textbf{Gröbner-based solving?} Some asymptotic results for prime or odd moduli \rouge{(not $2^q$)}.  
 
 \end{exampleblock}
 
@@ -399,9 +399,10 @@ Any sample $(\ver{\veca}, s_{\ver{\veca}})$, yields the following equation over 
 
 \pause
 \begin{alertblock}{}
-Our main result: in the case of LWR, one can do better.
+Our observation: inapplicable for some parameter regimes \rouge{independently of the nr of samples}. 
 \end{alertblock}
 
+Our main result: in the case of LWR, one can do an attack that 1) works 2) better.
 \end{frame}
 
 %%%%%%%%%%
@@ -415,6 +416,7 @@ Our main result: in the case of LWR, one can do better.
 
 \begin{frame}{A symmetric point of view}
 
+\vspace{-3mm}
 $$\ZZ_{2^{q}} \quad \simeq \quad \set{0,1,2,\ldots, 2^{q}-1} \quad \simeq \quad  \bleu{\FF_{2}^{q}}$$ 
 \pause
 \medskip
@@ -432,7 +434,7 @@ $$\ZZ_{2^{q}} \quad \simeq \quad \set{0,1,2,\ldots, 2^{q}-1} \quad \simeq \quad 
 
 \begin{exampleblock}{}
 \centering
-The LWR function ``is'' a $(2nq, p)$-vectorial Boolean function:
+The LWR function is a $(2nq, p)$-vectorial Boolean function:
 \begin{align*}
   F :  \FF_{2}^{nq} \times \FF_{2}^{nq} \to \FF_{2}^{p}\quad\quad
   (\ver{\veca}, \rouge{\vecx}) \mapsto \left\lfloor \sum_{i=0}^{n-1} \ver{\veca_{i}} \times \rouge{\vecx_{i}}\right\rfloor_{2^p} 
@@ -449,9 +451,7 @@ The \textbf{LWR problem} can be studied in a ``symmetric'' manner ($\simeq$ weak
 \end{frame}
 
 
-\begin{frame}{A strange (but handy) notation}
-
-\small
+\begin{frame}{Exponential notation}
 
 % \begin{itemize}
 % \item We deal with 2nq variables $\ver{\veca_{0, 0}}, \ldots, \ver{\veca_{0,q-1}}, \ldots, \ver{\veca_{n-1, 0}}, \ldots, \ver{\veca_{n-1,q-1}},\rouge{\vecx_{0, 0}}, \ldots, \rouge{\vecx_{0,q-1}}, \ldots, \rouge{\vecx_{n-1, 0}}, \ldots, \rouge{\vecx_{n-1,q-1}}$. 
@@ -460,14 +460,13 @@ The \textbf{LWR problem} can be studied in a ``symmetric'' manner ($\simeq$ weak
 % \flushleft
 
 \begin{exampleblock}{}
-\textbf{The ``usual'' notation.} Let $y = (y_{0}, \ldots, y_{q-1}), m = (m_{0}, \ldots, m_{q-1}) \in \FF_2^s$: %Then $y^{m}$ stands for:
-$$y^m \coloneq \prod_{i = 0}^{q-1} y_{i}^{m_{i}}\,.$$
+%\textbf{The ``usual'' notation.} Let $y = (y_{0}, \ldots, y_{q-1}), m = (m_{0}, \ldots, m_{q-1}) \in \FF_2^s$: %Then $y^{m}$ stands for:
+%$$y^m \coloneq \prod_{i = 0}^{q-1} y_{i}^{m_{i}}\,.$$
 
-\pause
-\textbf{The ``not-so usual'' one.} For an \bleu{integer} $\tilde{m}$ of size $q$, $\tilde{m} = \sum_{i=0}^{q-1}\tilde{m}_{i}2^{i}$:% $y^{\tilde{m}}$ stands for:
-$$y^{\tilde{m}} \coloneq \prod_{i = 0}^{q-1} y_{i}^{\tilde{m}_{i}}\,.$$
+%\pause
+%\textbf{The ``not-so usual'' one.} For an \bleu{integer} $\tilde{m}$ of size $q$, $\tilde{m} = \sum_{i=0}^{q-1}\tilde{m}_{i}2^{i}$:% $y^{\tilde{m}}$ stands for:
+%$$y^{\tilde{m}} \coloneq \prod_{i = 0}^{q-1} y_{i}^{\tilde{m}_{i}}\,.$$
 
-\pause
 If $u_{0}, \ldots, u_{n-1}, v_{0}, \ldots, v_{n-1}$ are $q$-bit integers: %$\ver{\veca^{\vecu}}\ver{\vecx^{\vecv}}$ stands for:
 $$ \ver{\veca^{\vecu}}\rouge{\vecx^{\vecv}} \coloneq \prod_{i} \prod_{j} \ver{a_{i, j}}^{u_{i, j}} \rouge{x_{i, j}}^{v_{i, j}}  $$
 \end{exampleblock}
@@ -481,18 +480,15 @@ $$ \ver{\veca^{\vecu}}\rouge{\vecx^{\vecv}} \coloneq \prod_{i} \prod_{j} \ver{a_
 % \item[] Since $2^i = (10\ldots0)_2$, $x^{2^{i}}$ is the $i+1$th bit of $x$, $x[i]$.
 % \end{itemize}
 
-
-\end{frame}
-
-
-\begin{frame}{An example}
-
 \centering
 
- $$\text{Consider } \quad M = \ver{a_{0,0}a_{0, 1}a_{1, 0}a_{1, 1}a_{1, 2}}\rouge{x_{0, 0}x_{1, 0}x_{1, 1}}.$$
+ $$\text{Consider } \quad M = \ver{a_{0,0}a_{0, 1}a_{1, 0}a_{1, 1}a_{1, 2}}\rouge{x_{0, 0}x_{1, 0}x_{1, 1}} \,.$$
 
-$$\text{We denote it by } M = \ver{a_{0}^{\mathtt{0b011}}a_{1}^{\mathtt{0b111}}}\rouge{x_{0}^{\mathtt{0b001}}x_{1}^{\mathtt{0b011}}} =  \ver{a^{(3, 7)}}\rouge{x^{(1, 3)}}.$$
+$$\text{We denote it by } M = \ver{a_{0}^{\mathtt{0b011}}a_{1}^{\mathtt{0b111}}}\rouge{x_{0}^{\mathtt{0b001}}x_{1}^{\mathtt{0b011}}} =  \ver{\veca^{(3, 7)}}\rouge{\vecx^{(1, 3)}}.$$
+
 \end{frame}
+
+
 
 
 
@@ -507,11 +503,10 @@ $$\text{We denote it by } M = \ver{a_{0}^{\mathtt{0b011}}a_{1}^{\mathtt{0b111}}}
 \end{align*}
 \end{exampleblock}
 
-\begin{exampleblock}{}
+%\begin{exampleblock}{}
 \textbf{Product of coordinates.} For any $F : \ZZ_{2^q} \to \ZZ_{2^q}$, and any $m = \sum_{i}m_i2^i$, we denote by:
-
 $$F^m \coloneq \prod_i F_i^{m_i}.$$
-\end{exampleblock}
+%\end{exampleblock}
 
 % \begin{exampleblock}{}
 % \textbf{ANF of modular addition.} \hfill [FSE:BraSem05]
@@ -524,7 +519,7 @@ $$F^m \coloneq \prod_i F_i^{m_i}.$$
 
 
 \begin{alertblock}{}
-In the following, we study (product of) coordinates of the inner product:
+In the following, we study (products of) coordinates of the inner product:
 \begin{align*}
 F^{m,n} : (\veca, \vecx) \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \qquad \quad F^{m,n}_{\veca} : \vecx \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \,.
 \end{align*}
@@ -621,7 +616,7 @@ $$ F^{m, n} = \sum_{\vecu, \vecv} \alpha_{\vecu, \vecv} \ver{\veca^{\vecu}}\roug
 
 \pause
 $\FF_2[\veca][\vecx].$
-$$ F^{m, n} = \sum_{\vecv} \underbrace{\left(\sum_{\vecu} \alpha_{\vecu,\vecv} \ver{\veca^{\vecu}}\right)}_{\alpha_{\vecv}}\rouge{\vecx^{\vecv}}, \quad\quad \alpha_{\vecv} \in \FF_2[\veca].$$
+$$ F^{m, n} = \sum_{\vecv} \underbrace{\left(\sum_{\vecu} \alpha_{\vecu,\vecv} \ver{\veca^{\vecu}}\right)}_{ \text{\small $\alpha_{\vecv}$}}\rouge{\vecx^{\vecv}}, \quad\quad \alpha_{\vecv} \in \FF_2[\veca].$$
 \end{exampleblock}
 
 
@@ -655,9 +650,9 @@ $$ F^{m, n} = \sum_{\vecv} \underbrace{\left(\sum_{\vecu} \alpha_{\vecu,\vecv} \
 \vspace{-2mm}
 \begin{alertblock}{}
   \begin{itemize}
-    \item Cost of linearisation $\leq$  $\#\text{monomials}^{\omega} = \card{\exponents_{\vecx}(F^{m,n})}^{\omega}$ \hfill  with 
+    \item Cost of linearisation $\leq$  $\#\text{monomials}^{\omega} = \card{\exponents_{\rouge{\vecx}}(F^{m,n})}^{\omega}$ \hfill  with 
 $
-\exponents_{\vecx}(F^{m,n}) = \{\vecv \ | \alpha_{\vecv} \neq 0 \} \,.
+\exponents_{\rouge{\vecx}}(F^{m,n}) = \{\vecv \ | \alpha_{\vecv} \neq 0 \} \,.
 $
 \item Linearisation is possible only if the ANF of each $\alpha_{\vecv}$ is known \hfill (We'll get back to it\dots)
   \end{itemize}
@@ -749,7 +744,7 @@ Let $S^n_k = \{v \in \NN^n :  \sum_{i = 0}^{n-1} v_i = k\} $ be the set of $n$-l
     \item \textbf{Proven using [Braeken \& Semaev FSE05].} 
     
     If $G(\vecx) =  x_0 + x_1 + \cdots + x_{n-1} \in \ZZ_{2^q}$, then $\exponents_{\vecx}(G^m) = S^n_m$
-    \item Related to the properties of \textbf{S-functions} \hfill [MouCanIndPre09]
+    \item Related to the properties of \textbf{S-functions}. \hfill [MouCanIndPre09]
   \end{itemize}
   
 \end{exampleblock}
@@ -764,7 +759,7 @@ Let $S^n_k = \{v \in \NN^n :  \sum_{i = 0}^{n-1} v_i = k\} $ be the set of $n$-l
 
 
 
-\begin{frame}{A `free' improvement}
+\begin{frame}{An attack that works and costs the same (in fact, a little less)}
 
 %\footnotesize
 \begin{alertblock}{}
@@ -781,7 +776,7 @@ Let $S^n_k = \{v \in \NN^n :  \sum_{i = 0}^{n-1} v_i = k\} $ be the set of $n$-l
 \begin{exampleblock}{}
 \begin{itemize}
 
-\item Recall over $\ZZ_{2^q}$: $\binom{n + 2^{q-p}}{2^{q-p}}$ monomials. \hfill [Arora \& Ge] 
+\item Recall over $\ZZ_{2^q}$ (when applicable): $\binom{n + 2^{q-p}}{2^{q-p}}$ monomials. \hfill [Arora \& Ge] 
 
 \pause
 \medskip 
@@ -790,11 +785,11 @@ Let $S^n_k = \{v \in \NN^n :  \sum_{i = 0}^{n-1} v_i = k\} $ be the set of $n$-l
 
 \pause
 \medskip
-\item Free benefit of working over \ver{$\FF_2$} rather than $\ZZ_{2^q}$: 
+\item Working over \ver{$\FF_2$} rather than $\ZZ_{2^q}$:  we gain at least $2^{q-p}$. 
 \begin{enumerate}
-\item  operations are \rouge{cheaper} (we gain at least $q$). 
+\item   it's a field. 
 \smallskip
-\item  it's a field. 
+\item  operations are \rouge{cheaper}
 \end{enumerate}
 
 \end{itemize}
@@ -830,7 +825,7 @@ The cost of steps 2 to 5 is \bleu{negligible} before the cost of step 1.
 
 %\footnotesize
 \begin{exampleblock}{}
-We improve Arora \& Ge generically\dots \only<2->{as long as we can compute the ANF\dots} 
+We improve Arora \& Ge generically\dots \only<2->{as long as we can compute the ANF.} 
 \end{exampleblock}
 
 
@@ -839,7 +834,7 @@ We improve Arora \& Ge generically\dots \only<2->{as long as we can compute the 
 \flushleft
 This is \textit{a priori} hard: 
 \begin{itemize}
-\item Möbius transform is out-of-scope (the LUT cannot be fully computed/stored)
+\item Möbius transform is out of reach (the LUT cannot be fully computed/stored)
 \item Direct computations using recursive formulas seem hopeless.
 \end{itemize}
 %$F^{m, n}$ depends on at most $\rouge{2n \cdot (\lfloor \log_2(m) \rfloor + 1)}$ with $n > 128$. 
@@ -852,13 +847,13 @@ This is \textit{a priori} hard:
 %\end{alertblock}
 %NB: this simply comes from the fact that the ith bit of the sum depends only on the i-1 LSBs of the terms.
 
-\begin{alertblock}{Our result}
+\begin{alertblock}{Our results}
 \centering
 The ANF can be `understood' for \rouge{arbitrary large $n$} and for \rouge{$m$ up to $16$} by:
 \vspace{.2cm}
 \begin{itemize}
-\item storing the ANF for a small value of $n'$.
-\item computing relevant parts of the ANF or properties for arbitrary large $n \geq n'$.
+\item storing the ANF for $n = m$.
+\item computing properties for arbitrary large $n$.
 \end{itemize}
 \end{alertblock}
 
@@ -893,7 +888,7 @@ F(\ver{\veca}, \rouge{\vecx}) &= \alpha_{\vecv}\rouge{\vecx^{\vecv}} + \alpha_{\
 \pause
 
 \begin{itemize}
-\item Less variables: improved linearisation (data and time).
+\item Less auxiliary variables: improved linearisation (data and time).
 \item Ideally: compute the rank and a basis for $\{\alpha_{\vecv}, \vecv \in \exponents(F^{m, n})\}$.  \hfill \rouge{Work in progress} 
 \end{itemize} 
 
@@ -959,7 +954,7 @@ F(\ver{\veca}, \rouge{\vecx}) &= \alpha_{\vecv}\rouge{\vecx^{\vecv}} + \alpha_{\
 
 \textbf{Comparison to the linearisation attack by Arora \& Ge using $\omega = 3$}.
 
-\hfill and cost of modular addition/multiplication $\approx q-p$.
+\hfill and cost of modular addition/multiplication $m = 2^{q-p}$.
 
 \begin{table}[]
     \centering
@@ -970,13 +965,13 @@ F(\ver{\veca}, \rouge{\vecx}) &= \alpha_{\vecv}\rouge{\vecx^{\vecv}} + \alpha_{\
         $m = 2^{q-p}$ & $n$ & \makecell{Arora-Ge} & \makecell{Our work\\ {\small ($\leq$ rank only)}}  &  \makecell{Our work\\ {\small ($\leq$ rank and sparsity)}} \\
         \midrule
         
-        &  $64$  & $2^{106.4}$ & \rouge{$2^{97.8}$} &  \bleu{$2^{87.2}$} \\
-       \multirow{-1}{*}{$8$}  & $128$ & $2^{129.3}$ & \rouge{$2^{121.8}$} & \bleu{$2^{110.8}$}\\
-        & \ $256$ \ & $2^{152.7}$ & \rouge{$2^{145.9}$} & \bleu{$2^{134.7}$} \\
+        &  $64$  & $2^{103.4}$ & \rouge{$2^{97.8}$} &  \bleu{$2^{87.2}$} \\
+       \multirow{-1}{*}{$8$}  & $128$ & $2^{126.3}$ & \rouge{$2^{121.8}$} & \bleu{$2^{110.8}$}\\
+        & \ $256$ \ & $2^{149.7}$ & \rouge{$2^{145.9}$} & \bleu{$2^{134.7}$} \\
         \midrule
-        & $64$  & $2^{170.7}$ &  \rouge{$2^{157.2}$}& {\small Non-available} \\
-        \multirow{-1}{*}{\ $16$ \ } & $128$ & $2^{214.6}$ &  \rouge{$2^{202.00}$}& {\small Non-available} \\
-        & $256$ & $2^{260.5}$ & \rouge{$2^{250.1}$} & {\small Non-available} \\
+        & $64$  & $2^{167.7}$ &  \rouge{$2^{157.2}$}& {\small Non-available} \\
+        \multirow{-1}{*}{\ $16$ \ } & $128$ & $2^{211.7}$ &  \rouge{$2^{202.00}$}& {\small Non-available} \\
+        & $256$ & $2^{257.5}$ & \rouge{$2^{250.1}$} & {\small Non-available} \\
         \bottomrule
     \end{tabular}
     \vspace{1mm}
@@ -1004,12 +999,12 @@ F(\ver{\veca}, \rouge{\vecx}) &= \alpha_{\vecv}\rouge{\vecx^{\vecv}} + \alpha_{\
 \centering
 The ANF (and additionnal properties) can be understood for \rouge{arbitrary large $n$} and for \rouge{$m$ up to $16$}. 
 \end{alertblock}
-\hfill {\scriptsize NB: these $m$ are used in practice $m = 8$ for SABER, $m = 16$ for LaKEY.}
+\hfill {\scriptsize NB: these $m$'s are used in practice e.g. $m = 8$ for SABER, $m = 16$ for LaKEY.}
 %More precisely: relevant metrics e.g. number of monomials. 
 
 \medskip
 
-We take advantage of symmetries due to \ver{commutativity of modular addition}. 
+We take advantage of symmetries due to the \ver{commutativity of modular addition}. 
 
 %\footnotesize
 \begin{block}{}
@@ -1038,7 +1033,7 @@ Observe that:
 Observe that:
 \begin{itemize}
   \item $\langle (a_0, a_1, 0), (x_0, x_1, 0) \rangle = a_0x_0 + a_1x_1  = \langle (a_0, a_1), (x_0, x_1) \rangle$.\pause
-  \item More generally for any $n \leq n'$, $\langle \veca || 0^{n'-n}, \vecx || 0^{n'-n} \rangle_{n'} = \langle \sigma \cdot \veca, \sigma \cdot \vecx  \rangle_{n} $.
+  \item More generally for any $n \leq n'$, $\langle \veca || 0^{n'-n}, \vecx || 0^{n'-n} \rangle_{n'} = \langle \veca, \vecx  \rangle_{n} $.
 \end{itemize}  
 
 \end{block}
@@ -1061,7 +1056,7 @@ Observe that:
 \begin{itemize}
 \item The group $\Sfrak_n$ acts on vectors of length $n$:  $\sigma \cdot \vecu \coloneq (u_{\sigma^{-1}(0)}, \ldots, u_{\sigma^{-1}(n-1)})$.
 
-\item $F(\veca, \vecx)$ is said $\Sfrak_n$-invariant if $F(\veca, \vecx) = F(\sigma \cdot \veca, \sigma \cdot \vecx)$ for all $\sigma \in \Sfrak_n$.
+\item $F(\veca, \vecx)$ is $\Sfrak_n$-invariant if $F(\veca, \vecx) = F(\sigma \cdot \veca, \sigma \cdot \vecx)$ for all $\sigma \in \Sfrak_n$.
 \end{itemize}
 \end{exampleblock}
 \pause
@@ -1096,14 +1091,15 @@ Indeed, $\Sfrak_2 = \{ \mathrm{id}, \bleu{(0 \ 1)} \}$ and
 
 
 \begin{alertblock}{}
-For any $m, n$, \rouge{$F^{m, n}$ is $\Sfrak_n$-invariant}. This is equivalent to: 
+For any $m, n$, \rouge{$F^{m, n}$ is $\Sfrak_n$-invariant}. $\Sfrak_n$-invariance is equivalent to: 
+\normalsize
 %\begin{minipage}{0.5\textwidth}
 \begin{itemize}
-\item $\forall \vecu, \vecv, \sigma, \quad \quad \alpha_{(\sigma \cdot \vecu, \sigma \cdot \vecv)} = \alpha_{(\vecu,\vecv)}$ \hfill $\alpha_{\vecu, \vecv} \in \FF_2$ %for any $\vecu, \vecv$, $\sigma \in \Sfrak_n$. 
- \item $\forall \vecu, \sigma, \quad \quad  \sigma \cdot \alpha_{\vecv}  = \alpha_{\sigma^{-1} \cdot \vecv}$\hfill $\alpha_{\vecv} \in \FF_2[\veca]$% for any $\vecv$, $\sigma \in \Sfrak_n$. 
+\item \qquad \qquad $\forall \vecu, \vecv, \sigma, \quad \quad \alpha_{(\sigma \cdot \vecu, \sigma \cdot \vecv)} = \alpha_{(\vecu,\vecv)}$ \hfill $\alpha_{\vecu, \vecv} \in \FF_2$ %for any $\vecu, \vecv$, $\sigma \in \Sfrak_n$. 
+ \item and to \qquad $\forall \vecu, \sigma, \quad \quad  \sigma \cdot \alpha_{\vecv}  = \alpha_{\sigma^{-1} \cdot \vecv}$\hfill $\alpha_{\vecv} \in \FF_2[\veca]$% for any $\vecv$, $\sigma \in \Sfrak_n$. 
 \end{itemize}
 %\end{minipage}
-
+\small
 \smallskip
 \centering \rouge{Allows to represent the ANF in a compact way.} 
 
@@ -1120,55 +1116,27 @@ For any $m, n$, \rouge{$F^{m, n}$ is $\Sfrak_n$-invariant}. This is equivalent t
 \small
 How do we get results for \rouge{arbitrary $n$}?
 
-\footnotesize
 \flushleft
 \begin{block}{}
 \textbf{Example.} 
-Let's look at the $\Sfrak_{\rouge{3}}$-invariant function 
+Let's look at the $\Sfrak_{\rouge{2}}$-invariant function 
 
-$$F^{\rouge{(3)}} ((\bleu{a_0, a_1},a_2),(\bleu{x_0, x_1}, x_2))  \mapsto \bleu{\veca^{(1,0,0)} \vecx^{(3,0,0) } + \veca^{(0,1,0)} \vecx^{(0,3,0) }} + \veca^{(0,0,1)} \vecx^{(0,0,1) } \,. $$
+$$F^{\rouge{(2)}} ((\bleu{a_0, a_1}),(\bleu{x_0, x_1})) =  \bleu{\veca^{(1,0)} \vecx^{(3,0) } + \veca^{(0,1)} \vecx^{(0,3) }  } \,.$$
 
-Then 
-$$F^{\rouge{(3)}} ((\bleu{a_0, a_1},0),(\bleu{x_0, x_1}, 0)) =  \bleu{\veca^{(1,0)} \vecx^{(3,0) } + \veca^{(0,1)} \vecx^{(0,3) }  } \,.$$
+then there exists a $\approx$ unique $\Sfrak_{\rouge{3}}$-invariant function $F^{(3)}$ such that 
 
-is $\Sfrak_{\bleu{2}}$-invariant. 
+$$
+((\bleu{a_0, a_1}),(\bleu{x_0, x_1})) \mapsto F^{(3)} ((\bleu{a_0, a_1},0),(\bleu{x_0, x_1},0)) 
+$$
+
+is equal to $F^{(2)}$:
+
+$$F^{\rouge{(3)}} ((\bleu{a_0, a_1},a_2),(\bleu{x_0, x_1}, x_2))  \mapsto \bleu{\veca^{(1,0,0)} \vecx^{(3,0,0) } + \veca^{(0,1,0)} \vecx^{(0,3,0) }} + \veca^{(0,0,1)} \vecx^{(0,0,3) } \,. $$
+
+%is $\Sfrak_{\bleu{2}}$-invariant. 
 
 \end{block}
-
-%\pause
-%What does $F^{\rouge{(3)}}$ look like? 
-%
-%\begin{block}{}
-%\begin{enumerate}
-%\item Since $F^{\rouge{(3)}} ((a_0, a_1,0),(x_0, x_1, 0)) = F^{\bleu{(2)}}((a_0, a_1),(x_0,x_1))$, 
-%\vspace{-2mm}
-%$$F^{\rouge{(3)}} ((\bleu{a_0, a_1},a_2),(\bleu{x_0, x_1}, x_2))  =  \bleu{\veca^{(1,0,0)} \vecx^{(3,0,0) } + \veca^{(0,1,0)} \vecx^{(0,3,0) }} + ...$$
-%In other words:
-%\vspace{-2mm}
-%$$ \alpha_{(\bleu{u_0, u_1}, 0), (\bleu{v_0, v_1}, 0)}(F^{\rouge{(3)}}) = \alpha_{\bleu{(u_0, u_1)}, \bleu{(v_0, v_1)}}(F^{\bleu{(2)}})  \,. $$
-%
-%\vspace{-1mm}
-%\pause
-%\item By $\Sfrak_{\rouge{3}}$-invariance of $F^{\rouge{(3)}}$, for all $\vecu, \vecv \in \ZZ_{2^q}^{\rouge{3}}$,
-%$$
-%\alpha_{(\sigma \cdot \vecu, \sigma \cdot \vecv)} = \alpha_{(\vecu, \vecv)}
-%$$
-%\end{enumerate}
-
-%\vspace{-2mm}
-%\end{block}
-
-\pause
-
-
-\begin{itemize}
-\item Conversely, all terms of support of cardinal at most $m$ in the ANF of $F^{(n)}$ can be understood from the ANF of $F^{(m)}$.
-
-\pause
-\medskip
-\item \textbf{Using $m$} you can bound the cardinal of the support. 
-\end{itemize}
-
+\ 
 \begin{alertblock}{}
 \centering
 (Properties of) $F^{m,n}$ can be derived from $F^{m,m}$.
@@ -1208,7 +1176,7 @@ Let $\vecv = (\rouge{3},1,\ver{1})$. Then $\orb(\vecv) = \{  (3,1,1), (1,3,1), (
   \textbf{Important properties}.
 \begin{itemize}
 \item The set of orbits $\{\orb(x), \ x \in E\}$ is a partition of E. 
-\item It induces an equivalence relation : $x \sim x'$ if and only if $x' \in \orb(x)$.
+\item It induces an equivalence relation: $x \sim x'$ if and only if $x' \in \orb(x)$.
 \item For any $x \in E$,
 \vspace{-2mm}
 \begin{align*}
@@ -1370,61 +1338,98 @@ F^{m,n} (\veca,\vecx) = (\langle \veca, \vecx \rangle)^m  = \Bigl(\sum \rouge{a_
 
 \end{comment} 
 
+
+%%%%%%%
+%%%%%%%
+%%%%%%%
+
+\begin{frame}{Effective computation of the ANF}
+%\begin{exampleblock}{}
+\small
+\flushleft
+Recall: \rouge{$S^n_m$ ordered} partitions of length $n$ of $m$.
+    \begin{align*}
+  F^{m,n}(\veca,\vecx) =  \langle \veca, \vecx \rangle^m = \Big( \sum_{i} a_i \times x_i \Big)^m \underset{[BraSem05]}{=} \sum_{\vecc \in S^n_m} \prod_{i} (a_i \times x_i)^{c_i} \,.
+    \end{align*}
+    
+    Let \bleu{$\mathcal{C}^n_m$} be a system of representatives (\bleu{unordered} partitions):
+    \begin{align*}
+    F^{m,n} = \ldots =   \sum_{\substack{ \vecc \in \bleu{\C^n_{m}}} } 
+\underbrace{\sum_{\vecc' \in \orb(\vecc) } \ \overbrace{\prod_{i} (a_i \times x_i)^{c'_i}}^{\text{ \small \rouge{$H_{\vecc'}$} }}}_{\text{\small \rouge{$G_{\vecc}$}}}
+     \end{align*}
+     
+   \vspace{-5mm}
+ We observe:
+\begin{itemize}
+\item $G_{\vecc}$ is $\Sfrak_n$-invariant.
+\item $H_{\sigma \cdot \vecc} = \sigma^{-1} \cdot H_{\vecc}$.
+\end{itemize}
+%\end{exampleblock}
+
+\end{frame}
+
 \begin{frame}{Effective computation of the ANF}
 \footnotesize
 \flushleft
-\vspace{-5mm}
-Recall: \rouge{$S^n_m$ ordered} partitions of length $n$ of $m$. Let \bleu{$\mathcal{C}^n_m$} be a system of representatives (\bleu{unordered} partitions). 
+%\vspace{-5mm}
+%Recall: \rouge{$S^n_m$ ordered} partitions of length $n$ of $m$. Let \bleu{$\mathcal{C}^n_m$} be a system of representatives (\bleu{unordered} partitions). 
+%
+%\begin{exampleblock}{}
+%\vspace{-5mm}
+%    \begin{align*}
+%        F^{m,n} (\veca, \vecx) = \sum_{\substack{ \vecc \in \bleu{\C^n_{m}}} } 
+%\only<1>{\sum_{\vecc' \in \orb(\vecc) } \  \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i} }
+%\only<2>{\sum_{\vecc' \in \orb(\vecc) } \  \ver{\prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}} }
+%\only<3>{\rouge{ \sum_{\vecc' \in \orb(\vecc) } \  \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}} }
+%\only<4->{\sum_{\vecc' \in \orb(\vecc) } \ \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}}
+%        = \sum_{\substack{  \bleu{\vecc \in \C^n_{m}}} } 
+%\only<1>{\sum_{ \vecc' \in \orb(\vecc)}  H_{\vecc'}( \veca, \vecx)}
+%\only<2>{\sum_{ \vecc' \in \orb(\vecc)}  \ver{H_{\vecc'}( \veca, \vecx)}}
+%\only<3>{ \rouge{ \sum_{ \vecc' \in \orb(\vecc)} H_{\vecc'}( \veca, \vecx)}}
+%\only<4->{\sum_{ \vecc' \in \orb(\vecc)}  H_{\vecc'}( \veca, \vecx)}
+%  =  \sum_{\substack{ \bleu{\vecc \in \C^n_{m}}} }   
+%  \only<1,2>{
+%  G_{\vecc}( \veca, \vecx) }
+%  \only<3>{
+%    \rouge{G_{\vecc}( \veca, \vecx) }}
+%  \only<4->{
+%    G_{\vecc}( \veca, \vecx) 
+%    }   \,. %= \sum_{\substack{ \vecc \in \C^n_{m}} } G_{\vecc}(\veca,\vecx) \,, 
+%\end{align*}
+%\vspace{-2mm}
+%\end{exampleblock}
 
-\begin{exampleblock}{}
-\vspace{-5mm}
-    \begin{align*}
-        F^{m,n} (\veca, \vecx) = \sum_{\substack{ \vecc \in \bleu{\C^n_{m}}} } 
-\only<1>{\sum_{\vecc' \in \orb(\vecc) } \  \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i} }
-\only<2>{\sum_{\vecc' \in \orb(\vecc) } \  \ver{\prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}} }
-\only<3>{\rouge{ \sum_{\vecc' \in \orb(\vecc) } \  \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}} }
-\only<4->{\sum_{\vecc' \in \orb(\vecc) } \ \prod_{i = 0}^{n-1} (a_i \times x_i)^{c'_i}}
-        = \sum_{\substack{  \bleu{\vecc \in \C^n_{m}}} } 
-\only<1>{\sum_{ \vecc' \in \orb(\vecc)}  H_{\vecc'}( \veca, \vecx)}
-\only<2>{\sum_{ \vecc' \in \orb(\vecc)}  \ver{H_{\vecc'}( \veca, \vecx)}}
-\only<3>{ \rouge{ \sum_{ \vecc' \in \orb(\vecc)} H_{\vecc'}( \veca, \vecx)}}
-\only<4->{\sum_{ \vecc' \in \orb(\vecc)}  H_{\vecc'}( \veca, \vecx)}
-  =  \sum_{\substack{ \bleu{\vecc \in \C^n_{m}}} }   
-  \only<1,2>{
-  G_{\vecc}( \veca, \vecx) }
-  \only<3>{
-    \rouge{G_{\vecc}( \veca, \vecx) }}
-  \only<4->{
-    G_{\vecc}( \veca, \vecx) 
-    }   \,. %= \sum_{\substack{ \vecc \in \C^n_{m}} } G_{\vecc}(\veca,\vecx) \,, 
-\end{align*}
-\vspace{-2mm}
-\end{exampleblock}
-
-\pause
-\pause
+%\pause
+%\pause
 \begin{alertblock}{}
  \textbf{Theorem.}   Let $\vecc \in \ZZ_{2^q}^n$, $(\vecu, \vecv) \in \ZZ_{2^q}^n \times \ZZ_{2^q}^n$. Define
     $E_{\vecc}(\vecu, \vecv) \coloneq \exponents(H_{\vecc}) \cap \orb(\vecu, \vecv)$.
-    For any $\sigma \in \Sfrak_n$,
+%    For any $\sigma \in \Sfrak_n$,
     \begin{align*}
-         \alpha_{\sigma \cdot (\vecu, \vecv)}(G_{\vecc}) \quad = \quad  \alpha_{(\vecu, \vecv)} (G_{\vecc})\quad  = \quad  \frac{\card{E_{\vecc}(\vecu,\vecv)}n!}{\card{\stab(\vecc)}\card{\orb(\vecu, \vecv)}} \mod{2} \,. 
+      \alpha_{(\vecu, \vecv)} (G_{\vecc})\quad  = \quad  \frac{\card{E_{\vecc}(\vecu,\vecv)}n!}{\card{\stab(\vecc)}\card{\orb(\vecu, \vecv)}} \mod{2} \,. 
     \end{align*}
 \end{alertblock}
 
 \pause
+
+We provide algorithms (and implementations) to:
 \begin{itemize}
-\item[(i)] For all canonical $\vecc$, compute ${\{ (\vecu, \vecv)^{\star}, \alpha_{(\vecu, \vecv)^{\star} } (G_{\vecc}) = 1 \}}$ from $H_{\vecc'}$ for some $\vecc' \in \orb(\vecc)$. (Theorem) 
+\item[(i)] compute the ANF of $H_{\vecc^{\star}}$ for $\vecc^{\star} \in \mathcal{C}^n_m$. 
+
+\item [(ii)] compute a SoR of the ANF of $G_{\vecc}$ (Theorem). \hfill ${\{ (\vecu, \vecv)^{\star}, \alpha_{(\vecu, \vecv)^{\star} } (G_{\vecc}) = 1 \}}$.
 %\pause $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
 \pause
-\item[(ii)] Compute a SOR of the ANF of $F^{m,n}$ from the $G_{\vecc}$'s i.e. $\ver{\{ (\vecu, \vecv)^{\star}, \alpha_{(\vecu, \vecv)^{\star} } (F^{m,n}) = 1 \}}$. % for some $\vecc' \in \orb(\vecc)$. \hfill $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
+\item[(iii)] compute a SoR of the ANF of $F^{m,n}$ from the $G_{\vecc}$'s. \hfill $\ver{\{ (\vecu, \vecv)^{\star}, \alpha_{(\vecu, \vecv)^{\star} } (F^{m,n}) = 1 \}}$. % for some $\vecc' \in \orb(\vecc)$. \hfill $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
 %\item[(i)] Compute ANF of $G_{\vecc}$ from $H_{\vecc'}$ for a single $\vecc' \in \orb(\vecc)$. \hfill $\rhd \ \exponents^\star(G_{\vecc}) \coloneq \{(\vecu, \vecv)^{\star} \ | \ \alpha_{(\vecu, \vecv)^{\star}}(G_{\vecc}) =1\}$
 \pause
-\item[(iii)] Compute the \rouge{multiset $\{\!\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}\!\}$}. %with cardinal equal to $\card{\{\vecv^{\star},  \alpha_{\vecv^{\star}\}} \neq 0}$. 
+\item[(iv)] compute \rouge{$\{  (\vecv^{\star}, \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0) \}$}. \hfill (non-trivial from (iii)). %with cardinal equal to $\card{\{\vecv^{\star},  \alpha_{\vecv^{\star}\}} \neq 0}$. 
+\pause
+\item[(v)] compute $\rouge{\{\alpha \in \exponents_{\vecx}(F^{m,n})\} / \sim} \subset \FF_2[\veca]$. \hfill (even less trivial).
 \end{itemize}
 
-\vspace{-1mm}
-\hfill {\scriptsize \textbf{NB:} $\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}$ is \rouge{not} a SOR of $\{ \alpha_{\vecv}(F^{m,n}) \neq 0 \} /\! \sim$}. 
+
+%
+%\hfill {\scriptsize \textbf{NB:} $\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}$ is \rouge{not} a SoR of $\{ \alpha_{\vecv}(F^{m,n}) \neq 0 \} /\! \sim$}. 
 
 \end{frame}
 
@@ -1432,48 +1437,50 @@ Recall: \rouge{$S^n_m$ ordered} partitions of length $n$ of $m$. Let \bleu{$\mat
 %%%%%%%
 %%%%%%%
 
-\begin{frame}{Effective computation of the number of monomials}
+\begin{frame}{Ex. of scaling: number of monomials}
 \flushleft
-\footnotesize
+\footnotesize 
 
 \vspace{-4mm}
-\textbf{Recall.} For each random $\ver{\veca}$, the function in $\{ F^{m,n}_{\ver{\veca}} \coloneq F^{m,n}({\ver{\veca}} , \cdot) \}$ is evaluated on the secret \rouge{$\vecx$} to yield $s_{\ver{\veca}}$. 
-
-\smallskip
-If we can compute the ANF of $F^{m,n}_{\ver{\veca}}$, we obtain an equation in the secret \rouge{$\vecx$}:
+\textbf{Recall.} For each random $\ver{\veca}$, %the function in $\{ F^{m,n}_{\ver{\veca}} \coloneq F^{m,n}({\ver{\veca}} , \cdot) \}$ is evaluated on the secret \rouge{$\vecx$} to yield $s_{\ver{\veca}}$. 
+%\smallskip
+if we can compute the ANF of $F^{m,n}_{\ver{\veca}}$, we obtain an equation in the secret \rouge{$\vecx$}:
 \begin{align*}
-\sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n}_{\ver{\veca}}) \ \rouge{\vecx}^{\vecv}  = \sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n})(\ver{\veca}) \ \rouge{\vecx}^{\vecv}  = (s_{\ver{\veca}})^{m/2^{q-p}} \,. 
+%\sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n}_{\ver{\veca}}) \ \rouge{\vecx}^{\vecv}  = 
+F^{m,n}(\ver{\veca}, \rouge{\vecx}) = \sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\vecv}(F^{m,n})(\ver{\veca}) \ \rouge{\vecx}^{\vecv}  = \text{LSB of the sample} \,. 
 \end{align*}
 
-\pause
+%\pause
 
-\vspace{-2mm}
-\begin{exampleblock}{}
-\textbf{NB:} Number of monomials in the system: 
-$$\card{\bigcup_{\veca \in \ZZ_{2^q}^n} \{\vecv, \alpha_{\vecv}(F^{m,n}_{\veca}) \neq 0 \}} =  \card{\{ \vecv, \alpha_{\vecv}(F^{m,n}) \neq 0 \}}  \,. $$
-\end{exampleblock}
+%\vspace{-2mm}
+%\begin{exampleblock}{}
+%\textbf{NB:} Number of monomials in the system: 
+%$$\card{\bigcup_{\veca \in \ZZ_{2^q}^n} \{\vecv, \alpha_{\vecv}(F^{m,n}_{\veca}) \neq 0 \}} =  \card{\{ \vecv, \alpha_{\vecv}(F^{m,n}) \neq 0 \}}  \,. $$
+%\end{exampleblock}
 
 \pause
 
 \begin{itemize}
-\item Our algorithm returned the \rouge{multiset $\{\!\{ \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0 \}\!\}$}, which has cardinal equal to $\card{\{\vecv^{\star},  \alpha_{\vecv^{\star}\}} \neq 0}$.
+\item Our algorithm (iv) returns $\{  (\vecv^{\star} , \alpha_{\vecv^{\star}} \neq 0) \}$.
 \end{itemize}
 
+\smallskip
 \small
 \centering
-$\text{ Nr of monomials } =  \card{\{ \vecv, \alpha_{\vecv} \neq 0 \} } =  \sum_{\vecv^{\star},  \alpha_{\vecv^{\star}} \neq 0} \orb(\alpha_{\vecv^{\star}}) \binom{n}{\card{\supp(\vecv^{\star})}}$
+$\text{ Nr of monomials } =  \card{\{ \vecv \ : \  \alpha_{\vecv} \neq 0 \} } =  \sum_{\vecv^{\star},\  \alpha_{\vecv^{\star}} \neq 0} \orb(\alpha_{\vecv^{\star}}) \binom{n}{\card{\supp(\vecv^{\star})}}$
 
 \pause
 
 \smallskip
+\footnotesize
 \begin{alertblock}{}
 \centering
 In practice, when $m$ is a power of two, this is \rouge{always} equal to the upper bound $\binom{n+m}{m} - 1$. 
 \end{alertblock}
 
-%dire qq part que nombre de monomes vaut tant pour m puissance de 2
-
-%dire définition de Qmn
+\begin{itemize}
+\item In general, scaling is not the hard part (even for other properties).
+\end{itemize}
 
 \end{frame}
 
@@ -1486,25 +1493,28 @@ In practice, when $m$ is a power of two, this is \rouge{always} equal to the upp
 \small
 \textbf{Results}
 \begin{itemize}
-\item Deterministic noise impacts practical complexity.
+\item Deterministic noise impacts attacks. 
 
 \medskip  
-\item Generic improvement over Arora \& Ge:
+\item Generic improvement (and ``correction'') of Arora \& Ge:
 \begin{itemize}
 \item same number of monomials + working over $\FF_2$.
 
 \smallskip
 \item computation of additional parameters.
+
+%\smallskip
+%\item open question/WIP : rank. 
 \end{itemize}
 
-\item Other stuff e.g.: Time-data trade-offs work \rouge{better} in mod/ring LWR.
+%\item Other stuff e.g.: Time-data trade-offs work \rouge{better} in mod/ring LWR.
 
 \end{itemize}
 
 \medskip
-\textbf{Many, many open questions}
+\textbf{Many open questions}
 \begin{itemize}
-\item Understanding the ANF even better (work in progress).
+\item Understanding the ANF even better (e.g. rank).
 
 \medskip
 
