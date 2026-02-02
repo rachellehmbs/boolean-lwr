@@ -499,8 +499,9 @@ $$\text{We denote it by } M = \ver{a_{0}^{\mathtt{0b011}}a_{1}^{\mathtt{0b111}}}
 
 \begin{frame}{Algebraic Normal Form}
 
+\small
 \begin{exampleblock}{}
-\textbf{Algebraic Normal Form (ANF).} Any $f : \FF_2^s \rightarrow \FF_2$ admits a unique polynomial form:
+\textbf{Algebraic Normal Form (ANF).} Any Boolean function $f : \FF_2^s \rightarrow \FF_2$ admits a unique multivariate polynomial form:
 \begin{align*}
 \forall x \in \FF_2^s, \quad f(x) = \sum_{u \in \FF_2^s} \alpha_u(f) x^u  \,.
 \end{align*}
@@ -812,7 +813,7 @@ Let $S^n_k = \{v \in \NN^n :  \sum_{i = 0}^{n-1} v_i = k\} $ be the set of $n$-l
   \begin{enumerate}
     \item With $\binom{n + 2^{q-p}}{2^{q-p}}$ samples, recover the $q-p$ LSBs of each $\rouge{x_i}$ by linearisation.
     \item Observe that each bit of $\langle \ver{\veca}, \rouge{\vecx}\rangle$ satisfies $b_{j} = \sum_{i = 0}^{n-1}\ver{\veca_{i, j}}\rouge{\vecx_{i, j}} + \bleu{c_j}$ where $\bleu{c_j}$ is a carry.
-    \item  Compute $\bleu{c_j}$ from the known $\ver{a_{i, k}}$'s and recovered $\rouge{x_{i, k}}$'s. 
+    \item  Compute $\bleu{c_j}$ from the known $\ver{a_{i, k}}$'s and recovered $\rouge{x_{i, k}}$'s, $k < j$. 
     \item Solve a linear system in $\rouge{\vecx_{i,j}}$ only.
     \item Repeat for increasing $j$.
   \end{enumerate}
@@ -883,8 +884,8 @@ F(\ver{\veca}, \rouge{\vecx}) &= \alpha_{\vecv}\rouge{\vecx^{\vecv}} + \alpha_{\
 \end{align*}
 
 \begin{itemize}
-\item If $\alpha_{\vecv} = \alpha_{\vecv'}$, then $\rouge{\vecx^{\vecv}}$ and $\rouge{\vecx^{\vecv'}}$ appear/vanish together for any value of $\ver{\veca}$.
-\item It makes sense to introduce $y = \rouge{\vecx^{\vecv}} + \rouge{\vecx^{\vecv'}}$. 
+\item If $\alpha_{\vecv} = \alpha_{\vecv'} = \alpha_{\vecv''}$, then $\rouge{\vecx^{\vecv}}$, $\rouge{\vecx^{\vecv'}}$, $\rouge{\vecx^{\vecv''}}$ appear/vanish together for any value of $\ver{\veca}$.
+\item It makes sense to introduce $y = \rouge{\vecx^{\vecv}} + \rouge{\vecx^{\vecv'}} + \rouge{\vecx^{\vecv''}}$. 
 \end{itemize}
 
 \end{block}
