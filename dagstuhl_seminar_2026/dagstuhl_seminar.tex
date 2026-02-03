@@ -1424,7 +1424,7 @@ We provide algorithms (and implementations) to:
 \pause
 \item[(iv)] compute \rouge{$\{  (\vecv^{\star}, \alpha_{\vecv^{\star}}(F^{m,n}) \neq 0) \}$}. \hfill (non-trivial from (iii)). %with cardinal equal to $\card{\{\vecv^{\star},  \alpha_{\vecv^{\star}\}} \neq 0}$. 
 \pause
-\item[(v)] compute $\rouge{\{\alpha \in \exponents_{\vecx}(F^{m,n})\} / \sim} \subset \FF_2[\veca]$. \hfill (even less trivial).
+\item[(v)] compute $\rouge{\{\alpha_{\vecv} : \vecv\in \exponents_{\vecx}(F^{m,n})\} / \sim} \subset \FF_2[\veca]$. \hfill (even less trivial).
 \end{itemize}
 
 
@@ -1467,7 +1467,7 @@ F^{m,n}(\ver{\veca}, \rouge{\vecx}) = \sum_{\vecv \in (\FF_{2}^q)^n} \alpha_{\ve
 \smallskip
 \small
 \centering
-$\text{ Nr of monomials } =  \card{\{ \vecv \ : \  \alpha_{\vecv} \neq 0 \} } =  \sum_{\vecv^{\star},\  \alpha_{\vecv^{\star}} \neq 0} \orb(\alpha_{\vecv^{\star}}) \binom{n}{\card{\supp(\vecv^{\star})}}$
+$\text{ Nr of monomials } =  \card{\exponents_{\vecx}(F^{m, n})} =  \sum_{\vecv^{\star},\  \alpha_{\vecv^{\star}} \neq 0} \orb(\alpha_{\vecv^{\star}}) \binom{n}{\card{\supp(\vecv^{\star})}}$
 
 \pause
 
@@ -1479,7 +1479,7 @@ In practice, when $m$ is a power of two, this is \rouge{always} equal to the upp
 \end{alertblock}
 
 \begin{itemize}
-\item In general, scaling is not the hard part (even for other properties).
+\item In general, scaling is not the hard part (\textit{e.g.} similar formula for scaling the average sparsity).
 \end{itemize}
 
 \end{frame}
