@@ -298,7 +298,7 @@ In a nutshell: solving a \rouge{noisy} \bleu{linear system} over a ring.
 In this case: 
 
 \begin{itemize}
-\item \bleu{rounding function} $\bleu{\round{\cdot}_{p}} : \ZZ_{q} \rightarrow \ZZ_{p} $ removes the \rouge{$q-p$} LSBs.  
+\item \bleu{rounding function} $\bleu{\round{\cdot}_{p}} : \ZZ_{2^q} \rightarrow \ZZ_{2^p} $ removes the \rouge{$q-p$} LSBs.  
 \item Security level is determined by \rouge{$n$}, \rouge{$q$} and \rouge{$q-p$}: noise $\sim Uniform[-2^{q-p},0)$ 
 \end{itemize}
  \hfill e.g. LightSaber: $n = 512, q-p = 3$, dPRF LaKey $n = 256, q-p = 4$. 
@@ -504,8 +504,8 @@ $$\text{We denote it by } M = \ver{a_{0}^{\mathtt{0b011}}a_{1}^{\mathtt{0b111}}}
 \end{exampleblock}
 
 %\begin{exampleblock}{}
-\textbf{Product of coordinates.} For any $F : \ZZ_{2^q} \to \ZZ_{2^q}$, and any $m = \sum_{i}m_i2^i$, we denote by:
-$$F^m \coloneq \prod_i F_i^{m_i}.$$
+\textbf{Product of coordinates.} For any $F : \ZZ_{2^q} \to \ZZ_{2^q}$, and any $m = \sum_{i}m_i2^i$, recall:
+$$x \mapsto (F(x))^m \coloneq \prod_i F_i(x)^{m_i}.$$
 %\end{exampleblock}
 
 % \begin{exampleblock}{}
@@ -521,7 +521,7 @@ $$F^m \coloneq \prod_i F_i^{m_i}.$$
 \begin{alertblock}{}
 In the following, we study (products of) coordinates of the inner product:
 \begin{align*}
-F^{m,n} : (\veca, \vecx) \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \qquad \quad F^{m,n}_{\veca} : \vecx \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \,.
+F^{m,n} : (\veca, \vecx) \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \,. %\qquad \quad F^{m,n}_{\veca} : \vecx \mapsto \left( \langle  \veca,  \vecx \rangle \right)^m \,.
 \end{align*}
 \end{alertblock}
 
@@ -766,7 +766,7 @@ Let $S^n_k = \{v \in \NN^n :  \sum_{i = 0}^{n-1} v_i = k\} $ be the set of $n$-l
 \begin{itemize}
 \item \textbf{Number of monomials.} $\card{\exponents_{\rouge{\vecx}}(F^{m, n})} \leq \card{\bigcup_{k = 1}^{m} S^n_k} = \binom{n+m}{m}$.
 
-\hfill \rouge{Open question : we conjecture equality when $m$ is a power of two.}
+\hfill \rouge{Open question: we conjecture equality when $m$ is a power of two.}
 \item  \textbf{Degree.} $\deg(F^{m,n}) \leq m$. Equality holds when $m \leq n$.%, $\deg_{\rouge{\vecx}}(F^{m,n}) = m$.
 
 \end{itemize}
@@ -834,7 +834,7 @@ We improve Arora \& Ge generically\dots \only<2->{as long as we can compute the 
 \flushleft
 This is \textit{a priori} hard: 
 \begin{itemize}
-\item Möbius transform is out of reach (the LUT cannot be fully computed/stored)
+\item Möbius transform is out of reach (the LUT cannot be fully computed/stored).
 \item Direct computations using recursive formulas seem hopeless.
 \end{itemize}
 %$F^{m, n}$ depends on at most $\rouge{2n \cdot (\lfloor \log_2(m) \rfloor + 1)}$ with $n > 128$. 
@@ -1362,7 +1362,7 @@ Recall: \rouge{$S^n_m$ ordered} partitions of length $n$ of $m$.
  We observe:
 \begin{itemize}
 \item $G_{\vecc}$ is $\Sfrak_n$-invariant.
-\item $H_{\sigma \cdot \vecc} = \sigma^{-1} \cdot H_{\vecc}$.
+\item $H_{\sigma \cdot \vecc} = \sigma^{-1} \cdot H_{\vecc} \,.$
 \end{itemize}
 %\end{exampleblock}
 
